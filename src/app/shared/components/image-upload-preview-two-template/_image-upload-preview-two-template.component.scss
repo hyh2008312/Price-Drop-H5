@@ -1,0 +1,86 @@
+@import "../../../styles/utils/index.scss";
+@import "../../../styles/variables.scss";
+
+.preview-label {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  display: block;
+  background-color: $whiteColor;
+
+  &__not-upload{
+    cursor: pointer;
+    i{
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 40px;
+      text-align: center;
+      color: rgba(0,0,0,.54);
+    }
+    span{
+      margin-left: 12px;
+      color: rgba(0,0,0,.54);
+    }
+    >img{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%,-50%));
+      height: 100%;
+      max-width: none;
+    }
+  }
+
+  &__upload{
+    >img{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%,-50%));
+      height: 100%;
+      max-width: none;
+    }
+  }
+
+  input{
+    display: none;
+  }
+
+  .none{
+    display: none;
+  }
+
+  .popup-mask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top:0;
+    .material-icons{
+      margin-right: 8px;
+      margin-top: 8px;
+      color: $whiteColor;
+    }
+    &__bg{
+      position: relative;
+      z-index: 99999;
+    }
+  }
+
+
+  &__hide{
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+
+  &__visible{
+    visibility: visible;
+    width: auto;
+    height: 300px;
+  }
+}

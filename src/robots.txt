@@ -1,0 +1,15 @@
+User-agent: *
+
+Allow: /store/*
+Allow: /account/login
+Allow: /account/signup
+Allow: /about
+Allow: /terms
+Allow: /privacy
+
+Disallow: /shop
+Disallow: /shop/*
+
+Disallow: /account/resetPassword
+Disallow: /account/resetPassword/*
+Disallow: /account/invitation

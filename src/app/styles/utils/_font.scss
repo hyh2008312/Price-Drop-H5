@@ -1,0 +1,60 @@
+$defaultFontSize: 14px;
+$defaultLineHeight:20px;
+$defaultMargin:10px;
+$defaultPadding:5px;
+$bodyPaddingTop: 50px;
+$bodyPaddingBottom: 80px;
+$sectionSpace: 50px;
+$cardSpace: 20px;
+
+$sectionFixedHeight : 450px;
+
+.padding{
+  padding: $defaultPadding $defaultPadding * 2
+}
+.margin{
+  margin: $defaultMargin * 2 $defaultMargin;
+}
+@mixin padding($padding:$defaultPadding){
+  padding: $padding $padding * 2
+}
+.margin-right{
+  margin-right: 10px;
+}
+
+.padding-clear{
+  padding: 0;
+}
+
+
+$directions: left top right bottom;
+$spaces: (
+  padding:$defaultPadding,
+  margin:$defaultMargin
+);
+
+@each $direction in $directions{
+  .margin-#{$direction}-clear{
+    margin-#{$direction}:0;
+  }
+  .padding-#{$direction}-clear{
+    padding-#{$direction}: 0;
+  }
+  .margin-#{$direction}{
+    margin-#{$direction}:$defaultMargin;
+  }
+}
+
+h2{
+  @media screen and (max-width: 800px){
+    font-size: 24px;
+  }
+}
+
+.xb-bold{
+  font-weight: bold;
+}
+
+.xb-italic{
+  font-style: italic;
+}

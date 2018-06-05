@@ -1,0 +1,179 @@
+@import "utils/index";
+@import "variables";
+
+html {
+  position: relative;
+  min-height: 100%;
+  ::-webkit-scrollbar {
+    width: 1px;
+  }
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    @include box-shadow(0 0 0 2px rgba(0,0,0,.19));
+    background-color: rgba(0,0,0,.19);
+  }
+}
+
+body {
+  /* padding bottom by footer height */
+
+  /* overwrite material.css */
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  background-color: $whiteColor;
+  font-family: Helvetica;
+  font-size: $defaultFontSize;
+  line-height: (20px / $defaultFontSize);
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+}
+
+* {
+  outline: none;
+  @include box-sizing(border-box);
+}
+*:before,
+*:after {
+  outline: none;
+  @include box-sizing(border-box);
+}
+
+ul.xb-list-pros-cons{
+  //padding-left: 10px;
+  margin-bottom: 20px;
+  -webkit-padding-start:15px
+}
+
+a{
+  color: $primaryColor;
+  text-decoration: none;
+}
+
+a.a-gray {
+  color: $lightGrayColor;
+  &:hover {
+    color: $grayColor;
+    cursor: pointer;
+  }
+}
+
+a.default {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+a.a-gray-primary {
+  color: $grayColor;
+  &:hover {
+    color: $primaryColor;
+    cursor: pointer;
+  }
+}
+
+a.block-link {
+  display: block;
+  &:hover, &:active {
+    text-decoration: none;
+  }
+}
+
+p, li{
+  color: rgba(0,0,0,.87);
+}
+
+.note-editor {
+  border: 1px solid $lightGrayColor;
+}
+
+.growl-container.top-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.growl-container.growl-fixed.top-right {
+  top: 100px;
+}
+
+.border-clear {
+  border: none;
+}
+
+.note-editable img {
+  max-width: 100%;
+}
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+.optional-field {
+  color: $grayColor;
+}
+
+//summer-note overrides
+
+.note-editable img {
+  width: 100% !important;
+  max-width: 850px !important;
+  height: auto !important;
+  &.pre-loading {
+    background: url("https://xberts.imgix.net/static/icon/loading.gif?s=1dc284fd55a3626df1317018bf299bcd") no-repeat center center;
+    width: 200px;
+    height: 200px !important;
+  }
+}
+
+.note-diseditable img {
+  width: 100% !important;
+  max-width: 850px !important;
+  height: auto !important;
+}
+
+.note-editable h1 {
+  font-size: 24px;
+  span {
+    font-size: 24px !important;
+  }
+}
+
+.note-product {
+  h1 {
+    font-size: 24px;
+    span {
+      font-size: 24px !important;
+    }
+  }
+}
+
+.note-editor.note-frame.fullscreen {
+  z-index: 1040;
+}
+
+.pr {
+  position: relative;
+}
+
+// fixed older popup form field name position problem
+.form-group{
+  position: relative;
+  margin-top: 25px;
+  overflow: visible;
+}
+
+iframe{
+  max-width: 100%;
+}
+
+img{
+  max-width: 100%;
+}

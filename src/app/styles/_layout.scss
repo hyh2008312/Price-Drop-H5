@@ -1,0 +1,563 @@
+
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 740px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1200px;
+  }
+}
+
+// basic layout
+
+.margin-none {
+  margin: 0;
+}
+
+.margin-top-none {
+  margin-top: 0;
+}
+
+.margin-top-l {
+  margin-top: 20px;
+}
+
+.margin-bottom-l {
+  margin-bottom: 20px;
+}
+
+.margin-top-xl {
+  margin-top: 30px;
+}
+
+.margin-bottom-xl {
+  margin-bottom: 30px;
+}
+
+.margin-top-xxl {
+  margin-top: 40px;
+}
+
+.margin-bottom-none {
+  margin-bottom: 0;
+}
+
+.xb-align-left {
+  text-align: left;
+}
+
+.xb-align-right {
+  text-align: right;
+}
+
+.xb-align-center {
+  text-align: center;
+}
+
+.xb-wrap {
+  position: relative;
+  width: 100%;
+}
+
+//must know the height of parent
+.xb-vertical-align-center {
+  @include vertical-align;
+}
+
+// inline-block layout  we must firstly specify their width
+// and take care of the white space may be a character,some tricky:font-size:0 letter-space:negative value
+$verticalAlign: top middle bottom;
+
+@for $x from 1 to 13 {
+  @each $align in $verticalAlign {
+    .xb-grid-#{$x}-#{$align} {
+      @include xbGrid($x);
+      vertical-align: $align;
+      @media screen and (max-width: 400px) {
+        @include xbGrid(4 * $x);
+      }
+      @media screen and (min-width: 401px) and (max-width: 800px) {
+        @include xbGrid(2 * $x);
+      }
+      @media screen and (min-width: 801px) and (max-width: 1200px) {
+        @include xbGrid(1 * $x);
+      }
+    }
+    .xb-grid-#{$x}-#{$align}-fixed {
+      @include xbGrid($x);
+      vertical-align: $align;
+    }
+  }
+  .xb-grid-#{$x} {
+    @include xbGrid($x);
+    @media screen and (max-width: 400px) {
+      @include xbGrid(4 * $x);
+    }
+    @media screen and (min-width: 401px) and (max-width: 800px) {
+      @include xbGrid(2 * $x);
+    }
+    @media screen and (min-width: 801px) and (max-width: 1200px) {
+      @include xbGrid(1 * $x);
+    }
+  }
+  .xb-grid-#{$x}-fixed {
+    @include xbGrid($x);
+  }
+}
+
+// img layout
+.xb-flex {
+  width: 100%;
+  height: 100%;
+}
+
+.xb-flex-fixed {
+  max-width: 100%;
+}
+
+// background layout
+
+.xb-brand-background-center {
+  background-size: cover;
+  background-position: center;
+}
+
+.xb-brand-background-right {
+  background-size: cover;
+  background-position: right;
+}
+
+.xb-brand-background-left {
+  background-size: cover;
+  background-position: left;
+}
+
+// fix aspect ratio block: aspect-ratio-wrap > aspect-ratio-content
+
+$widthHeight: (3 2) (1 1);
+
+@each $var in $widthHeight {
+  .aspect-ratio-wrap-#{nth($var, 1)}-#{nth($var, 2)} {
+    @include aspect-ratio(nth($var, 1), nth($var, 2));
+  }
+}
+
+section {
+  padding-top: $sectionSpace;
+  padding-bottom: $sectionSpace + 20px;
+}
+
+section.header {
+  padding-top: 27px;
+}
+
+.section-title {
+  text-align: center;
+  h1 {
+    font-size: 48px;
+  }
+  h3 {
+    color: $grayColor;
+    font-weight: normal;
+  }
+}
+
+hr {
+  border-top: 1px solid #C7C7C7;
+}
+
+.xb-about-banner {
+  height: 280px;
+  background: rgba(0, 0, 0, 0.6) no-repeat center;
+  background-size: cover;
+}
+
+.section-fixed {
+  height: $sectionFixedHeight;
+  background: rgba(0, 0, 0, 0.6) no-repeat left;
+  background-size: cover;
+  position: relative;
+  @media screen and (max-width: 767px) {
+    background: rgba(0, 0, 0, 0.6) no-repeat center;
+    background-size: cover;
+    //height: $sectionFixedHeight - 100;
+    //background-size: 100%;
+  }
+  > .cover-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: inherit;
+    background: rgba(0, 0, 0, 0.4);
+    //background: transparent;
+    z-index: 3;
+    h1 {
+      color: $whiteColor;
+    }
+    h2 {
+      color: $whiteColor;
+    }
+    h3 {
+      color: #f8f8f8;
+    }
+    h4, p {
+      color: $whiteColor;
+      font-size: 1.2em;
+      margin-top: 5px;;
+      margin-bottom: 5px;;
+    }
+  }
+  .section-title {
+    text-align: center;
+    position: relative;
+
+    h3 {
+      color: $lightColor;
+      font-weight: normal;
+    }
+  }
+
+}
+
+.section-fixed-sm {
+  height: 350px;
+  background: rgba(0, 0, 0, 0.6) no-repeat center;
+  background-size: cover;
+  position: relative;
+  > .cover-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: inherit;
+    background: rgba(0, 0, 0, 0.4);
+    //background: transparent;
+    z-index: 3;
+    h1 {
+      color: $whiteColor;
+    }
+    h2 {
+      color: $whiteColor;
+    }
+    h3 {
+      color: #f8f8f8;
+    }
+    h4, p {
+      color: $whiteColor;
+      font-size: 1.2em;
+      margin-top: 5px;;
+      margin-bottom: 5px;;
+    }
+  }
+  .section-title {
+    text-align: center;
+    position: relative;
+
+    h3 {
+      color: $lightColor;
+      font-weight: normal;
+    }
+    @media screen and (max-width: 767px) {
+      h1 {
+        font-size: 24px;
+      }
+    }
+  }
+
+}
+
+.section-title + .section-body {
+  margin-top: $sectionSpace;
+}
+
+.section-body img {
+  max-width: 100%;
+}
+
+.xb-section {
+  padding-top: $sectionPadding;
+  padding-bottom: $sectionPadding;
+  background: no-repeat center;
+  background-size: cover;
+  @include xb-xs-screen{
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+.xb-section-about {
+  padding: 100px 0;
+}
+
+.xb-section-about-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 40px;
+  color: #333;
+  font-weight: normal;
+}
+
+.xb-section-about-detail {
+  margin-top: 50px;
+  font-size: 22px;
+  color: #666;
+}
+
+.xb-section-about-image {
+  margin-top: 100px;
+  img {
+    margin-bottom: 40px;
+  }
+}
+
+.xb-section-title {
+  text-align: center;
+  margin-bottom: 40px;
+  h2 {
+    margin-top: 0;
+    font-size: 36px;
+    color: $primaryFontColor;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  h3 {
+    margin-top:0;
+    font-size: 16px;
+    color: $primaryFontColor;
+    font-weight: 300;
+  }
+}
+
+.xb-section-body {
+  margin-bottom: 0;
+}
+
+.xb-section-footer {
+  margin-bottom: 0;
+}
+
+.xb-section-details {
+
+}
+
+.section-banner {
+  //height: 400px;
+}
+
+.section-page {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+  ) center;
+  background-size: cover;
+  padding-top: 90px;
+  .section-title {
+    margin-left: 5%;
+    margin-right: 5%;
+    h2 {
+      font-size: 36px;
+      text-align: center;
+      color: $whiteColor;
+    }
+    h3, h4 {
+      margin-top: 25px;
+      font-size: 20px;
+      text-align: center;
+      color: $lightColor;
+    }
+  }
+  .section-button {
+    margin-top: 40px;
+  }
+  @media screen and (max-width: 767px) {
+    padding-top: 80px;
+    .section-title {
+      h2 {
+        font-size: 28px;
+        text-align: center;
+        color: $whiteColor;
+      }
+      h3, h4 {
+        margin-top: 20px;
+        text-align: center;
+        color: $lightColor;
+      }
+    }
+  }
+}
+
+.section-list-page {
+  height: 400px;
+}
+
+.section-detail-page {
+  height: 350px;
+}
+
+.xb-logo-wall {
+  img {
+    max-width: 200px;
+  }
+}
+
+.wordwrap {
+  white-space: pre-wrap; /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap; /* Opera <7 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* IE */
+}
+
+.xb-carousel {
+  background: rgba(0, 0, 0, 0.6) no-repeat center;
+  background-size: cover;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  height: 600px;
+  position: relative;
+  @media screen and (max-width: 767px) {
+    height: 450px;
+  }
+
+  .xb-carousel-body {
+    padding-top: 50px;
+
+    .xb-carousel-title {
+      color: $whiteColor;
+      font-size: 44px;
+      font-weight: normal;
+      margin-bottom: 40px;
+    }
+    .xb-carousel-subtitle {
+      color: $bgLight;
+      font-size: 26px;
+      margin-bottom: 40px;
+    }
+    .xb-carousel-howitwork {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+
+    .xb-carousel-button-wrap {
+      position: absolute;
+      bottom: 200px;
+      width: 200px;
+      left: 50%;
+      margin-left: -100px;
+    }
+
+    @media screen and (max-width: 767px) {
+      padding-top: 0px;
+      max-width: 100%;
+
+      .xb-carousel-title {
+        color: $whiteColor;
+        font-size: 20px;
+        font-weight: normal;
+        margin-bottom: 20px;
+      }
+
+      .xb-carousel-subtitle {
+        color: $bgLight;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .xb-carousel-button-wrap {
+        bottom: 70px;
+      }
+    }
+  }
+}
+
+.xb-full-image {
+  img {
+    width: 100%
+  }
+}
+
+.three-to-two {
+  position: relative;
+  width: 100%;
+  padding-bottom: 66.7%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-bottom: 16px;
+}
+
+.five-to-three {
+  position: relative;
+  width: 100%;
+  padding-bottom: 60%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-bottom: 16px;
+}
+
+.xb-page-product {
+  background-color: #ffffff;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+  .xb-page-product-title {
+    margin-bottom: 30px;
+  }
+  .xb-page-product-subtitle {
+    color: $primaryColor;
+    font-size: 18px;;
+  }
+}
+
+.xb-page-product + section {
+  padding-top: 0;
+}
+
+.xb-detail-section {
+  .xb-detail-section-detail {
+    color: #999999;
+    @media screen and (max-width: 767px) {
+      iframe {
+        max-width: 100% !important;
+        height: auto !important;
+      }
+    }
+
+  }
+}
+
+.tab-pane {
+  @media screen and (max-width: 767px) {
+    iframe {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+  }
+}
+
+ul.xb-ul-alpha {
+  list-style: lower-alpha;
+}
+
+.xb-no-wrap {
+  white-space: nowrap;
+}
+
+

@@ -1,0 +1,78 @@
+<div class="xb-loading" *ngIf="showLoading">
+  <mat-progress-bar [mode]="determinate" [value]="loadingValue" color="accent"></mat-progress-bar>
+</div>
+<div style="background-color: #f0f0f0; height: 100%;" >
+  <div class="header">
+    <div class="headertop" >
+      <!--<div class="righticon"> ➡ </div>-->
+      <div class="lefticon">
+        Price Drop FAQ
+      </div>
+    </div>
+    <div class="user">
+      <img src="{{imgsrc}}" alt="">
+      <!--<img src="{{ownerimg}}" alt="">-->
+    </div>
+    <p class="header-p" *ngIf="cutStatus=='progressing'" >Hey! Please help me drop the price of this item.<br>Thanks!</p>
+    <p class="header-p" *ngIf="cutamount">Thank you! You have helped.drop Rs.{{cutamount}} off the price!<br>Thanks!</p>
+  </div>
+  <div class="midcard">
+    <img src="{{imgsrc}}" alt="">
+    <div class="midcardword"  fxLayout="column" fxLayoutAlign="space-between start">
+
+      <div class="midcardtop">{{title}}</div>
+      <div class="midcardbottom">10+ people bought this item at the lowest price</div>
+    </div>
+  </div>
+  <div class="wrapper-progress" *ngIf="cutStatus=='progressing'"  >
+    <div class="current-price" [ngStyle]="{'margin-left': percentage }" >
+      <div class="current-price-1">Current Price</div>
+      <div class="current-price-2">Rs.{{currentPrice}}</div>
+    </div>
+    <div class="wrapper-progress-line">
+      <div class="progress-line-bottom"></div>
+      <div class="progress-line-top" [ngStyle]="{'width': percentage }"></div>
+      <div class="progress-line-icon  icon-pic-cut "  [ngStyle]="{left:iconpercentage }"></div>
+    </div>
+    <div class="wrapper-price">
+      <div class="wrapper-price-regular">
+        <div class="current-price-1">Regular Price</div>
+        <div class="wrapper-price-2">Rs.{{salePrice}}</div>
+      </div>
+      <div class="wrapper-price-lowest">
+        <div class="current-price-1">Lowest Price</div>
+        <div class="wrapper-price-2">Rs.{{lowestPrice}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper-progress" style="text-align: center"  *ngIf="cutStatus=='end'">
+      <div class="wrapper-word">Total Price Dropped:&nbsp;<span class="wrapper-word-price">Rs.111 </span></div>
+      <div class="wrapper-word-black">Final Price:&nbsp;<span class="wrapper-word-drop"> Rs.222 </span></div>
+  </div>
+
+  <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'"   >Help Mary Drop the Price in One Click</button>
+  <button class="sharebtn"   (click)="downApp()"  style=""  >I Want This Item Too</button>
+  <!--<a [ngClass]="{'xb-navigation-header__login-active': status}"-->
+     <!--fxShow.xs="false">LOG IN</a>-->
+  <div class="time">
+    <div class="timehh">{{ahour}}</div>
+    <span class="timespan">:</span>
+    <div class="timehh">{{amin}}</div>
+    <span class="timespan">:</span>
+    <div class="timehh">{{asecond}}</div>
+  </div>
+
+  <div class="scroll" style="height: max-content">
+    <div class="scrollhead">
+      Price Drop Contributors
+    </div>
+    <div class="scrollbottom">
+        <div class="bottom-card" *ngFor="let i of friendCuts">
+          <img class="bottom-card-img" src="{{i.avatar}}" alt="">
+          <div class="bottom-card-name">{{i.lastName}}{{i.firstName}}</div>
+          <div class="bottom-card-price">Dropped <span style="font-weight: 900">Rs.{{i.cutAmount}}</span></div>
+        </div>
+    </div>
+  </div>
+</div>

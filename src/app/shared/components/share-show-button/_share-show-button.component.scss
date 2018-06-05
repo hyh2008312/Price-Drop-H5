@@ -1,0 +1,53 @@
+@import "../../../styles/utils/_index";
+@import "../../../styles/_variables";
+
+.xb-social-share{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+
+  &__facebook{
+    background-color: $facebookColor;
+  }
+
+  &__twitter{
+    background-color: $twitterColor;
+  }
+
+  &__google{
+    background-color: $googleColor;
+  }
+
+  &__whatsapp{
+    background-color: $whatsAppColor;
+  }
+
+  >i{
+    font-size: 14px;
+    line-height: 14px;
+    color: $whiteColor;
+  }
+
+  @include xb-xs-screen{
+    width: 24px;
+    height: 24px;
+    >i{
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
+
+  &__store{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: white;
+
+    >i{
+      font-size: 16px;
+      line-height: 16px;
+      color: #252525;
+    }
+  }
+}
+

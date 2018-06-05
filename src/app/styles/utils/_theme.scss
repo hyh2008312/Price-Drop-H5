@@ -1,0 +1,26 @@
+$colors: (
+  primary: $primaryColor,
+  success: $successColor,
+  danger: $dangerColor,
+  striking: $strikingColor,
+  whitem:$whiteColor,
+  light-white:$lightWhiteColor,
+  light:$lightColor,
+  light-gray:$lightGrayColor,
+  gray-light:$grayLightColor,
+  graym:$grayColor,
+  dark-gray: $darkGrayColor,
+  dark: $darkColor,
+  bg-white:$bgWhite,
+  bg-light:$bgLight,
+  bg-gray:$bgGray,
+  bg-black: $blackColor
+);
+@each $name, $color in $colors {
+  .background-#{$name} {
+    background-color: $color;
+  }
+  .xb-color-#{$name} {
+    color: $color;
+  }
+}

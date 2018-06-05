@@ -1,0 +1,171 @@
+@import "font";
+@import "color";
+@import "theme";
+@import "mixins";
+
+@import '../../../../node_modules/@angular/material/theming';
+
+@include mat-core();
+$primary: mat-palette($mat-cyan, 500);
+$accent: mat-palette($mat-amber, A400);
+$warn: mat-palette($mat-red, 500);
+$theme: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
+
+$dark-primary: mat-palette($mat-grey, 900);
+$dark-accent: mat-palette($mat-amber, A400);
+$dark-warn: mat-palette($mat-red, 500);
+$dark-theme: mat-light-theme($dark-primary, $dark-accent, $dark-warn);
+
+.unicorn-dark-theme {
+  @include angular-material-theme($dark-theme);
+  .mat-form-field-underline{
+    height: 1px;
+    background-color: #000;
+  }
+
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+    color: #000;
+  }
+  .mat-option.mat-active{
+    background-color: rgba(0,0,0,.12) !important;
+  }
+}
+
+
+.unicorn-dark-theme-1 {
+  @include angular-material-theme($dark-theme);
+  .mat-raised-button {
+    line-height: 32px;
+    border-radius: 4px;
+    .mat-button-wrapper{
+      font-size: 12px !important;
+    }
+  }
+  .mat-checkbox-inner-container{
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.unicorn-theme {
+  @include angular-material-theme($dark-theme);
+  .mat-form-field-infix{
+    padding: 0;
+    border-top: 0;
+  }
+  .mat-form-field-wrapper{
+    padding-bottom: 0;
+  }
+  .mat-form-field-underline{
+    display: none;
+  }
+}
+
+.mat-raised-button:not([class*=mat-elevation-z]){
+  @include box-shadow(none);
+}
+
+.mat-form-field{
+  width: 280px;
+}
+
+.mat-form-field-underline{
+  background-color: rgba(0,0,0,.12);
+}
+
+.mat-toolbar{
+  background-color: $whiteColor;
+  min-height: 56px;
+  height: 56px;
+  .mat-toolbar-row{
+    min-height: 56px;
+    height: 56px;
+  }
+  border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+.mat-slide-toggle{
+  height: auto;
+  line-height: 0;
+}
+
+.mat-raised-button{
+  &.mat-accent{
+    color: rgba(white, 0.87);
+  }
+}
+
+.mat-tab-label{
+  &.mat-tab-label-active{
+    opacity: 1;
+  }
+}
+
+.mat-tab-body-content{
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.mat-raised-button{
+  line-height: 40px;
+  border-radius: 4px;
+
+  @include xb-xs-screen{
+    line-height: 36px;
+  }
+}
+
+.mat-tab-nav-bar, .mat-tab-header{
+  border-bottom: none;
+}
+
+textarea.mat-input-element{
+  line-height: 1.5;
+}
+
+.mat-dialog-container{
+  max-width: 100vw !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  @include xb-xs-screen{
+    background-color: transparent;
+    @include box-shadow(none !important);
+  }
+}
+
+.cdk-overlay-pane{
+  @include xb-xs-screen{
+    min-width: 100vw;
+  }
+}
+
+.mat-chip:not(.mat-basic-chip)+.mat-chip:not(.mat-basic-chip) {
+  margin: 0 8px 3px 0;
+}
+.mat-chip:not(.mat-basic-chip){
+  margin: 0 8px 3px 0;
+}
+
+.mat-progress-bar.mat-accent .mat-progress-bar-background{
+  fill: transparent;
+}
+.mat-progress-bar.mat-accent .mat-progress-bar-buffer{
+  background-color: transparent;
+}
+.mat-progress-bar{
+  height: 4px;
+}
+.mat-paginator-decrement, .mat-paginator-increment{
+  width: 12px !important;
+  height: 12px !important;
+  border-color: $blackColor !important;
+}
+.mat-paginator-range-label{
+  font-size: 16px;
+  color: $blackColor;
+}
+.mat-paginator-page-size{
+  display: none !important;
+  color: $blackColor;
+}

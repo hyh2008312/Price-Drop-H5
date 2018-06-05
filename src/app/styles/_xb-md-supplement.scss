@@ -1,0 +1,181 @@
+
+// typography
+
+button, html, body, input, select, textarea {
+  font-family: Roboto,Helvetica Neue,sans-serif;
+}
+
+p{
+  margin: 0 0 10px;
+}
+
+.xb-fab-fixed {
+  position: fixed !important;
+}
+
+// theme
+
+.md-dark-primary{
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.md-dark-secondary{
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.md-dark-third{
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.md-dark-four{
+  color: rgba(0, 0, 0, 0.12);
+}
+
+
+.md-light-primary{
+  color: rgba(255, 255, 255, 1);
+}
+
+.md-light-secondary{
+  color: rgba(255, 255, 255, 0.70);
+}
+
+.md-light-third{
+  color: rgba(255, 255, 255, 0.50);
+}
+
+.md-light-four{
+  color: rgba(255, 255, 255, 0.12);
+}
+
+// link
+
+a {
+  color: #3f51b5;
+  &:hover {
+    color: #283593;
+  }
+}
+
+a.xb2-nostyle-link {
+  color: inherit;
+  &:hover {
+    color: inherit;
+  }
+}
+
+.md-body-1{
+  font-size: 14px;
+}
+
+.md-subhead, b {
+  font-weight: 500;
+}
+$directions: left top right bottom;
+$sizes: 0 1 2 3 4 5;
+@each $direction in $directions {
+  @each $size in $sizes {
+    .md-margin-#{$direction}-#{$size} {
+      margin-#{$direction}: 8px * $size;
+    }
+    .md-padding-#{$direction}-#{$size} {
+      padding-#{$direction}: 8px * $size;
+    }
+  }
+}
+
+$aligns: left right center justify;
+
+@each $align in $aligns {
+  .md-align-#{$align} {
+    text-align: $align;
+  }
+}
+
+.md-margin-clear {
+  margin: 0 0;
+}
+
+.md-padding-clear {
+  padding: 0 0;
+}
+
+.md-relative {
+  position: relative;
+}
+
+.list-none-style {
+  list-style: none;
+}
+
+.xb-loading-top {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  .md-container{
+    height: 4px;
+    @include xb-xs-screen{
+      height: 2px;
+    }
+  }
+}
+.xb-pointer{
+  cursor: pointer;
+}
+
+.xb-scroll{
+  overflow: scroll;
+}
+
+.xb-input-error{
+  color: $dangerColor;
+  font-size: 12px;
+  padding-bottom: 8px;
+}
+
+.ql-editor, .ql-container{
+  height: auto;
+  box-sizing: border-box;
+  @include xb-xs-screen{
+    font-size: 10px !important;
+  }
+}
+
+.ql-container{
+  font-size: 14px!important;
+  min-height: 96px;
+}
+
+.ql-editor{
+  padding: 0;
+}
+
+.ql-container .ql-editor{
+  min-height: 0 !important;
+  padding: 16px;
+}
+.ql-bubble .ql-tooltip{
+  z-index: 1000;
+}
+
+.material-icons {
+  /* Support for  UC ! */
+  text-rendering: optimizeLegibility;
+
+
+}
+
+.xb-large-star{
+  font-size: 16px;
+}
+
+.xb-loading{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+}

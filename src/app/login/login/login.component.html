@@ -1,0 +1,62 @@
+<div class="xb-loading" *ngIf="showLoading">
+  <mat-progress-bar [mode]="determinate" [value]="loadingValue" color="accent"></mat-progress-bar>
+</div>
+<div class="xb-login__scroll background-bg-light">
+  <div class="xb-login__scroll-inner" fxLayout="column">
+    <div class="background-bg-white" fxFlex="none">
+      <div class="container">
+        <!--<app-navigation-header [status]="true"></app-navigation-header>-->
+      </div>
+    </div>
+    <div  fxFlex="noshrink" fxLayout="row" fxLayoutAlign="center center">
+      <div class="xb-login__container" fxLayout="column" >
+        <div class="xb-login__login-title">Log In</div>
+        <div class="xb-login__error md-margin-bottom-2" *ngIf="loginErr">{{loginErr}}</div>
+        <!--<form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="loginGroup" (ngSubmit)="login()" novalidate>-->
+          <!--<div class="xb-login__width">-->
+            <!--<mat-form-field>-->
+              <!--<input matInput placeholder="Email Address" formControlName="username">-->
+            <!--</mat-form-field>-->
+            <!--<div *ngIf="formErrors['username']" class="xb-input-error">-->
+              <!--{{ formErrors['username'] }}-->
+            <!--</div>-->
+            <!--<mat-form-field>-->
+              <!--<input matInput type="password" placeholder="Password" formControlName="password">-->
+            <!--</mat-form-field>-->
+            <!--<div *ngIf="formErrors['password']" class="xb-input-error">-->
+              <!--{{ formErrors['password'] }}-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div fxLayout="row">-->
+            <!--<a class="text-underline md-margin-bottom-3 md-dark-primary" routerLink="/account/resetPassword">Forgot password?</a>-->
+          <!--</div>-->
+          <!--<div fxLayout="column">-->
+            <!--<button mat-raised-button color="primary" type="submit">-->
+              <!--<div class="gtag-login-email-btn">LOG IN</div>-->
+            <!--</button>-->
+          <!--</div>-->
+        <!--</form>-->
+        <div fxLayout="column" >
+
+          <!--<div class="md-align-center md-margin-top-2 md-margin-bottom-2">OR</div>-->
+          <!--<button class="xb-login__facebook" mat-raised-button (click)="facebookLogin('facebook')">-->
+            <!--<div fxLayout="row" fxLayoutAlign="start center">-->
+              <!--<i class="iconfontXberts icon-ic-facebook"></i>-->
+              <!--<span class="md-align-center gtag-login-facebook-btn" fxFlex>Continue with Facebook</span>-->
+            <!--</div>-->
+          <!--</button>-->
+
+          <button class="xb-login__google" mat-raised-button (click)="googleLogin('google')">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="iconfontXberts icon-pic-google"></i>
+              <span class="md-align-center gtag-login-google-btn" fxFlex>Continue with Google</span>
+            </div>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

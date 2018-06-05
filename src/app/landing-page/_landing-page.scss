@@ -1,0 +1,624 @@
+@import "../styles/utils/_index";
+@import "../styles/_variables";
+
+.xb-landing-page {
+  font-family: ProximaNova;
+  width: 100vw;
+
+  &__inner {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+  }
+
+  &__banner {
+    height: 823px;
+    background-image: url("https://media.socialcommer.com/source/web/pic/landing-banner1-20184026.jpg");
+    background-position: center;
+    background-size: auto 823px;
+    background-repeat: repeat;
+
+    @include xb-xs-screen {
+      background-image: url("https://media.socialcommer.com/source/web/pic/landing-bitmap2-20180426.png");
+      height: auto;
+      background-size: auto 100%;
+      padding: 0 16px 48px;
+    }
+
+    &-1 {
+      padding: 112px 0 120px;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+
+      @include xb-xs-screen{
+        padding: 58px 16px 54px;
+      }
+
+      &-left{
+        padding: 0 32px;
+        @include xb-xs-screen{
+          padding: 0;
+        }
+      }
+    }
+
+    &-title {
+      font-family: Didot;
+      font-size: 40px;
+      line-height: 52px;
+      letter-spacing: -0.29px;
+      margin-top: 196px;
+      @include media();
+
+      @include xb-xs-screen {
+        font-size: 24px;
+        line-height: 31px;
+        margin-top: 291px;
+      }
+    }
+    &-subtitle {
+      margin-top: 16px;
+      font-size: 16px;
+      letter-spacing: -0.29px;
+      line-height: 24px;
+      @include light();
+
+      @include xb-xs-screen {
+        margin-top: 6px;
+        font-size: 14px;
+        line-height: 24px;
+      }
+    }
+
+    &-title-2 {
+      font-family: 'Didot';
+      font-size: 34px;
+      line-height: 56px;
+
+      @include xb-sm-screen{
+        margin-top: 0px;
+      }
+      @include xb-xs-screen {
+        font-size: 24px;
+        line-height: 40px;
+        margin-top: 28px;
+      }
+    }
+
+    &-subtitle-1 {
+      margin-top: 24px;
+      font-size: 16px;
+      line-height: 19px;
+
+      @include xb-xs-screen {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 24px;
+      }
+    }
+
+    &-button {
+      margin-top: 63px;
+      color: $whiteColor;
+      background: $primaryColorNew;
+      font-size: 14px;
+      line-height: 40px;
+      letter-spacing: -0.29px;
+      text-align: center;
+      padding: 0 24px;
+      display: block;
+      @include xb-xs-screen {
+        margin-top: 20px;
+        line-height: 32px;
+        font-size: 12px;
+      }
+    }
+
+    &-button-1 {
+      margin-top: 48px;
+      color: $whiteColor;
+      background: $primaryColorNew;
+      font-size: 14px;
+      line-height: 40px;
+      letter-spacing: -0.29px;
+      text-align: center;
+      padding: 0 24px;
+      display: block;
+      @include xb-xs-screen {
+        margin-top: 32px;
+        line-height: 32px;
+        font-size: 12px;
+      }
+    }
+
+    &-title-1 {
+      height: 120px;
+      color: $whiteColor;
+      background-color: #231d1a;
+      font-size: 34px;
+      line-height: 48px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin-top: -1px;
+
+      @include media();
+
+      @include xb-sm-screen {
+        font-size: 24px;
+        line-height: 32px;
+        height: 120px;
+      }
+
+      @include xb-xs-screen {
+        font-size: 16px;
+        line-height: 24px;
+        height: 88px;
+      }
+    }
+
+    &-tri {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      @include transform(translateX(-50%));
+      width: 0;
+      height: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-top: 16px solid #231d1a;
+
+      @include xb-xs-screen {
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 8px solid #231d1a;
+      }
+    }
+
+    &-box{
+      position: absolute;
+      top: 391px;
+      right: calc(50% + 223px);
+      width: 240px;
+      height: 151px;
+      background-image: url("https://media.socialcommer.com/source/web/pic/landing-banner2-20180426.jpg");
+      background-repeat: repeat-y;
+    }
+  }
+
+  &__navigation {
+
+    &-bg {
+      background-color: $blackColor;
+    }
+  }
+
+  &__content {
+    padding: 0 16px;
+
+    &-bg {
+      height: 471px;
+      overflow: hidden;
+      @include xb-xs-screen {
+        height: auto;
+        padding: 54px 16px;
+      }
+    }
+    &-title {
+      font-family: Didot;
+      margin-top: 120px;
+      font-size: 24px;
+      line-height: 31px;
+      text-align: center;
+      margin-bottom: 82px;
+      @include xb-xs-screen{
+        margin: 0;
+      }
+    }
+    i {
+      font-size: 40px;
+      line-height: 40px;
+      display: block;
+      color: $primaryColorNew;
+      @include xb-xs-screen{
+        margin-top: 32px;
+      }
+    }
+    &-title-1 {
+      font-size: 18px;
+      margin-top: 12px;
+      line-height: 19px;
+      @include media();
+      text-align: center;
+    }
+    &-title-2 {
+      font-size: 14px;
+      @include light();
+      line-height: 20px;
+      margin-top: 24px;
+      text-align: center;
+      @include xb-xs-screen {
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 12px;
+      }
+    }
+  }
+
+  &__title {
+    margin-top: 96px;
+    font-size: 48px;
+    @include media();
+    text-align: center;
+    color: $whiteColor;
+
+    @include xb-sm-screen {
+      margin-top: 48px;
+      font-size: 32px;
+    }
+
+    @include xb-xs-screen {
+      margin-top: 40px;
+      font-size: 24px;
+      line-height: 24px;
+    }
+  }
+
+  &__content-1 {
+
+    &-image{
+      padding: 0 88px;
+      @include xb-sm-screen{
+        padding: 0 32px;
+      }
+    }
+
+    &-bg {
+      overflow: hidden;
+      background-color: #f8f3f3;
+      padding: 120px 0;
+      @include xb-xs-screen{
+        padding: 54px 16px;
+      }
+    }
+    &-title {
+      font-size: 16px;
+      line-height: 17px;
+      @include media();
+    }
+
+    &-title-1 {
+      font-size: 12px;
+      color: #000000;
+      line-height: 20px;
+      margin-bottom: 36px;
+      margin-top: 4px;
+      @include xb-sm-screen{
+        margin-bottom: 24px;
+      }
+    }
+
+    &-title-2{
+      font-family: Didot;
+      font-size: 24px;
+      line-height: 31px;
+      margin-bottom: 32px;
+      @include xb-xs-screen{
+        text-align: center;
+      }
+    }
+
+    &-circle{
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #000000;
+      line-height: 20px;
+      font-size: 14px;
+      text-align: center;
+      display: block;
+    }
+
+    &-line{
+      width: 1px;
+      height: 100%;
+      background-color: #AA7942;
+      display: block;
+    }
+  }
+
+  &__list {
+
+    padding: 0 4px;
+
+    @include xb-xs-screen{
+      padding: 0 8px;
+    }
+
+    @include xb-xs-screen{
+      width: 360px;
+      padding: 0 8px;
+    }
+
+    &-image{
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+      overflow: hidden;
+      img{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
+
+    &-title-1{
+      font-size: 14px;
+      letter-spacing: -0.29px;
+      line-height: 20px;
+      max-height: 24px;
+      margin-top: 16px;
+      margin-bottom: 8px;
+      text-align: center;
+      @include text-overflow();
+    }
+
+    &-title-2{
+      font-size: 16px;
+      letter-spacing: -0.29px;
+      line-height: 19px;
+      @include media();
+      margin-right: 12px;
+    }
+
+    &-title-3{
+      font-size: 14px;
+      color: rgba(0,0,0,.54);
+      letter-spacing: -0.29px;
+      line-height: 17px;
+    }
+
+    &-title-4{
+      font-size: 16px;
+      color: #000000;
+      letter-spacing: -0.29px;
+      line-height: 19px;
+      margin-top: 8px;
+      padding-bottom: 8px;
+
+      @include xb-xs-screen{
+        font-size: 14px;
+      }
+    }
+
+    &-button{
+      margin-top: 32px;
+      font-size: 14px;
+      color: $primaryColorNew;
+      letter-spacing: -0.29px;
+      line-height: 38px;
+      padding: 0 32px;
+      border: 1px solid $primaryColorNew;
+      cursor: pointer;
+
+      @include xb-xs-screen{
+        line-height: 30px;
+      }
+    }
+
+    &-bg {
+      width: 100%;
+
+      padding: 120px 0;
+
+      @include xb-xs-screen{
+        padding: 54px 0;
+        overflow-x: hidden;
+        ::-webkit-scrollbar {
+          height: 1px;
+        }
+      }
+    }
+
+    &-bg-1{
+      margin-left: -15%;
+      width: 130%;
+      @include xb-xs-screen{
+        margin-left: -50%;
+        width: 200%;
+      }
+    }
+
+    &-title {
+      font-family: Didot;
+      font-size: 24px;
+      color: #000000;
+      letter-spacing: -0.29px;
+      text-align: center;
+      line-height: 31px;
+      margin-bottom: 64px;
+
+      @include xb-xs-screen {
+        min-height: 0;
+        font-size: 20px;
+      }
+    }
+
+  }
+
+  &__content-container{
+    position: relative;
+
+    width: 70%;
+    max-width: 540px;
+    margin-right: 72px;
+
+    background-color: $whiteColor;
+
+    @include xb-sm-screen{
+      margin-right: 32px;
+    }
+
+    @include xb-xs-screen{
+      width: 80%;
+      margin-right: 0;
+      min-height: 100px;
+    }
+
+    &-bg{
+      height: 771px;
+      padding: 120px 0;
+      background-color: #f8f3f3;
+
+      @include xb-xs-screen{
+        height: auto;
+        padding: 54px 16px;
+      }
+    }
+
+    &-title{
+      font-family: Didot;
+      font-size: 24px;
+      line-height: 31px;
+      letter-spacing: -0.29px;
+      text-align: center;
+    }
+
+    &-title-1{
+      margin-top: 32px;
+      font-size: 24px;
+      line-height: 29px;
+      color: #000000;
+      letter-spacing: -0.29px;
+      @include media();
+
+      @include xb-xs-screen{
+        margin-top: 72px;
+      }
+    }
+
+    &-title-2{
+      font-size: 14px;
+      color: #000000;
+      text-align: left;
+      line-height: 20px;
+      margin-top: 24px;
+
+      @include xb-xs-screen{
+        margin-top: 12px;
+      }
+    }
+
+    &-margin-top{
+      margin-top: 72px;
+    }
+
+    &-margin-top-1{
+      margin-top: 24px;
+      @include xb-xs-screen{
+        margin-top: 18px;
+      }
+    }
+
+    &-margin-top-2{
+      margin-top: 87px;
+      padding-right: 40px;
+      @include xb-xs-screen{
+        margin-top: 40px;
+        padding-right: 0;
+      }
+    }
+
+    &-header{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      >img{
+        width: 40px;
+        height: 40px;
+        display: block;
+      }
+    }
+
+    &-name{
+      font-size: 14px;
+      line-height: 17px;
+      margin-left: 12px;
+    }
+
+    &-button{
+      margin-top: 40px;
+      border: 1px solid $primaryColorNew;
+      color: $primaryColorNew;
+      font-size: 14px;
+      line-height: 38px;
+      padding: 0 30px;
+      cursor: pointer;
+      @include xb-xs-screen{
+        margin-top: 32px;
+        font-size: 12px;
+        line-height: 32px;
+      }
+    }
+
+    &-image{
+      width: 80%;
+      max-width: 280px;
+      padding-bottom: 160%;
+      position: absolute;
+      left: -40%;
+      top: 50%;
+      @include transform(translateY(-50%));
+
+      >img{
+        position: absolute;
+        width: 100%;
+        height: auto;
+        left: 0;
+        top: 50%;
+        @include transform(translateY(-50%));
+      }
+
+      @include xb-xs-screen{
+        width: 60%;
+        left: -20%;
+      }
+    }
+  }
+}
+
+.swiper-slide {
+  background-color: $whiteColor;
+  img{
+    width: 100%;
+    display: block;
+  }
+}
+
+
+.swiper-pagination-handle{
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 0 8px;
+  background-color: #D8D8D8;
+  cursor: pointer;
+  @include xb-xs-screen{
+    margin: 0 16px 0 0;
+  }
+}
+
+.swiper-pagination-handle-active{
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 0 8px;
+  background-color: $primaryColorNew;
+  cursor: pointer;
+  @include xb-xs-screen{
+    margin: 0 16px 0 0;
+  }
+}

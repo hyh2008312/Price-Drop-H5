@@ -1,0 +1,12 @@
+{
+  "name": "SocialCommer",
+  "description": "SocialCommer",
+  "keywords": [
+    "Restful",
+    "Angular",
+    "Node",
+    "Angular cli"
+  ],
+  "repository": "https://heyh@bitbucket.org/xberts/web.git",
+  "success_url": "/"
+}

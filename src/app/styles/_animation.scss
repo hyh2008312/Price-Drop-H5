@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+.animation-opacity-show{
+
+  @include prefixer(animation, opacity-show .5s linear 0s 1 normal, $prefix-list);
+
+  @at-root {
+
+    @include prefix-keyframes(opacity-show, $prefix-list) {
+      0%   { opacity: .5;}
+      99% { opacity: 1;}
+    }
+  }
+}
+
+// perk points animation
+.animation-add-to-cart{
+
+  @include prefixer(animation, perks-points-flow .5s cubic-bezier(1,.5,.45,1) .1s 1 forwards, $prefix-list);
+
+  @at-root {
+
+    @include prefix-keyframes(perks-points-flow, $prefix-list) {
+      0%   {
+        left: 50%;
+        top:40%;
+        @include prefix-content(transform,translateX(-50%));
+      }
+      25%   {
+        @include prefix-content(transform,translateX(-50%));
+      }
+      50%  {
+        @include prefix-content(transform,translateX(-50%));
+      }
+      75%  {
+      }
+      99% {
+        left: 90%;
+        top:16px;
+        @include prefix-content(transform,translateX(-50%));
+        display: none;
+      }
+    }
+  }
+}
+
+.animation-transform-auto{
+
+  @include prefixer(animation, transform-auto .8s cubic-bezier(1,.5,.45,1) 0s 1 normal, $prefix-list);
+
+  @at-root {
+
+    @include prefix-keyframes(transform-auto, $prefix-list) {
+      0%   { opacity: 1;}
+      20%  { opacity: 0;}
+      100% { opacity: 1;}
+    }
+  }
+}
+
+.animation-transform-auto-1{
+
+  @include prefixer(animation, transform-auto-1 .5s cubic-bezier(1,.5,.45,1) 0s 1 normal, $prefix-list);
+
+  @at-root {
+
+    @include prefix-keyframes(transform-auto-1, $prefix-list) {
+      0%   { opacity: 1;}
+      20%  { opacity: 0;}
+      100% { opacity: 1;}
+    }
+  }
+}
+
+.animation-background-position{
+
+  @include prefixer(animation, background-position-scroll 20s cubic-bezier(1,.8,.8,1) 0.5s infinite alternate, $prefix-list);
+
+  @at-root {
+
+    @include prefix-keyframes(background-position-scroll, $prefix-list) {
+      0%   { background-position-y: 0;}
+      15%  { background-position-y: 0;}
+      20%  { background-position-y: -150px;}
+      35%  { background-position-y: -150px;}
+      40%  { background-position-y: -300px;}
+      55%  { background-position-y: -300px;}
+      60%  { background-position-y: -450px;}
+      75%  { background-position-y: -450px;}
+      80%  { background-position-y: -600px;}
+      95%  { background-position-y: -600px;}
+      100% { background-position-y: -750px;}
+    }
+  }
+}
+
+.animation-height-show{
+
+  @include prefixer(animation, height-show .2s linear 0s 1 normal, $prefix-list);
+
+  @at-root {
+
+    @include prefix-keyframes(height-show, $prefix-list) {
+      0%   { height: 0;}
+      100% { height: 56px;}
+    }
+  }
+}

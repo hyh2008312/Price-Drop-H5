@@ -1,0 +1,312 @@
+@import "../variables";
+
+@mixin xbGrid($width) {
+  width: percentage($width/12 - 0.01);
+  max-width: 100%;
+  display: inline-block;
+}
+
+//madding padding
+//% based on the width of its parents
+//auto is computed by browser vendor
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: percentage($height / $width);
+  }
+  > .radio-content,.image-wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}
+
+// the height of parent should be known at first
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+// aspect ratio
+
+@mixin xaspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: percentage($height / $width);
+  }
+}
+
+
+
+// Text overflow
+// Requires inline-block or block for proper styling
+@mixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin xb-xxs-screen(){
+  @media screen and (max-width: 400px) {
+    @content;
+  }
+}
+@mixin xb-xs-screen(){
+  @media screen and (max-width: 599px) {
+    @content;
+  }
+}
+@mixin xb-gt-xs-screen(){
+  @media screen and (min-width: 600px) {
+    @content;
+  }
+}
+@mixin xb-sm-screen(){
+  @media screen and (min-width: 600px) and (max-width: 959px){
+    @content;
+  }
+}
+@mixin xb-gt-sm-screen(){
+  @media screen and (min-width: 960px) {
+    @content;
+  }
+}
+@mixin xb-md-screen(){
+  @media screen and (min-width: 960px) and (max-width: 1179px){
+    @content;
+  }
+}
+@mixin xb-lg-screen(){
+  @media screen and (min-width: 1180px) and (max-width: 1920px){
+    @content;
+  }
+}
+
+@mixin triangleBottom($px1:10px,$px2:10px,$color:#FFF){
+  width: 0;
+  height: 0;
+  border-left: $px1 solid transparent;
+  border-right: $px1 solid transparent;
+  border-bottom: $px2 solid $color;
+}
+
+@mixin changeMdIcon($arguments...){
+  width: $arguments;
+  height: $arguments;
+  min-width: $arguments;
+  min-height: $arguments;
+  font-size: $arguments;
+  line-height: $arguments;
+}
+
+// prefixer
+//----------------------------
+@mixin prefixer ($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit and $prefix-for-webkit == true {
+      -webkit-#{$property}: $value;
+    }
+    @else if $prefix == moz and $prefix-for-mozilla == true {
+      -moz-#{$property}: $value;
+    }
+    @else if $prefix == ms and $prefix-for-microsoft == true {
+      -ms-#{$property}: $value;
+    }
+    @else if $prefix == o and $prefix-for-opera == true {
+      -o-#{$property}: $value;
+    }
+    @else if $prefix == spec and $prefix-for-spec == true {
+      #{$property}: $value;
+    }
+    @else {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
+  }
+}
+
+// set box sizing
+@mixin box-sizing($arguments...) {
+  @include prefixer(box-sizing, $arguments, webkit moz spec);
+}
+
+// iOS <4.3 & Android <4.1 & firefox
+// box shadow
+@mixin box-shadow($arguments...) {
+  @include prefixer(box-shadow, $arguments, webkit moz spec);
+}
+
+// prefix transform
+@mixin transform($arguments...) {
+  @include prefixer(transform, $arguments, webkit moz ms o spec);
+}
+
+// prefix animation
+@mixin prefix-keyframes($animationName, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit and $prefix-for-webkit == true {
+      @-webkit-keyframes #{$animationName} {
+        @content;
+      }
+    }
+    @else if $prefix == moz and $prefix-for-mozilla == true {
+      @-moz-keyframes #{$animationName} {
+        @content;
+      }
+    }
+    @else if $prefix == ms and $prefix-for-microsoft == true {
+      @-ms-keyframes #{$animationName} {
+        @content;
+      }
+    }
+    @else if $prefix == o and $prefix-for-opera == true {
+      @-o-keyframes #{$animationName} {
+        @content;
+      }
+    }
+    @else if $prefix == spec and $prefix-for-spec == true {
+      @keyframes #{$animationName} {
+        @content;
+      }
+    }
+    @else {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
+  }
+}
+
+// prefix content
+@mixin prefix-content($content-name,$content-txt){
+  @include prefixer($content-name, $content-txt, webkit moz ms o spec);
+}
+
+// avatar content
+@mixin avatar-header($media) {
+  @if $media == large {
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+    img{
+      width: 64px;
+      height: 64px;
+    }
+    .c-user__name {
+      width: 64px;
+      height: 64px;
+    }
+  }
+  @else if $media == medium {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    img{
+      width: 40px;
+      height: 40px;
+    }
+    .c-user__name{
+      width: 40px;
+      height: 40px;
+    }
+  }
+  @else if $media == small {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    img{
+      width: 30px;
+      height: 30px;
+    }
+    .c-user__name{
+      width: 30px;
+      height: 30px;
+    }
+  }
+  @else {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    img{
+      width: 80px;
+      height: 80px;
+    }
+    .c-user__name{
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
+
+@mixin ellipsisText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin ellipsisMultiText($multi) {
+  position: relative;
+  height: $defaultLineHeight * $multi;
+  overflow: hidden;
+}
+
+@mixin ellipsisMultiTextMax($multi) {
+  position: relative;
+  max-height: $defaultLineHeight * $multi;
+  overflow: hidden;
+}
+
+@mixin regular() {
+  font-weight: 400;
+}
+@mixin light() {
+  font-weight: 300;
+}
+@mixin media() {
+  font-weight: 600;
+}
+
+@mixin font-h1(){
+  font-size: 34px;
+  line-height: 40px;
+  font-weight: 400;
+}
+
+@mixin font-h2(){
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+}
+
+@mixin font-h3(){
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+  color: rgba(0,0,0,.87);
+}
+
+@mixin font-p(){
+  font-size: 14px;
+  line-height: 24px;
+}
+
+@mixin font-label(){
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+@mixin resetBorder{
+  border-radius: 2px;
+  @include box-shadow(0 0 0 1px rgba(0, 0, 0, 0.06));
+}

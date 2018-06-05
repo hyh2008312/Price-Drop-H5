@@ -1,0 +1,19 @@
+@import "../../../styles/utils/index.scss";
+@import "../../../styles/variables.scss";
+
+.xb-loading{
+  &__bg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &__circle{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    @include transform(translate(-50%, -50%));
+    border-radius: 50%;
+  }
+}

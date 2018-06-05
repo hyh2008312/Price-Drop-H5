@@ -1,0 +1,255 @@
+@import "../styles/utils/_index";
+@import "../styles/_variables";
+
+.xb-login{
+  &__container{
+    max-width: 400px;
+    margin: 32px 0;
+    padding: 40px 40px 54px;
+    background-color: $whiteColor;
+    border-radius: 4px;
+    @include box-shadow(0 0 3px 1px rgba(0, 0, 0, 0.19));
+    width: 100%;
+    @include xb-xs-screen{
+      margin: 0;
+      padding: 40px 16px 56px;
+    }
+    @include xb-sm-screen{
+      padding: 40px 16px 56px;
+    }
+  }
+
+  &__container-1{
+    width: 100%;
+    @include xb-xs-screen{
+      padding: 0 16px;
+    }
+    @include xb-sm-screen{
+      padding: 0 16px;
+    }
+  }
+
+  &__auto{
+    margin: 40px auto;
+    @include xb-xs-screen{
+      margin: 0 auto;
+    }
+  }
+
+  &__width{
+    width: 100%;
+    &-hidden{
+      overflow: hidden;
+    }
+    .mat-form-field{
+      width: 100%;
+    }
+  }
+
+  &__width-1{
+    width: 100px;
+  }
+
+  &__facebook{
+    padding: 0 28px;
+    color: $whiteColor;
+    background-color: $facebookColor;
+    margin-bottom: 16px;
+  }
+
+  &__google{
+    padding: 0 28px;
+    color: $whiteColor;
+    background-color: $googleColor;
+    margin-bottom: 16px;
+  }
+
+  &__margin-left{
+    margin-left: 32px;
+    @include xb-xs-screen{
+      margin-left: 0;
+      margin-top: 16px;
+    }
+  }
+
+  &__margin-top{
+    margin-top: 40px;
+    @include xb-xs-screen{
+      margin-top: 24px;
+    }
+  }
+
+  &__margin-top-1{
+    margin-top: 120px;
+    @include xb-xs-screen{
+      margin-top: 40px;
+    }
+  }
+
+  &__title{
+    font-size: 34px;
+    font-weight: bold;
+    margin-top: 72px;
+
+    @include xb-xs-screen{
+      font-size: 24px;
+      margin-top: 24px;
+    }
+    @include xb-sm-screen{
+      font-size: 24px;
+
+    }
+  }
+
+  &__login-title{
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  &__title-1{
+    font-size: 34px;
+    font-weight: bold;
+    @include xb-xs-screen{
+      font-size: 24px;
+    }
+  }
+
+  &__title-2{
+    font-size: 16px;
+    @include xb-xs-screen{
+      font-size: 14px;
+    }
+  }
+
+  &__header{
+    margin-top: 108px;
+  }
+
+  &__circle{
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    text-align: center;
+    border: 2px solid $primaryColor;
+    color: $primaryColor;
+    line-height: 28px;
+
+    &.active{
+      background-color: $primaryColor;
+      color: $whiteColor;
+    }
+  }
+
+  &__line{
+    background-color: $primaryColor;
+    height: 2px;
+    width: 100%;
+  }
+
+  &__error{
+    color: $dangerColor;
+  }
+
+  &__scroll{
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &-inner{
+      overflow-x: hidden;
+      overflow-y: scroll;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+  }
+
+  &__width-mobile{
+    @include xb-xs-screen{
+      width: 100%;
+    }
+  }
+
+  &__mobile{
+    &-bg{
+      width: 100vw;
+      height: calc(100vh - 56px);
+      padding: 16px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      background-color: $whiteColor;
+    }
+
+    &-height{
+      height: 56px;
+
+      >i{
+        font-size: 24px;
+        line-height: 24px;
+        padding: 16px;
+        color: $whiteColor;
+      }
+    }
+  }
+
+  &__hidden{
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &__image{
+    max-width: 300px;
+    margin-bottom: 40px;
+  }
+}
+
+.sc-login-dialog{
+
+  padding: 40px 40px 48px;
+  max-width: 660px;
+  max-height: 100vh;
+  overflow-y: scroll;
+  position: relative;
+  background-color: $whiteColor;
+  border-radius: 4px;
+  @include xb-xs-screen{
+    padding: 40px 16px;
+  }
+
+  &__close{
+    position: absolute;
+    left: calc(100% - 36px);
+    top: 12px;
+    color: $blackColor;
+    cursor: pointer;
+    i{
+      font-size: 24px;
+      line-height: 24px;
+      @include media();
+    }
+  }
+
+  &__content{
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    @include regular();
+  }
+
+  &__margin-top{
+    margin-top: 24px;
+  }
+
+  &__color{
+    color: $blackColor;
+  }
+
+}
+

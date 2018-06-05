@@ -1,0 +1,237 @@
+*{
+  font-family: ProximaNova,Arial,Sans-serif;
+}
+.header {
+  width: 100%;
+  background-color: #ef8a31;
+  height: 210px;
+}
+.headertop {
+  overflow: hidden;
+  margin-bottom: 68px;
+}
+.righticon {
+  position: absolute;
+  top: 28px;
+  left: 15px;
+}
+.lefticon {
+  position: absolute;
+  top: 28px;
+  right: 15px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 300;
+  height: 22px;
+  color: white;
+  background-color: rgba(0,0,0,0.34);
+  border-radius: 20px;
+}
+.user {
+  background-color: white;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto 0 auto;
+  width: 40px;
+  height: 40px;
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
+.header-p{
+  margin: 8px auto 8px auto;
+  line-height: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: white
+}
+.midcard {
+  background-color: white;
+  margin: -43px auto 0 auto;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.12);
+  border-radius: 4px;
+  width: 96%;
+  padding: 8px 0 ;
+  display: flex;
+  flex-direction: row;
+  //justify-content:space-between
+
+  img {
+    margin: 0  8px;
+    width: 80px;
+    border-radius:4px;
+    height: 80px;
+  }
+}
+.midcardtop {
+  text-align: left;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  margin:4px 8px 0 4px;
+  max-height: 39px;
+  line-height: 18px;
+  color: rgba(0,0,0,0.87);
+  font-size: 12px;
+  //line-height: 18px;
+}
+.midcardbottom {
+  text-align: left;
+  color: #ef8a31;
+  margin:4px 8px 0 4px;
+  font-size: 10px;
+  line-height: 14px;
+  font-family: ProximaNova-Bold;
+  font-weight: 600;
+}
+.wrapper-progress {
+  width: 88%;
+  margin: 0 auto;
+}
+.wrapper-word{
+  margin-top: 24px;
+  font-size: 12px ;
+}
+.wrapper-word-price{
+  color: #ef8a31;
+  font-size: 14px;
+  font-weight: 700;
+}
+.wrapper-word-black{
+  margin: 12px 0;
+  font-size: 12px ;
+}
+.wrapper-word-drop{
+  color: #000;
+  font-size: 16px ;
+  font-weight: 700;
+}
+.wrapper-progress-line {
+  border-radius: 4px;
+  width: 100%;
+  position: relative;
+  height: 30px;
+}
+.progress-line-top {
+  border-radius: 4px;
+  top: 15px;
+  position: absolute;
+  background-color: #ef8a31;
+  height: 4px;
+}
+.progress-line-icon {
+  position: absolute;
+  font-size: 20px;
+  top:3px;
+  color: black;
+  font-family: 'iconfont-socialcommer'
+}
+.progress-line-bottom {
+  border-radius: 8px;
+  width: 100%;
+  position: absolute;
+  top: 15px;
+  background-color: rgba(0, 0, 0, 0.12);
+  height: 4px;
+}
+.wrapper-price-2 {
+  font-weight: bold;
+  text-align: left;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.87);
+}
+.current-price-2 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fd7900;
+}
+.current-price-1 {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.87);
+  font-weight: 400;
+}
+.current-price {
+  text-align: left;
+  margin-top: 12px;
+}
+.wrapper-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.sharebtn {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 13px 15px;
+  width: 96%;
+  border-radius: 4px;
+  background-color: #ef8a31;
+  color: white;
+  margin: 10px auto 0 auto;
+  display: block;
+}
+.time {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+.timehh {
+  background-color: white;
+  text-align: center;
+  line-height: 32px;
+  width: 32px;
+  height: 32px;
+  margin: 8px;
+  font-size: 14px;
+  box-shadow: 0 1px  3px rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+  font-weight: 700;
+}
+.timespan {
+  line-height: 31px;
+  margin: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.scroll {
+  background-color: white;
+  width: 97%;
+  margin: 0 auto;
+  border-radius: 4px;
+  overflow: scroll;
+}
+.scrollhead {
+  font-size: 14px;
+  font-weight: 900;
+  margin: 16px auto 16px auto;
+  padding-top: 16px;
+  text-align: center;
+}
+.scrollbottom{
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.bottom-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.bottom-card-name {
+  font-size: 14px;
+  margin-top: 30px;
+  margin-right: 36%;
+}
+.bottom-card-img {
+  border-radius: 50%;
+  margin: 16px 8px;
+  width: 40px;
+  height: 40px;
+}
+.bottom-card-price {
+  margin-top: 30px;
+  font-size: 14px;
+  margin-left: 55px;
+}

@@ -1,0 +1,84 @@
+@import "../../../styles/utils/_index";
+@import "../../../styles/_variables";
+
+.xb-image-display{
+  &__left{
+    width: 84px;
+    padding-bottom: 100%;
+    height: 0;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    @include resetBorder();
+    >img{
+      position: absolute;
+      width: 100%;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%, -50%));
+    }
+
+    &-bg{
+      width: 84px;
+      @include xb-sm-screen{
+        width: 60px;
+      }
+    }
+    &.active{
+      border: 1px solid $orangeColor;
+    }
+    @include xb-sm-screen{
+      width: 60px;
+    }
+  }
+
+  &__margin-bottom{
+    margin-bottom: 15px;
+    @include xb-sm-screen{
+      margin-bottom: 5px;
+    }
+  }
+  &__right{
+    width: 480px;
+    padding-bottom: 100%;
+    height: 0;
+    overflow: hidden;
+    position: relative;
+
+    @include resetBorder();
+    >img{
+      position: absolute;
+      width: 100%;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%, -50%));
+    }
+
+    @include xb-sm-screen{
+      width: 320px;
+    }
+  }
+
+  &__slide{
+    width: calc(100vw - 32px);
+    height: calc(100vw - 32px);
+    position: relative;
+    overflow: hidden;
+
+    > span{
+      position: absolute;
+      font-size: 12px;
+      right: 16px;
+      bottom: 12px;
+      color: $whiteColor;
+    }
+
+    >img{
+      width: 100%;
+      display: block;
+    }
+  }
+}
+
+
+

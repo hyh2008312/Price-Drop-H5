@@ -1,0 +1,17 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div class="xb-social-share xb-social-share__facebook" fxLayout="row" fxLayoutAlign="center center"
+     appSocialShare  [facebook]="{u: link}">
+    <i class="iconfontXberts icon-ic-facebook"></i>
+    <div>Share to Facebook</div>
+  </div>
+  <div class="xb-social-share xb-social-share__twitter xb-social-share__margin-left" fxLayout="row" fxLayoutAlign="center center"
+     appSocialShare [twitter]="{url: link, text: text, hashtags: '' }">
+    <i class="iconfontXberts icon-ic-twitter"></i>
+    <div>Share to Twitter</div>
+  </div>
+  <div class="xb-social-share xb-social-share__whatsapp xb-social-share__margin-left" fxLayout="row" fxLayoutAlign="center center"
+       appSocialShare [whatsApp]="{text: text + ' ' + link}">
+    <i class="iconfontXberts icon-ic-social-whatsapp"></i>
+    <div>Share to WhatsApp</div>
+  </div>
+</div>
