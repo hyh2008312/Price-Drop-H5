@@ -22,7 +22,7 @@
   padding: 2px 8px;
   font-size: 10px;
   font-weight: 300;
-  height: 22px;
+  //height: 22px;
   color: white;
   background-color: rgba(0,0,0,0.34);
   border-radius: 20px;
@@ -45,6 +45,7 @@
   text-align: center;
   font-size: 14px;
   font-weight: 700;
+  padding: 0 10px;
   color: white
 }
 .midcard {
@@ -222,7 +223,6 @@
 .bottom-card-name {
   font-size: 14px;
   margin-top: 30px;
-  margin-right: 36%;
 }
 .bottom-card-img {
   border-radius: 50%;
@@ -233,5 +233,5 @@
 .bottom-card-price {
   margin-top: 30px;
   font-size: 14px;
-  margin-left: 55px;
+  margin-left: 25%;
 }

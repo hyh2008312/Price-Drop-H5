@@ -5,7 +5,7 @@
   <div class="header">
     <div class="headertop" >
       <!--<div class="righticon"> ➡ </div>-->
-      <div class="lefticon">
+      <div class="lefticon" (click)="openFaq()">
         Price Drop FAQ
       </div>
     </div>
@@ -53,7 +53,7 @@
   </div>
 
   <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'"   >Help Mary Drop the Price in One Click</button>
-  <button class="sharebtn"   (click)="downApp()"  style=""  >I Want This Item Too</button>
+  <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'" style=""  >I Want This Item Too</button>
   <!--<a [ngClass]="{'xb-navigation-header__login-active': status}"-->
      <!--fxShow.xs="false">LOG IN</a>-->
   <div class="time">

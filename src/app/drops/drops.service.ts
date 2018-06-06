@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {BaseApi} from '../config/app.api';
 import {AuthenticationService} from '../shared/services/authentication/authentication.service';
 import {GuardLinkService} from '../shared/services/guard-link/guard-link.service';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Injectable()
 export class DropsService {
@@ -16,10 +17,22 @@ export class DropsService {
     private baseUrl: BaseApi,
     private auth: AuthenticationService,
     public guardLinkService: GuardLinkService,
+    public titleService: Title,
+    public metaService: Meta,
     public router: Router
   ) {
   }
+  addTitleDescription(data:any) {
+    this.titleService.setTitle(data.title);
 
+    this.metaService.updateTag({name: 'description', content: data.description});
+    this.metaService.updateTag({property: "og:title", content: data.title});
+    this.metaService.updateTag({property: "og:description", content: data.description});
+    this.metaService.updateTag({property: "og:image", content: data.shareImage});
+    this.metaService.updateTag({property: "og:image:width", content: '600'});
+    this.metaService.updateTag({property: "og:image:height", content: '600'});
+    this.metaService.updateTag({property: "og:url", content: window.location.href});
+  }
   createAuthorizationHeader(headers: Headers) {
 
     this.auth.getAccessToken().subscribe((data) => {

@@ -7,7 +7,7 @@ import { AuthenticationService } from '../../shared/services/authentication/auth
 import { UserService } from '../../shared/services/user/user.service';
 import { GuardLinkService } from '../../shared/services/guard-link/guard-link.service';
 
-import { AuthService } from "angular2-social-login";
+import { AuthService } from 'angular2-social-login';
 
 @Component({
   selector: 'app-login',
@@ -128,12 +128,13 @@ export class LoginComponent implements OnInit {
           self.router.navigate([self.loginLink]).then((data) => {
             self.showLoading = false;
             self.loadingValue = 0;
+            console.log(self.loginLink)
           });
         } else {
-          self.router.navigate(['/drops/detail/8']).then((data) => {
-            self.showLoading = false;
-            self.loadingValue = 0;
-          });
+          // self.router.navigate(['/drops/detail/8']).then((data) => {
+          //   self.showLoading = false;
+          //   self.loadingValue = 0;
+          // });
         }
       });
     }).catch((data) => {
@@ -167,10 +168,10 @@ export class LoginComponent implements OnInit {
                   self.loadingValue = 0;
                 });
               } else {
-                self.router.navigate(['/drops/detail/1']).then((data) => {
-                  self.showLoading = false;
-                  self.loadingValue = 0;
-                });
+                // self.router.navigate(['/drops/detail/1']).then((data) => {
+                //   self.showLoading = false;
+                //   self.loadingValue = 0;
+                // });
               }
               self.changeDetectorRef.markForCheck();
               self.changeDetectorRef.detectChanges();
