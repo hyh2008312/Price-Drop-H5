@@ -90,7 +90,7 @@ export class DropsService {
 
     let options = new RequestOptions({headers: headers});
 
-    const url = `${this.baseUrl.url}promotion/cut/friend/${this.serializeParams(params)}/`;
+    const url = `${this.baseUrl.url}promotion/cut/friend/${params}/`;
     // const url = `http://47.104.171.91/promotion/cut/friend/${params}/`;
 
     return this.http.get(url, options)

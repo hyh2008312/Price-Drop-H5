@@ -212,26 +212,21 @@
   text-align: center;
 }
 .scrollbottom{
-  max-height: 300px;
+  height: 200px;
   overflow-y: scroll;
 }
 .bottom-card {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  padding: 8px;
 }
 .bottom-card-name {
   font-size: 14px;
-  margin-top: 30px;
 }
 .bottom-card-img {
   border-radius: 50%;
-  margin: 16px 8px;
+  margin: 0  5px 0 0;
   width: 40px;
   height: 40px;
 }
 .bottom-card-price {
-  margin-top: 30px;
   font-size: 14px;
-  margin-left: 25%;
 }

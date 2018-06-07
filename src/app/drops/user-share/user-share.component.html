@@ -13,8 +13,8 @@
       <img src="{{imgsrc}}" alt="">
       <!--<img src="{{ownerimg}}" alt="">-->
     </div>
-    <p class="header-p" *ngIf="cutStatus=='progressing'" >Hey! Please help me drop the price of this item.<br>Thanks!</p>
-    <p class="header-p" *ngIf="cutamount">Thank you! You have helped.drop Rs.{{cutamount}} off the price!<br>Thanks!</p>
+    <p class="header-p" *ngIf="cutStatus=='progressing'" >Hey! Please help me drop the price of this item. Thanks!</p>
+    <p class="header-p" *ngIf="cutamount">Thank you! You have helped.drop Rs.{{cutamount}} off the price! Thanks!</p>
   </div>
   <div class="midcard">
     <img src="{{imgsrc}}" alt="">
@@ -69,9 +69,9 @@
       Price Drop Contributors
     </div>
     <div class="scrollbottom">
-        <div class="bottom-card" *ngFor="let i of friendCuts">
+        <div class="bottom-card" *ngFor="let i of friendCuts" fxLayout="row" fxLayoutAlign="start center">
           <img class="bottom-card-img" src="{{i.avatar}}" alt="">
-          <div class="bottom-card-name">{{i.lastName}}{{i.firstName}}</div>
+          <div class="bottom-card-name" fxFlex>{{i.lastName}}{{i.firstName}}</div>
           <div class="bottom-card-price">Dropped <span style="font-weight: 900">Rs.{{i.cutAmount}}</span></div>
         </div>
     </div>
