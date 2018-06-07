@@ -8,14 +8,14 @@
     padding: 40px 40px 54px;
     background-color: $whiteColor;
     border-radius: 4px;
-    @include box-shadow(0 0 3px 1px rgba(0, 0, 0, 0.19));
+    //@include box-shadow(0 0 3px 1px rgba(0, 0, 0, 0.19));
     width: 100%;
     @include xb-xs-screen{
       margin: 0;
-      padding: 40px 16px 56px;
+      padding: 15px 16px 56px;
     }
     @include xb-sm-screen{
-      padding: 40px 16px 56px;
+      padding: 15px 16px 56px;
     }
   }
 
@@ -251,5 +251,20 @@
     color: $blackColor;
   }
 
+}
+.price-name{
+  text-align: center;
+  font-size: 16px;
+  font-style: italic;
+  color: #EF8A31;
+  font-weight: bold;
+}
+.icon-img{
+  margin: 60px 0 10px 0 ;
+}
+.icon-dec{
+  text-align: center;
+  margin: 10px 0 40px 0 ;
+  font-size: 14px;
 }
 
