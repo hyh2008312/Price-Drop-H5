@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, NgZone,  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone,  } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 // import { LoginService } from '../user-share.service';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
@@ -8,12 +8,9 @@ import { DropsService } from '../drops.service';
 import { GuardLinkService } from '../../shared/services/guard-link/guard-link.service';
 import { MatDialog } from '@angular/material';
 
-import {Response} from '@angular/http';
 import {FaqDialogComponent} from '../faq-dialog/faq-dialog.component';
 
 import {CutPriceDialogComponent} from '../cut-price-dialog/cut-price-dialog.component';
-
-// import { AuthService } from "angular2-social-user-share";
 
 @Component({
   selector: 'app-login',
@@ -23,17 +20,9 @@ import {CutPriceDialogComponent} from '../cut-price-dialog/cut-price-dialog.comp
 
 export class UserShareComponent implements OnInit {
 
-  loginGroup : FormGroup;
-
-  loginErr : any = false;
-
-  token: any;
-
   showLoading: boolean = false;
   loadingValue: any = 0;
-  color: string = 'Accent';
-
-  googleLoginSub: any;
+  color = 'Accent';
 
   loginLink: any = false;
 
@@ -95,12 +84,11 @@ export class UserShareComponent implements OnInit {
       console.log(res)
       let data = {
         description: res.title,
-        title: res.title,
+        title: 'Come help me drop the price before it sells out!',
         shareImage: res.mainImage,
       }
       this.dropsService.addTitleDescription(data)
       this.cancut = res.canCut
-      console.log(res.canCut)
       this.title = res.title
       this.salePrice = res.salePrice
       this.lowestPrice = res.lowestPrice
@@ -175,14 +163,17 @@ export class UserShareComponent implements OnInit {
   }
   cutPrice() {
     const self  = this
-    this.openCutPrice(111)
     if (this.isLogin && this.user === 'friend') {
       self.dropsService.friendCutPrice(self.cutid).then((res) => {
         const tmpcut  = res.cutAmount
         this.cutamount = tmpcut
-        this.percentage = Math.ceil((this.salePrice - this.currentPrice - tmpcut ) / (this.salePrice - this.lowestPrice) * 100) + '%';
-        this.iconpercentage = Math.ceil(((this.salePrice - this.currentPrice - tmpcut) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
+        this.cancut = res.canCut
+        this.currentPrice = res.currentPrice
+        this.percentage = Math.ceil((this.salePrice - res.currentPrice  ) / (this.salePrice - this.lowestPrice) * 100) + '%';
+        this.iconpercentage = Math.ceil(((this.salePrice - res.currentPrice ) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
+
         this.friendCuts = res.friendCuts
+
         this.openCutPrice(res.cutAmount)
       }).catch((res) => {
         console.log('cutPrice--------catch:' + res)
@@ -196,6 +187,7 @@ export class UserShareComponent implements OnInit {
   }
 
   openCutPrice(price: any) {
+    console.log(price)
     let dialogRef = this.dialog.open(CutPriceDialogComponent, {
       data: {
         price
@@ -216,20 +208,6 @@ export class UserShareComponent implements OnInit {
   }
   downApp() {
     window.open('https://www.getpricedrop.com')
-  }
-
-
-
-    ngOnDestroy(){
-    // if(this.googleLoginSub) {
-    //   this.googleLoginSub.unsubscribe();
-    // }
-    // if(this.facebookLoginSub) {
-    //   this.facebookLoginSub.unsubscribe();
-    // }
-    // if(this.sub) {
-    //   this.sub.unsubscribe();
-    // }
   }
 
   private load() {

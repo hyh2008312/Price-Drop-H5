@@ -22,7 +22,9 @@ export class CutPriceDialogComponent implements OnInit {
   ngOnInit():void {
 
   }
-
+  openLink(){
+    window.open('https://www.getpricedrop.com')
+  }
   close():void {
     this.dialogRef.close();
   }

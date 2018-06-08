@@ -9,13 +9,11 @@ import { MomentModule }        from 'angular2-moment';
 import { SafeHtmlPipe }         from './pipes/safe-html/safe-html.pipe';
 import { SafeUrlPipe }         from './pipes/safe-url/safe-url.pipe';
 import { SaleDiscountPipe }         from './pipes/sale-discount/sale-discount.pipe';
-import { FormatCurrencyPipe }         from './pipes/format-currency/format-currency.pipe';
 import { ExchangeCurrencyPipe }  from './pipes/exchange-currency/exchange-currency.pipe';
 
 import { ViewResizeDirective }  from './directives/view-resize/view-resize.directive';
 import { ViewScrollDirective }  from './directives/view-srcoll/view-scroll.directive';
 import { ViewObjectScrollDirective }  from './directives/view-object-srcoll/view-object-scroll.directive';
-import { RepeatOrderDirective }  from './directives/repeat-order/repeat-order.directive';
 import { SocialShareDirective }  from './directives/social-share/social-share.directive';
 import { ValidateEqualDirective }  from './directives/validate-equal/validate-equal.directive';
 
@@ -55,7 +53,6 @@ import {
 import { GoogleClientId, FacebookClientId } from '../config/app.api';
 import {ViewShareScrollDirective} from './directives/view-share-srcoll/view-share-scroll.directive';
 import {ViewScrollTopDirective} from './directives/view-scroll-top/view-scroll-top.directive';
-import {MakeFirstLetterBigPipe} from 'app/shared/pipes/make-first-letter-big/make-first-letter-big.pipe';
 
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -105,13 +102,10 @@ let providers = {
     SafeHtmlPipe,
     SaleDiscountPipe,
     SafeUrlPipe,
-    FormatCurrencyPipe,
-    MakeFirstLetterBigPipe,
     ExchangeCurrencyPipe,
     ViewResizeDirective,
     ViewScrollDirective,
     ViewObjectScrollDirective,
-    RepeatOrderDirective,
     SocialShareDirective,
     ValidateEqualDirective,
     ViewShareScrollDirective,
@@ -123,13 +117,10 @@ let providers = {
     SafeHtmlPipe,
     SaleDiscountPipe,
     SafeUrlPipe,
-    FormatCurrencyPipe,
-    MakeFirstLetterBigPipe,
     ExchangeCurrencyPipe,
     ViewResizeDirective,
     ViewScrollDirective,
     ViewObjectScrollDirective,
-    RepeatOrderDirective,
     ViewShareScrollDirective,
     ViewScrollTopDirective,
     SocialShareDirective,
