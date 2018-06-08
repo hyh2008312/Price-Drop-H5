@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShareButtonRowComponent } from './share-button-row.component';
+import { CutPriceDialogComponent } from './cut-price-dialog.component';
 
-describe('ShareButtonRowComponent', () => {
-  let component: ShareButtonRowComponent;
-  let fixture: ComponentFixture<ShareButtonRowComponent>;
+describe('CutPriceDialogComponent', () => {
+  let component: CutPriceDialogComponent;
+  let fixture: ComponentFixture<CutPriceDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShareButtonRowComponent ]
+      declarations: [ CutPriceDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShareButtonRowComponent);
+    fixture = TestBed.createComponent(CutPriceDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

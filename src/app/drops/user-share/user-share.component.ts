@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material';
 import {Response} from '@angular/http';
 import {FaqDialogComponent} from '../faq-dialog/faq-dialog.component';
 
+import {CutPriceDialogComponent} from '../cut-price-dialog/cut-price-dialog.component';
+
 // import { AuthService } from "angular2-social-user-share";
 
 @Component({
@@ -97,7 +99,8 @@ export class UserShareComponent implements OnInit {
         shareImage: res.mainImage,
       }
       this.dropsService.addTitleDescription(data)
-
+      this.cancut = res.canCut
+      console.log(res.canCut)
       this.title = res.title
       this.salePrice = res.salePrice
       this.lowestPrice = res.lowestPrice
@@ -107,10 +110,6 @@ export class UserShareComponent implements OnInit {
       this.percentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
 
       this.iconpercentage = Math.ceil(((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
-
-      console.log(this.salePrice)
-      console.log(this.currentPrice)
-      console.log(this.lowestPrice)
       this.imgsrc = res.mainImage
       this.ownerimg = res.ownerAvatar
       this.cutStatus = res.cutStatus
@@ -130,11 +129,18 @@ export class UserShareComponent implements OnInit {
         this.asecond = '00'
       }
 
-      // alert(res)
+      // this.showBtn()
     }).catch((res) => {
        console.log('getCutdetail-------catch' + res)
     })
   }
+  // showBtn() {
+  //   if(this.cutStatus=='progressing'){
+  //
+  //   } else {
+  //
+  //   }
+  // }
   editTime(time) {
     // const tmp = 1527753479
     let self = this
@@ -169,16 +175,15 @@ export class UserShareComponent implements OnInit {
   }
   cutPrice() {
     const self  = this
-
+    this.openCutPrice(111)
     if (this.isLogin && this.user === 'friend') {
       self.dropsService.friendCutPrice(self.cutid).then((res) => {
-        console.log(res)
         const tmpcut  = res.cutAmount
         this.cutamount = tmpcut
-        this.cancut = res.canCut
         this.percentage = Math.ceil((this.salePrice - this.currentPrice - tmpcut ) / (this.salePrice - this.lowestPrice) * 100) + '%';
         this.iconpercentage = Math.ceil(((this.salePrice - this.currentPrice - tmpcut) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
         this.friendCuts = res.friendCuts
+        this.openCutPrice(res.cutAmount)
       }).catch((res) => {
         console.log('cutPrice--------catch:' + res)
       })
@@ -190,15 +195,24 @@ export class UserShareComponent implements OnInit {
 
   }
 
-  openFaq() {
+  openCutPrice(price: any) {
+    let dialogRef = this.dialog.open(CutPriceDialogComponent, {
+      data: {
+        price
+      }
+    });
+
+    let self = this;
+  }
+  openFaq(price) {
     let dialogRef = this.dialog.open(FaqDialogComponent, {
       data: {}
     });
 
     let self = this;
 
-    // dialogRef.afterClosed().subscribe(result => {
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
   downApp() {
     window.open('https://www.getpricedrop.com')

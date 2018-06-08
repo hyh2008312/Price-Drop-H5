@@ -1,0 +1,58 @@
+*{
+  font-family: ProximaNova,Arial,Sans-serif;
+}
+.icon-ic-close{
+  display: inline-block;
+  margin: 4px 10px 0 0 ;
+  font-size: 24px;
+}
+.xb-guide-dialog__close{
+  text-align: right;
+  background-color: #EF8A31;
+  color: white;
+  border-radius: 4px 4px 0 0 ;
+
+}
+.xb-guide-dialog{
+  height: 49vh;
+  margin: 16px;
+  background-color: white;
+  border-radius: 4px;
+
+}
+.xb-guide__text-1{
+  font-size: 14px;
+  padding-top: 12px;
+  background-color: #EF8A31;
+  color: white;
+  text-align: center;
+}
+.xb-guide__text-1-title{
+  font-size: 16px;
+  margin-top: -22px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.xb-guide__text-1-content{
+  font-family: ProximaNova-Regular;
+  line-height: 1.8;
+  padding-bottom:10px
+}
+.xb-guide-dialog__container-1{
+  background-color: #ef8a31;
+}
+.content{
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 12px 23px;
+}
+.btn{
+  margin-top: 4px;
+  width: 191px;
+  color: #EF8A31;
+  border: #EF8A31 1px solid;
+  border-radius:  4px;
+  padding: 8px 12px;
+  font-size: 12px;
+}

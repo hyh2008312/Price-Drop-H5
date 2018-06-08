@@ -131,10 +131,7 @@ export class LoginComponent implements OnInit {
             console.log(self.loginLink)
           });
         } else {
-          // self.router.navigate(['/drops/detail/8']).then((data) => {
-          //   self.showLoading = false;
-          //   self.loadingValue = 0;
-          // });
+          window.open('https://www.getpricedrop.com/')
         }
       });
     }).catch((data) => {

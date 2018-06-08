@@ -19,27 +19,14 @@ import { RepeatOrderDirective }  from './directives/repeat-order/repeat-order.di
 import { SocialShareDirective }  from './directives/social-share/social-share.directive';
 import { ValidateEqualDirective }  from './directives/validate-equal/validate-equal.directive';
 
-import { ImageUploadPreviewComponent } from './components/image-upload-preview/image-upload-preview.component';
-import { ImageUploadPreviewMultiComponent } from './components/image-upload-preview-multi/image-upload-preview-multi.component';
-import { ImagePreviewMultiComponent } from './components/image-preview-multi/image-preview-multi.component';
-import { ImageUploadHeaderComponent } from './components/image-upload-header/image-upload-header.component';
-import { ImageUploadPreviewBlogComponent } from './components/image-upload-preview-blog/image-upload-preview-blog.component';
-import { ImagePreviewLoadingComponent } from './components/image-preview-loading/image-preview-loading.component';
-import { LeftProductsImageComponent } from './components/left-products-image/left-products-image.component';
-import { ShareButtonComponent } from './components/share-button/share-button.component';
-import { ShareButtonRowComponent } from './components/share-button-row/share-button-row.component';
-import { NavigationHeaderComponent } from './components/navigation-header/navigation-header.component';
-import { BottomFooterComponent } from './components/bottom-footer/bottom-footer.component';
-import { LoadingComponent } from './components/loading/loading.component';
-
-import { ImageUploadPreviewService } from './components/image-upload-preview/image-upload-preview.service';
 import { ConstantService } from './services/constant/constant.service';
 import { S3UploaderService } from './services/s3-upload/s3-upload.service';
 import { PlatformService } from './services/platform/platform.service';
+import { LoadingComponent } from './components/loading/loading.component';
+
 
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { AngularCropperjsModule } from 'angular-cropperjs';
-import { CarouselModule } from './components/angular4-carousel/index';
 
 import { Angular2SocialLoginModule } from "angular2-social-login";
 
@@ -66,13 +53,9 @@ import {
 
 
 import { GoogleClientId, FacebookClientId } from '../config/app.api';
-import {ImageUploadPreviewTwoTemplateComponent} from './components/image-upload-preview-two-template/image-upload-preview-two-template.component';
-import {ImageUploadPreviewFourTemplateComponent} from './components/image-upload-preview-four-template/image-upload-preview-four-template.component';
 import {ViewShareScrollDirective} from './directives/view-share-srcoll/view-share-scroll.directive';
 import {ViewScrollTopDirective} from './directives/view-scroll-top/view-scroll-top.directive';
-import {ViewModifyBodyStyleDirective} from "./directives/view-modify-body-style/view-modify-body-style.directive";
 import {MakeFirstLetterBigPipe} from 'app/shared/pipes/make-first-letter-big/make-first-letter-big.pipe';
-import {ShareShowButtonComponent} from "./components/share-show-button/share-show-button.component";
 
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -97,7 +80,6 @@ let providers = {
     FlexLayoutModule,
     QuillEditorModule,
     AngularCropperjsModule,
-    CarouselModule,
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -134,22 +116,7 @@ let providers = {
     ValidateEqualDirective,
     ViewShareScrollDirective,
     ViewScrollTopDirective,
-    ViewModifyBodyStyleDirective,
-    ImageUploadPreviewComponent,
-    ImageUploadPreviewMultiComponent,
-    ImagePreviewMultiComponent,
-    ImageUploadHeaderComponent,
-    ImagePreviewLoadingComponent,
-    ImageUploadPreviewBlogComponent,
-    LeftProductsImageComponent,
-    ShareButtonComponent,
-    ShareButtonRowComponent,
-    NavigationHeaderComponent,
-    BottomFooterComponent,
-    ImageUploadPreviewTwoTemplateComponent,
-    ImageUploadPreviewFourTemplateComponent,
     LoadingComponent,
-    ShareShowButtonComponent
 
   ],
   exports: [
@@ -167,23 +134,8 @@ let providers = {
     ViewScrollTopDirective,
     SocialShareDirective,
     ValidateEqualDirective,
-    ViewModifyBodyStyleDirective,
-    ImageUploadPreviewComponent,
-    ImageUploadPreviewMultiComponent,
-    ImagePreviewMultiComponent,
-    ImageUploadHeaderComponent,
-    ImagePreviewLoadingComponent,
-    ImageUploadPreviewBlogComponent,
-    ImageUploadPreviewTwoTemplateComponent,
-    ImageUploadPreviewFourTemplateComponent,
-    LeftProductsImageComponent,
-    ShareButtonComponent,
-    ShareShowButtonComponent,
-    ShareButtonRowComponent,
-    NavigationHeaderComponent,
-    BottomFooterComponent,
-    LoadingComponent,
     CommonModule,
+    LoadingComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -191,7 +143,6 @@ let providers = {
     QuillEditorModule,
     AngularCropperjsModule,
     MomentModule,
-    CarouselModule,
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -214,7 +165,6 @@ let providers = {
     SwiperModule
   ],
   providers: [
-    ImageUploadPreviewService,
     ConstantService,
     S3UploaderService,
     PlatformService

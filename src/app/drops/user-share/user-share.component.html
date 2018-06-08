@@ -10,8 +10,8 @@
       </div>
     </div>
     <div class="user">
-      <img src="{{imgsrc}}" alt="">
-      <!--<img src="{{ownerimg}}" alt="">-->
+      <!--<img src="{{imgsrc}}" alt="">-->
+      <img src="{{ownerimg}}" alt="">
     </div>
     <p class="header-p" *ngIf="cutStatus=='progressing'" >Hey! Please help me drop the price of this item. Thanks!</p>
     <p class="header-p" *ngIf="cutamount">Thank you! You have helped.drop Rs.{{cutamount}} off the price! Thanks!</p>
@@ -52,8 +52,10 @@
       <div class="wrapper-word-black">Final Price:&nbsp;<span class="wrapper-word-drop"> Rs.222 </span></div>
   </div>
 
-  <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'"   >Help Mary Drop the Price in One Click</button>
-  <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'" style=""  >I Want This Item Too</button>
+  <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'&&cancut==true"   >Help Me Drop the Price in One Click</button>
+  <!--<button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >I Want This Item Too</button>-->
+  <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >I Want This Item Too</button>
+  <!--<button class="sharebtn"   (click)="openCutPrice()"    > TestBtn</button>-->
   <!--<a [ngClass]="{'xb-navigation-header__login-active': status}"-->
      <!--fxShow.xs="false">LOG IN</a>-->
   <div class="time">

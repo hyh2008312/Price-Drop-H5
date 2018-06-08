@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FaqDialogComponent } from './faq-dialog.component';
 
-describe('FaqDialogComponent', () => {
+describe('CutPriceDialogComponent', () => {
   let component: FaqDialogComponent;
   let fixture: ComponentFixture<FaqDialogComponent>;
 
