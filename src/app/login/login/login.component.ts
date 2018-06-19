@@ -128,7 +128,6 @@ export class LoginComponent implements OnInit {
           self.router.navigate([self.loginLink]).then((data) => {
             self.showLoading = false;
             self.loadingValue = 0;
-            console.log(self.loginLink)
           });
         } else {
           window.open('https://www.getpricedrop.com/')

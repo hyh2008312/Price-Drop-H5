@@ -14,6 +14,7 @@
       <img src="{{ownerimg}}" alt="">
     </div>
     <p class="header-p" *ngIf="cutStatus=='progressing'" >Hey! Please help me drop the price of this item. Thanks!</p>
+    <p class="header-p" *ngIf="cutStatus=='end'" >The DROP has ended. Thank you for your support!</p>
     <p class="header-p" *ngIf="cutamount">Thank you! You have helped.drop Rs.{{cutamount}} off the price! Thanks!</p>
   </div>
   <div class="midcard">

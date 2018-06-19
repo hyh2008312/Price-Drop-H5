@@ -196,7 +196,7 @@ export class UserShareComponent implements OnInit {
 
     let self = this;
   }
-  openFaq(price) {
+  openFaq() {
     let dialogRef = this.dialog.open(FaqDialogComponent, {
       data: {}
     });
@@ -207,7 +207,29 @@ export class UserShareComponent implements OnInit {
     });
   }
   downApp() {
-    window.open('https://www.getpricedrop.com')
+    // window.navigator
+    const  sUserAgent: any = navigator.userAgent.toLowerCase();
+    const  bIsIpad = sUserAgent.match(/ipad/i) === 'ipad';
+    const  bIsIphoneOs = sUserAgent.match(/iphone os/i) === 'iphone os';
+    const  bIsMidp = sUserAgent.match(/midp/i) === 'midp';
+    const  bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) === 'rv:1.2.3.4';
+    const  bIsUc = sUserAgent.match(/ucweb/i) === 'ucweb';
+    const  bIsAndroid = sUserAgent.match(/android/i) === 'android';
+    if (bIsAndroid) {
+      window.open('market://details?id=com.socialcommer.wx')
+      // window.open('https://www.getpricedrop.com/')
+
+    } else {
+      window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx')
+
+    }
+    // if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid) {
+    //   window.open('market://details?id=com.socialcommer.wx')
+    //   window.open('https://www.getpricedrop.com/')
+    // } else {
+    //   window.open('https://www.getpricedrop.com/')
+    //
+    // }
   }
 
   private load() {

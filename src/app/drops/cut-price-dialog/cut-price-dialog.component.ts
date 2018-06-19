@@ -19,13 +19,35 @@ export class CutPriceDialogComponent implements OnInit {
   ) {
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
+    (<any>window).dataLayer.push({
+      'event': 'VirtualPageView',
+      'virtualPageURL': '/droppedtheprice',
+      'virtualPageTitle': 'Dropped The Price'
+    });
+  }
+  openLink() {
 
+    // https://play.google.com/store/apps/details?id=com.socialcommer.wx
+    // window.navigator
+
+    const  sUserAgent: any = navigator.userAgent.toLowerCase();
+    const  bIsIpad = sUserAgent.match(/ipad/i) === 'ipad'
+    const  bIsIphoneOs = sUserAgent.match(/iphone os/i) === 'iphone os';
+    const  bIsMidp = sUserAgent.match(/midp/i) === 'midp';
+    const  bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) === 'rv:1.2.3.4';
+    const  bIsUc = sUserAgent.match(/ucweb/i) === 'ucweb';
+    const  bIsAndroid = sUserAgent.match(/android/i) === 'android';
+    if (bIsAndroid) {
+      window.open('market://details?id=com.socialcommer.wx')
+      // window.open('https://www.getpricedrop.com/')
+
+    } else {
+      window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx')
+
+    }
   }
-  openLink(){
-    window.open('https://www.getpricedrop.com')
-  }
-  close():void {
+  close(): void {
     this.dialogRef.close();
   }
 }
