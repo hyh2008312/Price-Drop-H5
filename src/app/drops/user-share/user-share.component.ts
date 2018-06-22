@@ -220,7 +220,7 @@ export class UserShareComponent implements OnInit {
       // window.open('https://www.getpricedrop.com/')
 
     } else {
-      window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx')
+      window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx&referrer=utm_source%3Dh5page%26utm_medium%3Dpage')
 
     }
     // if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid) {

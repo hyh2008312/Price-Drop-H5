@@ -13,9 +13,9 @@
       <!--<img src="{{imgsrc}}" alt="">-->
       <img src="{{ownerimg}}" alt="">
     </div>
-    <p class="header-p" *ngIf="cutStatus=='progressing'" >Hey! Please help me drop the price of this item. Thanks!</p>
+    <p class="header-p" *ngIf="cutStatus=='progressing'" >Hey! Please help me drop the price of this item before it sells out!</p>
     <p class="header-p" *ngIf="cutStatus=='end'" >The DROP has ended. Thank you for your support!</p>
-    <p class="header-p" *ngIf="cutamount">Thank you! You have helped.drop Rs.{{cutamount}} off the price! Thanks!</p>
+    <!--<p class="header-p" *ngIf="cutamount">Thank you! You have helped me drop Rs.{{cutamount}} off the price!</p>-->
   </div>
   <div class="midcard">
     <img src="{{imgsrc}}" alt="">
@@ -26,7 +26,8 @@
     </div>
   </div>
   <div class="wrapper-progress" *ngIf="cutStatus=='progressing'"  >
-    <div class="current-price" [ngStyle]="{'margin-left': percentage }" >
+    <!--<div class="current-price" [ngStyle]="{'margin-left': percentage }" >-->
+    <div class="current-price" fxLayout="column" fxLayoutAlign="center center" >
       <div class="current-price-1">Current Price</div>
       <div class="current-price-2">Rs.{{currentPrice}}</div>
     </div>
@@ -49,13 +50,13 @@
   </div>
 
   <div class="wrapper-progress" style="text-align: center"  *ngIf="cutStatus=='end'">
-      <div class="wrapper-word">Total Price Dropped:&nbsp;<span class="wrapper-word-price">Rs.111 </span></div>
-      <div class="wrapper-word-black">Final Price:&nbsp;<span class="wrapper-word-drop"> Rs.222 </span></div>
+      <div class="wrapper-word">Total Price Dropped:&nbsp;<span class="wrapper-word-price">Rs.{{salePrice - currentPrice}}</span></div>
+      <div class="wrapper-word-black">Final Price:&nbsp;<span class="wrapper-word-drop"> Rs.{{currentPrice}} </span></div>
   </div>
 
   <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'&&cancut==true"   >Help Me Drop the Price in One Click</button>
   <!--<button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >I Want This Item Too</button>-->
-  <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >I Want This Item Too</button>
+  <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >Claim Your Points Gifts On Our App</button>
   <!--<button class="sharebtn"   (click)="openCutPrice(11)"    > TestBtn</button>-->
   <!--<a [ngClass]="{'xb-navigation-header__login-active': status}"-->
      <!--fxShow.xs="false">LOG IN</a>-->
