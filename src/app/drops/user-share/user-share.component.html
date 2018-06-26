@@ -50,7 +50,7 @@
   </div>
 
   <div class="wrapper-progress" style="text-align: center"  *ngIf="cutStatus=='end'">
-      <div class="wrapper-word">Total Price Dropped:&nbsp;<span class="wrapper-word-price">Rs.{{salePrice - currentPrice}}</span></div>
+      <div class="wrapper-word">Total Price Dropped:&nbsp;<span class="wrapper-word-price">Rs.{{topPrice}}</span></div>
       <div class="wrapper-word-black">Final Price:&nbsp;<span class="wrapper-word-drop"> Rs.{{currentPrice}} </span></div>
   </div>
 
@@ -68,7 +68,7 @@
     <div class="timehh">{{asecond}}</div>
   </div>
 
-  <div class="scroll" style="height: max-content">
+  <div class="scroll" >
     <div class="scrollhead">
       Price Drop Contributors
     </div>

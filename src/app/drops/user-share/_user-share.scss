@@ -204,7 +204,6 @@
   width: 97%;
   margin: 0 auto;
   border-radius: 4px;
-  overflow: scroll;
 }
 .scrollhead {
   font-size: 14px;
@@ -214,8 +213,8 @@
   text-align: center;
 }
 .scrollbottom{
-  height: 200px;
-  overflow-y: scroll;
+  //height: 200px;
+  //overflow-y: scroll;
 }
 .bottom-card {
   padding: 8px;
