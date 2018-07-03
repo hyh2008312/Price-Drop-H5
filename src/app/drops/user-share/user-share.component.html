@@ -1,72 +1,106 @@
 <div class="xb-loading" *ngIf="showLoading">
   <mat-progress-bar [mode]="determinate" [value]="loadingValue" color="accent"></mat-progress-bar>
 </div>
-<div style="background-color: #f0f0f0; height: 100%;" >
+<div style="background-image:url('http://image.getpricedrop.com/appweb/bg.jpg'); height: 100%;" >
   <div class="header">
     <div class="headertop" >
       <!--<div class="righticon"> ➡ </div>-->
       <div class="lefticon" (click)="openFaq()">
-        Price Drop FAQ
+        <span style="font-family: 'iconfont-socialcommer'">&#xe709; </span>Price Drop FAQ
       </div>
     </div>
-    <div class="user">
-      <!--<img src="{{imgsrc}}" alt="">-->
-      <img src="{{ownerimg}}" alt="">
-    </div>
-    <p class="header-p" *ngIf="cutStatus=='progressing'" >Hey! Please help me drop the price of this item before it sells out!</p>
-    <p class="header-p" *ngIf="cutStatus=='end'" >The DROP has ended. Thank you for your support!</p>
-    <!--<p class="header-p" *ngIf="cutamount">Thank you! You have helped me drop Rs.{{cutamount}} off the price!</p>-->
   </div>
-  <div class="midcard">
-    <img src="{{imgsrc}}" alt="">
-    <div class="midcardword"  fxLayout="column" fxLayoutAlign="space-between start">
 
-      <div class="midcardtop">{{title}}</div>
-      <div class="midcardbottom">10+ people bought this item at the lowest price</div>
+
+
+
+  <div class="midcard" >
+    <div class="overflow-user"  fxLayout="column" fxLayoutAlign="center center"  >
+      <div class="user">
+        <!--<img src="{{imgsrc}}" alt="">-->
+        <img class="user-img" src="{{ownerimg}}" alt="">
+      </div>
+
+      <p class="header-p" *ngIf="cutStatus=='progressing'" >Hey! Please help me drop the <br> price of this item before it sells out!</p>
+      <p class="header-p" *ngIf="cutStatus=='end'" >The DROP has ended. <br> Thank you for your support!</p>
+      <!--<p class="header-p" *ngIf="cutamount">Thank you! You have helped me drop Rs.{{cutamount}} off the price!</p>-->
+    </div>
+    <div class="overflow-word" fxLayout="row" fxLayoutAlign="start" >
+      <img class="midcard-img" src="{{imgsrc}}" alt="">
+      <div class="midcardword"  fxLayout="column" fxLayoutAlign="space-between start">
+
+        <div class="midcardtop">{{title}}</div>
+        <div class="midcardbottom">10+ people bought this item at the lowest price</div>
+      </div>
+    </div>
+
+    <div class="bottom-line" fxLayout="row" fxLayoutAlign="space-between center">
+      <img class="line-img" src="http://image.getpricedrop.com/appweb/line.png" alt="">
+      <img  class="line-img" src="http://image.getpricedrop.com/appweb/line.png" alt="">
     </div>
   </div>
+
+
   <div class="wrapper-progress" *ngIf="cutStatus=='progressing'"  >
-    <!--<div class="current-price" [ngStyle]="{'margin-left': percentage }" >-->
-    <div class="current-price" fxLayout="column" fxLayoutAlign="center center" >
-      <div class="current-price-1">Current Price</div>
-      <div class="current-price-2">Rs.{{currentPrice}}</div>
+    <div class="current-price" [ngStyle]="{'padding-left': 'calc( ' + wordPercentage + ' - 45px)' }" >
+    <!--<div class="current-price" fxLayout="column" fxLayoutAlign="center center" >-->
+      <div style="width: 80px">
+        <div class="current-price-1 sm-font">Current Price</div>
+        <span class="current-price-2">Rs.{{currentPrice}}</span>
+      </div>
+      <div class="triangle-down"  ></div>
     </div>
     <div class="wrapper-progress-line">
       <div class="progress-line-bottom"></div>
       <div class="progress-line-top" [ngStyle]="{'width': percentage }"></div>
-      <div class="progress-line-icon  icon-pic-cut "  [ngStyle]="{left:iconpercentage }"></div>
+      <div class="progress-line-icon   "  [ngStyle]="{left:iconpercentage }"></div>
     </div>
     <div class="wrapper-price">
       <div class="wrapper-price-regular">
-        <div class="current-price-1">Regular Price</div>
         <div class="wrapper-price-2">Rs.{{salePrice}}</div>
+        <div class="current-price-1">Regular Price</div>
       </div>
       <div class="wrapper-price-lowest">
+        <div class="wrapper-lowest-price" style="text-align: right;">Rs.{{lowestPrice}}</div>
         <div class="current-price-1">Lowest Price</div>
-        <div class="wrapper-price-2">Rs.{{lowestPrice}}</div>
       </div>
     </div>
 
+
+
+    <div class="overflow-btn-time">
+
+      <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'&&cancut==true"   >Help Me Drop the Price in One Click</button>
+      <!--<button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >I Want This Item Too</button>-->
+      <!--<button class="sharebtn"   (click)="openCutPrice(11)"    > TestBtn</button>-->
+      <!--<a [ngClass]="{'xb-navigation-header__login-active': status}"-->
+      <!--fxShow.xs="false">LOG IN</a>-->
+      <div class="time">
+        <div class="timehh">{{ahour}}</div>
+        <span class="timespan">:</span>
+        <div class="timehh">{{amin}}</div>
+        <span class="timespan">:</span>
+        <div class="timehh">{{asecond}}</div>
+      </div>
+
+    </div>
   </div>
 
   <div class="wrapper-progress" style="text-align: center"  *ngIf="cutStatus=='end'">
       <div class="wrapper-word">Total Price Dropped:&nbsp;<span class="wrapper-word-price">Rs.{{topPrice}}</span></div>
       <div class="wrapper-word-black">Final Price:&nbsp;<span class="wrapper-word-drop"> Rs.{{currentPrice}} </span></div>
+    <button class="sharebtn"   (click)="cutPrice()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >Claim Your Points Gifts On Our App</button>
+
+    <div class="time">
+      <div class="timehh">{{ahour}}</div>
+      <span class="timespan">:</span>
+      <div class="timehh">{{amin}}</div>
+      <span class="timespan">:</span>
+      <div class="timehh">{{asecond}}</div>
+    </div>
   </div>
 
-  <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'&&cancut==true"   >Help Me Drop the Price in One Click</button>
-  <!--<button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >I Want This Item Too</button>-->
-  <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >Claim Your Points Gifts On Our App</button>
-  <!--<button class="sharebtn"   (click)="openCutPrice(11)"    > TestBtn</button>-->
-  <!--<a [ngClass]="{'xb-navigation-header__login-active': status}"-->
-     <!--fxShow.xs="false">LOG IN</a>-->
-  <div class="time">
-    <div class="timehh">{{ahour}}</div>
-    <span class="timespan">:</span>
-    <div class="timehh">{{amin}}</div>
-    <span class="timespan">:</span>
-    <div class="timehh">{{asecond}}</div>
-  </div>
+
 
   <div class="scroll" >
     <div class="scrollhead">

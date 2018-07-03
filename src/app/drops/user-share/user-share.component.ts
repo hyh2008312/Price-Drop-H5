@@ -33,6 +33,7 @@ export class UserShareComponent implements OnInit {
   lowestPrice: any;
   iconpercentage: any;
   percentage: any;
+  wordPercentage: any;
   ahour: any;
   amin: any;
   asecond: any;
@@ -69,20 +70,23 @@ export class UserShareComponent implements OnInit {
       if (data) {
         this.isLogin = true
       }
+      this.getCutdetail()
     })
 
   }
   ngOnInit(): void {
-    this.getCutdetail()
+
   }
 
   getCutdetail() {
     const self  = this
     console.log(window.location.pathname)
     self.cutid = self.activatedRoute.snapshot.params['cutId'];
-    self.dropsService.getCutDetail(self.cutid).then((res) => {
-
+    self.dropsService.getCutDetail(self.cutid,this.isLogin).then((res) => {
       console.log(res)
+      if(res===undefined){
+        return
+      }
       const data = {
         description: res.title,
         title: 'Come help me drop the price before it sells out!',
@@ -98,13 +102,26 @@ export class UserShareComponent implements OnInit {
 
       this.percentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
 
+      let wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
+      // let wordPercentageNum = 99
+
+      if ( wordPercentageNum > 85){
+        this.wordPercentage = 84 + '%'
+      } else {
+        this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
+      }
+
       this.iconpercentage = Math.ceil(((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
       this.imgsrc = res.mainImage
       this.ownerimg = res.ownerAvatar
       this.cutStatus = res.cutStatus
       this.friendCuts = res.friendCuts
       this.user = res.user
-      this.topPrice = (this.salePrice - this.currentPrice).toString().substring(0,(this.salePrice - this.currentPrice).toString().indexOf(".") + 3)
+      if((this.salePrice - this.currentPrice).toString().indexOf(".") == -1){
+        this.topPrice = (this.salePrice - this.currentPrice).toString() + '.00'
+      } else {
+        this.topPrice = (this.salePrice - this.currentPrice).toString().substring(0,(this.salePrice - this.currentPrice).toString().indexOf(".") + 3)
+      }
       const nowtime = new Date
       const tmp = nowtime.getTime()
       const restmp = res.endTimestamp
@@ -119,7 +136,9 @@ export class UserShareComponent implements OnInit {
 
       // this.showBtn()
     }).catch((res) => {
-       console.log('getCutdetail-------catch' + res)
+
+
+      console.log('getCutdetail-------catch' + res)
     })
   }
   // showBtn() {
@@ -163,6 +182,8 @@ export class UserShareComponent implements OnInit {
   }
   cutPrice() {
     const self  = this
+    // this.openCutPrice(1111)
+
     if (this.isLogin && this.user === 'friend') {
       self.dropsService.friendCutPrice(self.cutid).then((res) => {
         const tmpcut  = res.cutAmount
@@ -170,11 +191,18 @@ export class UserShareComponent implements OnInit {
         this.cancut = res.canCut
         this.currentPrice = res.currentPrice
         this.percentage = Math.ceil((this.salePrice - res.currentPrice  ) / (this.salePrice - this.lowestPrice) * 100) + '%';
+        let wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
+        // let wordPercentageNum = 99
+
+        if ( wordPercentageNum > 85){
+          this.wordPercentage = 84 + '%'
+        } else {
+          this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
+        }
         this.iconpercentage = Math.ceil(((this.salePrice - res.currentPrice ) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
 
         this.friendCuts = res.friendCuts
-
-        this.openCutPrice(res.cutAmount)
+        this.openCutPrice(this.cutamount)
       }).catch((res) => {
         console.log('cutPrice--------catch:' + res)
       })

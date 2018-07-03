@@ -7,17 +7,7 @@ import { FlexLayoutModule }    from '@angular/flex-layout';
 import { MomentModule }        from 'angular2-moment';
 
 import { SafeHtmlPipe }         from './pipes/safe-html/safe-html.pipe';
-import { SafeUrlPipe }         from './pipes/safe-url/safe-url.pipe';
-import { SaleDiscountPipe }         from './pipes/sale-discount/sale-discount.pipe';
-import { ExchangeCurrencyPipe }  from './pipes/exchange-currency/exchange-currency.pipe';
 
-import { ViewResizeDirective }  from './directives/view-resize/view-resize.directive';
-import { ViewScrollDirective }  from './directives/view-srcoll/view-scroll.directive';
-import { ViewObjectScrollDirective }  from './directives/view-object-srcoll/view-object-scroll.directive';
-import { SocialShareDirective }  from './directives/social-share/social-share.directive';
-import { ValidateEqualDirective }  from './directives/validate-equal/validate-equal.directive';
-
-import { ConstantService } from './services/constant/constant.service';
 import { S3UploaderService } from './services/s3-upload/s3-upload.service';
 import { PlatformService } from './services/platform/platform.service';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -51,8 +41,6 @@ import {
 
 
 import { GoogleClientId, FacebookClientId } from '../config/app.api';
-import {ViewShareScrollDirective} from './directives/view-share-srcoll/view-share-scroll.directive';
-import {ViewScrollTopDirective} from './directives/view-scroll-top/view-scroll-top.directive';
 
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -100,31 +88,11 @@ let providers = {
   ],
   declarations: [
     SafeHtmlPipe,
-    SaleDiscountPipe,
-    SafeUrlPipe,
-    ExchangeCurrencyPipe,
-    ViewResizeDirective,
-    ViewScrollDirective,
-    ViewObjectScrollDirective,
-    SocialShareDirective,
-    ValidateEqualDirective,
-    ViewShareScrollDirective,
-    ViewScrollTopDirective,
     LoadingComponent,
 
   ],
   exports: [
     SafeHtmlPipe,
-    SaleDiscountPipe,
-    SafeUrlPipe,
-    ExchangeCurrencyPipe,
-    ViewResizeDirective,
-    ViewScrollDirective,
-    ViewObjectScrollDirective,
-    ViewShareScrollDirective,
-    ViewScrollTopDirective,
-    SocialShareDirective,
-    ValidateEqualDirective,
     CommonModule,
     LoadingComponent,
     RouterModule,
@@ -156,7 +124,6 @@ let providers = {
     SwiperModule
   ],
   providers: [
-    ConstantService,
     S3UploaderService,
     PlatformService
   ]

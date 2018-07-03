@@ -3,8 +3,8 @@
 }
 .header {
   width: 100%;
-  background-color: #ef8a31;
-  height: 210px;
+  //background-color: #ef8a31;
+  height: 140px;
   overflow: hidden;
 }
 .headertop {
@@ -27,17 +27,22 @@
   background-color: rgba(0,0,0,0.34);
   border-radius: 20px;
 }
+.overflow-user{
+  border-bottom: 1px dashed rgba(0,0,0,0.08);
+}
 .user {
   background-color: white;
   overflow: hidden;
   border-radius: 50%;
-  margin: 68px auto 0 auto;
-  width: 40px;
-  height: 40px;
-  img {
-    width: 40px;
-    height: 40px;
-  }
+  border: 3px solid white;
+  margin: -28px auto 0 auto;
+  width: 54px;
+  height: 54px;
+}
+.user-img{
+  width: 48px !important;
+  height: 48px !important;
+  margin: 0 !important;
 }
 .header-p{
   margin: 8px auto 8px auto;
@@ -46,31 +51,34 @@
   font-size: 14px;
   font-weight: 700;
   padding: 0 10px;
-  color: white
+  color: black
 }
 .midcard {
   background-color: white;
-  margin: -43px auto 0 auto;
+  margin: -43px 16px 0 16px;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.12);
   border-radius: 4px;
-  width: 96%;
   padding: 8px 0 ;
-  display: flex;
-  flex-direction: row;
-  //justify-content:space-between
-
-  img {
-    margin: 0  8px;
-    width: 80px;
-    border-radius:4px;
-    height: 80px;
-  }
 }
+.midcard-img{
+  width: 80px;
+  height: 80px;
+  margin: 0  8px 0  16px;
+  border-radius:4px;
+}
+.overflow-word{
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+.midcardword{
+  margin-right: 16px;
+}
+
 .midcardtop {
   text-align: left;
   overflow:hidden;
   text-overflow:ellipsis;
-  margin:4px 8px 0 4px;
+  margin:4px 0 0 4px;
   max-height: 39px;
   line-height: 18px;
   color: rgba(0,0,0,0.87);
@@ -80,15 +88,25 @@
 .midcardbottom {
   text-align: left;
   color: #ef8a31;
-  margin:4px 8px 0 4px;
+  margin:4px 0 0 4px;
   font-size: 10px;
   line-height: 14px;
   font-family: ProximaNova-Bold;
   font-weight: 600;
 }
+.bottom-line{
+
+}
+.line-img{
+  height: 49px;
+  width: 9px;
+  margin:-13px 8px -50px 8px;
+}
 .wrapper-progress {
-  width: 88%;
-  margin: 0 auto;
+  background-color: white;
+  margin:  16px;
+  padding:  8px;
+  border-radius: 4px;
 }
 .wrapper-word{
   margin-top: 24px;
@@ -110,16 +128,17 @@
 }
 .wrapper-progress-line {
   border-radius: 4px;
-  width: 100%;
+  //width: 88%;
   position: relative;
   height: 30px;
+  margin: -15px 20px 0 20px;
 }
 .progress-line-top {
   border-radius: 4px;
   top: 15px;
   position: absolute;
-  background-color: #ef8a31;
-  height: 4px;
+  background: linear-gradient(to right, #EF8A31 , #F8BE5F);
+  height: 10px;
 }
 .progress-line-icon {
   position: absolute;
@@ -134,23 +153,48 @@
   position: absolute;
   top: 15px;
   background-color: rgba(0, 0, 0, 0.12);
-  height: 4px;
+  height: 10px;
 }
 .wrapper-price-2 {
-  font-weight: bold;
+  //font-weight: bold;
   text-align: left;
+  text-decoration: line-through;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.87);
+}
+.wrapper-lowest-price{
+  font-weight: bold;
+  text-align: right;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.87);
 }
 .current-price-2 {
-  font-size: 14px;
+  font-size: 12px;
+  background-color: #FFCC9E;
+  border-radius: 8px;
   font-weight: bold;
-  color: #fd7900;
+  padding: 0 4px;
+  color: black;
 }
 .current-price-1 {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.87);
   font-weight: 400;
+}
+.sm-font{
+  -webkit-transform-origin-x: 0;
+  -webkit-transform: scale(0.90);
+  margin-bottom: -5px;
+  margin-left: 2px;
+}
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #FFCC9E;
+  margin-top: -2px;
+  margin-left: 31px;
 }
 .current-price {
   text-align: left;
@@ -160,12 +204,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 88%;
+  margin: 0 auto;
 }
 .sharebtn {
   font-size: 12px;
   font-weight: 600;
   padding: 13px 15px;
-  width: 96%;
+  width: 89%;
   border-radius: 4px;
   border: 0;
   box-shadow: 0 1px  3px rgba(0, 0, 0, 0.19) ;
@@ -201,8 +247,8 @@
 }
 .scroll {
   background-color: white;
-  width: 97%;
-  margin: 0 auto;
+  //width: 97%;
+  margin: 0 16px 20px 16px;
   border-radius: 4px;
 }
 .scrollhead {

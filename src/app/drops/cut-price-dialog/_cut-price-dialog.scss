@@ -14,7 +14,7 @@
 
 }
 .xb-guide-dialog{
-  height: 49vh;
+  //height: 49vh;
   margin: 16px;
   background-color: white;
   border-radius: 4px;
@@ -49,9 +49,11 @@
 }
 .btn{
   margin-top: 4px;
-  width: 191px;
+  margin-bottom: 20px;
+  //width: 191px;
   color: #EF8A31;
   border: #EF8A31 1px solid;
+  background-color: white !important;
   border-radius:  4px;
   padding: 8px 12px;
   font-size: 12px;

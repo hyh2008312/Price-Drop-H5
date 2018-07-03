@@ -44,7 +44,7 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-      "deployUrl": "/",
+      "deployUrl": "https://app-cdn.getpricedrop.com/",
       "styles": [
         "_styles.scss",
         "app/styles/main.scss"

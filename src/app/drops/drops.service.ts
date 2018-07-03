@@ -63,12 +63,14 @@ export class DropsService {
     return array.join('&');
   }
 
-  getCutDetail(id): Promise<any> {
+  getCutDetail(id, login): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    this.createAuthorizationHeader(headers);
+    if(login){
+      this.createAuthorizationHeader(headers);
+    }
 
     let options = new RequestOptions({headers: headers});
 
@@ -77,7 +79,7 @@ export class DropsService {
 
     return this.http.get(url, options)
       .toPromise()
-      .then(this.checkIsAuth)
+      .then(response => response.json())
       .catch((error) => {this.handleError(error, this)});
   }
 
@@ -90,7 +92,7 @@ export class DropsService {
 
     let options = new RequestOptions({headers: headers});
 
-    const url = `${this.baseUrl.url}promotion/cut/friend/${params}/`;
+    const url = `${this.baseUrl.url}promotion/cut/down/friend/${params}/`;
     // const url = `http://47.104.171.91/promotion/cut/friend/${params}/`;
 
     return this.http.get(url, options)
@@ -123,7 +125,7 @@ export class DropsService {
     return response.json();
   }
 
-  private handleError(error: Response | any, target?: any) {
+  private handleError(error: Response | any, target?: any, option?:any) {
     let errMsg: string;
     if (error instanceof Response) {
       if(error.status == 401) {
@@ -136,6 +138,28 @@ export class DropsService {
           return Promise.reject(401);
         }
       }
+      if(error.status == 409) {
+        window.location.href = 'http://www.getpricedrop.com';
+        return Promise.reject(409);
+      }
+      const body = error.json() || '';
+      const err = body.error || body;
+      if (err.detail) {
+        errMsg = `${err.detail}`;
+      } else {
+        if (err.error) {
+          errMsg = 'Sorry! Server is busy now!';
+        }
+      }
+    } else {
+      errMsg = error.msg ? error.msg : error.toString();
+    }
+    return Promise.reject(errMsg);
+  }
+
+  private handleError1(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
       const body = error.json() || '';
       const err = body.error || body;
       if (err.detail) {

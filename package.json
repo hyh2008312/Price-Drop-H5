@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 8080",
+    "start": "ng serve --port 8080 ",
     "start:prod": "ng serve --env=prod --port 8080",
     "start:ssr": "ng build --dev --aot=true --app 3 && ng build --dev --aot=true --app 4",
     "start:server": "webpack --progress --env.development --colors",
