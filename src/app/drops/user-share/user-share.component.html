@@ -42,7 +42,7 @@
 
 
   <div class="wrapper-progress" *ngIf="cutStatus=='progressing'"  >
-    <div class="current-price" [ngStyle]="{'padding-left': 'calc( ' + wordPercentage + ' - 45px)' }" >
+    <div class="current-price" [ngStyle]="{'padding-left': 'calc( ' + wordPercentage + ' - 25px)' }" >
     <!--<div class="current-price" fxLayout="column" fxLayoutAlign="center center" >-->
       <div style="width: 80px">
         <div class="current-price-1 sm-font">Current Price</div>
@@ -71,7 +71,7 @@
     <div class="overflow-btn-time">
 
       <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'&&cancut==true"   >Help Me Drop the Price in One Click</button>
-      <!--<button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >I Want This Item Too</button>-->
+      <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false">I Want It Too</button>
       <!--<button class="sharebtn"   (click)="openCutPrice(11)"    > TestBtn</button>-->
       <!--<a [ngClass]="{'xb-navigation-header__login-active': status}"-->
       <!--fxShow.xs="false">LOG IN</a>-->
@@ -89,7 +89,7 @@
   <div class="wrapper-progress" style="text-align: center"  *ngIf="cutStatus=='end'">
       <div class="wrapper-word">Total Price Dropped:&nbsp;<span class="wrapper-word-price">Rs.{{topPrice}}</span></div>
       <div class="wrapper-word-black">Final Price:&nbsp;<span class="wrapper-word-drop"> Rs.{{currentPrice}} </span></div>
-    <button class="sharebtn"   (click)="cutPrice()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >Claim Your Points Gifts On Our App</button>
+    <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >Claim Your Points Gifts On Our App</button>
 
     <div class="time">
       <div class="timehh">{{ahour}}</div>
