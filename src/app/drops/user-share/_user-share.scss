@@ -1,6 +1,11 @@
 *{
   font-family: ProximaNova,Arial,Sans-serif;
 }
+.overflow-body1{
+  background-image:url('http://image.getpricedrop.com/appweb/bg.jpg');
+  height: 100vh;
+  overflow-y: scroll;
+}
 .header {
   width: 100%;
   //background-color: #ef8a31;

@@ -15,7 +15,7 @@ import { AuthService } from 'angular2-social-login';
   styleUrls: ['../login.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginGroup : FormGroup;
 
@@ -169,7 +169,6 @@ export class LoginComponent implements OnInit {
                 //   self.loadingValue = 0;
                 // });
               }
-              self.changeDetectorRef.markForCheck();
               self.changeDetectorRef.detectChanges();
             }
           });
@@ -234,6 +233,9 @@ export class LoginComponent implements OnInit {
     }
     if(this.sub) {
       this.sub.unsubscribe();
+    }
+    if (this.changeDetectorRef) {
+      this.changeDetectorRef.detach();
     }
   }
 

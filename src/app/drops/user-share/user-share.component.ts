@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone,  } from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, NgZone, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 
@@ -15,10 +15,11 @@ import {CutPriceDialogComponent} from '../cut-price-dialog/cut-price-dialog.comp
 @Component({
   selector: 'app-login',
   templateUrl: './user-share.component.html',
-  styleUrls: ['./_user-share.scss']
+  styleUrls: ['./_user-share.scss'],
+  entryComponents: [FaqDialogComponent, CutPriceDialogComponent]
 })
 
-export class UserShareComponent implements OnInit {
+export class UserShareComponent implements OnInit, OnDestroy {
 
   showLoading = false;
   loadingValue: any = 0;
@@ -34,6 +35,7 @@ export class UserShareComponent implements OnInit {
   iconpercentage: any;
   percentage: any;
   wordPercentage: any;
+  wordPercentageNum: any;
   ahour: any;
   amin: any;
   asecond: any;
@@ -48,6 +50,8 @@ export class UserShareComponent implements OnInit {
   cancut: any;
 
   isLogin = false;
+
+  timer: any = null;
 
   constructor(
     private router: Router,
@@ -82,9 +86,9 @@ export class UserShareComponent implements OnInit {
     const self  = this
     console.log(window.location.pathname)
     self.cutid = self.activatedRoute.snapshot.params['cutId'];
-    self.dropsService.getCutDetail(self.cutid,this.isLogin).then((res) => {
+    self.dropsService.getCutDetail(self.cutid, this.isLogin).then((res) => {
       console.log(res)
-      if(res===undefined){
+      if (res === undefined) {
         return
       }
       const data = {
@@ -102,10 +106,10 @@ export class UserShareComponent implements OnInit {
 
       this.percentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
 
-      let wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
+      this.wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
       // let wordPercentageNum = 99
 
-      if ( wordPercentageNum > 85){
+      if ( this.wordPercentageNum > 85) {
         this.wordPercentage = 84 + '%'
       } else {
         this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
@@ -115,12 +119,26 @@ export class UserShareComponent implements OnInit {
       this.imgsrc = res.mainImage
       this.ownerimg = res.ownerAvatar
       this.cutStatus = res.cutStatus
+      // this.friendCuts = res.friendCuts.slice(0, 4)
       this.friendCuts = res.friendCuts
+      //
+      // for (let i=0;i<this.friendCuts.length; i++) {
+      //   for(let j = i + 1;j<this.friendCuts.length; j++) {
+      //     if(parseInt(this.friendCuts[i].cutAmount) < parseInt(this.friendCuts[j].cutAmount)) {
+      //       let tmp = this.friendCuts[i];
+      //       this.friendCuts[i] = this.friendCuts[j];
+      //       this.friendCuts[j] = tmp;
+      //     }
+      //   }
+      // }
+
+      this.friendCuts.slice(0, 4)
+
       this.user = res.user
-      if((this.salePrice - this.currentPrice).toString().indexOf(".") == -1){
+      if ((this.salePrice - this.currentPrice).toString().indexOf('.') == -1) {
         this.topPrice = (this.salePrice - this.currentPrice).toString() + '.00'
       } else {
-        this.topPrice = (this.salePrice - this.currentPrice).toString().substring(0,(this.salePrice - this.currentPrice).toString().indexOf(".") + 3)
+        this.topPrice = (this.salePrice - this.currentPrice).toString().substring(0, (this.salePrice - this.currentPrice).toString().indexOf('.') + 3)
       }
       const nowtime = new Date
       const tmp = nowtime.getTime()
@@ -152,7 +170,7 @@ export class UserShareComponent implements OnInit {
     // const tmp = 1527753479
     const self = this
     self.ngZone.runOutsideAngular(() => {
-      setInterval(() => {
+      self.timer = setInterval(() => {
         const nowtime = new Date
         const total =  time - nowtime.getTime() / 1000
 
@@ -175,7 +193,9 @@ export class UserShareComponent implements OnInit {
           self.asecond = '0' + self.asecond
         }
 
-        self.changeDetectorRef.detectChanges();
+        if (!self.changeDetectorRef['destroyed']) {
+          self.changeDetectorRef.detectChanges();
+        }
       }, 1000)
     })
     // alert(time / (24 * 3600 * 1000))
@@ -191,10 +211,10 @@ export class UserShareComponent implements OnInit {
         this.cancut = res.canCut
         this.currentPrice = res.currentPrice
         this.percentage = Math.ceil((this.salePrice - res.currentPrice  ) / (this.salePrice - this.lowestPrice) * 100) + '%';
-        let wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
+        const wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
         // let wordPercentageNum = 99
 
-        if ( wordPercentageNum > 85){
+        if ( wordPercentageNum > 85) {
           this.wordPercentage = 84 + '%'
         } else {
           this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
@@ -215,17 +235,19 @@ export class UserShareComponent implements OnInit {
   }
 
   openCutPrice(price: any) {
-    console.log(price)
-    const dialogRef = this.dialog.open(CutPriceDialogComponent, {
+
+    const dialogRef: any = this.dialog.open(CutPriceDialogComponent, {
       data: {
         price
       }
     });
 
     const self = this;
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
   openFaq() {
-    const dialogRef = this.dialog.open(FaqDialogComponent, {
+    const dialogRef: any = this.dialog.open(FaqDialogComponent, {
       data: {}
     });
 
@@ -258,6 +280,15 @@ export class UserShareComponent implements OnInit {
     //   window.open('https://www.getpricedrop.com/')
     //
     // }
+  }
+
+  ngOnDestroy() {
+    if (this.changeDetectorRef) {
+      this.changeDetectorRef.detach();
+    }
+    if(this.timer) {
+      clearInterval(this.timer)
+    }
   }
 
   private load() {
