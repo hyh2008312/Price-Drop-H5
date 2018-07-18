@@ -21,9 +21,9 @@
   left: 15px;
 }
 .lefticon {
-  position: absolute;
-  top: 28px;
-  right: 15px;
+  //position: absolute;
+  margin-top: 28px;
+  margin-right: 15px;
   padding: 2px 8px;
   font-size: 10px;
   font-weight: 300;
@@ -281,4 +281,16 @@
 }
 .bottom-card-price {
   font-size: 14px;
+}
+.overflow-popup{
+  background-color: rgba(0,0,0,.288);
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+.popup{
+  position: absolute;
+  top:165px;
 }

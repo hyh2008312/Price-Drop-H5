@@ -1,11 +1,12 @@
 <div class="xb-loading" *ngIf="showLoading">
   <mat-progress-bar [mode]="determinate" [value]="loadingValue" color="accent"></mat-progress-bar>
 </div>
+<faq-dialog *ngIf="faqStauts" (valueChange)="openFaq($event)"></faq-dialog>
 <div  class="overflow-body1" style="" >
   <div class="header">
-    <div class="headertop" >
+    <div class="headertop" fxLayout="column" fxLayoutAlign="center end" >
       <!--<div class="righticon"> ➡ </div>-->
-      <div class="lefticon" (click)="openFaq()">
+      <div class="lefticon" (click)="openFaq($event)"  >
         <span style="font-family: 'iconfont-socialcommer'">&#xe709; </span>Price Drop FAQ
       </div>
     </div>
@@ -100,6 +101,10 @@
       </div>
 
     </div>
+  </div>
+  <div class="overflow-popup" *ngIf="cutPriceStauts" >
+    <cut-price-dialog class="popup" (statusChange)="openCutPrice($event)" [data]="cutamount" ></cut-price-dialog>
+
   </div>
   <!--<div>-->
     <!--<div>-->

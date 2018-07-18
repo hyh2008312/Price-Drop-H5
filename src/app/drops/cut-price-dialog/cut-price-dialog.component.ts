@@ -1,6 +1,5 @@
-import {Component, Inject, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 
@@ -12,20 +11,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export class CutPriceDialogComponent implements OnInit {
 
+  @Output() statusChange: any = new EventEmitter();
+  @Input() data: any;
 
-  constructor(
-    public dialogRef: MatDialogRef<CutPriceDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any
-  ) {
+  constructor() {
 
   }
 
   ngOnInit(): void {
-    (<any>window).dataLayer.push({
-      'event': 'VirtualPageView',
-      'virtualPageURL': '/droppedtheprice',
-      'virtualPageTitle': 'Dropped The Price'
-    });
+    console.log(this.data)
   }
   openLink() {
 
@@ -49,6 +43,7 @@ export class CutPriceDialogComponent implements OnInit {
     }
   }
   close(): void {
-    this.dialogRef.close();
+
+    this.statusChange.emit(true)
   }
 }

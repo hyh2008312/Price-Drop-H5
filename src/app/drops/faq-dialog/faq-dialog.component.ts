@@ -1,6 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
-
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 
 
@@ -12,11 +10,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export class FaqDialogComponent implements OnInit {
 
+  @Output() valueChange:any = new EventEmitter();
 
-  constructor(
-    public dialogRef: MatDialogRef<FaqDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
+
+  constructor() {
   }
 
   ngOnInit():void {
@@ -24,6 +21,6 @@ export class FaqDialogComponent implements OnInit {
   }
 
   close():void {
-    this.dialogRef.close();
+    this.valueChange.emit(true)
   }
 }

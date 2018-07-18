@@ -46,12 +46,16 @@ export class UserShareComponent implements OnInit, OnDestroy {
   user: any;
   cutStatus: any;
   friendCuts: any;
-  cutamount: any;
+  cutamount: any = 111;
   cancut: any;
+  faqStauts: any = false;
+  cutPriceStauts: any = false;
+  aboutProduct: any;
 
   isLogin = false;
+  timer: any;
 
-  timer: any = null;
+  isFirstCut: any = null;
 
   constructor(
     private router: Router,
@@ -74,7 +78,11 @@ export class UserShareComponent implements OnInit, OnDestroy {
       if (data) {
         this.isLogin = true
       }
-      this.getCutdetail()
+
+      this.activatedRoute.queryParams.subscribe((data) => {
+        this.isFirstCut = data.first;
+        this.getCutdetail()
+      })
     })
 
   }
@@ -93,7 +101,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
       }
       const data = {
         description: res.title,
-        title: 'Come help me drop the price before it sells out!',
+        title: 'Click to get this product at Rs.' + res.lowestPrice + ' together!',
         shareImage: res.mainImage,
       }
       this.dropsService.addTitleDescription(data)
@@ -119,21 +127,10 @@ export class UserShareComponent implements OnInit, OnDestroy {
       this.imgsrc = res.mainImage
       this.ownerimg = res.ownerAvatar
       this.cutStatus = res.cutStatus
-      // this.friendCuts = res.friendCuts.slice(0, 4)
-      this.friendCuts = res.friendCuts
-      //
-      // for (let i=0;i<this.friendCuts.length; i++) {
-      //   for(let j = i + 1;j<this.friendCuts.length; j++) {
-      //     if(parseInt(this.friendCuts[i].cutAmount) < parseInt(this.friendCuts[j].cutAmount)) {
-      //       let tmp = this.friendCuts[i];
-      //       this.friendCuts[i] = this.friendCuts[j];
-      //       this.friendCuts[j] = tmp;
-      //     }
-      //   }
-      // }
-
-      this.friendCuts.slice(0, 4)
-
+      let tmparr = res.friendCuts
+      if (tmparr.length > 0){
+        this.arrSort(tmparr)
+      }
       this.user = res.user
       if ((this.salePrice - this.currentPrice).toString().indexOf('.') == -1) {
         this.topPrice = (this.salePrice - this.currentPrice).toString() + '.00'
@@ -152,6 +149,10 @@ export class UserShareComponent implements OnInit, OnDestroy {
         this.asecond = '00'
       }
 
+      if(this.isFirstCut == 'true') {
+        this.cutPrice()
+      }
+
       // this.showBtn()
     }).catch((res) => {
 
@@ -159,13 +160,19 @@ export class UserShareComponent implements OnInit, OnDestroy {
       console.log('getCutdetail-------catch' + res)
     })
   }
-  // showBtn() {
-  //   if(this.cutStatus=='progressing'){
-  //
-  //   } else {
-  //
-  //   }
-  // }
+  arrSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      for(let j = i + 1;j<arr.length; j++) {
+        if(parseInt(arr[i].cutAmount) < parseInt(arr[j].cutAmount)) {
+          let tmp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = tmp;
+        }
+      }
+    }
+    const  sortArr = arr.slice(0, 4)
+    this.friendCuts = sortArr;
+  }
   editTime(time) {
     // const tmp = 1527753479
     const self = this
@@ -202,7 +209,6 @@ export class UserShareComponent implements OnInit, OnDestroy {
   }
   cutPrice() {
     const self  = this
-    // this.openCutPrice(1111)
 
     if (this.isLogin && this.user === 'friend') {
       self.dropsService.friendCutPrice(self.cutid).then((res) => {
@@ -220,9 +226,8 @@ export class UserShareComponent implements OnInit, OnDestroy {
           this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
         }
         this.iconpercentage = Math.ceil(((this.salePrice - res.currentPrice ) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
-
-        this.friendCuts = res.friendCuts
-        this.openCutPrice(this.cutamount)
+        this.arrSort(res.friendCuts)
+        this.openCutPrice(Event)
       }).catch((res) => {
         console.log('cutPrice--------catch:' + res)
       })
@@ -234,27 +239,11 @@ export class UserShareComponent implements OnInit, OnDestroy {
 
   }
 
-  openCutPrice(price: any) {
-
-    const dialogRef: any = this.dialog.open(CutPriceDialogComponent, {
-      data: {
-        price
-      }
-    });
-
-    const self = this;
-    dialogRef.afterClosed().subscribe(result => {
-    });
+  openCutPrice($event) {
+   this.cutPriceStauts = !this.cutPriceStauts
   }
-  openFaq() {
-    const dialogRef: any = this.dialog.open(FaqDialogComponent, {
-      data: {}
-    });
-
-    const self = this;
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+  openFaq($event) {
+    this.faqStauts = !this.faqStauts
   }
   downApp() {
     // window.navigator
@@ -285,9 +274,6 @@ export class UserShareComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.changeDetectorRef) {
       this.changeDetectorRef.detach();
-    }
-    if(this.timer) {
-      clearInterval(this.timer)
     }
   }
 
