@@ -106,12 +106,6 @@
     <cut-price-dialog class="popup" (statusChange)="openCutPrice($event)" [data]="cutamount" ></cut-price-dialog>
 
   </div>
-  <!--<div>-->
-    <!--<div>-->
-      <!--<img src="" alt="user">-->
-    <!--</div>-->
-    <!--<span>230 people dropped price for you</span>-->
-  <!--</div>-->
 
   <div class="wrapper-progress" style="text-align: center"  *ngIf="cutStatus=='end'">
       <div class="wrapper-word">Total Price Dropped:&nbsp;<span class="wrapper-word-price">Rs.{{topPrice}}</span></div>
@@ -127,7 +121,12 @@
     </div>
   </div>
 
-
+  <div class="friend-cut-div" *ngIf="hasfriends>=4" fxLayout="row" fxLayoutAlign="start center " >
+    <div style="width: 140px;margin-left: 10px">
+      <img class="friend-cut" *ngFor="let i of userArr" [src]="i.avatar" alt="user">
+    </div>
+    <div class="friend-cut-word">{{hasfriends}} people dropped price for you</div>
+  </div>
 
   <div class="scroll" >
     <div class="scrollhead">
@@ -139,6 +138,30 @@
           <div class="bottom-card-name" fxFlex>{{i.lastName}}{{i.firstName}}</div>
           <div class="bottom-card-price">Dropped <span style="font-weight: 900">Rs.{{i.cutAmount}}</span></div>
         </div>
+    </div>
+  </div>
+
+  <div class="bottom-goods">
+    <div class="bottom-goods-head">
+      You Might Also Like
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center" style="margin: 0 14px" >
+      <!--<img *ngFor="let i of friendCuts" src="" alt="">-->
+      <div fxFlex="48"  *ngFor="let i of aboutProduct" class="overflow-bottom-goods-img" (click)="downApp()">
+        <div style="width: 100%;padding-bottom: 100%; position: relative;overflow: hidden;">
+          <img   class="bottom-goods-img" [src]="i.image" alt="about product" >
+
+        </div>
+        <div class="bottom-goods-price" fxLayout="column" fxLayoutAlign="center center" >
+          <div >
+            <span style="font-weight: 700;font-size: 14px;">Rs.{{i.lowestPrice}}</span>
+            <span style="font-size: 10px;color: #EF8A31;" *ngIf="i.rate==0">100%OFF</span>
+            <span style="font-size: 10px;color: #EF8A31;" *ngIf="i.rate!=0">{{i.rate}}%OFF</span>
+          </div>
+          <div style="font-size: 10px;color: #000000; text-decoration: line-through;">Rs.{{i.saleUnitPrice}}</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

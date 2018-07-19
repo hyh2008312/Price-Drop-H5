@@ -50,6 +50,8 @@ export class UserShareComponent implements OnInit, OnDestroy {
   cancut: any;
   faqStauts: any = false;
   cutPriceStauts: any = false;
+  userArr: any;
+  hasfriends: any;
   aboutProduct: any;
 
   isLogin = false;
@@ -95,13 +97,12 @@ export class UserShareComponent implements OnInit, OnDestroy {
     console.log(window.location.pathname)
     self.cutid = self.activatedRoute.snapshot.params['cutId'];
     self.dropsService.getCutDetail(self.cutid, this.isLogin).then((res) => {
-      console.log(res)
       if (res === undefined) {
         return
       }
       const data = {
         description: res.title,
-        title: 'Click to get this product at Rs.' + res.lowestPrice + ' together!',
+        title: 'PriceDrop - Share with friends & go to page to help me drop ' + res.title +' to Rs.'+ res.lowestPrice +' ! Download APP to start your own PRICE DROP.',
         shareImage: res.mainImage,
       }
       this.dropsService.addTitleDescription(data)
@@ -127,8 +128,17 @@ export class UserShareComponent implements OnInit, OnDestroy {
       this.imgsrc = res.mainImage
       this.ownerimg = res.ownerAvatar
       this.cutStatus = res.cutStatus
+      this.aboutProduct = res.choiceProduct
+
       let tmparr = res.friendCuts
+      if(tmparr.length >= 4){
+        this.userArr = tmparr.slice(0, 5)
+      }else {
+        this.userArr = []
+      }
+
       if (tmparr.length > 0){
+        this.hasfriends = res.friendCuts.length
         this.arrSort(tmparr)
       }
       this.user = res.user
@@ -149,7 +159,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
         this.asecond = '00'
       }
 
-      if(this.isFirstCut == 'true') {
+      if(this.isFirstCut == 'true' && this.cancut == true) {
         this.cutPrice()
       }
 
@@ -161,17 +171,26 @@ export class UserShareComponent implements OnInit, OnDestroy {
     })
   }
   arrSort(arr) {
-    for (let i = 0; i < arr.length; i++) {
-      for(let j = i + 1;j<arr.length; j++) {
-        if(parseInt(arr[i].cutAmount) < parseInt(arr[j].cutAmount)) {
-          let tmp = arr[i];
-          arr[i] = arr[j];
-          arr[j] = tmp;
+    let moneyArr  = arr
+    let timeArr  = arr
+    console.log(timeArr)
+
+
+    for (let i = 0; i < moneyArr.length; i++) {
+      for (let j = i + 1; j < moneyArr.length; j++) {
+        if(parseInt(moneyArr[i].cutAmount) < parseInt(moneyArr[j].cutAmount)) {
+          let tmp = moneyArr[i];
+          moneyArr[i] = moneyArr[j];
+          moneyArr[j] = tmp;
         }
       }
     }
-    const  sortArr = arr.slice(0, 4)
-    this.friendCuts = sortArr;
+    const  sortArr = moneyArr.slice(0, 4)
+    this.friendCuts = sortArr; // 钱数最多的排序
+
+  }
+  avatarArr(){
+
   }
   editTime(time) {
     // const tmp = 1527753479
@@ -221,11 +240,17 @@ export class UserShareComponent implements OnInit, OnDestroy {
         // let wordPercentageNum = 99
 
         if ( wordPercentageNum > 85) {
-          this.wordPercentage = 84 + '%'
+          this.wordPercentage = 90 + '%'
         } else {
           this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
         }
         this.iconpercentage = Math.ceil(((this.salePrice - res.currentPrice ) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
+        let tmparr = res.friendCuts
+        if(tmparr.length >= 4){
+          this.userArr = tmparr.slice(0, 5)
+        }else {
+          this.userArr = []
+        }
         this.arrSort(res.friendCuts)
         this.openCutPrice(Event)
       }).catch((res) => {

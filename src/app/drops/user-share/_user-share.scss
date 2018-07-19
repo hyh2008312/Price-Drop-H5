@@ -268,7 +268,7 @@
   //overflow-y: scroll;
 }
 .bottom-card {
-  padding: 8px;
+  padding: 8px 16px;
 }
 .bottom-card-name {
   font-size: 14px;
@@ -281,6 +281,59 @@
 }
 .bottom-card-price {
   font-size: 14px;
+}
+.friend-cut-div{
+  background-color: white;
+  height: 56px;
+  margin:  16px;
+  padding:  8px;
+  border-radius: 4px;
+}
+.friend-cut{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px white solid;
+  margin-left: -5px;
+
+}
+.friend-cut-word{
+  opacity: 0.87;
+  font-size: 10px;
+  color: #000000;
+  letter-spacing: 0;
+  text-align: left;
+}
+.bottom-goods{
+  //margin: 4px 16px;
+}
+.bottom-goods-head{
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.overflow-bottom-goods-img{
+  width: 164px;
+  margin-bottom: 16px;
+  border-radius:5px
+}
+
+.bottom-goods-img{
+  display: block;
+  position: absolute;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.bottom-goods-price{
+  height: 46px;
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .overflow-popup{
   background-color: rgba(0,0,0,.288);
