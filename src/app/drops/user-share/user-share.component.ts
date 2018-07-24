@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
 import { DropsService } from '../drops.service';
 import { GuardLinkService } from '../../shared/services/guard-link/guard-link.service';
+import { UserService } from '../../shared/services/user/user.service';
 import { MatDialog } from '@angular/material';
 
 import {FaqDialogComponent} from '../faq-dialog/faq-dialog.component';
@@ -59,6 +60,8 @@ export class UserShareComponent implements OnInit, OnDestroy {
 
   isFirstCut: any = null;
 
+  sub1: any;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -67,6 +70,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
     public activatedRoute: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef,
     private guardLinkService: GuardLinkService,
+    private userService: UserService,
     private ngZone: NgZone,
     public dialog: MatDialog,
   ) {
@@ -76,16 +80,17 @@ export class UserShareComponent implements OnInit, OnDestroy {
       }
     });
 
+
+
     this.auth.isOnlyAuthorized().subscribe((data) => {
       if (data) {
         this.isLogin = true
       }
 
-      this.activatedRoute.queryParams.subscribe((data) => {
-        this.isFirstCut = data.first;
-        this.getCutdetail()
-      })
-    })
+      this.getCutdetail()
+
+    });
+
 
   }
   ngOnInit(): void {
@@ -101,8 +106,8 @@ export class UserShareComponent implements OnInit, OnDestroy {
         return
       }
       const data = {
-        description: res.title,
-        title: 'PriceDrop - Share with friends & go to page to help me drop ' + res.title +' to Rs.'+ res.lowestPrice +' ! Download APP to start your own PRICE DROP.',
+        description: '#PriceDrop - Go to page & help me drop the price of ' + res.title + ' to Rs.' + res.lowestPrice + ' ! You can also get it for FREE.',
+        title: 'Help Me Drop The Price to Rs. 0!',
         shareImage: res.mainImage,
       }
       this.dropsService.addTitleDescription(data)
@@ -130,14 +135,14 @@ export class UserShareComponent implements OnInit, OnDestroy {
       this.cutStatus = res.cutStatus
       this.aboutProduct = res.choiceProduct
 
-      let tmparr = res.friendCuts
-      if(tmparr.length >= 4){
+      const tmparr = res.friendCuts
+      if (tmparr.length >= 4) {
         this.userArr = tmparr.slice(0, 5)
-      }else {
+      } else {
         this.userArr = []
       }
 
-      if (tmparr.length > 0){
+      if (tmparr.length > 0) {
         this.hasfriends = res.friendCuts.length
         this.arrSort(tmparr)
       }
@@ -159,9 +164,12 @@ export class UserShareComponent implements OnInit, OnDestroy {
         this.asecond = '00'
       }
 
-      if(this.isFirstCut == 'true' && this.cancut == true) {
-        this.cutPrice()
-      }
+      this.sub1 = this.userService.inLogin.subscribe((data) => {
+        this.isFirstCut = data;
+        if (this.isFirstCut === true && this.cancut === true) {
+          this.cutPrice()
+        }
+      })
 
       // this.showBtn()
     }).catch((res) => {
@@ -171,15 +179,15 @@ export class UserShareComponent implements OnInit, OnDestroy {
     })
   }
   arrSort(arr) {
-    let moneyArr  = arr
-    let timeArr  = arr
+    const moneyArr  = arr
+    const timeArr  = arr
     console.log(timeArr)
 
 
     for (let i = 0; i < moneyArr.length; i++) {
       for (let j = i + 1; j < moneyArr.length; j++) {
-        if(parseInt(moneyArr[i].cutAmount) < parseInt(moneyArr[j].cutAmount)) {
-          let tmp = moneyArr[i];
+        if (parseInt(moneyArr[i].cutAmount) < parseInt(moneyArr[j].cutAmount)) {
+          const tmp = moneyArr[i];
           moneyArr[i] = moneyArr[j];
           moneyArr[j] = tmp;
         }
@@ -187,9 +195,6 @@ export class UserShareComponent implements OnInit, OnDestroy {
     }
     const  sortArr = moneyArr.slice(0, 4)
     this.friendCuts = sortArr; // 钱数最多的排序
-
-  }
-  avatarArr(){
 
   }
   editTime(time) {
@@ -245,10 +250,10 @@ export class UserShareComponent implements OnInit, OnDestroy {
           this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
         }
         this.iconpercentage = Math.ceil(((this.salePrice - res.currentPrice ) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
-        let tmparr = res.friendCuts
-        if(tmparr.length >= 4){
+        const tmparr = res.friendCuts
+        if (tmparr.length >= 4) {
           this.userArr = tmparr.slice(0, 5)
-        }else {
+        } else {
           this.userArr = []
         }
         this.arrSort(res.friendCuts)
@@ -299,6 +304,9 @@ export class UserShareComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.changeDetectorRef) {
       this.changeDetectorRef.detach();
+    }
+    if (this.sub1) {
+      this.sub1.unsubscribe();
     }
   }
 

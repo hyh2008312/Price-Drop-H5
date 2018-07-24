@@ -159,9 +159,10 @@ export class LoginComponent implements OnInit, OnDestroy {
               self.userService.addUser(res.user);
               self.auth.inviteToken(res.user.isInvite);
               if(self.loginLink) {
-                self.router.navigate([self.loginLink], { queryParams: { first: true } }).then((data) => {
+                self.router.navigate([self.loginLink]).then((data) => {
                   self.showLoading = false;
                   self.loadingValue = 0;
+                  self.userService.addLogin(true);
                 });
               } else {
                 // self.router.navigate(['/drops/detail/1']).then((data) => {

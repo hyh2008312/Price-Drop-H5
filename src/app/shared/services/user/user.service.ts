@@ -19,14 +19,15 @@ export class UserService {
   countryList: Subject<any> = new BehaviorSubject<any>(null);
   currentAds: Subject<any> = new BehaviorSubject<any>(null);
   cartNumber: Subject<any> = new BehaviorSubject<any>(null);
+  inLogin: Subject<any> = new BehaviorSubject<any>(null);
 
   public addUser(newUser: User): void {
     this.currentUser.next(newUser);
   }
 
-  // public addStore(newStore: Store): void {
-  //   this.store.next(newStore);
-  // }
+  public addLogin(isLogin: any): void {
+    this.inLogin.next(isLogin);
+  }
 
   public addUserCategory(newCategory: any): void {
     this.userCategory.next(newCategory);
