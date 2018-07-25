@@ -88,6 +88,7 @@
     <div class="overflow-btn-time">
 
       <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'&&cancut==true"   >Help Me Drop the Price in One Click</button>
+      <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'&&user=='owner'"   >Help Me Drop the Price in One Click</button>
       <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false">I Want It Too</button>
       <!--<button class="sharebtn"   (click)="openCutPrice(11)"    > TestBtn</button>-->
       <!--<a [ngClass]="{'xb-navigation-header__login-active': status}"-->
@@ -102,15 +103,23 @@
 
     </div>
   </div>
+
+
+
   <div class="overflow-popup" *ngIf="cutPriceStauts" fxLayout="column" fxLayoutAlign="center center">
-    <cut-price-dialog fxFlex="none" class="popup" (statusChange)="openCutPrice($event)" [data]="cutamount" ></cut-price-dialog>
+    <cut-price-dialog fxFlex="none" class="popup" (statusChange)="openCutPrice($event)" [data]="cutamount" [isMe]="isMe" ></cut-price-dialog>
 
   </div>
 
   <div class="wrapper-progress" style="text-align: center"  *ngIf="cutStatus=='end'">
-      <div class="wrapper-word">Total Price Dropped:&nbsp;<span class="wrapper-word-price">Rs.{{topPrice}}</span></div>
-      <div class="wrapper-word-black">Final Price:&nbsp;<span class="wrapper-word-drop"> Rs.{{currentPrice}} </span></div>
-    <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false" style=""  >Claim Your Points Gifts On Our App</button>
+      <div class="wrapper-word" *ngIf="priceOff>=50&&priceOff<70">Final Price Unlocked:&nbsp;<span class="wrapper-word-price">50%OFF </span></div>
+      <!--<div class="wrapper-word" *ngIf="priceOff>=70&&priceOff<100">Final Price Unlocked:&nbsp;<span class="wrapper-word-price">70%OFF </span></div>-->
+      <!--<div class="wrapper-word" *ngIf="priceOff=100">Final Price Unlocked:&nbsp;<span class="wrapper-word-price">Rs.0 </span></div>-->
+      <div class="wrapper-word" *ngIf="priceOff<50">You didn't unlock any discount. {{priceOff}}</div>
+
+    <button class="sharebtn"   (click)="downApp()"  *ngIf="(cutStatus=='end'||cancut==false)&&user=='friend'" style=""  >Claim Your Points Gifts On Our App</button>
+    <!--<button class="sharebtn"      style=""  ><a href="pricedrop://pricedropapp">Check Your Final Price On PriceDrop App</a></button>-->
+
 
     <div class="time">
       <div class="timehh">{{ahour}}</div>
@@ -120,6 +129,9 @@
       <div class="timehh">{{asecond}}</div>
     </div>
   </div>
+
+
+
 
   <div class="friend-cut-div" *ngIf="hasfriends>=4" fxLayout="row" fxLayoutAlign="start center " >
     <div style="width: 140px;margin-left: 10px">

@@ -13,6 +13,8 @@ export class CutPriceDialogComponent implements OnInit {
 
   @Output() statusChange: any = new EventEmitter();
   @Input() data: any;
+  @Input() isMe: any;
+  isM: any = false;
 
   constructor() {
 
@@ -20,6 +22,7 @@ export class CutPriceDialogComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data)
+    this.isM = this.isMe
   }
   openLink() {
 

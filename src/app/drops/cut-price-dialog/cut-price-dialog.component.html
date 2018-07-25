@@ -2,7 +2,8 @@
   <div class="xb-guide-dialog__close">
     <i class="icon-ic-close iconfont-socialcommer " (click)="close()" ></i>
   </div>
-  <div class="xb-guide-dialog__container">
+
+  <div class="xb-guide-dialog__container" *ngIf="isM==false">
     <div class="xb-guide__text-1">
       <div class="xb-guide__text-1-title">Thank You!</div>
 
@@ -21,6 +22,26 @@
     </div>
     <div fxLayout="column" fxLayoutAlign="center center">
       <button  class="btn" (click)="openLink()">Claim Your Points Gifts On Our App</button>
+    </div>
+  </div>
+
+
+
+  <div class="xb-guide-dialog__container" *ngIf="isM">
+    <div class="xb-guide__text-1">
+      <div class="xb-guide__text-1-title">Thank You!</div>
+
+      <div class="xb-guide__t ext-1-content">
+      </div>
+
+    </div>
+    <div class="content" >
+
+      <p style="margin-bottom: 8px">        You have already dropped the price for this item. To reach the lowest price, please share this page link with more friends!
+
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <button  class="btn" (click)="close()">OKAY</button>
     </div>
   </div>
 

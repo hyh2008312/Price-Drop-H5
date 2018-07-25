@@ -272,6 +272,10 @@
 }
 .bottom-card-name {
   font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 28px;
+  max-height: 28px;
 }
 .bottom-card-img {
   border-radius: 50%;

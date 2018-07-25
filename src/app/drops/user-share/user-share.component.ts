@@ -54,6 +54,8 @@ export class UserShareComponent implements OnInit, OnDestroy {
   userArr: any;
   hasfriends: any;
   aboutProduct: any;
+  priceOff: any;
+  isMe: any;
 
   isLogin = false;
   timer: any;
@@ -117,6 +119,9 @@ export class UserShareComponent implements OnInit, OnDestroy {
       this.lowestPrice = res.lowestPrice
       this.currentPrice = res.currentPrice
       // this.currentPrice = '5.00'
+      this.priceOff = parseInt(((((res.salePrice * 100 - res.currentPrice * 100) / 100) / (res.salePrice * 1- res.lowestPrice * 1)) * 100).toString())
+
+      console.log( ((res.salePrice * 100 - res.currentPrice * 100) / 100) / (res.salePrice * 1 ) )
 
       this.percentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
 
@@ -152,10 +157,6 @@ export class UserShareComponent implements OnInit, OnDestroy {
       } else {
         this.topPrice = (this.salePrice - this.currentPrice).toString().substring(0, (this.salePrice - this.currentPrice).toString().indexOf('.') + 3)
       }
-      const nowtime = new Date
-      const tmp = nowtime.getTime()
-      const restmp = res.endTimestamp
-      console.log(restmp - nowtime.getTime())
       if (this.cutStatus == 'progressing') {
         this.editTime(res.endTimestamp)
       } else {
@@ -234,42 +235,50 @@ export class UserShareComponent implements OnInit, OnDestroy {
   cutPrice() {
     const self  = this
 
-    if (this.isLogin && this.user === 'friend') {
-      self.dropsService.friendCutPrice(self.cutid).then((res) => {
-        const tmpcut  = res.cutAmount
-        this.cutamount = tmpcut
-        this.cancut = res.canCut
-        this.currentPrice = res.currentPrice
-        this.percentage = Math.ceil((this.salePrice - res.currentPrice  ) / (this.salePrice - this.lowestPrice) * 100) + '%';
-        const wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
-        // let wordPercentageNum = 99
+    if (this.isLogin ) {
+      if(this.user === 'friend'){
+        self.dropsService.friendCutPrice(self.cutid).then((res) => {
+          const tmpcut  = res.cutAmount
+          this.cutamount = tmpcut
+          this.cancut = res.canCut
+          this.currentPrice = res.currentPrice
+          this.percentage = Math.ceil((this.salePrice - res.currentPrice  ) / (this.salePrice - this.lowestPrice) * 100) + '%';
+          const wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
+          // let wordPercentageNum = 99
 
-        if ( wordPercentageNum > 85) {
-          this.wordPercentage = 90 + '%'
-        } else {
-          this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
-        }
-        this.iconpercentage = Math.ceil(((this.salePrice - res.currentPrice ) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
-        const tmparr = res.friendCuts
-        if (tmparr.length >= 4) {
-          this.userArr = tmparr.slice(0, 5)
-        } else {
-          this.userArr = []
-        }
-        this.arrSort(res.friendCuts)
-        this.openCutPrice(Event)
-      }).catch((res) => {
-        console.log('cutPrice--------catch:' + res)
-      })
+          if ( wordPercentageNum > 85) {
+            this.wordPercentage = 90 + '%'
+          } else {
+            this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
+          }
+          this.iconpercentage = Math.ceil(((this.salePrice - res.currentPrice ) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
+          const tmparr = res.friendCuts
+          if (tmparr.length >= 4) {
+            this.userArr = tmparr.slice(0, 5)
+          } else {
+            this.userArr = []
+          }
+          this.arrSort(res.friendCuts)
+          this.openCutPrice(Event,false)
+        }).catch((res) => {
+          console.log('cutPrice--------catch:' + res)
+        })
+      } else {
+        this.openCutPrice(Event,true)
+      }
     } else {
       self.guardLinkService.addRouterLink(window.location.pathname);
-      // this.guardLinkService.addRouterLink(window.location.origin + '/account/login');
       self.router.navigate(['/account/login']);
     }
 
   }
 
-  openCutPrice($event) {
+  openCutPrice($event,a?:any) {
+    if(a){
+      this.isMe = true
+    }else{
+      this.isMe = false
+    }
    this.cutPriceStauts = !this.cutPriceStauts
   }
   openFaq($event) {
@@ -299,6 +308,10 @@ export class UserShareComponent implements OnInit, OnDestroy {
     //   window.open('https://www.getpricedrop.com/')
     //
     // }
+  }
+  jumpApp(){
+    // window.open('http://price_drop://price_drop_app/OpenPriceDropApp')
+    // window.location.href = 'price_drop://price_drop_app'
   }
 
   ngOnDestroy() {
