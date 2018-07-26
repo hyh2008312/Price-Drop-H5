@@ -113,13 +113,15 @@
 
   <div class="wrapper-progress" style="text-align: center"  *ngIf="cutStatus=='end'">
       <div class="wrapper-word" *ngIf="priceOff>=50&&priceOff<70">Final Price Unlocked:&nbsp;<span class="wrapper-word-price">50%OFF </span></div>
-      <!--<div class="wrapper-word" *ngIf="priceOff>=70&&priceOff<100">Final Price Unlocked:&nbsp;<span class="wrapper-word-price">70%OFF </span></div>-->
-      <!--<div class="wrapper-word" *ngIf="priceOff=100">Final Price Unlocked:&nbsp;<span class="wrapper-word-price">Rs.0 </span></div>-->
-      <div class="wrapper-word" *ngIf="priceOff<50">You didn't unlock any discount. {{priceOff}}</div>
+
+      <div class="wrapper-word" *ngIf="priceOff>=70&&priceOff<100">Final Price Unlocked:&nbsp;<span class="wrapper-word-price">70%OFF </span></div>
+
+      <div class="wrapper-word" *ngIf="priceOff==100">Final Price Unlocked:&nbsp;<span class="wrapper-word-price">Rs.0 </span></div>
+
+      <div class="wrapper-word" *ngIf="priceOff<50">You didn't unlock any discount.</div>
 
     <button class="sharebtn"   (click)="downApp()"  *ngIf="(cutStatus=='end'||cancut==false)&&user=='friend'" style=""  >Claim Your Points Gifts On Our App</button>
     <!--<button class="sharebtn"      style=""  ><a href="pricedrop://pricedropapp">Check Your Final Price On PriceDrop App</a></button>-->
-
 
     <div class="time">
       <div class="timehh">{{ahour}}</div>

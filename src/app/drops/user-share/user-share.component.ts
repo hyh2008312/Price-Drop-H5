@@ -57,6 +57,9 @@ export class UserShareComponent implements OnInit, OnDestroy {
   priceOff: any;
   isMe: any;
 
+
+  sUserAgent: any;
+
   isLogin = false;
   timer: any;
 
@@ -195,6 +198,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
       }
     }
     const  sortArr = moneyArr.slice(0, 4)
+    // const  sortArr = moneyArr
     this.friendCuts = sortArr; // 钱数最多的排序
 
   }
@@ -287,16 +291,16 @@ export class UserShareComponent implements OnInit, OnDestroy {
   downApp() {
     // window.navigator
     const  sUserAgent: any = navigator.userAgent.toLowerCase();
+    this.sUserAgent = sUserAgent
     const  bIsIpad = sUserAgent.match(/ipad/i) === 'ipad';
     const  bIsIphoneOs = sUserAgent.match(/iphone os/i) === 'iphone os';
     const  bIsMidp = sUserAgent.match(/midp/i) === 'midp';
-    const  bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) === 'rv:1.2.3.4';
-    const  bIsUc = sUserAgent.match(/ucweb/i) === 'ucweb';
+    const  bIsQQ= sUserAgent.indexOf('mqqbrowser') > -1
+    const  bIsUc =  sUserAgent.indexOf('ucbrowser') > -1
     const  bIsAndroid = sUserAgent.match(/android/i) === 'android';
-    if (bIsAndroid) {
+    if (bIsAndroid || bIsUc ||bIsQQ ) {
       window.open('market://details?id=com.socialcommer.wx')
       // window.open('https://www.getpricedrop.com/')
-
     } else {
       window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx&referrer=utm_source%3Dh5page%26utm_medium%3Dpage')
 
