@@ -283,7 +283,12 @@ export class UserShareComponent implements OnInit, OnDestroy {
     }else{
       this.isMe = false
     }
+
    this.cutPriceStauts = !this.cutPriceStauts
+
+    if( $event == true) {
+      window.location.hash = 'bottom-goods-head';
+    }
   }
   openFaq($event) {
     this.faqStauts = !this.faqStauts

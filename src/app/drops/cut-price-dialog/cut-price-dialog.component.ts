@@ -21,7 +21,6 @@ export class CutPriceDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
     this.isM = this.isMe
   }
   openLink() {
@@ -46,7 +45,6 @@ export class CutPriceDialogComponent implements OnInit {
     }
   }
   close(): void {
-
     this.statusChange.emit(true)
   }
 }

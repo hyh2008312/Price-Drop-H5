@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule }    from '@angular/flex-layout';
 import { MomentModule }        from 'angular2-moment';
 
-import { SafeHtmlPipe }         from './pipes/safe-html/safe-html.pipe';
+// import { SafeHtmlPipe }         from './pipes/safe-html/safe-html.pipe';
 
 import { S3UploaderService } from './services/s3-upload/s3-upload.service';
 import { PlatformService } from './services/platform/platform.service';
@@ -87,12 +87,12 @@ let providers = {
     SwiperModule
   ],
   declarations: [
-    SafeHtmlPipe,
+    // SafeHtmlPipe,
     LoadingComponent,
 
   ],
   exports: [
-    SafeHtmlPipe,
+    // SafeHtmlPipe,
     CommonModule,
     LoadingComponent,
     RouterModule,

@@ -89,7 +89,7 @@
 
       <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'&&cancut==true"   >Help Me Drop the Price in One Click</button>
       <button class="sharebtn" (click)="cutPrice()" *ngIf="cutStatus=='progressing'&&user=='owner'"   >Help Me Drop the Price in One Click</button>
-      <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false">I Want It Too</button>
+      <button class="sharebtn"   (click)="downApp()"  *ngIf="cutStatus=='end'||cancut==false">Get Free Products & Gifts On Our App</button>
       <!--<button class="sharebtn"   (click)="openCutPrice(11)"    > TestBtn</button>-->
       <!--<a [ngClass]="{'xb-navigation-header__login-active': status}"-->
       <!--fxShow.xs="false">LOG IN</a>-->
@@ -120,7 +120,7 @@
 
       <div class="wrapper-word" *ngIf="priceOff<50">You didn't unlock any discount.</div>
 
-    <button class="sharebtn"   (click)="downApp()"  *ngIf="(cutStatus=='end'||cancut==false)&&user=='friend'" style=""  >Claim Your Points Gifts On Our App</button>
+    <button class="sharebtn"   (click)="downApp()"  *ngIf="(cutStatus=='end'||cancut==false)&&user=='friend'" style=""  >Get Free Products & Gifts On Our App</button>
     <!--<button class="sharebtn"      style=""  ><a href="pricedrop://pricedropapp">Check Your Final Price On PriceDrop App</a></button>-->
 
     <div class="time">
@@ -139,7 +139,7 @@
     <div style="width: 140px;margin-left: 10px">
       <img class="friend-cut" *ngFor="let i of userArr" [src]="i.avatar" alt="user">
     </div>
-    <div class="friend-cut-word">{{hasfriends}} people dropped price for you</div>
+    <div class="friend-cut-word">{{hasfriends}} people dropped price</div>
   </div>
 
   <div class="scroll" >
@@ -156,13 +156,13 @@
   </div>
 
   <div class="bottom-goods">
-    <div class="bottom-goods-head">
+    <div class="bottom-goods-head" id="bottom-goods-head">
       You Might Also Like
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="space-between center" style="margin: 0 14px" >
       <!--<img *ngFor="let i of friendCuts" src="" alt="">-->
       <div fxFlex="48"  *ngFor="let i of aboutProduct" class="overflow-bottom-goods-img" (click)="downApp()">
-        <div style="width: 100%;padding-bottom: 100%; position: relative;overflow: hidden;">
+        <div class="bottom-goods-img-div" >
           <img   class="bottom-goods-img" [src]="i.image" alt="about product" >
 
         </div>
