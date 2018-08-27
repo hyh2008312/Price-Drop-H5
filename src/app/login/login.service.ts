@@ -64,7 +64,42 @@ export class LoginService {
       .then(response => response.json())
       .catch(this.handleError);
   }
+  getCode(num: any, login: any): Promise<any> {
 
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    if(login){
+      this.createAuthorizationHeader(headers);
+    }
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}user/send_sms/`;
+
+    return this.http.post(url, num, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+  verifyCode(num: any, login: any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    if(login){
+      this.createAuthorizationHeader(headers);
+    }
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}user/verify_code/`;
+
+    return this.http.post(url, num, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
   facebookLogin(token:any): Promise<any> {
 
     let headers = new Headers({
@@ -82,23 +117,6 @@ export class LoginService {
       .then(response => response.json())
       .catch(this.handleError);
   }
-
-  signUp(object: any): Promise<SignUp> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}user/signup/`;
-
-    return this.http.post(url, JSON.stringify(object), options)
-      .toPromise()
-      .then(response => response.json() as SignUp)
-      .catch(this.handleError);
-  }
-
   settingProfile(object: any): Promise<SignUp> {
 
     let headers = new Headers({

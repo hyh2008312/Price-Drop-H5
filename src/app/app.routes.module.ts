@@ -13,7 +13,6 @@ const routes: Routes = [
         loadChildren: './login/login.module#LoginModule'
       },{
         path: '',
-
         loadChildren: './drops/drops.module#DropsModule'
       }
     ]

@@ -8,6 +8,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 
 import { BaseApi,SystemConstant } from '../../../config/app.api';
 import { User } from './user';
+import {Observable} from 'rxjs/Observable';
 // import { Store } from '../../../shop/shop';
 
 @Injectable()
@@ -56,6 +57,12 @@ export class UserService {
     private auth: AuthenticationService
   ) {
 
+  }
+
+  public isBindNum(): Observable<string> {
+    const bindNum: any = this.currentUser
+
+    return Observable.of(bindNum);
   }
 
   createAuthorizationHeader(headers: Headers) {

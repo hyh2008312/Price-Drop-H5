@@ -17,15 +17,15 @@ import { AuthService } from 'angular2-social-login';
 
 export class LoginComponent implements OnInit, OnDestroy {
 
-  loginGroup : FormGroup;
+  loginGroup: FormGroup;
 
-  loginErr : any = false;
+  loginErr: any = false;
 
   token: any;
 
-  showLoading: boolean = false;
+  showLoading = false;
   loadingValue: any = 0;
-  color: string = 'Accent';
+  color = 'Accent';
 
   //存储错误信息
   formErrors = {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     'username': {
       'required': 'This field is required'
     },
-    'password':{
+    'password': {
       'required': 'This field is required'
     }
   };
@@ -47,6 +47,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   googleLoginSub: any;
 
   loginLink: any = false;
+  loginStatus: any ;
+  verifyCode: any ;
+  verifyShow: any  = false;
+  phoneNum: any = '';
+  Vcode: any = '';
+  errMsg: any = '';
+  errTwo: any = false;
+  second: any;
+  disabled: any ;
+  isF: any = true ;
+  bindNum: any ;
 
   sub: any;
 
@@ -72,7 +83,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginGroup.valueChanges.subscribe(data => this.onValueChanged(data));
 
     this.sub = this.guardLinkService.routerLink.subscribe((data) => {
-      if(data) {
+      if (data) {
         this.loginLink = data;
       }
     });
@@ -104,17 +115,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
 
   }
 
   login() {
-    if(!this.loginGroup.valid) {
+    if (!this.loginGroup.valid) {
       return;
     }
 
-    let self = this;
-    let _setLogin = false;
+    const self = this;
+    const _setLogin = false;
     this.loadingValue = 0;
     this.showLoading = true;
     this.load();
@@ -124,7 +135,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       self.userService.getUser().then((data) => {
         self.userService.addUser(data);
         self.auth.inviteToken(data.isInvite);
-        if(self.loginLink) {
+        if (self.loginLink) {
           self.router.navigate([self.loginLink]).then((data) => {
             self.showLoading = false;
             self.loadingValue = 0;
@@ -140,20 +151,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   googleLogin(provider) {
-    let self = this;
+    const self = this;
     let first = false;
     this.loadingValue = 0;
     this.showLoading = true;
     this.load()
     this.googleLoginSub = this._auth.login(provider).subscribe(
       (data) => {
-        if(data) {
+        if (data) {
           self.service.googleLogin(data).then((res) => {
             self.loginErr = false;
-            if(res && !first) {
+            if (res && !first) {
               first = true;
 
-              let token = {
+              const token = {
                 access_token: res.token.accessToken,
                 refresh_token: res.token.refreshToken,
                 expires_in: res.token.expiresIn
@@ -161,12 +172,21 @@ export class LoginComponent implements OnInit, OnDestroy {
               self.auth.setAccessToken(token);
               self.userService.addUser(res.user);
               self.auth.inviteToken(res.user.isInvite);
-              if(self.loginLink) {
-                self.router.navigate([self.loginLink]).then((data) => {
+              self.loginStatus = true
+
+              if (self.loginLink) {
+                self.bindNum = res.user.bindMobile
+                if (self.bindNum == '' ) {
                   self.showLoading = false;
                   self.loadingValue = 0;
-                  self.userService.addLogin(true);
-                });
+                  self.verifyShow = true
+                } else {
+                  self.router.navigate([self.loginLink]).then((data) => {
+                  //   self.showLoading = false;
+                  //   self.loadingValue = 0;
+                  //   self.userService.addLogin(true);
+                  });
+                }
               } else {
                 // self.router.navigate(['/drops/detail/1']).then((data) => {
                 //   self.showLoading = false;
@@ -182,17 +202,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   facebookLogin(provider) {
-    let self = this;
+    const self = this;
     let first = false;
     this.facebookLoginSub = this._auth.login(provider).subscribe(
         (data) => {
-          if(data) {
+          if (data) {
             self.service.facebookLogin(data).then((res) => {
               self.loginErr = false;
-              if(res && !first) {
+              if (res && !first) {
                 first = true;
 
-                let token = {
+                const token = {
                   access_token: res.token.accessToken,
                   refresh_token: res.token.refreshToken,
                   expires_in: res.token.expiresIn
@@ -200,13 +220,13 @@ export class LoginComponent implements OnInit, OnDestroy {
                 self.auth.setAccessToken(token);
                 self.userService.addUser(res.user);
                 self.auth.inviteToken(res.user.isInvite);
-                if(res.user.firstLogin) {
-                  self.router.navigate(['/account/signup'], {queryParams:{tab: 'settingProfile'}});
+                if (res.user.firstLogin) {
+                  self.router.navigate(['/account/signup'], {queryParams: {tab: 'settingProfile'}});
                 } else {
-                  if(res.user && res.user.store && res.user.store.length>0) {
+                  if (res.user && res.user.store && res.user.store.length > 0) {
                     // self.userService.addStore(res.user.store[0]);
 
-                    if(res.user && res.user.isInvite) {
+                    if (res.user && res.user.isInvite) {
                       self.router.navigate(['/shop/dashboard']);
 
                     } else {
@@ -227,15 +247,129 @@ export class LoginComponent implements OnInit, OnDestroy {
       )
   }
 
+  scoller() {
 
-  ngOnDestroy(){
-    if(this.googleLoginSub) {
+    // document.body.addEventListener('click',  (event)=> {
+    // //   alert(event)
+    // // }
+    //   let element = event.target;
+    //   let tags = {
+    //     'INPUT': 1,
+    //     'TEXTAREA': 1,
+    //   }
+    //   console.log( element.scrollIntoViewIfNeeded())
+    //   if ((element.tagName in tags) ) {
+    //     setTimeout(()=>{
+    //       element.scrollIntoViewIfNeeded();
+    //       console.log('scrollIntoViewIfNeeded');
+    //     }, 400);
+    //   }
+    //
+    // }, false);
+  }
+  getCodeF() {
+    if (this.phoneNum == '') {
+      this.errMsg = 'Please enter your mobile number.'
+      this.isF = false
+    } else {
+      this.isF = true
+    }
+    if (this.isF) {
+      this.getCode()
+      this.isF = false
+    }
+    this.changeDetectorRef.detectChanges();
+  }
+  getCode() {
+    // let self = this;
+    const data = {
+      'mobile' : this.phoneNum
+    }
+    this.time()
+    this.service.getCode(data, this.loginStatus).then((res) => {
+      if (res.result === 'success') {
+        this.errMsg = ''
+      } else {
+        if (res.code == 30004) {
+          this.errTwo = true
+        } else {
+          this.errMsg = res.message
+        }
+      }
+      // (<any>window).dataLayer.push({
+      //   'event': 'VirtualPageView',
+      //   'virtualPageURL': '/storesetup/url',
+      //   'virtualPageTitle': 'StoreSetup - URL'
+      // });
+      this.changeDetectorRef.detectChanges();
+    }).catch(res => {
+      console.log(res)
+    })
+
+  }
+  time () {
+    let timer = null
+    clearInterval(timer);
+    let time = 60;
+    timer = setInterval(() => {
+      console.log(time);
+      if (time < 0 ) {
+        this.second = '';
+        this.disabled = false;
+      } else if ( time == 0) {
+        this.second = 'Resend Code';
+        this.disabled = false;
+        this.isF = true;
+        clearInterval(timer);
+      } else {
+        this.disabled = true;
+        this.second = '';
+        this.second = time + 's';
+        time--;
+      }
+      this.changeDetectorRef.detectChanges();
+    }, 1000);
+
+  }
+  // enterCodeF(){
+  //
+  // }
+
+  enterCode() {
+    if(this.Vcode == '') {
+      this.errMsg = 'Please enter your verification code.'
+      this.changeDetectorRef.detectChanges();
+      return
+    }
+    const data = {
+      'mobile' : this.phoneNum,
+      'code' : this.Vcode
+    }
+
+    this.service.verifyCode(data, this.loginStatus).then((res) => {
+      if(res.result =='success'){
+        this.router.navigate([this.loginLink]).then((data) => {
+          this.userService.addLogin(true);
+        });
+      } else {
+        if(res.code){
+          this.errMsg = res.message
+        }
+      }
+      this.changeDetectorRef.detectChanges();
+    }).catch(res => {
+      console.log(res)
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.googleLoginSub) {
       this.googleLoginSub.unsubscribe();
     }
-    if(this.facebookLoginSub) {
+    if (this.facebookLoginSub) {
       this.facebookLoginSub.unsubscribe();
     }
-    if(this.sub) {
+    if (this.sub) {
       this.sub.unsubscribe();
     }
     if (this.changeDetectorRef) {
@@ -244,7 +378,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private load() {
-    if(this.loadingValue < 90) {
+    if (this.loadingValue < 90) {
       this.loadingValue++;
     } else {
       return;

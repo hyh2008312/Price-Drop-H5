@@ -56,6 +56,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
   aboutProduct: any;
   priceOff: any;
   isMe: any;
+  bindNum: any = false;
 
 
   sUserAgent: any;
@@ -81,11 +82,20 @@ export class UserShareComponent implements OnInit, OnDestroy {
   ) {
     this.sub = this.guardLinkService.routerLink.subscribe((data) => {
       if (data) {
-        this.loginLink = data;
+        this.loginLink = data
       }
     });
 
+    this.userService.currentUser.subscribe((data) => {
+      if(data!=null){
+        if (data.bindMobile!="") {
+          this.bindNum = true
+        } else {
+          this.bindNum = false
+        }
+      }
 
+    })
 
     this.auth.isOnlyAuthorized().subscribe((data) => {
       if (data) {
@@ -238,8 +248,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
   }
   cutPrice() {
     const self  = this
-
-    if (this.isLogin ) {
+    if (this.isLogin && this.bindNum ) {
       if(this.user === 'friend'){
         self.dropsService.friendCutPrice(self.cutid).then((res) => {
           const tmpcut  = res.cutAmount

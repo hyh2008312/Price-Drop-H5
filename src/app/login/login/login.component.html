@@ -7,9 +7,7 @@
       <div class="container">
       </div>
     </div>
-
-
-    <div  fxFlex="noshrink" fxLayout="row" fxLayoutAlign="center ">
+    <div *ngIf="verifyShow==false"  fxFlex="noshrink" fxLayout="row" fxLayoutAlign="center ">
 
       <div class="xb-login__container" fxLayout="column" >
         <!--<div>-->
@@ -45,26 +43,53 @@
       </div>
     </div>
 
+    <div *ngIf="verifyShow==true" fxFlex="noshrink" fxLayout="row" fxLayoutAlign="center ">
+      <div class="xb-login__container" fxLayout="column" >
+          <div fxLayout="column" >
+
+          <div fxLayoutAlign="center center" class="icon-img1">
+            <!--<img style="width: 60px;" src="http://image.getpricedrop.com/appweb/price-drop-logo.png"  alt="">-->
+            <img src="../../../assets/phone.png" alt="" style="width: 96px;opacity: 0.2">
+
+          </div>
+          <div class="title-bold">The Final Step to Get Started & Earn Free Gifts!</div>
+          <div class="title">Please enter your phone number to verify you are a real user: </div>
+          <!--<p>The Final Step to Get Started & Earn Free Gifts! </p>-->
+          <!--<p>Please enter your phone number to verify you are a real user: </p>-->
+          <div class="phone-div" fxLayout="row" fxLayoutAlign="start center ">
+              <span class="phone-span">+91</span>
+              <input type="tel" class="phone-num" name="phone"
+                     pattern="[0-9]"
+                     (click)="scoller()"
+                     onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)"
+                     onblur="this.v();"
+                     maxlength="10"
+                     [(ngModel)]="phoneNum" placeholder="Enter Mobile Number">
+          </div>
+
+          <div class="code-div" fxLayout="row" fxLayoutAlign="start center ">
+              <input type="tel" class="code-num" name="vcode" maxlength="4" [(ngModel)]="Vcode" placeholder="Verification Code">
+              <button  class="code-btn" (click)="getCodeF()"  [disabled]="disabled" >{{second||'Get Code'}}</button>
+          </div>
+            <span class="err-msg">{{errMsg}}</span>
+            <div class="err-msg" *ngIf="errTwo">
+              <p  style="color: red">
+                Oh! Your mobile number has been tied to another Google account.
+              </p>
+              <p style="color: red">
+                According to our policy, each user can only use one account to drop price for friends!
+              </p>
+            </div>
+
+            <!--<label for="">Verification Code</label><input type="text" placeholder="Verification Code">-->
+
+            <button class="price-btn" (click)="enterCode()">Drop Price</button>
+
+            <!--<button (click)="">Drop Price</button>-->
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
-
-
-<!--<div class="container"-->
-     <!--fxLayout="row"-->
-     <!--fxLayout.xs="column"-->
-     <!--fxLayoutAlign="center"-->
-     <!--fxLayoutGap="10px"-->
-     <!--fxLayoutGap.xs="0">-->
-  <!--<div class="item item-1" fxFlex="33 center">-->
-    <!--<img style="width: 80px;" src="../../../assets/price-drop-logo.png"  alt="">-->
-  <!--</div>-->
-  <!--<div class="item item-2" fxFlex="33">Item 2</div>-->
-  <!--<div class="item item-3" fxFlex="33">-->
-    <!--<button class="xb-login__google" mat-raised-button (click)="googleLogin('google')">-->
-      <!--<div fxLayout="row" fxLayoutAlign="start center">-->
-        <!--<i class="iconfontXberts icon-pic-google"></i>-->
-        <!--<span class="md-align-center gtag-login-google-btn" fxFlex>Continue with Google</span>-->
-      <!--</div>-->
-    <!--</button>-->
-  <!--</div>-->
-<!--</div>-->
