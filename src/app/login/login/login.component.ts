@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoginService } from '../login.service';
@@ -61,8 +61,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   sub: any;
 
+  user: any;
+
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private service: LoginService,
     private fb: FormBuilder,
     private auth: AuthenticationService,
@@ -87,6 +90,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginLink = data;
       }
     });
+    this.activatedRoute.queryParams.subscribe((data) => {
+      if (data) {
+        if ( data.verifyShow == "true" ) {
+          this.verifyShow = true
+        }
+      }
+    })
   }
 
 
@@ -171,6 +181,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               };
               self.auth.setAccessToken(token);
               self.userService.addUser(res.user);
+              self.user = res.user;
               self.auth.inviteToken(res.user.isInvite);
               self.loginStatus = true
 
@@ -179,7 +190,12 @@ export class LoginComponent implements OnInit, OnDestroy {
                 if (self.bindNum == '' ) {
                   self.showLoading = false;
                   self.loadingValue = 0;
-                  self.verifyShow = true
+                  self.verifyShow = true;
+                  (<any>window).dataLayer.push({
+                    'event': 'getCodePage',
+                    'virtualPageURL': '/getCodePage/url',
+                    'virtualPageTitle': 'getCodePage - URL'
+                  });
                 } else {
                   self.router.navigate([self.loginLink]).then((data) => {
                   //   self.showLoading = false;
@@ -288,7 +304,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.time()
     this.service.getCode(data, this.loginStatus).then((res) => {
       if (res.result === 'success') {
-        this.errMsg = ''
+        this.errMsg = '';
       } else {
         if (res.code == 30004) {
           this.errTwo = true
@@ -296,11 +312,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.errMsg = res.message
         }
       }
-      // (<any>window).dataLayer.push({
-      //   'event': 'VirtualPageView',
-      //   'virtualPageURL': '/storesetup/url',
-      //   'virtualPageTitle': 'StoreSetup - URL'
-      // });
       this.changeDetectorRef.detectChanges();
     }).catch(res => {
       console.log(res)
@@ -348,6 +359,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.service.verifyCode(data, this.loginStatus).then((res) => {
       if(res.result =='success'){
+        (<any>window).dataLayer.push({
+          'event': 'getCodeSuccess',
+          'virtualPageURL': '/getCodeSuccess/url',
+          'virtualPageTitle': 'getCodeSuccess - URL'
+        });
+        this.user.bindMobile = this.phoneNum;
+        this.userService.addUser(this.user);
         this.router.navigate([this.loginLink]).then((data) => {
           this.userService.addLogin(true);
         });

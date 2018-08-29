@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material';
 import {FaqDialogComponent} from '../faq-dialog/faq-dialog.component';
 
 import {CutPriceDialogComponent} from '../cut-price-dialog/cut-price-dialog.component';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
   selector: 'app-login',
@@ -248,40 +249,57 @@ export class UserShareComponent implements OnInit, OnDestroy {
   }
   cutPrice() {
     const self  = this
-    if (this.isLogin && this.bindNum ) {
+    if (this.isLogin && this.bindNum) {
       if(this.user === 'friend'){
         self.dropsService.friendCutPrice(self.cutid).then((res) => {
-          const tmpcut  = res.cutAmount
-          this.cutamount = tmpcut
-          this.cancut = res.canCut
-          this.currentPrice = res.currentPrice
-          this.percentage = Math.ceil((this.salePrice - res.currentPrice  ) / (this.salePrice - this.lowestPrice) * 100) + '%';
-          const wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
-          // let wordPercentageNum = 99
+          if(res.code && res.code == 30001 ){
+            self.guardLinkService.addRouterLink(window.location.pathname);
+              self.router.navigate(['/account/login'], {queryParams: {verifyShow: true}});
+              return
+          } else{
+            const tmpcut  = res.cutAmount
+            this.cutamount = tmpcut
+            this.cancut = res.canCut
+            this.currentPrice = res.currentPrice
+            this.percentage = Math.ceil((this.salePrice - res.currentPrice  ) / (this.salePrice - this.lowestPrice) * 100) + '%';
+            const wordPercentageNum = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100)
+            // let wordPercentageNum = 99
 
-          if ( wordPercentageNum > 85) {
-            this.wordPercentage = 90 + '%'
-          } else {
-            this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
+            if ( wordPercentageNum > 85) {
+              this.wordPercentage = 90 + '%'
+            } else {
+              this.wordPercentage = Math.ceil((this.salePrice - this.currentPrice) / (this.salePrice - this.lowestPrice) * 100) + '%';
+            }
+            this.iconpercentage = Math.ceil(((this.salePrice - res.currentPrice ) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
+            const tmparr = res.friendCuts
+            if (tmparr.length >= 4) {
+              this.userArr = tmparr.slice(0, 5)
+            } else {
+              this.userArr = []
+            }
+            this.arrSort(res.friendCuts)
+            this.openCutPrice(Event,false)
           }
-          this.iconpercentage = Math.ceil(((this.salePrice - res.currentPrice ) / (this.salePrice - this.lowestPrice)  * 100) - 4) + '%';
-          const tmparr = res.friendCuts
-          if (tmparr.length >= 4) {
-            this.userArr = tmparr.slice(0, 5)
-          } else {
-            this.userArr = []
-          }
-          this.arrSort(res.friendCuts)
-          this.openCutPrice(Event,false)
+
         }).catch((res) => {
+
           console.log('cutPrice--------catch:' + res)
+          // console.log('cutPrice--------catch:' + res)
         })
       } else {
         this.openCutPrice(Event,true)
       }
-    } else {
-      self.guardLinkService.addRouterLink(window.location.pathname);
-      self.router.navigate(['/account/login']);
+    } else  {
+      if(!this.isLogin){
+        self.guardLinkService.addRouterLink(window.location.pathname);
+        self.router.navigate(['/account/login' ]);
+        return
+      }
+      if(!this.bindNum){
+        self.guardLinkService.addRouterLink(window.location.pathname);
+        self.router.navigate(['/account/login'], {queryParams: {verifyShow: true}});
+        return
+      }
     }
 
   }
