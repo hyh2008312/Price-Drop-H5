@@ -90,13 +90,27 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginLink = data;
       }
     });
-    this.activatedRoute.queryParams.subscribe((data) => {
-      if (data) {
-        if ( data.verifyShow == "true" ) {
-          this.verifyShow = true
-        }
+    this.activatedRoute.queryParams.subscribe((data1) => {
+      if (data1) {
+        this.userService.currentUser.subscribe((data) => {
+          if(data!=null){
+
+            if (data.bindMobile!="") {
+
+              if ( data1.verifyShow == "true" ) {
+                this.verifyShow = false
+              } else {
+                this.verifyShow = false
+              }
+            } else {
+              this.verifyShow = false
+            }
+          }
+
+        });
       }
-    })
+    });
+
   }
 
 
@@ -190,17 +204,17 @@ export class LoginComponent implements OnInit, OnDestroy {
                 if (self.bindNum == '' ) {
                   self.showLoading = false;
                   self.loadingValue = 0;
-                  self.verifyShow = true;
-                  (<any>window).dataLayer.push({
-                    'event': 'getCodePage',
-                    'virtualPageURL': '/getCodePage/url',
-                    'virtualPageTitle': 'getCodePage - URL'
+                  self.verifyShow = false;
+                  self.router.navigate([self.loginLink]).then((data) => {
+                      self.showLoading = false;
+                      self.loadingValue = 0;
+                      self.userService.addLogin(true);
                   });
                 } else {
                   self.router.navigate([self.loginLink]).then((data) => {
-                  //   self.showLoading = false;
-                  //   self.loadingValue = 0;
-                  //   self.userService.addLogin(true);
+                    self.showLoading = false;
+                    self.loadingValue = 0;
+                    self.userService.addLogin(true);
                   });
                 }
               } else {
@@ -264,7 +278,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   scoller() {
-
+    //
     // document.body.addEventListener('click',  (event)=> {
     // //   alert(event)
     // // }
@@ -305,6 +319,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.service.getCode(data, this.loginStatus).then((res) => {
       if (res.result === 'success') {
         this.errMsg = '';
+        (<any>window).dataLayer.push({
+          'event': 'VirtualPageView',
+          'virtualPageURL': '/GetCodeSend',
+          'virtualPageTitle': 'GetCodeSend'
+        });
       } else {
         if (res.code == 30004) {
           this.errTwo = true
@@ -360,9 +379,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.service.verifyCode(data, this.loginStatus).then((res) => {
       if(res.result =='success'){
         (<any>window).dataLayer.push({
-          'event': 'getCodeSuccess',
-          'virtualPageURL': '/getCodeSuccess/url',
-          'virtualPageTitle': 'getCodeSuccess - URL'
+          'event': 'VirtualPageView',
+          'virtualPageURL': '/GetCodeSuccess',
+          'virtualPageTitle': 'GetCodeSuccess'
         });
         this.user.bindMobile = this.phoneNum;
         this.userService.addUser(this.user);

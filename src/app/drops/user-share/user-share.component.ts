@@ -181,8 +181,11 @@ export class UserShareComponent implements OnInit, OnDestroy {
 
       this.sub1 = this.userService.inLogin.subscribe((data) => {
         this.isFirstCut = data;
+        console.log(data)
+        console.log(this.cancut)
         if (this.isFirstCut === true && this.cancut === true) {
           this.cutPrice()
+          console.log("执行了")
         }
       })
 
@@ -249,14 +252,14 @@ export class UserShareComponent implements OnInit, OnDestroy {
   }
   cutPrice() {
     const self  = this
-    if (this.isLogin && this.bindNum) {
+    if (this.isLogin) {
       if(this.user === 'friend'){
         self.dropsService.friendCutPrice(self.cutid).then((res) => {
-          if(res.code && res.code == 30001 ){
-            self.guardLinkService.addRouterLink(window.location.pathname);
-              self.router.navigate(['/account/login'], {queryParams: {verifyShow: true}});
-              return
-          } else{
+          // if(res.code && res.code == 30001 ){
+          //   self.guardLinkService.addRouterLink(window.location.pathname);
+          //     self.router.navigate(['/account/login'], {queryParams: {verifyShow: true}});
+          //     return
+          // } else{
             const tmpcut  = res.cutAmount
             this.cutamount = tmpcut
             this.cancut = res.canCut
@@ -278,8 +281,13 @@ export class UserShareComponent implements OnInit, OnDestroy {
               this.userArr = []
             }
             this.arrSort(res.friendCuts)
-            this.openCutPrice(Event,false)
-          }
+            this.openCutPrice(Event,false);
+            (<any>window).dataLayer.push({
+              'event': 'VirtualPageView',
+              'virtualPageURL': '/DroppedThePrice',
+              'virtualPageTitle': 'DroppedThePrice'
+            });
+          // }
 
         }).catch((res) => {
 
@@ -290,16 +298,18 @@ export class UserShareComponent implements OnInit, OnDestroy {
         this.openCutPrice(Event,true)
       }
     } else  {
+
       if(!this.isLogin){
         self.guardLinkService.addRouterLink(window.location.pathname);
         self.router.navigate(['/account/login' ]);
         return
       }
-      if(!this.bindNum){
-        self.guardLinkService.addRouterLink(window.location.pathname);
-        self.router.navigate(['/account/login'], {queryParams: {verifyShow: true}});
-        return
-      }
+
+      // if(!this.bindNum){
+      //   self.guardLinkService.addRouterLink(window.location.pathname);
+      //   self.router.navigate(['/account/login'], {queryParams: {verifyShow: true}});
+      //   return
+      // }
     }
 
   }
