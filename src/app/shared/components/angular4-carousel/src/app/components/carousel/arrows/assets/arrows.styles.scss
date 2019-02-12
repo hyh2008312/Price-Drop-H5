@@ -1,0 +1,58 @@
+.carousel-nav__clickable-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--left {
+    right: auto;
+    left: 0;
+
+    &:hover .carousel-nav__btn--left {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  &--right {
+    left: auto;
+    right: 0;
+
+    &:hover .carousel-nav__btn--right {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}
+
+.carousel-nav__btn {
+  position: absolute;
+  top: 50%;
+  font-size: 40px;
+  text-align: center;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(0,0,0,0.54);
+  cursor: pointer;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  &--left {
+    left: 8px;
+  }
+
+  &--right {
+    right: 8px;
+  }
+
+  &--disabled {
+    pointer-events: none;
+  }
+}

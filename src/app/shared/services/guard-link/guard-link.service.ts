@@ -8,7 +8,6 @@ export class GuardLinkService {
 
 
   public addRouterLink(newLink: any): void {
-    console.log(newLink)
     this.routerLink.next(newLink);
   }
 

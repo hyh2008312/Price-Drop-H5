@@ -1,0 +1,58 @@
+<div class="sc-promotion-dialog">
+  <div class="sc-promotion-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-promotion-dialog__title">Select Product</div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="unicorn-dark-theme">
+      <mat-form-field class="sc-promotion-dialog__width">
+        <mat-select [ngModel]="cat" placeholder="Filter by Category" name="Category"
+                    (ngModelChange)="categorySelect($event)">
+          <mat-option class="md-align-center" *ngFor="let item of data.categoryList" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="md-margin-left-4" fxLayout="row" fxLayoutAlign="end center" fxFlex>
+      <form class="sc-product__search" [formGroup]="searchForm"
+            fxLayout="row" fxLayoutAlign="start center" >
+        <i class="material-icons">search</i>
+        <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+               placeholder="Search"
+               (keyup.enter)="getPromoteProduct()"/>
+        <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="searchKey != ''" (click)="clearSearchKey()">
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+      <div class="sc-product__search-margin-top unicorn-dark-theme">
+        <mat-form-field class="sc-product__product-sort">
+          <mat-select [(ngModel)]="searchCategory" name="sort">
+            <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+              {{ item.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="sc-promotion-dialog__bg">
+    <app-sizeChart-select-product-title></app-sizeChart-select-product-title>
+    <div *ngFor="let item of promotionProduct;let i = index;">
+      <app-sizeChart-select-product-item [promote]="item" [index]="i" [promoteId]="data.promotionId"
+         (promoteChange)="promoteChanges($event)"></app-sizeChart-select-product-item>
+    </div>
+    <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
+         *ngIf="promotionProduct && promotionProduct.length <= 0">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <i class="iconfontXberts icon-ic-empty"></i>
+        <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any product yet. </div>
+      </div>
+    </div>
+    <div class="md-margin-top-2">
+      <app-sizeChart-pagination  [length]="length"
+        [page]="page" [pageSize]="pageSize" (paginationChange)="changePage($event)" ></app-sizeChart-pagination>
+    </div>
+  </div>
+</div>

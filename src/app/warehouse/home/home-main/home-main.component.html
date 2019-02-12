@@ -1,0 +1,520 @@
+<div class="container">
+  <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
+    <div class="sc-product__header"></div>
+    <div class="md-padding-bottom-2" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="createPurchase()">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <i class="material-icons">add</i>
+          <span class="md-margin-left-1">创建采购信息</span>
+        </div>
+      </button>
+    </div>
+    <mat-tab-group color="primary" (selectedTabChange)="changePurchaseLists($event)"  [(selectedIndex)]="selectedIndex">
+      <mat-tab label="所有" >
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>下单时间: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="sortAll" name="sort" (valueChange)="sortChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="md-margin-left-2">仓库: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="wbAll" name="warehouse" (valueChange)="warehouseChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                {{ item.warehouseName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="搜索"
+                     (keyup.enter)="changePurchaseLists({index:0})"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
+          <app-warehouse-home-title [status]="0" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of purchaseAll;let i = index;">
+            <app-warehouse-home-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageIndex]="purchaseAllIndex - 1"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 0)"
+                         *ngIf="purchaseAll && purchaseAll.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="purchaseAll && purchaseAll.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="未发货">
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div class="unicorn-dark-theme">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="processingDays" name="sort" (ngModelChange)="changeDays($event)">
+                <mat-option class="md-align-center" *ngFor="let item of processingDaysList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-2">下单时间: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="sortProcessing" name="sort" (valueChange)="sortChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="md-margin-left-2">仓库: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="wbProcessing" name="warehouse" (valueChange)="warehouseChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                {{ item.warehouseName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="搜索"
+                     (keyup.enter)="changePurchaseLists({index:1})"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
+          <app-warehouse-home-title [status]="1" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of purchaseProccessing;let i = index;">
+            <app-warehouse-home-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageIndex]="purchaseProccessingIndex - 1"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 1)"
+                         *ngIf="purchaseProccessing && purchaseProccessing.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="purchaseProccessing && purchaseProccessing.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="已发货" >
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div class="unicorn-dark-theme">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="shippedDays" name="sort" (ngModelChange)="changeDays($event)">
+                <mat-option class="md-align-center" *ngFor="let item of shippedDaysList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-2">下单时间: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="sortShipped" name="sort" (valueChange)="sortChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="md-margin-left-2">仓库: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="wbShipped" name="warehouse" (valueChange)="warehouseChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                {{ item.warehouseName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="搜索"
+                     (keyup.enter)="changePurchaseLists({index:2})"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
+          <app-warehouse-home-title [status]="2" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of purchaseShipped;let i = index;">
+            <app-warehouse-home-item [status]="2" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageIndex]="purchaseShippedIndex - 1"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 2)"
+                         *ngIf="purchaseShipped && purchaseShipped.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="purchaseShipped && purchaseShipped.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="部分收货">
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>下单时间: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="sortPartiallyDelivered" name="sort" (valueChange)="sortChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="md-margin-left-2">仓库: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="wbPartiallyDelivered" name="warehouse" (valueChange)="warehouseChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                {{ item.warehouseName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="搜索"
+                     (keyup.enter)="changePurchaseLists({index:3})"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+          <div>收货日期: </div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="csPurchasePartiallyDelivered" [(ngModel)]="asPurchasePartiallyDelivered" placeholder="开始日期" (dateInput)="addEvent('csPurchasePartiallyDelivered', $event)">
+            <mat-datepicker-toggle matSuffix [for]="csPurchasePartiallyDelivered"></mat-datepicker-toggle>
+            <mat-datepicker #csPurchasePartiallyDelivered></mat-datepicker>
+          </mat-form-field>
+          <div class="md-margin-left-2">to</div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="cePurchasePartiallyDelivered" [(ngModel)]="aePurchasePartiallyDelivered" placeholder="结束日期" (dateInput)="addEvent('cePurchasePartiallyDelivered', $event)">
+            <mat-datepicker-toggle matSuffix [for]="cePurchasePartiallyDelivered"></mat-datepicker-toggle>
+            <mat-datepicker #cePurchasePartiallyDelivered></mat-datepicker>
+          </mat-form-field>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="accent" (click)="cancelDate(3)">重置</button>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
+          <app-warehouse-home-title [status]="3" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of purchasePartiallyDelivered;let i = index;" >
+            <app-warehouse-home-item [status]="3" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageIndex]="purchasePartiallyDeliveredIndex-1"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 3)"
+                         *ngIf="purchasePartiallyDelivered && purchasePartiallyDelivered.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="purchasePartiallyDelivered && purchasePartiallyDelivered.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="全部收货">
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>下单时间: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="sortDelivered" name="sort" (valueChange)="sortChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="md-margin-left-2">仓库: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="wbDelivered" name="warehouse" (valueChange)="warehouseChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                {{ item.warehouseName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="搜索"
+                     (keyup.enter)="changePurchaseLists({index:4})"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+          <div>收货日期: </div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="csPurchaseDelivered" [(ngModel)]="asPurchaseDelivered" placeholder="开始日期" (dateInput)="addEvent('csPurchaseDelivered', $event)">
+            <mat-datepicker-toggle matSuffix [for]="csPurchaseDelivered"></mat-datepicker-toggle>
+            <mat-datepicker #csPurchaseDelivered></mat-datepicker>
+          </mat-form-field>
+          <div class="md-margin-left-2">to</div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="cePurchaseDelivered" [(ngModel)]="aePurchaseDelivered" placeholder="结束日期" (dateInput)="addEvent('cePurchaseDelivered', $event)">
+            <mat-datepicker-toggle matSuffix [for]="cePurchaseDelivered"></mat-datepicker-toggle>
+            <mat-datepicker #cePurchaseDelivered></mat-datepicker>
+          </mat-form-field>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="accent" (click)="cancelDate(4)">重置</button>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
+          <app-warehouse-home-title [status]="4" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of purchaseDelivered;let i = index;" >
+            <app-warehouse-home-item [status]="4" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageIndex]="purchaseDeliveredIndex-1"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 4)"
+                         *ngIf="purchaseDelivered && purchaseDelivered.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="purchaseDelivered && purchaseDelivered.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="货物不符">
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>下单时间: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="sortWrong" name="sort" (valueChange)="sortChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="md-margin-left-2">仓库: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="wbWrong" name="warehouse" (valueChange)="warehouseChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                {{ item.warehouseName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="搜索"
+                     (keyup.enter)="changePurchaseLists({index:5})"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
+          <app-warehouse-home-title [status]="5" [status]="2" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of purchaseWrong;let i = index;" >
+            <app-warehouse-home-item [status]="5" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageIndex]="purchaseWrongIndex-1"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 5)"
+                         *ngIf="purchaseWrong && purchaseWrong.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="purchaseWrong && purchaseWrong.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="已取消">
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>仓库: </div>
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="wbCanceled" name="warehouse" (valueChange)="warehouseChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                {{ item.warehouseName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="搜索"
+                     (keyup.enter)="changePurchaseLists({index:6})"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
+          <app-warehouse-home-title [status]="6" [status]="3" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of purchaseCanceled;let i = index;" >
+            <app-warehouse-home-item [status]="6" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageIndex]="purchaseCanceledIndex-1"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 6)"
+                         *ngIf="purchaseCanceled && purchaseCanceled.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="purchaseCanceled && purchaseCanceled.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

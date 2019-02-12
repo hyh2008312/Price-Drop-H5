@@ -1,0 +1,19 @@
+<div class="xb-account md-padding-right-2 md-padding-top-2 md-padding-left-2 unicorn-dark-theme">
+  <div class="container">
+    <div class="md-margin-top-4 md-margin-left-2 md-margin-bottom-4 sc-order__detail-title-2">
+      <span class="md-dark-secondary xb-pointer" routerLink="../../">Keywords</span> <span class="md-dark-secondary">></span>
+      <span class="xb-bold">{{keywords}}</span>
+    </div>
+    <app-admin-keywords-detail-title></app-admin-keywords-detail-title>
+    <div class="md-margin-top-2"></div>
+    <div *ngFor="let item of keywordsList;let i = index;">
+      <app-admin-keywords-detail-item [item]="item" [index]="i"></app-admin-keywords-detail-item>
+    </div>
+    <mat-paginator [length]="length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="changePage($event)"
+                   *ngIf="keywordsList && keywordsList.length > 0">
+    </mat-paginator>
+  </div>
+</div>

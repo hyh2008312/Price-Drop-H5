@@ -8,47 +8,12 @@ import { AuthenticationService } from '../authentication/authentication.service'
 
 import { BaseApi,SystemConstant } from '../../../config/app.api';
 import { User } from './user';
-// import { Store } from '../../../shop/shop';
 
 @Injectable()
 export class UserService {
   currentUser: Subject<any> = new BehaviorSubject<any>(null);
-  store: Subject<any> = new BehaviorSubject<any>(null);
   userCategory: Subject<any> = new BehaviorSubject<any>(null);
   pubCategory: Subject<any> = new BehaviorSubject<any>(null);
-  countryList: Subject<any> = new BehaviorSubject<any>(null);
-  currentAds: Subject<any> = new BehaviorSubject<any>(null);
-  cartNumber: Subject<any> = new BehaviorSubject<any>(null);
-  inLogin: Subject<any> = new BehaviorSubject<any>(null);
-
-  public addUser(newUser: User): void {
-    this.currentUser.next(newUser);
-  }
-
-  public addLogin(isLogin: any): void {
-    this.inLogin.next(isLogin);
-    console.log(isLogin)
-  }
-
-  public addUserCategory(newCategory: any): void {
-    this.userCategory.next(newCategory);
-  }
-
-  public addPubCategory(newCategory: any): void {
-    this.pubCategory.next(newCategory);
-  }
-
-  public addCountryList(newCountryList: any): void {
-    this.countryList.next(newCountryList);
-  }
-
-  public addCurrentAds(ads: any): void {
-    this.currentAds.next(ads);
-  }
-
-  public addCartNumber(cart: any): void {
-    this.cartNumber.next(cart);
-  }
 
   constructor(
     private http: Http,
@@ -86,7 +51,17 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  public addUser(newUser: User): void {
+    this.currentUser.next(newUser);
+  }
 
+  public addUserCategory(newCategory: any): void {
+    this.userCategory.next(newCategory);
+  }
+
+  public addPubCategory(newCategory: any): void {
+    this.pubCategory.next(newCategory);
+  }
 
   private handleError (error: Response | any) {
     let errMsg: string;

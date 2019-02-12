@@ -1,0 +1,50 @@
+<div class="sc-product__product-height" fxLayout="row" fxLayoutAlign="start center" >
+  <div class="xb-bold md-margin-right-2" fxFlex="40" >
+    Order Number: {{product.orderNumber}}
+  </div>
+  <div class="xb-bold md-margin-right-2" fxFlex="50" >
+    Review Time: {{product.createdTime | amTz:'Asia/Kolkata' | amDateFormat:'MMM Do, YYYY HH:mm:ss'}}
+  </div>
+  <div fxFlex="10"></div>
+</div>
+<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
+  <div class="md-margin-right-2" fxFlex="40" fxLayout="row" fxLayoutAlign="space-between stretch">
+    <div class="sc-product__product-image" fxFlex="none">
+      <img [src]="product.commentVariantImage">
+    </div>
+    <div fxFlex fxLayout="column" fxLayoutAlign="start start">
+      <div class="sc-order__product-title" >{{product.commentVariantTitle}}</div>
+      <div class="md-margin-top-2">
+        <div>{{product.variant}}</div>
+        <div class="md-margin-top-1">SKU: {{product.commentVariantSku}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="50" fxLayout="row" fxLayoutAlign="space-between stretch">
+    <div class="sc-product__product-avatar" fxFlex="none">
+      <img [src]="product.userAvatar">
+    </div>
+    <div fxFlex fxLayout="column" fxLayoutAlign="start start">
+      <div class="md-dark-secondary">{{product.userName}}</div>
+      <div class="md-margin-top-1" >{{product.message}}</div>
+      <div class="md-margin-top-1" fxLayout="row wrap" fxLayoutAlign="start start" >
+        <div class="sc-product__product-image md-margin-bottom-1 xb-pointer" *ngFor="let item of product.uploadImages" (click)="openLargeImage(product)">
+          <img [src]="item">
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span>Score:</span>
+        <i class="material-icons md-dark-secondary sc-product__product-score" *ngFor="let i of getScore(product.productScores);">star</i>
+        <i class="material-icons md-dark-secondary sc-product__product-score" *ngFor="let i of getUnscore(product.productScores);">star_border</i>
+      </div>
+    </div>
+  </div>
+  <div class="sc-product__product-action-buttons sc__accent-dark"
+       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="10">
+    <button mat-raised-button color="primary" *ngIf="product.commentStatus == 'pending' || product.commentStatus == 'unpublished'"
+            (click)="publish()">Publish</button>
+    <div class="md-margin-top-1"></div>
+    <button mat-raised-button color="primary" *ngIf="product.commentStatus == 'pending' || product.commentStatus == 'published'"
+            (click)="unpublish()">Unpublish</button>
+  </div>
+</div>

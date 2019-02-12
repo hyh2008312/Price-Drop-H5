@@ -1,0 +1,61 @@
+@import "../../styles/utils/_index";
+@import "../../styles/_variables";
+
+.sc-navigation{
+  height: 48px;
+  background-color: $blackColor;
+  width: 100%;
+  ::-webkit-scrollbar {
+    height: 1px;
+  }
+
+  &__buttons{
+    color: $whiteColor;
+    line-height: 48px;
+    padding: 0 16px;
+    font-size: 12px;
+    cursor: pointer;
+
+    &.active{
+      @include media();
+      background-color: rgba(255,255,255,.12);
+    }
+  }
+
+  &__scroll{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 48px;
+  }
+
+  &__triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid white;
+  }
+  &__my-account {
+    height: 48px;
+    white-space: nowrap;
+    overflow-y: hidden;
+    &-menu {
+      background-color: white;
+      border-radius: 4px;
+      z-index: 100;
+      position: relative;
+      box-shadow: 0 0 3px 1px rgba(0, 0, 0, .19);
+    }
+    &-menu-item {
+      height: 40px;
+      line-height: 40px;
+      padding-left: 16px;
+      padding-right: 16px;
+      @include regular();
+      cursor: pointer;
+      &.active {
+        background-color: rgba(0, 0, 0, .12);
+      }
+    }
+  }
+}

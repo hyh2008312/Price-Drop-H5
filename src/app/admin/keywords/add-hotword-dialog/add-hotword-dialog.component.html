@@ -1,0 +1,49 @@
+<div class="sc-keywords-dialog">
+  <div class="sc-keywords-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-keywords-dialog__title">
+    Add Featured Keywords
+  </div>
+  <form class="md-margin-top-3" [formGroup]="hotwordForm" novalidate>
+    <div class="xb-bold">
+      Featured Keywords
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="Featured Keywords" formControlName="key">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="hotwordForm.get('key').invalid && (hotwordForm.get('key').dirty ||
+              hotwordForm.get('key').touched)" class="xb-input-error">
+        <div *ngIf="hotwordForm.get('key').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+    <div class="xb-bold">
+      Index
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="Index" formControlName="index">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="hotwordForm.get('index').invalid && (hotwordForm.get('index').dirty ||
+              hotwordForm.get('index').touched)" class="xb-input-error">
+        <div *ngIf="hotwordForm.get('index').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="error" class="xb-input-error">{{error}}</div>
+  <div class="sc-keywords-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="create()">SAVE</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">CANCEL</button>
+    </div>
+  </div>
+</div>

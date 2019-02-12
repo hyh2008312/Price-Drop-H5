@@ -1,0 +1,187 @@
+<div class="container">
+  <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
+    <div class="sc-product__header"></div>
+    <div class="sc-promote__title">
+      Reviews
+    </div>
+    <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Pending Approval">
+        <div class="md-margin-top-2">
+          <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+            <div>Sort by</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [ngModel]="reviewPendingScore" name="sort" (valueChange)="sortChange($event)">
+                  <mat-option class="md-align-center" *ngFor="let item of scoreList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+              <form class="sc-product__search" [formGroup]="searchForm"
+                    fxLayout="row" fxLayoutAlign="start center" >
+                <i class="material-icons">search</i>
+                <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                       placeholder="Search"
+                       (keyup.enter)="changeProducts({index:0})"/>
+                <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                  <i class="material-icons">close</i>
+                </div>
+              </form>
+              <div class="sc-product__search-margin-top unicorn-dark-theme">
+                <mat-form-field class="sc-product__product-sort">
+                  <mat-select [(ngModel)]="searchCategory" name="sort">
+                    <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                      {{ item.text }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="sc-promote__promote-bg md-margin-top-2">
+            <app-review-title [status]="0" ></app-review-title>
+            <div class="md-margin-top-2"></div>
+            <div class="sc-product__product-list" *ngFor="let item of reviewPendingApproval;let i = index;">
+              <app-review-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-review-item>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageIndex]="reviewPendingApprovalIndex - 1"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event)"
+                           *ngIf="reviewPendingApproval && reviewPendingApproval.length > 0">
+            </mat-paginator>
+            <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="reviewPendingApproval && reviewPendingApproval.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any review yet. </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Published">
+        <div class="md-margin-top-2">
+          <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+            <div>Sort by</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [ngModel]="reviewPublishedScore" name="sort" (valueChange)="sortChange($event)">
+                  <mat-option class="md-align-center" *ngFor="let item of scoreList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+              <form class="sc-product__search" [formGroup]="searchForm"
+                    fxLayout="row" fxLayoutAlign="start center" >
+                <i class="material-icons">search</i>
+                <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                       placeholder="Search"
+                       (keyup.enter)="changeProducts({index:1})"/>
+                <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                  <i class="material-icons">close</i>
+                </div>
+              </form>
+              <div class="sc-product__search-margin-top unicorn-dark-theme">
+                <mat-form-field class="sc-product__product-sort">
+                  <mat-select [(ngModel)]="searchCategory" name="sort">
+                    <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                      {{ item.text }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="sc-promote__promote-bg md-margin-top-2">
+            <app-review-title [status]="0" ></app-review-title>
+            <div class="md-margin-top-2"></div>
+            <div class="sc-product__product-list" *ngFor="let item of reviewPublished;let i = index;">
+              <app-review-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-review-item>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageIndex]="reviewPublishedIndex - 1"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event)"
+                           *ngIf="reviewPublished && reviewPublished.length > 0">
+            </mat-paginator>
+            <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="reviewPublished && reviewPublished.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any review yet. </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Unpublished">
+        <div class="md-margin-top-2">
+          <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+            <div>Sort by</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [ngModel]="reviewUnpublishedScore" name="sort" (valueChange)="sortChange($event)">
+                  <mat-option class="md-align-center" *ngFor="let item of scoreList" [value]="item.value">
+                    {{ item.text }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+              <form class="sc-product__search" [formGroup]="searchForm"
+                    fxLayout="row" fxLayoutAlign="start center" >
+                <i class="material-icons">search</i>
+                <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                       placeholder="Search"
+                       (keyup.enter)="changeProducts({index:2})"/>
+                <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                  <i class="material-icons">close</i>
+                </div>
+              </form>
+              <div class="sc-product__search-margin-top unicorn-dark-theme">
+                <mat-form-field class="sc-product__product-sort">
+                  <mat-select [(ngModel)]="searchCategory" name="sort">
+                    <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                      {{ item.text }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="sc-promote__promote-bg md-margin-top-2">
+            <app-review-title [status]="0" ></app-review-title>
+            <div class="md-margin-top-2"></div>
+            <div class="sc-product__product-list" *ngFor="let item of reviewUnpublished;let i = index;">
+              <app-review-item [status]="2" [index]="i" (productChange)="productChange($event)" [product]="item"></app-review-item>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageIndex]="reviewUnpublishedIndex - 1"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event)"
+                           *ngIf="reviewUnpublished && reviewUnpublished.length > 0">
+            </mat-paginator>
+            <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="reviewUnpublished && reviewUnpublished.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any review yet. </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

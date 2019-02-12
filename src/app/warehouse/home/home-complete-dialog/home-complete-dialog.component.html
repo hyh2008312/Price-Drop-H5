@@ -1,0 +1,164 @@
+<div class="sc-product-dialog">
+  <div class="sc-product-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-product-dialog__title">
+    {{this.data.item.purchaseStatus != 'Delivered' ? '到货入库': '查看入库情况'}}
+  </div>
+  <form class="md-margin-top-3" [formGroup]="purchaseForm" novalidate *ngIf="this.data.item.purchaseStatus != 'Delivered'">
+    <div class="xb-bold">
+      采购订单号
+    </div>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+      {{data.item.purchaseId}}
+    </div>
+    <div class="xb-bold md-margin-top-2">
+      入库情况
+    </div>
+    <div class="md-margin-top-2" formArrayName="purchaseVariants">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="65" >
+          商品
+        </div>
+        <div class="sc-product__product-title-1" fxFlex="35">
+          实际收货数量
+        </div>
+      </div>
+      <div fxLayout="column" *ngFor="let p of purchaseVariants.controls; let i = index">
+        <div [formGroupName]="i">
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2" fxFlex="65" fxLayout="row" fxLayoutAlign="start stretch">
+              <div class="sc-product__product-image" fxFlex="none">
+                <img class="xb-pointer" [src]="p.value.mainImage">
+              </div>
+              <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
+                <div class="sc-product__product-title md-dark-secondary" >{{p.value.title}}</div>
+                <div>
+                  <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="xb-bold">SKU: {{p.value.sku}}</div>
+                  </div>
+                  <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+                    <div>规格: {{p.value.attribute}}</div>
+                    <div class="md-margin-left-1">采购数量: {{p.value.quantity}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="35">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field fxFlex>
+                  <input type="number" matInput formControlName="receiveQuantity">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="p.get('receiveQuantity').invalid && (p.get('receiveQuantity').dirty ||
+                    p.get('receiveQuantity').touched)" class="md-margin-top-2 xb-input-error">
+            <div *ngIf="p.get('receiveQuantity').hasError('required')">
+              必填字段。
+            </div>
+            <div *ngIf="p.get('receiveQuantity').hasError('max')">
+              数字大于采购数量。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="xb-bold md-margin-top-2">
+      仓库
+    </div>
+    <mat-form-field>
+      <mat-select formControlName="warehouseId" name="warehouse">
+        <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+          {{ item.warehouseName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="xb-bold">
+      备注
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput formControlName="notes">
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="xb-input-error md-margin-top-2" *ngIf="error">
+    {{error}}
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center" *ngIf="this.data.item.purchaseStatus != 'Delivered'">
+    <button mat-raised-button color="primary" (click)="publish()">保存</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">取消</button>
+    </div>
+  </div>
+  <form class="md-margin-top-3" [formGroup]="purchaseForm" novalidate *ngIf="this.data.item.purchaseStatus == 'Delivered'">
+    <div class="xb-bold">
+      采购订单号
+    </div>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+      {{data.item.purchaseId}}
+    </div>
+    <div class="xb-bold md-margin-top-2">
+      入库情况
+    </div>
+    <div class="md-margin-top-2" formArrayName="purchaseVariants">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="65" >
+          商品
+        </div>
+        <div class="sc-product__product-title-1" fxFlex="35">
+          实际收货数量
+        </div>
+      </div>
+      <div fxLayout="column" *ngFor="let p of purchaseVariants.controls; let i = index">
+        <div [formGroupName]="i">
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2" fxFlex="65" fxLayout="row" fxLayoutAlign="start stretch">
+              <div class="sc-product__product-image" fxFlex="none">
+                <img class="xb-pointer" [src]="p.value.mainImage">
+              </div>
+              <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
+                <div class="sc-product__product-title md-dark-secondary" >{{p.value.title}}</div>
+                <div>
+                  <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="xb-bold">SKU: {{p.value.sku}}</div>
+                  </div>
+                  <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+                    <div>规格: {{p.value.attribute}}</div>
+                    <div class="md-margin-left-1">采购数量: {{p.value.quantity}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="35">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                {{p.value.receiveQuantity}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+      <div class="xb-bold">
+        仓库
+      </div>
+      <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+        {{data.item.warehouseName}}
+      </div>
+    </div>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+      <div class="xb-bold">
+        备注
+      </div>
+      <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+        {{data.item.notes}}
+      </div>
+    </div>
+  </form>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center" *ngIf="this.data.item.purchaseStatus == 'Delivered'">
+    <button mat-raised-button color="primary" (click)="close()">确定</button>
+
+  </div>
+</div>

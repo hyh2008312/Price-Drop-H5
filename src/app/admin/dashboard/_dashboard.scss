@@ -1,0 +1,242 @@
+@charset "UTF-8";
+@import "../../styles/utils/_index";
+@import "../../styles/_variables";
+
+.xb-dashboard {
+
+  &__wenhao {
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+    &—word {
+      height: 40px;
+      width: 345px;
+      color: black;
+      font-size: 14px;
+      padding-left: 16px;
+      background-color: white;
+      line-height: 40px;
+      @include regular();
+    }
+    &-content {
+      position: absolute;
+      z-index: 5;
+      right: -106px;
+    }
+    &-triangle-up {
+      width: 0;
+      height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-bottom: 7px solid white;
+      margin-left: 130px;
+    }
+    &-bg {
+      margin-left: 5px;
+      position: relative;
+    }
+  }
+
+  &__mgrignt48px {
+    margin-right: 48px;
+  }
+
+  &__top {
+    margin-top: 35px;
+    &-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+      padding-left: 16px;
+    }
+    &-category-title {
+      font-size: 14px;
+      @include regular();
+      color: black;
+      margin-right: 16px;
+    }
+  }
+
+  &__card {
+    border-radius: 10px;
+    padding: 28px 0 28px 28px;
+    height: 120px;
+    color: $whiteColor;
+    margin-top: 16px;
+    position: relative;
+    > i {
+      position: absolute;
+      color: $whiteColor;
+      font-size: 48px;
+      line-height: 48px;
+      right: 16px;
+      top: 25%;
+    }
+    &-data {
+      font-size: 24px;
+      font-weight: bold;
+      color: $whiteColor;
+    }
+    &-word {
+      font-size: 14px;
+      @include regular();
+      color: $whiteColor;
+      margin-top: 8px;
+    }
+
+  }
+
+  &__data{
+    width: 110%;
+    height: 400px;
+    margin-left: -5%;
+    margin-right: -5%;
+
+    &-card{
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 4px;
+      background-color: #fff;
+      overflow: hidden;
+    }
+  }
+
+  &__action {
+    padding: 56px 0;
+    margin-top: 24px;
+    background-color: $whiteColor;
+    &-data {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+      text-align: center;
+    }
+    &-word {
+      font-size: 14px;
+      @include regular();
+      color: black;
+      margin-top: 8px;
+    }
+  }
+
+}
+
+.xb-dashboard-category {
+  width: 175px;
+  &__name {
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 12px;
+  }
+}
+
+.xb-dashboard-navigation {
+  height: 48px;
+  background-color: #F9F9F9;
+  margin-top: 18px;
+  &__title {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 24px;
+  }
+
+}
+
+.xb-dashboard-item {
+  background-color: $whiteColor;
+  height: 112px;
+  &__image {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    margin-left: 16px;
+    margin-right: 16px;
+    border: 1px solid rgba(0, 0, 0, .12);
+
+    > img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      @include transform(translate(-50%, -50%));
+    }
+  }
+  &__Product {
+    height: 100%;
+    &-price-now {
+      font-size: 14px;
+      font-weight: bold;
+      color: black;
+    }
+    &-price-origin {
+      font-size: 14px;
+      @include regular();
+      color: black;
+      margin-top: 8px;
+      text-decoration: line-through;
+    }
+
+  }
+  &__line {
+    height: 1px;
+    margin-left: 16px;
+    margin-right: 16px;
+    background-color: rgba(0, 0, 0, .12);
+  }
+}
+
+.sc-order-dialog{
+
+  padding: 40px 40px 48px;
+  max-width: 660px;
+  max-height: 600px;
+  width: 660px;
+  overflow-y: scroll;
+  position: relative;
+  background-color: $whiteColor;
+  border-radius: 4px;
+  @include xb-xs-screen{
+    padding: 40px 16px;
+  }
+
+  &__close{
+    position: absolute;
+    left: calc(100% - 36px);
+    top: 12px;
+    color: $blackColor;
+    cursor: pointer;
+    i{
+      font-size: 24px;
+      line-height: 24px;
+      @include media();
+    }
+  }
+
+  &__icons{
+    font-size: 24px;
+  }
+
+  &__title{
+    font-size: 24px;
+    line-height: 32px;
+    @include media();
+  }
+
+  &__content{
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    @include regular();
+  }
+
+  &__margin-top{
+    margin-top: 24px;
+  }
+
+  &__color{
+    color: black;
+  }
+
+}

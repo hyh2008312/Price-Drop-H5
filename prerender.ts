@@ -33,6 +33,9 @@ global['CSS'] = null;
 global['localStorage'] = localStorage;
 global['location'] = win.location;
 global['Image'] = win.Image;
+global['HTMLAnchorElement'] = win.HTMLAnchorElement;
+global['html2pdf'] = win.html2pdf;
+global['URL'] = win.URL || {};
 
 // Load zone.js for the server.
 import 'zone.js/dist/zone-node';

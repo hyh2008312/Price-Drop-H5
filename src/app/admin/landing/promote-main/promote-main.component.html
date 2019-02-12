@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="sc-promote__title">
+    Landing
+  </div>
+  <div>
+    <div class="md-margin-top-3 sc-promote__create-text" fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <mat-select [ngModel]="categoryId" name="category" placeholder="Select a Category"
+                      (valueChange)="categoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+              {{ item.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex></div>
+      <div class="sc-promote__promote-text xb-bold" *ngIf="categoryId">Add Product for This Category:</div>
+      <div class="md-margin-left-3 sc__accent-dark" *ngIf="categoryId">
+        <button mat-raised-button color="primary" type="button" (click)="selectProduct()">
+          Select
+        </button>
+      </div>
+    </div>
+    <div class="md-margin-top-3 sc-promote__promote-bg">
+      <app-promote-product-title></app-promote-product-title>
+      <div class="sc-promote__promote-list" *ngFor="let item of promotionProducts;let i = index;">
+        <app-promote-product-item [promote]="item" [index]="i" [status]="1" [promoteId]="promotionId"
+                                  (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
+      </div>
+      <mat-paginator [length]="length"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="pageSizeOptions"
+                     (page)="changePage($event)"
+                     *ngIf="promotionProducts && promotionProducts.length > 0">
+      </mat-paginator>
+      <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
+           *ngIf="promotionProducts && promotionProducts.length <= 0">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <i class="iconfontXberts icon-ic-empty"></i>
+          <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any activity product yet. </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

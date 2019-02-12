@@ -59,6 +59,18 @@ export class S3UploaderService {
     return array.join('&');
   }
 
+  serializeParamsJSONP(params) {
+
+    let _params = new URLSearchParams();
+
+    for (const key in params) {
+      _params.set( key, params[key]);
+    }
+    _params.set('callback', "JSONP_CALLBACK");
+
+    return _params;
+  }
+
   private getPostOptions(): RequestOptions {
 
     let headers = new Headers({ 'Content-Type': 'application/json; charset=UTF-8' });
@@ -71,7 +83,7 @@ export class S3UploaderService {
   upload(file: UploadFile): Promise<any> {
 
     let _options = this.getPostOptions();
-    const url = `${this.baseUrl.url}image/s3policy/`;
+    const url = `${this.baseUrl.url}image/qiniu/`;
 
     return this.http.post(url, file, _options)
       .toPromise()
@@ -83,19 +95,13 @@ export class S3UploaderService {
 
     let formData = new FormData();
 
-    formData.append('acl',  postParams.acl);
-    formData.append('key', postParams.key);
-    formData.append('Content-Type', postParams['Content-Type']);
-    formData.append('policy', postParams.policy);
-    formData.append('x-amz-date', postParams['x-amz-date']);
-    formData.append('x-amz-algorithm', postParams['x-amz-algorithm']);
-    formData.append('x-amz-credential', postParams['x-amz-credential']);
-    formData.append('x-amz-signature', postParams['x-amz-signature']);
+    formData.append('token', postParams['token']);
+    formData.append('key', postParams['name']);
 
     formData.append('file', file);
 
 
-    const req = new HttpRequest('POST', postParams.url, formData, {
+    const req = new HttpRequest('POST', postParams.domain, formData, {
       reportProgress: true
     });
 
@@ -106,18 +112,12 @@ export class S3UploaderService {
 
     let formData = new FormData();
 
-    formData.append('acl',  postParams.acl);
-    formData.append('key', postParams.key);
-    formData.append('Content-Type', postParams['Content-Type']);
-    formData.append('policy', postParams.policy);
-    formData.append('x-amz-date', postParams['x-amz-date']);
-    formData.append('x-amz-algorithm', postParams['x-amz-algorithm']);
-    formData.append('x-amz-credential', postParams['x-amz-credential']);
-    formData.append('x-amz-signature', postParams['x-amz-signature']);
+    formData.append('token', postParams['token']);
+    formData.append('key', postParams['name']);
 
     formData.append('file', file);
 
-    return this.http.post(postParams.url, formData)
+    return this.http.post(postParams.domain, formData)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -129,9 +129,9 @@ export class S3UploaderService {
     const url = `${this.baseUrl.formatUrl}image/upload/done/?${this.serializeParams(file)}`;
 
     return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
   }
 
   private handleError (error: Response | any) {

@@ -1,0 +1,722 @@
+@import "../../styles/utils/_index";
+@import "../../styles/_variables";
+
+.sc-product{
+
+  &__container{
+    padding: 0 16px;
+  }
+  &__product{
+    position: relative;
+
+    &-sort{
+      width: 140px;
+      text-align: center;
+    }
+
+    &-navigation{
+      height: 54px;
+      background-color: #f9f9f9;
+      padding: 0 16px;
+      border-radius: 2px;
+    }
+
+    &-bg{
+      padding: 0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    &-image{
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 16px;
+      position: relative;
+      border: 1px solid rgba(0,0,0,.12);
+
+      >img{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include transform(translate(-50%, -50%));
+      }
+    }
+    &-width{
+      width: 80px;
+      margin-right: 16px;
+    }
+
+    &-id{
+      text-align: center;
+    }
+
+    &-time{
+      text-align: center;
+    }
+
+    &-title{
+      font-size: 14px;
+      line-height: 24px;
+      max-height: 48px;
+      overflow: hidden;
+    }
+
+    &-title-1{
+      font-size: 12px;
+      @include media();
+      color: rgba(0,0,0,.87);
+    }
+
+    &-margin-left{
+      margin-left: 12px;
+    }
+
+    &-price{
+      text-align: center;
+      &-sale{
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 24px;
+      }
+    }
+
+    &-category{
+      line-height: 28px;
+      border-radius: 2px;
+      text-align: center;
+    }
+
+    &-background{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+
+    &-item{
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+    }
+    &-list{
+      padding: 0 16px;
+      background-color: $whiteColor;
+    }
+
+    &-none{
+      padding: 96px 0;
+      background-color: $whiteColor;
+      border-radius: 4px;
+      span{
+        margin-top: 16px;
+        @include media();
+      }
+      i{
+        font-size: 96px;
+        line-height: 96px;
+        color: rgba(0,0,0,.38);
+      }
+    }
+
+    &-buttons {
+      position: absolute;
+      right: 16px;
+      top: 24px;
+      z-index: 10;
+    }
+
+    &-button-list{
+      width: 210px;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: $lightWhiteColor;
+      @include media();
+      @include resetBorder();
+
+      >a{
+        height: 56px;
+        color: rgba(0,0,0,.87);
+        &:hover{
+          background-color: rgba(0,0,0,.12);
+        }
+      }
+    }
+  }
+
+  &__search{
+    border-bottom: 2px solid $blackColor;
+    height: 32px;
+    margin: 16px 0;
+    position: relative;
+
+    >i{
+      margin: 0 16px 0 0;
+      color: $blackColor;
+    }
+
+    >input{
+      border: none;
+      background-color: transparent;
+      width: 150px;
+    }
+
+    &-close{
+      position: absolute;
+      cursor: pointer;
+      right: 0;
+      top: 50%;
+      @include transform(translateY(-50%));
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      background-color: rgba(0,0,0,.54);
+      >i{
+        font-size: 12px;
+        line-height: 12px;
+        color: $whiteColor;
+      }
+    }
+
+    &-result{
+      color: $primaryColor;
+    }
+
+    &-margin-top{
+      margin-top: 10px;
+    }
+  }
+
+  &__create{
+    &-text{
+      span{
+        font-family: 'San Francisco', Helvetica;
+      }
+    }
+
+    &-text-1{
+      font-style: oblique;
+    }
+
+    &-text-2{
+      font-size: 12px;
+      font-family: 'San Francisco', Helvetica;
+    }
+
+    &-container{
+      max-width: 880px;
+      margin: auto;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    &-container-1{
+      margin-top: 16px;
+      padding: 28px 32px 40px;
+      background-color: $whiteColor;
+      border-radius: 4px;
+    }
+
+    &-container-2{
+      margin-top: 16px;
+      padding: 20px 20px 20px;
+      background-color: $whiteColor;
+      border-radius: 4px;
+    }
+
+    $parent: &;
+
+    &-navigation{
+      position: relative;
+      height: 54px;
+      font-size: 16px;
+      background-color: $whiteColor;
+      @include media();
+
+      &-bg{
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      &-active{
+        background-color: $blackColor;
+        color: $whiteColor;
+        #{$parent}-tri{
+          border-left: 16px solid $blackColor;
+        }
+      }
+    }
+
+    &-tri{
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 100%;
+      width: 0;
+      height: 0;
+      border-top: 27px solid transparent;
+      border-left: 16px solid $whiteColor;
+      border-bottom: 27px solid transparent;
+    }
+
+    &-title{
+      font-size: 16px;
+      @include media();
+    }
+
+    &-title-1{
+      font-size: 14px;
+      @include media();
+    }
+
+    &-margin-top{
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    &-margin-top-1{
+      margin-top: 16px;
+      margin-bottom: 40px;
+    }
+
+    &-margin-right{
+      margin-left: 64px;
+    }
+
+    &-margin-right-1{
+      margin-right: 32px;
+    }
+
+    &-margin-right-2{
+      margin-right: 12px;
+    }
+
+    &-margin-right-3{
+      margin-right: 16px;
+    }
+
+    &-margin-right-4{
+      margin-right: 64px;
+    }
+
+    &-margin-left{
+      margin-left: 20px;
+    }
+
+
+    &-width{
+      width: 54px;
+    }
+
+    &-width-1{
+      width: 100px;
+      white-space: normal;
+    }
+
+    &-width-2{
+      width: 160px;
+      text-align: right;
+    }
+
+    &-width-3{
+      width: 80px;
+    }
+
+    &-width-4{
+      width: 60px;
+    }
+
+    &-width-5{
+      width: 100px;
+    }
+
+    &-width-6{
+      width: 180px;
+    }
+
+    &-width-100{
+      width: 80px;
+    }
+
+    &-height{
+      height: 57px;
+      line-height: 57px;
+    }
+
+    &-list{
+      margin-bottom: 20px;
+      padding: 24px 20px 30px;
+      @include box-shadow(0 1px 3px 1px rgba(0, 0, 0, 0.24));
+      border-radius: 4px;
+    }
+  }
+
+  &__edit{
+    &-button{
+      line-height: 54px;
+      font-size: 16px;
+      padding: 0 16px;
+      width: 224px;
+      &:hover{
+        @include media();
+        background-color: rgba(0,0,0,.12);
+      }
+      &.active{
+        @include media();
+        background-color: rgba(0,0,0,.12);
+      }
+    }
+
+    &-tab{
+      width: 224px;
+      border-radius: 4px;
+      background-color: $whiteColor;
+      overflow: hidden;
+    }
+
+    &-line{
+      height: 54px;
+      padding: 0 40px;
+      margin: 0 -40px;
+      &:hover{
+        background-color: rgba(0,0,0,.12);
+      }
+    }
+  }
+}
+
+.sc-promote {
+  &__promote {
+    position: relative;
+
+    &-bg {
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    &-list {
+      padding: 0 16px;
+      background-color: $whiteColor;
+    }
+
+    &-buttons {
+      position: absolute;
+      right: 16px;
+      top: 8px;
+      z-index: 10;
+    }
+
+    &-navigation {
+      padding: 0 16px;
+      height: 54px;
+      background-color: $lightGrayColor;
+
+      &-1 {
+        padding: 0 12px;
+        background-color: $lightWhiteColor;
+        height: 40px;
+      }
+    }
+
+    &-none {
+      padding: 96px 0;
+      background-color: $whiteColor;
+      border-radius: 4px;
+      span {
+        margin-top: 16px;
+        @include media();
+      }
+      i {
+        font-size: 96px;
+        line-height: 96px;
+        color: rgba(0, 0, 0, .38);
+      }
+    }
+
+    &-item {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+      &-1 {
+        padding: 16px 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, .12);
+      }
+    }
+
+    &-title-1 {
+      font-size: 16px;
+      @include media();
+      color: rgba(0, 0, 0, .87);
+    }
+
+    &-title-2 {
+      font-size: 12px;
+      @include media();
+    }
+
+    &-width {
+      width: 138px;
+    }
+
+    &-width-1 {
+      width: 88px;
+    }
+
+    &-width-2 {
+      width: 32px;
+    }
+
+    &-width-3 {
+      width: 60px;
+    }
+
+    &-width-4 {
+      width: 120px;
+    }
+
+    &-width-5 {
+      width: 160px;
+    }
+
+    &-text {
+      font-size: 12px;
+    }
+
+    &-button {
+      line-height: 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, .12);
+      min-width: 100px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    &-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 16px;
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, .12);
+
+      > img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include transform(translate(-50%, -50%));
+      }
+    }
+  }
+
+  &__create{
+    &-text{
+      padding: 0 16px;
+    }
+
+    &-bg{
+      padding: 40px 16px;
+      border-radius: 4px;
+      background-color: $whiteColor;
+    }
+
+    &-bg-1{
+      padding: 16px;
+      border-top: 1px dashed rgba(0,0,0, 0.12);
+      background-color: $whiteColor;
+    }
+
+    &-width{
+      width: 140px;
+    }
+
+    &-align-center{
+      text-align: center;
+    }
+  }
+
+}
+
+.sc-promotion-dialog{
+
+  padding: 28px 40px;
+  max-width: 800px;
+  max-height: 800px;
+  overflow-y: scroll;
+  width: 100%;
+  position: relative;
+  background-color: $whiteColor;
+  border-radius: 4px;
+  @include xb-xs-screen{
+    padding: 16px 16px;
+  }
+
+  &__large{
+    padding: 40px 40px;
+    max-width: 960px;
+    max-height: 800px;
+    overflow-y: scroll;
+    width: 100%;
+    position: relative;
+    background-color: $whiteColor;
+    border-radius: 4px;
+    @include xb-xs-screen{
+      padding: 16px 16px;
+    }
+  }
+
+  &__close{
+    position: absolute;
+    left: calc(100% - 36px);
+    top: 12px;
+    color: $blackColor;
+    cursor: pointer;
+    i{
+      font-size: 24px;
+      line-height: 24px;
+      @include media();
+    }
+  }
+
+  &__title{
+    font-size: 24px;
+    line-height: 28px;
+    @include media();
+  }
+
+  &__width{
+    width: 172px;
+  }
+
+  &__search{
+    border-bottom: 2px solid $blackColor;
+    height: 32px;
+    margin: 16px 0 30px;
+    position: relative;
+
+    >i{
+      margin: 0 16px 0 0;
+      color: $blackColor;
+    }
+
+    >input{
+      border: none;
+      background-color: transparent;
+      width: 150px;
+    }
+
+    &-close{
+      position: absolute;
+      cursor: pointer;
+      right: 0;
+      top: 50%;
+      @include transform(translateY(-50%));
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      background-color: rgba(0,0,0,.54);
+      >i{
+        font-size: 12px;
+        line-height: 12px;
+        color: $whiteColor;
+      }
+    }
+  }
+
+  &__bg{
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+}
+
+.sc-order-dialog{
+
+  padding: 40px 40px 48px;
+  max-width: 660px;
+  width: 660px;
+  max-height: 100vh;
+  overflow-y: scroll;
+  position: relative;
+  background-color: $whiteColor;
+  border-radius: 4px;
+  @include xb-xs-screen{
+    padding: 40px 16px;
+  }
+
+  &__close{
+    position: absolute;
+    left: calc(100% - 36px);
+    top: 12px;
+    color: $blackColor;
+    cursor: pointer;
+    i{
+      font-size: 24px;
+      line-height: 24px;
+      @include media();
+    }
+  }
+
+  &__icons{
+    font-size: 24px;
+  }
+
+  &__title{
+    font-size: 24px;
+    line-height: 32px;
+    @include media();
+  }
+
+  &__content{
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    @include regular();
+  }
+
+  &__margin-top{
+    margin-top: 24px;
+  }
+
+  &__color{
+    color: black;
+  }
+
+}
+
+
+
+.sc-order{
+  &__product{
+
+    &-item-left{
+      width: 150px;
+    }
+
+  }
+
+  &__detail{
+
+    &-border-bottom{
+      border-bottom: 1px dashed rgba(0,0,0,.38);
+    }
+
+    &-container-4{
+      height: 56px;
+    }
+
+    &-width-1{
+      width: 180px;
+    }
+
+    &-margin-right{
+      margin-right: 16px;
+    }
+
+    &-item{
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+    }
+  }
+}

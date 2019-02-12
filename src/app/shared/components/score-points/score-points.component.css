@@ -1,0 +1,14 @@
+.xb-rating-star__star {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 2px;
+  color: rgba(0, 0, 0, 0.54); }
+.xb-rating-star__color {
+  color: #ff4081; }
+
+/*# sourceMappingURL=score-points.component.css.map */

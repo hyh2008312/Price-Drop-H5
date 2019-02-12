@@ -1,0 +1,246 @@
+@charset "UTF-8";
+@import "../../styles/utils/_index";
+@import "../../styles/_variables";
+
+.xb-customer-service {
+
+  &__regular {
+    @include regular();
+  }
+  &__bold {
+    font-weight: bold;
+  }
+  &__right48px {
+    margin-right: 48px;
+  }
+  &__w960px {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// 客服主页以及页面css
+.xb-customer-service-main {
+  padding-bottom: 125px;
+  &__navigation {
+    height: 54px;
+    background-color: #F9F9F9;
+    margin-top: 18px;
+    &-title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+  }
+
+  &__title {
+    font-size: 34px;
+    font-weight: bold;
+    margin-top: 48px;
+  }
+  &__tip {
+    font-size: 14px;
+    @include regular();
+    line-height: 24px;
+    margin-top: 12px;
+  }
+  &__content {
+    margin-top: 48px;
+  }
+  &__search {
+    border-bottom: 1px solid $blackColor;
+    height: 32px;
+    margin: 20px 16px 0;
+    position: relative;
+
+    > i {
+      margin: 0 16px 0 0;
+      color: $blackColor;
+    }
+
+    > input {
+      border: none;
+      background-color: transparent;
+      width: 250px;
+    }
+
+    &-close {
+      position: absolute;
+      cursor: pointer;
+      right: 0;
+      top: 50%;
+      @include transform(translateY(-50%));
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      background-color: rgba(0, 0, 0, .54);
+      > i {
+        font-size: 12px;
+        line-height: 12px;
+        color: $whiteColor;
+      }
+    }
+
+    &-result {
+      color: $primaryColor;
+    }
+  }
+  &__item {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    &-line {
+      height: 1px;
+      margin-left: 16px;
+      margin-right: 16px;
+      background-color: rgba(0, 0, 0, .12);
+    }
+    &-title {
+      font-size: 14px;
+      @include regular();
+      color: black;
+      line-height: 24px;
+    }
+    &-detail {
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    &-background {
+      background-color: $whiteColor;
+    }
+  }
+}
+
+// 客服的详情的css
+.xb-customer-service-detail {
+  &__nav-title {
+    font-size: 14px;
+    color: black;
+  }
+  &__content {
+    padding-top: 50px;
+    padding-bottom: 150px;
+    &-left {
+      width: 640px;
+      background-color: white;
+      padding-bottom: 40px;
+      &-warn {
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-top: 30px;
+        font-style: italic;
+      }
+      &-bottom {
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-top: 30px;
+      }
+      &-close {
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+        height: 32px;
+        background-color: #f4bc20;
+        padding-left: 16px;
+        padding-right: 16px;
+        line-height: 32px;
+      }
+      &-submit {
+        height: 40px;
+        font-size: 14px;
+        color: white;
+        line-height: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: rgba(0, 0, 0, .38);
+      }
+      &-submit-black {
+        background-color: black;
+      }
+
+      &-reply {
+        margin: 40px 40px 0 40px;
+      }
+      &-line {
+        height: 1px;
+        margin-top: 32px;
+        background-color: rgba(0, 0, 0, .12);
+      }
+      &-message {
+        height: 70px;
+        margin-left: 40px;
+        margin-right: 40px;
+      }
+      &-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+      }
+      &-status-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: rgba(0, 0, 0, .54);
+        margin-right: 16px;
+      }
+      &-status {
+
+      }
+    }
+    &-right {
+      width: 280px;
+      padding: 32px 24px 40px;
+      background-color: white;
+      &-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+      }
+      &-attribute {
+        font-size: 14px;
+        font-weight: bold;
+        color: rgba(0, 0, 0, .54);
+      }
+      &-content {
+        font-size: 14px;
+        @include regular();
+        color: black;
+      }
+      &-order-detail {
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-top: 30px;
+      }
+    }
+  }
+  //detail -->message的列表
+  &__message {
+    margin: 10px 40px;
+    &-name {
+      font-size: 14px;
+      font-weight: bold;
+      color: black;
+      margin-left: 12px;
+    }
+    &-date {
+      font-size: 14px;
+      @include regular();
+      margin-left: 16px;
+      color: rgba(0, 0, 0, .54);
+    }
+    &-description {
+      font-size: 14px;
+      @include regular();
+      line-height: 24px;
+      margin-left: 36px;
+    }
+  }
+
+}
+
+
+

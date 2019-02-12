@@ -7,7 +7,7 @@ import { AuthenticationService } from './authentication.service';
   imports: [ AuthModule ],
   providers: [
     { provide: PROTECTED_FALLBACK_PAGE_URI, useValue: '/shop/dashboard' },
-    { provide: PUBLIC_FALLBACK_PAGE_URI, useValue: '/account/user-share' },
+    { provide: PUBLIC_FALLBACK_PAGE_URI, useValue: '/account/login' },
     { provide: AUTH_SERVICE, useClass: AuthenticationService }
   ]
 })

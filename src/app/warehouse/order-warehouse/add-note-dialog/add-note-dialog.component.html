@@ -1,0 +1,27 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    添加备注
+  </div>
+  <form class="md-margin-top-2" [formGroup]="noteForm" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <textarea type="text" matInput  placeholder="添加备注" formControlName="notes"></textarea>
+      </mat-form-field>
+    </div>
+    <div *ngIf="noteForm.get('notes').invalid && (noteForm.get('notes').dirty ||
+                      noteForm.get('notes').touched)" class="xb-input-error">
+      <div *ngIf="noteForm.get('notes').hasError('required')">
+        This field is required.
+      </div>
+    </div>
+  </form>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="addOrderNotes()">保存</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">取消</button>
+    </div>
+  </div>
+</div>

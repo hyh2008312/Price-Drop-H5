@@ -1,0 +1,25 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap>
+  <div class="sc-product-dialog">
+    <div class="sc-product-dialog__title">
+      Bulk Upload
+    </div>
+    <div class="sc-product-dialog__content">
+      Please upload an Excel file:
+    </div>
+    <div *ngIf="error" class="xb-input-error md-margin-top-2">{{error}}</div>
+    <div class="sc-product-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <label class="md-margin-right-2">
+        <input class="sc-product-dialog__hide" type="file" (change)="onFileChange($event)">
+        <div class="sc-product-dialog__button">
+          Upload</div>
+      </label>
+      <label class="md-margin-right-2">
+        <input class="sc-product-dialog__hide" type="file" (change)="onFileChange1($event)">
+        <div class="sc-product-dialog__button">
+          Upload Category</div>
+      </label>
+      <button mat-raised-button color="primary" (click)="close()">Cancel</button>
+    </div>
+  </div>
+
+</div>

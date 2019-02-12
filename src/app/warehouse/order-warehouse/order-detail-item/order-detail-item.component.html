@@ -1,0 +1,101 @@
+<div class="sc__accent-dark" fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status != 2">
+  <div class="sc-order__detail-item" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="sc-order__detail-width sc-order__detail-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
+      <a class="sc-order__detail-image xb-pointer" fxFlex="none"
+           routerLink="/admin/product/edit/{{order.lines[0].productId}}" target="_blank">
+        <img [src]="order.lines[0].mainImage">
+      </a>
+      <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
+        <div>
+          <div class="sc-order__product-title-2" >{{order.lines[0].title}}</div>
+          <div class="md-margin-top-1">{{order.lines[0].attributes}}</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div>SKU: {{order.lines[0].sku}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-margin-right" fxFlex="8"
+         fxLayout="column" fxLayoutAlign="center center"> {{order.lines[0].quantity}}</div>
+    <div class="sc-order__detail-margin-right" fxFlex="25"
+         fxLayout="column" fxLayoutAlign="center center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-order__detail-width-2">
+          <div class="md-align-right">Subtotal:&nbsp;</div>
+          <div class="md-margin-top-1 md-align-right">Shipping:&nbsp;</div>
+          <div class="md-margin-top-1 md-align-right">Tax:&nbsp;</div>
+          <div class="md-margin-top-1 md-align-right" *ngIf="order.orderType == 'Cut'">Price Drop:</div>
+          <div class="md-margin-top-1 md-align-right" *ngIf="(order.orderType == 'Normal' || order.orderType == 'Flash') && order.voucherShare > 0">Voucher:</div>
+          <div class="md-margin-top-1 md-align-right" *ngIf="order.balanceUsed && order.balance > 0">Wallet:</div>
+          <div class="md-margin-top-1 md-align-right" *ngIf="order.paymentDiscount>0">Payment Discount:</div>
+          <div class="md-margin-top-1 md-align-right">Total:&nbsp;</div>
+        </div>
+        <div class="md-margin-left-1">
+          <div *ngIf="order.orderType=='Cut'">{{order.totalExclTax | currency: currency: true}}</div>
+          <div *ngIf="order.orderType=='Normal'">{{(order.paymentAmount * 100 + order.voucherShare * 100 - order.shippingExclTax * 100) / 100 | currency: currency: true}}</div>
+          <div *ngIf="order.orderType=='Flash'">{{(order.paymentAmount * 100 + order.voucherShare * 100 - order.shippingExclTax * 100) / 100 | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{order.shippingExclTax | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{0 | currency: currency: true}}</div>
+          <div class="md-margin-top-1" *ngIf="order.orderType == 'Cut'">- ₹{{((order.totalExclTax * 100 + order.shippingExclTax * 100 - order.paymentAmount * 100) / 100).toFixed(2)}}</div>
+          <div class="md-margin-top-1" *ngIf="(order.orderType == 'Normal'|| order.orderType == 'Flash') && order.voucherShare > 0">- ₹{{order.voucherShare}}</div>
+
+          <div class="md-margin-top-1" *ngIf="order.balanceUsed && order.balance > 0">- ₹{{order.balance}}</div>
+          <div class="md-margin-top-1" *ngIf="order.paymentDiscount>0">- ₹{{order.paymentDiscount}}</div>
+          <div class="md-margin-top-1">{{order.paymentAmount  | currency: currency: true}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-margin-right" fxFlex="10"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{order.orderStatus == 'Audit canceled' ? 'Pending Cancel': order.orderStatus}}</div>
+    <div fxFlex="none" *ngIf="order.orderStatus == 'Unpaid'" class="sc-order__detail-width-3"
+         fxLayout="column" fxLayoutAlign="center stretch">
+    </div>
+    <div fxFlex="none" *ngIf="order.orderStatus == 'Packing' || order.orderStatus == 'Paid'" class="sc-order__detail-width-3"
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="cancelFulfillment()">Cancel Fulfillment</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Refund</button>
+      </div>
+    </div>
+    <div fxFlex="none" *ngIf="order.orderStatus == 'Partially Refunded'" class="sc-order__detail-width-3"
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <div fxLayout="column">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Refund</button>
+      </div>
+    </div>
+    <div fxFlex="none" *ngIf="order.orderStatus == 'Shipped' || order.orderStatus == 'Completed'" class="sc-order__detail-width-3"
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Refund</button>
+      </div>
+    </div>
+    <div fxFlex="none" *ngIf="order.orderStatus == 'Canceled'" class="sc-order__detail-width-3"
+         fxLayout="column" fxLayoutAlign="center center">
+      <div class="sc-order__detail-color xb-bold" *ngIf="order.cancelType == 'customer'">Customer Canceled</div>
+      <div class="sc-order__detail-color xb-bold" *ngIf="order.cancelType == 'suppiler'">Supplier Canceled</div>
+      <div class="sc-order__detail-color xb-bold" *ngIf="!order.cancelType">System Canceled</div>
+    </div>
+    <div fxFlex="none" *ngIf="order.orderStatus == 'Audit canceled'" class="sc-order__detail-width-3"
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="accent" (click)="approveCancel()">View Detail</button>
+    </div>
+  </div>
+</div>
+<div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status == 2">
+  <div class="sc-order__detail-item" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="sc-order__detail-width-1 sc-order__detail-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
+      <div class="sc-order__product-title" >{{order.lines[0].title}}</div>
+    </div>
+    <div class="sc-order__detail-margin-right" fxFlex="15"
+         fxLayout="column" fxLayoutAlign="center center">{{order.lines[0].quantity}}</div>
+    <div fxFlex="50"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{order.shippingProvider}}
+    </div>
+  </div>
+</div>

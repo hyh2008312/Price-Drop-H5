@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="md-margin-top-4 sc-promote__create-text">
+    <span class="md-dark-secondary xb-pointer" routerLink="../../">Size Chart</span>
+    <span class="md-dark-secondary">></span> <span class="xb-bold">Create Size Chart</span>
+  </div>
+  <div class="unicorn-dark-theme">
+    <form [formGroup]="sizeChartForm" novalidate>
+      <div class="md-margin-top-3 sc-promote__create-bg">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <div class="sc-promote__promote-text xb-bold">Size Chart Name</div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+              <mat-form-field fxFlex>
+                <input matInput type="text" placeholder="" formControlName="name">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="sizeChartForm.get('name').invalid && (sizeChartForm.get('name').dirty ||
+            sizeChartForm.get('name').touched)" class="xb-input-error">
+          <div *ngIf="sizeChartForm.get('name').hasError('required')">
+            This field is required.
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <div class="sc-promote__promote-text xb-bold">Size Chart Note</div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+              <mat-form-field fxFlex>
+                <input matInput type="text" placeholder="" formControlName="note">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-top-2">
+          <div class="sc-promote__promote-text md-margin-bottom-2 xb-bold">Size Chart Picture</div>
+          <app-sizeChart-image-upload-additional [(previewImgFile)]="image"
+                                                 [(previewImgSrcs)]="image"></app-sizeChart-image-upload-additional>
+        </div>
+        <div class="md-margin-top-2">
+          <div class="sc-promote__promote-text md-margin-bottom-2 xb-bold">Size Chart Picture List</div>
+          <app-sizeChart-image-upload-multi [(previewImgFile)]="imageList"
+                                            [(previewImgSrcs)]="imageList"></app-sizeChart-image-upload-multi>
+        </div>
+      </div>
+    </form>
+    <div class="md-margin-top-3 sc-promote__create-bg" *ngIf="sizeChart.length == 0">
+      <div class="md-margin-top-3 md-margin-bottom-3 sc-promote__create-text" fxLayout="row" fxLayoutAlign="center center">
+        <div class="md-margin-left-3 sc__accent-dark">
+          <button mat-button color="primary" type="button" (click)="addTabName()">
+            <i class="material-icons">add</i>
+            <span class="md-margin-left-1">Add Size Chart Tab</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="sc-product md-margin-top-3" *ngIf="sizeChart.length > 0">
+      <div class="sc-product__create-text-1 sc__accent-dark">
+        <button mat-raised-button color="primary" type="button" (click)="addTabName()">
+          <i class="material-icons">add</i>
+          <span class="md-margin-left-1">Add Size Chart Tab</span>
+        </button>
+      </div>
+      <mat-tab-group color="primary" (selectedTabChange)="getSubTabList($event)"  [(selectedIndex)]="selectedIndex">
+        <mat-tab *ngFor="let item of sizeChart">
+          <ng-template mat-tab-label>
+            {{item.name == ''? 'Empty Subevent': item.name}}
+          </ng-template>
+          <div class="md-margin-top-3 sc-promote__create-text sc__accent-dark" fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-promote__promote-text xb-bold md-margin-right-2">Edit Tab Name:</div>
+            <mat-form-field >
+              <input matInput type="text" placeholder="" [(ngModel)]="item.name">
+            </mat-form-field>
+            <div class="md-margin-left-2"></div>
+            <button mat-raised-button color="accent" type="button" (click)="deleteName($event)">
+              Delete This Tab
+            </button>
+            <div class="md-margin-left-2"></div>
+            <button mat-raised-button color="primary" type="button" (click)="generateInch($event, item)">
+              Generate Inch Tab
+            </button>
+          </div>
+          <div class="md-margin-top-2 sc-promote__create-bg">
+            <div *ngFor="let p of item.children; let i = index;">
+              <div fxLayout="row" fxLayoutAlign="start center" >
+                <div class="md-margin-right-2" fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field fxFlex>
+                    <input type="text" matInput placeholder="Size Type" [(ngModel)]="p.name" />
+                  </mat-form-field>
+                </div>
+                <div class="sc-product__create-margin-right-2" fxFlex="70" fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field fxFlex>
+                    <mat-chip-list #chipList>
+                      <mat-chip *ngFor="let item of p.value;let j = index;" [selectable]="selectable"
+                                [removable]="removable" (remove)="remove(j, p)">
+                        {{item.value}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="Size Value"
+                             [matChipInputFor]="chipList"
+                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                             [matChipInputAddOnBlur]="addOnBlur"
+                             (matChipInputTokenEnd)="add($event, p)" />
+                    </mat-chip-list>
+                  </mat-form-field>
+                </div>
+                <div class="md-margin-top-2" fxFlex="5" fxLayout="row" fxLayoutAlign="center center">
+                  <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteColumn(i)">delete</i>
+                </div>
+              </div>
+            </div>
+            <button mat-raised-button color="primary" type="button" (click)="addColoumn()">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <i class="material-icons">add</i>
+                <span class="md-margin-left-1">Add Size Chart Row</span>
+              </div>
+            </button>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="md-padding-top-3 md-padding-bottom-3" fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" type="button" (click)="save()">
+        SAVE
+      </button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" type="button" routerLink="../../">
+          CANCEL
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

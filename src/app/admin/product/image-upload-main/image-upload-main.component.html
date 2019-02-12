@@ -1,0 +1,19 @@
+<div fxLayout="row" fxLayoutAlign="start stretch">
+  <label class="preview-label" fxLayout="row" fxLayoutAlign="center center"
+    [ngClass]="{'preview-label__not-upload': !upload}">
+    <input type="file" (change)="previewPic($event)" >
+    <i class="iconfontXberts icon-ic-pic preview-label__icons" *ngIf="!upload"></i>
+    <img src="{{previewImgSrcs}}" *ngIf="upload">
+    <app-image-preview-loading [percent]="loading" *ngIf="!closeAnimate && !closeLoading"
+                               (loadingChange)="loadingChange($event)"></app-image-preview-loading>
+  </label>
+  <div class="preview-label__margin-left" fxFlex fxLayout="column" fxLayoutAlign="space-between start">
+    <label class="preview-label__button">
+      <input type="file" (change)="previewPic($event)" >UPLOAD
+    </label>
+    <div class="md-margin-top-2">
+      <div class="preview-label__text">The images should be at least 600*600 pixels.</div>
+      <div class="preview-label__text">Do not steal images from other suppliers, or your product will be deleted.</div>
+    </div>
+  </div>
+</div>

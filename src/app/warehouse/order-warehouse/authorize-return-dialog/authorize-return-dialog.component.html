@@ -1,0 +1,158 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div *ngIf="!modified">
+    <div class="sc-order-dialog__title">
+      Edit Your RAN & Shipping Info for Product Return
+    </div>
+    <div *ngIf="formErr" class="xb-input-error md-margin-top-2">
+      {{ formErr }}
+    </div>
+    <form [formGroup]="shippingForm" novalidate>
+      <div class="sc-order__detail-title-1 sc-order__detail-margin-top-1">Return Authorization Number(RAN)</div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Enter a unique RAN for this Item" formControlName="ran">
+        </mat-form-field>
+      </div>
+      <div *ngIf="shippingForm.get('ran').invalid && (shippingForm.get('ran').dirty ||
+            shippingForm.get('ran').touched)" class="xb-input-error">
+        <div *ngIf="shippingForm.get('ran').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+      <div class="sc-order__detail-title-1 md-margin-top-2">Return Shipping Address</div>
+      <div class="md-margin-top-2"  fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Recipient or Company Name" formControlName="firstName">
+        </mat-form-field>
+      </div>
+      <div *ngIf="shippingForm.get('firstName').invalid && (shippingForm.get('firstName').dirty ||
+            shippingForm.get('firstName').touched)" class="xb-input-error">
+        <div *ngIf="shippingForm.get('firstName').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Address Line1" formControlName="line1">
+        </mat-form-field>
+      </div>
+      <div *ngIf="shippingForm.get('line1').invalid && (shippingForm.get('line1').dirty ||
+            shippingForm.get('line1').touched)" class="xb-input-error">
+        <div *ngIf="shippingForm.get('line1').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Address Line2" formControlName="line2">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="46">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <input type="text" matInput placeholder="City" formControlName="city">
+            </mat-form-field>
+          </div>
+          <div *ngIf="shippingForm.get('city').invalid && (shippingForm.get('city').dirty ||
+            shippingForm.get('city').touched)" class="xb-input-error">
+            <div *ngIf="shippingForm.get('city').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div fxFlex="46">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="country" placeholder="Country" formControlName="countryId"
+                          (ngModelChange)="changeShippingState($event)">
+                <mat-option class="md-align-center" *ngFor="let item of countries" [value]="item.id">
+                  {{ item.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="shippingForm.get('countryId').invalid && (shippingForm.get('countryId').dirty ||
+            shippingForm.get('countryId').touched)" class="xb-input-error">
+            <div *ngIf="shippingForm.get('countryId').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="46">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="state" placeholder="State / Province / Region" formControlName="stateId">
+                <mat-option class="md-align-center" *ngFor="let item of states" [value]="item.id">
+                  {{ item.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="shippingForm.get('stateId').invalid && (shippingForm.get('stateId').dirty ||
+            shippingForm.get('stateId').touched)" class="xb-input-error">
+            <div *ngIf="shippingForm.get('stateId').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div fxFlex="46">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <input type="text" matInput placeholder="Postal / ZIP Code" formControlName="postcode">
+            </mat-form-field>
+          </div>
+          <div *ngIf="shippingForm.get('postcode').invalid && (shippingForm.get('postcode').dirty ||
+            shippingForm.get('postcode').touched)" class="xb-input-error">
+            <div *ngIf="shippingForm.get('postcode').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Phone Number" formControlName="phoneNumber">
+        </mat-form-field>
+      </div>
+      <div *ngIf="shippingForm.get('phoneNumber').invalid && (shippingForm.get('phoneNumber').dirty ||
+            shippingForm.get('phoneNumber').touched)" class="xb-input-error">
+        <div *ngIf="shippingForm.get('phoneNumber').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+      <div class="xb-italic">Note: If you don't need your products to be refunded, please SKIP this step.</div>
+    </form>
+    <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="authorization()">SAVE</button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" type="button" (click)="close()">CANCEL</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="modified">
+    <div class="sc-order-dialog__title">
+      Product Return Information
+    </div>
+    <div class="sc-order__detail-title-1 sc-order__detail-margin-top-1">Return Authorization Number(RAN)</div>
+    <div class="md-margin-top-2">{{data.order.ran}}</div>
+    <div class="sc-order__detail-title-1 sc-order__detail-margin-top-1">Return Shipping Address</div>
+    <div class="md-margin-top-1">{{data.order.supplierAddress.firstName}}</div>
+    <div class="md-margin-top-1">{{data.order.supplierAddress.line1}}</div>
+    <div class="md-margin-top-1">{{data.order.supplierAddress.line2}}</div>
+    <div class="md-margin-top-1">{{data.order.supplierAddress.state.name}}</div>
+    <div class="md-margin-top-1">{{data.order.supplierAddress.country.name}}</div>
+    <div class="md-margin-top-1">Phone Number:{{data.order.supplierAddress.phoneNumber}}</div>
+    <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="close()">CANCEL</button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" (click)="editRAN()">MODIFY</button>
+      </div>
+    </div>
+  </div>
+</div>

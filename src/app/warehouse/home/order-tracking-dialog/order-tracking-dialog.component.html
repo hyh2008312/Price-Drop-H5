@@ -1,0 +1,17 @@
+<div class="sc-product-dialog">
+  <div class="sc-product-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-product-dialog__title">
+    查看物流信息
+  </div>
+  <div class="md-margin-top-2">采购单号: {{data.item.purchaseId}}</div>
+  <div class="md-margin-top-2">快递单号: {{data.item.logisticsId}}</div>
+  <div class="md-margin-top-2" *ngFor="let item of trackingSteps">
+    <div>{{item.acceptTime | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-top-1">{{item.remark}}</div>
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="!trackingSteps">
+    <mat-progress-spinner [color]="color" [mode]="mode" [value]="value"></mat-progress-spinner>
+  </div>
+</div>

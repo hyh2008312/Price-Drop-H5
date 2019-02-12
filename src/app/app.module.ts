@@ -1,6 +1,9 @@
+///<reference path="../../node_modules/preboot/typings/module.d.ts"/>
+///<reference path="shared/services/authentication/authentication.module.ts"/>
+///<reference path="../../node_modules/angulartics2/gtm/angulartics2-gtm.d.ts"/>
 import { NgModule } from '@angular/core';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { HttpModule,JsonpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
@@ -17,9 +20,9 @@ import { SharedServerModule } from './shared-server/shared-server.module';
 
 import { AppComponent } from './app.component';
 
-import { BaseApi, SystemConstant, DataApi, SupportApi } from './config/app.api';
+import { BaseApi, SystemConstant, DataApi } from './config/app.api';
 
-import { AuthenticationModule } from './shared/services/authentication/index';
+import { AuthenticationModule } from './shared/services/authentication';
 import { UserModule } from './shared/services/user/user.module';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { PrebootModule } from 'preboot';
@@ -53,7 +56,7 @@ import { GuardLinkService } from './shared/services/guard-link/guard-link.servic
       appRoot: 'app-root'
     })
   ],
-  providers: [BaseApi, SystemConstant, DataApi, SupportApi, HttpClientModule, CookieService, GuardLinkService],
+  providers: [BaseApi, SystemConstant, DataApi, HttpClientModule, CookieService, GuardLinkService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

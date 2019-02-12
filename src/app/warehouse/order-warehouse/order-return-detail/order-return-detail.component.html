@@ -1,0 +1,192 @@
+<div class="sc-order__product">
+  <div class="container md-padding-bottom-2">
+    <div class="md-margin-top-4 sc-order__detail-title-2">
+      <span class="md-dark-secondary xb-pointer" routerLink="../../">My Order</span> <span class="md-dark-secondary">></span>
+      <span class="xb-bold">Order Details</span>
+    </div>
+    <div class="sc-order__detail-container md-margin-top-2" *ngIf="order.type == 'Exchange'">
+      <div class="sc-order__detail-title sc-order__detail-margin-left-1">Return for Item Exchange</div>
+      <div class="sc-order__detail-container-1">
+        <div class="sc-order__detail-margin-top-1" fxLayout="column" >
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Request Date
+            </div>
+            <div>
+              {{order.created | amDateFormat:'MMMM Do, YYYY'}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Return Reason
+            </div>
+            <div>
+              {{order.reason}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Comments
+            </div>
+            <div>
+              {{order.comments}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Attachment
+            </div>
+            <div class="sc__accent-dark" fxLayout="row" fxLayoutAlign="start center">
+              {{annexName}} <div class="md-margin-left-2">
+              <a class="sc-order__detail-tracking-button" href="{{order.annex}}" download="{{annexName}}">Download</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-container md-margin-top-2" *ngIf="order.type == 'Refund'">
+      <div class="sc-order__detail-title sc-order__detail-margin-left-1">Return for a Refund</div>
+      <div class="sc-order__detail-container-1">
+        <div class="sc-order__detail-margin-top-1" fxLayout="column" >
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Request Date
+            </div>
+            <div>
+              {{order.created | amDateFormat:'MMMM Do, YYYY'}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Return Reason
+            </div>
+            <div>
+              {{order.reason}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Comments
+            </div>
+            <div>
+              {{order.comments}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Attachment
+            </div>
+            <div class="sc__accent-dark" fxLayout="row" fxLayoutAlign="start center">
+              {{annexName}} <div class="md-margin-left-2">
+              <a class="sc-order__detail-tracking-button" href="{{order.annex}}" download="{{annexName}}">Download</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-container md-margin-top-2">
+      <div class="sc-order__detail-title sc-order__detail-margin-left-1" >Returned Product & Order Information</div>
+      <div class="sc-order__detail-margin-left-1 md-margin-top-3" fxLayout="row" fxLayoutAlign="start center">
+        <div class="xb-bold">Order Number</div>
+        <div class="md-margin-left-2">
+          {{product.number}}
+        </div>
+        <div class="xb-bold sc-order__detail-margin-left">Order Date</div>
+        <div class="md-margin-left-2">
+          {{order.created | amDateFormat:'MMMM Do, YYYY'}}
+        </div>
+      </div>
+      <div class="md-margin-top-3 sc-order__detail-border-bottom" *ngIf="order.type == 'Exchange'">
+        <app-warehouse-order-detail-title [status]="3"></app-warehouse-order-detail-title>
+      </div>
+      <div *ngIf="order.type == 'Exchange'">
+        <app-warehouse-order-detail-item [status]="3" [order]="order" (productChange)="productChange($event)"></app-warehouse-order-detail-item>
+      </div>
+      <div class="md-margin-top-3 sc-order__detail-border-bottom" *ngIf="order.type == 'Refund'">
+        <app-warehouse-order-detail-title [status]="4"></app-warehouse-order-detail-title>
+      </div>
+      <div *ngIf="order.type == 'Refund'">
+        <app-warehouse-order-detail-item [status]="4" [order]="order" (productChange)="productChange($event)"></app-warehouse-order-detail-item>
+      </div>
+      <div class="sc-order__detail-container-1">
+        <div class="sc-order__detail-title-1 sc-order__detail-margin-top">
+          Shipping Information
+        </div>
+        <div class="sc-order__detail-margin-top-1" fxLayout="column" *ngIf="shippingAddress">
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Name
+            </div>
+            <div>
+              {{shippingAddress.firstName + '' + shippingAddress.lastName}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Shipping Address Line1
+            </div>
+            <div>
+              {{shippingAddress.line1}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Shipping Address Line2
+            </div>
+            <div>
+              {{shippingAddress.line2}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              City
+            </div>
+            <div>
+              {{shippingAddress.city}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              State
+            </div>
+            <div>
+              {{shippingAddress.state.name}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Postal / Zip Code
+            </div>
+            <div>
+              {{shippingAddress.postcode}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Country
+            </div>
+            <div>
+              {{shippingAddress.country.name}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Phone Number
+            </div>
+            <div>
+              {{shippingAddress.phoneNumber}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-container-padding md-margin-top-2">
+      <div class="sc-order__detail-title sc-order__detail-margin-left-1">Tracking Information</div>
+      <div class="md-margin-top-3">
+        <div class="sc-order__detail-margin-bottom">
+          <app-warehouse-order-detail-tracking-item [order]="product" [shippingPrice]="shippingPrice"></app-warehouse-order-detail-tracking-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

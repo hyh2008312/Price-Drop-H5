@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
+    <div class="sc-product__header"></div>
+
+    <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Products by Size Chart">
+        <div class="md-margin-top-2">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field fxFlex>
+                <mat-select name="category" placeholder="Select a Size Chart"
+                            (valueChange)="sizeChartChange($event)">
+                  <mat-option class="md-align-center" *ngFor="let item of sizChartList" [value]="item.id">
+                    {{ item.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="md-margin-right-2 unicorn-dark-theme" *ngIf="sizeChartId" fxFlex fxLayout="row" fxLayoutAlign="end center">
+              <button mat-raised-button color="primary" (click)="addProductsById()">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <i class="material-icons">add</i>
+                  <span class="md-margin-left-1">Add Size Chart by Product ID</span>
+                </div>
+              </button>
+              <div class="md-margin-right-2"></div>
+              <button mat-raised-button color="primary" (click)="addProducts()">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <i class="material-icons">add</i>
+                  <span class="md-margin-left-1">Add Size Chart to Product</span>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field fxFlex>
+                <mat-select name="category" placeholder="Select a Category"
+                            (valueChange)="categoryChange($event)">
+                  <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                    {{ item.data.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+              <mat-form-field fxFlex>
+                <mat-select name="subcategory" placeholder="Select a Subcategory"
+                            (valueChange)="subCategoryChange($event)">
+                  <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                    {{ item.data.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+              <mat-form-field fxFlex>
+                <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                            (valueChange)="thirdCategoryChange($event)">
+                  <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                    {{ item.data.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center" fxFlex>
+              <div class="sc-product__search"
+                    fxLayout="row" fxLayoutAlign="start center" >
+                <i class="material-icons">search</i>
+                <input type="text" [(ngModel)]="searchKey"
+                       placeholder="Search by Product Name"
+                       (keyup.enter)="changeProducts({index: 0})"/>
+                <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                  <i class="material-icons">close</i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sc-promote__promote-bg md-margin-top-2">
+            <app-sizeChart-product-title [status]="0" ></app-sizeChart-product-title>
+            <div class="md-margin-top-2"></div>
+            <div class="sc-promote__promote-list" *ngFor="let item of sizeChartProduct;let i = index;">
+              <app-sizeChart-product-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-sizeChart-product-item>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event, 0)"
+                           *ngIf="sizeChartProduct && sizeChartProduct.length > 0">
+            </mat-paginator>
+            <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="sizeChartProduct && sizeChartProduct.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any size chart product yet. </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Size Chart" >
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" routerLink="./create">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="material-icons">add</i>
+              <span class="md-margin-left-1">Add Size Chart</span>
+            </div>
+          </button>
+        </div>
+        <div class="md-margin-top-2">
+          <app-sizeChart-title></app-sizeChart-title>
+        </div>
+        <div class="sc-product__product-bg md-margin-top-2" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of sizeChart;let i = index;">
+            <app-sizeChart-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-sizeChart-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 1)"
+                         *ngIf="sizeChart && sizeChart.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="sizeChart && sizeChart.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any size chart yet. </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

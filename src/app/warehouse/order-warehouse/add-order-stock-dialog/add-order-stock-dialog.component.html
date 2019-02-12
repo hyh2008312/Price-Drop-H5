@@ -1,0 +1,87 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    订单采购信息
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+    <div>订单号 #: {{data.order.number}}</div>
+    <div class="md-margin-left-3" fxFlex>{{data.order.sumOrderNumber? 'Sum Order #:' + data.order.sumOrderNumber: ''}}</div>
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+    <div class="sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex>
+      <div class="sc-order__product-image" fxFlex="none">
+        <img src="{{data.order.lines[0].mainImage}}">
+      </div>
+      <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
+        <div class="sc-order__product-title" >{{data.order.lines[0].title}}</div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          {{data.order.lines[0].sku}}
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">{{data.order.lines[0].quantity}}</div>
+  </div>
+  <form class="md-margin-top-3" [formGroup]="orderStockForm" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="采购单号" formControlName="sourcingOrderNumber">
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="orderStockForm.get('sourcingOrderNumber').invalid && (orderStockForm.get('sourcingOrderNumber').dirty ||
+              orderStockForm.get('sourcingOrderNumber').touched)" class="xb-input-error">
+      <div *ngIf="orderStockForm.get('sourcingOrderNumber').hasError('required')">
+        This field is required.
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <mat-select name="shippingProvider" placeholder="选择采购平台" formControlName="sourcingSupplier">
+          <mat-option class="md-align-center" *ngFor="let item of sourcingSupplierList" [value]="item.sourcingName">
+            {{ item.sourcingName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <mat-select name="warehouse" placeholder="选择仓库" formControlName="warehouseId">
+          <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+            {{ item.warehouseName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <mat-select name="supplierProvider" placeholder="选择采购账号" formControlName="purchaseAccount">
+          <mat-option class="md-align-center" *ngFor="let item of supplierList" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="采购价格(RMB)" formControlName="purchasePrice">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="采购链接" formControlName="purchaseUrl">
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="xb-input-error md-margin-top-2" *ngIf="error">
+    {{error}}
+  </div>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="changeOrderSourcing()">保存</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">取消</button>
+    </div>
+  </div>
+</div>

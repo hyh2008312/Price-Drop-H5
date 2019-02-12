@@ -11,9 +11,20 @@ const routes: Routes = [
       {
         path: 'account',
         loadChildren: './login/login.module#LoginModule'
-      },{
+      }, {
+        path: 'admin',
+        canActivate: [ ProtectedGuard ],
+        loadChildren: './admin/admin.module#AdminModule'
+      }, {
+        path: 'warehouse',
+        canActivate: [ ProtectedGuard ],
+        loadChildren: './warehouse/warehouse.module#WarehouseModule'
+      }, {
         path: '',
-        loadChildren: './drops/drops.module#DropsModule'
+        loadChildren: './landing-page/landing-page.module#LandingPageModule'
+      }, {
+        path: 'about',
+        loadChildren: './about/about.module#AboutModule'
       }
     ]
   }, {

@@ -1,0 +1,96 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div *ngIf="!modified">
+    <div class="sc-order-dialog__title">
+      Edit Your Tracking Information for Exchanged Item
+    </div>
+    <form [formGroup]="shippingForm" novalidate>
+      <div *ngIf="formErr" class="md-margin-top-2 xb-input-error">
+        {{formErr}}
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex="none">
+          <mat-select formControlName="exchangeShippingProvider" name="shippingList">
+            <mat-option class="unicorn-dark-theme"  *ngFor="let item of shippingList" [value]="item.shippingProvider">
+              {{ item.shippingProvider }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="shippingForm.get('exchangeShippingProvider').invalid && (shippingForm.get('exchangeShippingProvider').dirty ||
+            shippingForm.get('exchangeShippingProvider').touched)" class="xb-input-error">
+        <div *ngIf="shippingForm.get('exchangeShippingProvider').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Shipping Number" formControlName="exchangeShippingNumber">
+        </mat-form-field>
+      </div>
+      <div *ngIf="shippingForm.get('exchangeShippingNumber').invalid && (shippingForm.get('exchangeShippingNumber').dirty ||
+            shippingForm.get('exchangeShippingNumber').touched)" class="xb-input-error">
+        <div *ngIf="shippingForm.get('exchangeShippingNumber').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Shipping URL" formControlName="exchangeShippingUrl">
+        </mat-form-field>
+      </div>
+      <div *ngIf="shippingForm.get('exchangeShippingUrl').invalid && (shippingForm.get('exchangeShippingUrl').dirty ||
+            shippingForm.get('exchangeShippingUrl').touched)" class="xb-input-error">
+        <div *ngIf="shippingForm.get('exchangeShippingUrl').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+      <div class="xb-italic">Note: Your customer will receive an email notification once you update your tracking info.</div>
+    </form>
+    <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="changeShippingMethod()">SAVE</button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" (click)="close()">CANCEL</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="modified">
+    <div class="sc-order-dialog__title">
+      Tracking Information
+    </div>
+    <div class="sc-order__detail-margin-top-1" fxLayout="column" >
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div class="md-dark-secondary sc-order__detail-tracking-left-1" fxFlex="none">
+          Shipping Carrier
+        </div>
+        <div>
+          {{data.order.line.exchangeShippingProvider}}
+        </div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+        <div class="md-dark-secondary sc-order__detail-tracking-left-1" fxFlex="none">
+          Tracking Number
+        </div>
+        <div>
+          {{data.order.line.exchangeShippingNumber}}
+        </div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+        <div class="md-dark-secondary sc-order__detail-tracking-left-1" fxFlex="none">
+          Tracking URL
+        </div>
+        <div>
+          {{data.order.line.exchangeShippingUrl}}
+        </div>
+      </div>
+    </div>
+    <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="close()">CANCEL</button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" (click)="editShippingMethod()">MODIFY</button>
+      </div>
+    </div>
+  </div>
+</div>

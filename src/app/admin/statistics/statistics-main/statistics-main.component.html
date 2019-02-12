@@ -1,0 +1,24 @@
+<div class="sc-order__product">
+  <div class="container">
+    <div class="sc-order__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
+      <div class="sc-order__header"></div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div>Filter by Order Paid Time: </div>
+        <mat-form-field class="md-margin-left-2">
+          <input matInput [matDatepicker]="ps" placeholder="Start Date" (dateInput)="addEvent('ps', $event)">
+          <mat-datepicker-toggle matSuffix [for]="ps"></mat-datepicker-toggle>
+          <mat-datepicker #ps></mat-datepicker>
+        </mat-form-field>
+        <div class="md-margin-left-2">to</div>
+        <mat-form-field class="md-margin-left-2">
+          <input matInput [matDatepicker]="pe" placeholder="End Date" (dateInput)="addEvent('pe', $event)">
+          <mat-datepicker-toggle matSuffix [for]="pe"></mat-datepicker-toggle>
+          <mat-datepicker #pe></mat-datepicker>
+        </mat-form-field>
+        <div class="sc__accent-dark md-margin-left-2">
+          <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

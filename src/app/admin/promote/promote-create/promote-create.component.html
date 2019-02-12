@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="md-margin-top-4 sc-promote__create-text">
+    <span class="md-dark-secondary xb-pointer" routerLink="../">Promotions</span>
+    <span class="md-dark-secondary">></span> <span class="xb-bold">Create a Campaign</span>
+  </div>
+  <form [formGroup]="promotionForm" novalidate *ngIf="!isEdit">
+    <div class="md-margin-top-3 sc-promote__create-bg">
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Campaign Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="title">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Campaign Type</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <mat-select placeholder="" name="promotion type" formControlName="promotionType">
+                <mat-option *ngFor="let item of campaignType" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div *ngIf="promotionForm.get('title').invalid && (promotionForm.get('title').dirty ||
+            promotionForm.get('title').touched)" class="xb-input-error">
+            <div *ngIf="promotionForm.get('title').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div *ngIf="promotionForm.get('promotionType').invalid && (promotionForm.get('promotionType').dirty ||
+            promotionForm.get('promotionType').touched)" class="xb-input-error">
+            <div *ngIf="promotionForm.get('promotionType').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div>
+          <div fxLayout="row" fxLayoutAlign="start center" >
+            <div class="sc-promote__promote-text xb-bold">Start Time</div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field>
+                <input matInput type="datetime-local" placeholder="" formControlName="startTime">
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf="promotionForm.get('startTime').invalid && (promotionForm.get('startTime').dirty ||
+            promotionForm.get('startTime').touched)" class="xb-input-error">
+            <div *ngIf="promotionForm.get('startTime').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-left-3">
+          <div fxLayout="row" fxLayoutAlign="start center" >
+            <div class="sc-promote__promote-text xb-bold">End Time</div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field>
+                <input matInput type="datetime-local" placeholder="" formControlName="endTime">
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf="promotionForm.get('endTime').invalid && (promotionForm.get('endTime').dirty ||
+            promotionForm.get('endTime').touched)" class="xb-input-error">
+            <div *ngIf="promotionForm.get('endTime').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" type="button" (click)="continue()">
+        SAVE
+      </button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" type="button" routerLink="../">
+          CANCEL
+        </button>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="isEdit">
+    <div class="md-margin-top-3 sc-promote__create-bg">
+      <div fxLayout="row" fxLayoutAlign="start center" >
+        <div class="sc-promote__promote-text xb-bold">Campaign Name</div>
+        <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+          {{campaign.title}}
+        </div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Campaign Status</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.flashStatus}}
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Campaign Type</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.promotionType}}
+          </div>
+        </div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Start Time</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
+            {{campaign.startTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">End Time</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
+            {{campaign.endTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="md-margin-top-3 sc-promote__create-text" fxLayout="row" fxLayoutAlign="start center">
+      <div class="sc-promote__promote-text xb-bold">Add Product for This Campaign:</div>
+      <div class="md-margin-left-3 sc__accent-dark">
+        <button mat-raised-button color="primary" type="button" (click)="selectProduct()">
+          Select
+        </button>
+      </div>
+    </div>
+    <div class="md-margin-top-3 sc-promote__promote-bg">
+      <app-promote-product-title></app-promote-product-title>
+      <div class="sc-promote__promote-list"
+           *ngFor="let item of campaign.product;let i = index;">
+        <app-promote-product-item [promote]="item" [index]="i"
+                                  (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
+      </div>
+      <div class="sc-promote__promote-navigation" fxLayout="row" fxLayoutAlign="start center">
+        <div class="xb-pointer" fxLayout="row" fxLayoutAlign="start center" (click)="selectProduct()">
+          <i class="material-icons sc-promote__promote-text">add</i>
+          <div class="md-margin-left-1 text-underline">Add Product</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="md-padding-top-4 md-padding-bottom-4" fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" type="button" (click)="save()">
+        SAVE
+      </button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" type="button" routerLink="../">
+          CANCEL
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

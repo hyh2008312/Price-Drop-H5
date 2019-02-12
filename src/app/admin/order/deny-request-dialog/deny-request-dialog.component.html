@@ -1,0 +1,34 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    Deny Request
+  </div>
+  <div class="sc-order-dialog__content">
+    <div>By clicking on this button, the order return request will be closed.</div>
+    <div class="md-margin-top-2 xb-bold">Are you sure you want to deny this request now?</div>
+  </div>
+  <div *ngIf="formErr" class="xb-input-error md-margin-top-2">
+    {{ formErr }}
+  </div>
+  <form [formGroup]="orderReturnForm" novalidate>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <textarea matInput formControlName="reason" placeholder="Please describe reason in detail"></textarea>
+      </mat-form-field>
+    </div>
+    <div *ngIf="orderReturnForm.get('reason').invalid && (orderReturnForm.get('reason').dirty ||
+            orderReturnForm.get('reason').touched)" class="xb-input-error">
+      <div *ngIf="orderReturnForm.get('reason').hasError('required')">
+        This field is required.
+      </div>
+    </div>
+  </form>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="close()">NO</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="denyReturnRequest()">YES</button>
+    </div>
+  </div>
+</div>

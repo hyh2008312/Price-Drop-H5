@@ -1,0 +1,16 @@
+<div class="sc-product-dialog">
+  <div class="sc-product-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div *ngIf="!data.isDelete">
+    <div class="sc-product-dialog__title-1">
+      Are you sure you want to delete this shipping method?
+    </div>
+    <div class="sc-product-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="close()">NO</button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" (click)="delete()">YES</button>
+      </div>
+    </div>
+  </div>
+</div>

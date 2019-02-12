@@ -1,0 +1,29 @@
+<label class="preview-label preview-label__upload" *ngIf="upload" fxLayout="row" fxLayoutAlign="center center">
+  <img src="{{previewImgSrcs}}" >
+  <div class="popup-mask">
+    <div fxLayout="row" fxLayoutAlign="end start">
+      <i class="material-icons" (click)="remove();">clear</i>
+    </div>
+  </div>
+</label>
+<label class="preview-label preview-label__not-upload" *ngIf="!upload" fxLayout="row" fxLayoutAlign="center center">
+  <input type="file" (change)="previewPic($event)">
+  <i class="material-icons">add_circle</i>
+</label>
+<div class="md-margin-top-2" *ngIf="upload && !croppedSrc">
+  <div class="preview-label__cropper-bg" fxLayout="row" fxLayoutAlign="center center">
+    <angular-cropper #angularCropper [cropperOptions]="config" [imageUrl]="previewImgSrcs"></angular-cropper>
+  </div>
+  <div class="md-margin-top-2">
+    <button mat-raised-button color="primary" (click)="onCropped()">UPLOAD</button>
+  </div>
+</div>
+<div class="md-margin-top-2" *ngIf="upload && croppedSrc">
+  <div class="preview-label__cropper-bg"  fxLayout="row" fxLayoutAlign="center center">
+    <img src="{{croppedSrc}}" >
+  </div>
+  <div class="md-margin-top-2">
+    <button mat-raised-button color="accent" >UPLOADING ...</button>
+  </div>
+</div>
+

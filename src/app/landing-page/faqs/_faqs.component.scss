@@ -1,0 +1,116 @@
+@import "../../styles/utils/index";
+@import "../../styles/variables";
+
+.xb-about {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
+  &__banner {
+    height: 368px;
+    background-image: url("https://media.xberts.com/collector/source/web/pic/FAQ.jpg");
+    background-position: center;
+    background-size: auto 110%;
+    background-repeat: no-repeat;
+  }
+
+  &__navigation {
+    height: 56px;
+    &-login {
+      font-size: 16px;
+      color: $whiteColor;
+    }
+
+    &-button {
+      font-size: 16px;
+      color: $whiteColor;
+      background-color: $primaryColor;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 16px;
+      width: 100px;
+      display: block;
+    }
+    &-title {
+      font-size: 48px;
+      font-weight: 300;
+      color: $whiteColor;
+      text-align: center;
+      margin-top: 120px;
+
+      @include xb-xs-screen{
+        font-size: 24px;
+      }
+    }
+  }
+  &-container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 686px;
+    width: 100%;
+    @include xb-xs-screen{
+      padding: 0 16px;
+    }
+    @include xb-sm-screen{
+      padding: 0 16px;
+    }
+  }
+  &-faq {
+    &__content-1 {
+      font-size: 16px;
+      line-height: 28px;
+      color: black;
+      @include light();
+    }
+    &__content-2 {
+      font-size: 16px;
+      line-height: 28px;
+      color: black;
+      margin-bottom: 72px;
+      @include light();
+    }
+    &__title {
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: bold;
+      margin-top: 28px;
+    }
+    &__subtitle {
+      font-size: 16px;
+      line-height: 28px;
+      font-weight: bold;
+      margin-top: 16px;
+    }
+    &__line {
+      height: 1px;
+      margin-top: 64px;
+      background-color: $bgGray;
+    }
+  }
+  &__footer{
+    &-top{
+      background-color: #252525;
+      color: rgba(255,255,255,.5);
+      >div{
+        height: 80px;
+      }
+    }
+
+    &-text{
+      padding: 0 24px;
+      font-size: 16px;
+      color: $whiteColor;
+    }
+
+    &-bottom{
+      background-color: #252525;
+      color: rgba(255,255,255,.5);
+      overflow: hidden;
+    }
+  }
+  &-margin-top-2{
+    margin-top: 0;
+    @include xb-xs-screen{
+      margin-top: 8px;
+    }
+  }
+}

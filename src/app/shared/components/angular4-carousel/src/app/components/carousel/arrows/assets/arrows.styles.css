@@ -1,0 +1,36 @@
+.carousel-nav__clickable-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px; }
+  .carousel-nav__clickable-area:hover {
+    cursor: pointer; }
+  .carousel-nav__clickable-area--left {
+    right: auto;
+    left: 0; }
+    .carousel-nav__clickable-area--left:hover .carousel-nav__btn--left {
+      color: rgba(255, 255, 255, 0.8); }
+  .carousel-nav__clickable-area--right {
+    left: auto;
+    right: 0; }
+    .carousel-nav__clickable-area--right:hover .carousel-nav__btn--right {
+      color: rgba(255, 255, 255, 0.8); }
+
+.carousel-nav__btn {
+  position: absolute;
+  top: 50%;
+  font-size: 46px;
+  transform: scaleX(0.8) translateY(-50%);
+  text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 3px;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer; }
+  .carousel-nav__btn:hover {
+    color: rgba(255, 255, 255, 0.5); }
+  .carousel-nav__btn--left {
+    left: 8px; }
+  .carousel-nav__btn--right {
+    right: 8px; }
+  .carousel-nav__btn--disabled {
+    pointer-events: none; }
+
+/*# sourceMappingURL=arrows.styles.css.map */

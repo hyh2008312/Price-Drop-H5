@@ -4,21 +4,27 @@
 html {
   position: relative;
   min-height: 100%;
+
   ::-webkit-scrollbar {
-    width: 1px;
+    width: 8px;
+
   }
   ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    @include box-shadow(0 0 0 2px rgba(0,0,0,.19));
-    background-color: rgba(0,0,0,.19);
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.38);
+    &:hover{
+      background-color: rgba(0,0,0,.54);
+    }
   }
 }
 
 body {
-  //max-width: 100%;
-  //max-height: 100%;
-  //overflow: hidden;
+  /* padding bottom by footer height */
+
+  /* overwrite material.css */
+  max-width: 100%;
+  overflow-x: hidden;
   background-color: $whiteColor;
   font-family: Helvetica;
   font-size: $defaultFontSize;
@@ -26,6 +32,7 @@ body {
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
 
 }
 

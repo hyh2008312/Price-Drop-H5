@@ -1,0 +1,132 @@
+@import "../../styles/utils/_index";
+@import "../../styles/_variables";
+
+.xb-shop{
+
+  &__container{
+    padding: 0 16px;
+  }
+
+  &__title{
+    font-size: 24px;
+    @include media();
+    margin-top: 32px;
+  }
+  &__header{
+    position: absolute;
+    background-color: $whiteColor;
+    height: 65px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+  }
+
+  &__product{
+    position: relative;
+
+    &-navigation{
+      height: 64px;
+      background-color: $whiteColor;
+      padding: 0 16px;
+      border-radius: 2px;
+    }
+
+    &-bg{
+      padding: 0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    &-width{
+      width: 160px;
+      margin-right: 16px;
+    }
+
+    &-list{
+      background-color: $whiteColor;
+      padding: 0 16px;
+    }
+
+    &-none{
+      padding: 96px 0;
+      background-color: $whiteColor;
+      border-radius: 4px;
+      span{
+        margin-top: 16px;
+        @include media();
+      }
+    }
+
+    &-buttons {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      z-index: 10;
+    }
+
+    &-button-list{
+      width: 210px;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: $lightWhiteColor;
+      @include media();
+      @include resetBorder();
+
+      >a{
+        height: 56px;
+        color: rgba(0,0,0,.87);
+        &:hover{
+          background-color: rgba(0,0,0,.12);
+        }
+      }
+    }
+  }
+
+  &__products{
+
+    &-sort{
+      width: 140px;
+      text-align: center;
+    }
+
+    &-margin-left{
+      margin-left: 64px;
+    }
+  }
+}
+
+.xb-account-navigation {
+  height: 56px;
+  background-color: #F9F9F9;
+  padding: 0 16px;
+  &__title {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+  }
+
+}
+
+.xb-account-item {
+  height: 96px;
+  padding: 12px 0;
+  background-color: $whiteColor;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+  &__title {
+    font-size: 14px;
+  }
+
+  &__title-1{
+    font-size: 14px;
+    color: rgba(0,0,0, .87);
+    line-height: 24px;
+    max-height: 48px;
+    overflow: hidden;
+  }
+
+  &__width{
+    width: 300px;
+  }
+}

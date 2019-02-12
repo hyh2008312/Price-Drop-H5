@@ -1,0 +1,71 @@
+<div class="sc-order__product">
+  <div class="container md-padding-bottom-2" >
+    <div class="md-margin-top-4 md-margin-left-2 md-margin-bottom-2 sc-order__detail-title-2" fxLayout="row" fxLayoutAlign="start center">
+      <span class="md-dark-secondary xb-pointer" routerLink="../../">Attribute Template by Category</span>
+      <span class="md-dark-secondary">&nbsp;>&nbsp;</span>
+      <span class="xb-bold">{{categoryName}}</span>
+      <div fxFlex fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button color="primary" (click)="addAttribute()">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <i class="material-icons">add</i>
+            <span class="md-margin-left-1">Add Attribute Type</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="md-align-right xb-input-error" *ngIf="error">{{error}}</div>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <div class="md-margin-right-2">Product Number: {{length}}. {{ready? ready: ''}}</div>
+      <div>
+        <form class="sc-product__search" [formGroup]="searchForm"
+              fxLayout="row" fxLayoutAlign="start center" >
+          <i class="material-icons">search</i>
+          <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                 placeholder="Search"/>
+          <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="searchKey != ''" (click)="clearSearchKey()">
+            <i class="material-icons">close</i>
+          </div>
+        </form>
+      </div>
+      <div class="sc-product__search-margin-top md-margin-right-2 unicorn-dark-theme">
+        <mat-form-field class="sc-product__product-sort">
+          <mat-select name="page" placeholder="Select Page" [(ngModel)]="page">
+            <mat-option class="md-align-center" *ngFor="let item of pageList" [value]="item">
+              Page {{ item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="sc-product__search-margin-top md-margin-right-2 unicorn-dark-theme">
+        <mat-form-field class="sc-product__product-sort">
+          <mat-select name="status" placeholder="Status" [(ngModel)]="status">
+            <mat-option class="md-align-center" *ngFor="let item of statusList" [value]="item.value">
+              {{item.text}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" (click)="export()">
+        Export Template
+      </button>
+    </div>
+    <div class="sc-order__detail-container">
+      <div class="md-margin-top-2">
+        <app-attribute-category-title></app-attribute-category-title>
+      </div>
+      <div class="sc-product__product-bg md-margin-top-2" fxLayout="column">
+        <div class="sc-product__product-list" *ngFor="let item of promoteAll;let i = index;">
+          <app-attribute-category-item [status]="1" [index]="i" [attributeList]="attributeList" (productChange)="productChange($event)" [product]="item"></app-attribute-category-item>
+        </div>
+      </div>
+      <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+           *ngIf="promoteAll && promoteAll.length <= 0">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <i class="iconfontXberts icon-ic-empty"></i>
+          <div class="sc-product__product-title-1 md-margin-top-4">There is no attribute</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

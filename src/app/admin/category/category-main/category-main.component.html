@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
+    <div class="sc-promote__title">
+      Catalog Management
+    </div>
+
+    <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Catalog">
+        <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" (click)="addCategory()">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="material-icons">add</i>
+              <span class="md-margin-left-1">Add a Main Category</span>
+            </div>
+          </button>
+        </div>
+        <div class="md-margin-top-2">
+          <app-category-title [status]="0" ></app-category-title>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of categoryList;let i = index;">
+            <app-category-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-category-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 0)"
+                         *ngIf="categoryList && categoryList.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="categoryList && categoryList.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any category yet. </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Session" >
+        <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field>
+              <mat-select name="category" placeholder="Select a Main Category" [ngModel]="parentId" (valueChange)="filterChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of filterCategoryList" [value]="item.id">
+                  {{ item.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" (click)="addCategory()">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="material-icons">add</i>
+              <span class="md-margin-left-1">Add a Session</span>
+            </div>
+          </button>
+        </div>
+        <div class="md-margin-top-2">
+          <app-category-title [status]="1" ></app-category-title>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column" *ngIf="parentId">
+          <div class="sc-product__product-list" *ngFor="let item of subCategoryList;let i = index;">
+            <app-category-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-category-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 1)"
+                         *ngIf="subCategoryList && subCategoryList.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="subCategoryList && subCategoryList.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any category yet. </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

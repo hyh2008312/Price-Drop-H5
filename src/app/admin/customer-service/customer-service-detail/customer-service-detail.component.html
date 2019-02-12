@@ -1,0 +1,77 @@
+<div class="xb-customer-service-detail xb-customer-service__w960px">
+  <div class="md-margin-top-3">
+    <span class="xb-pointer xb-customer-service-detail__nav-title xb-customer-service__regular" routerLink="../../">Customer Support Tickets</span>
+    <span class="xb-customer-service__bold">></span>
+    <span class="xb-customer-service-detail__nav-title xb-customer-service__bold">View Details</span>
+  </div>
+  <div class="xb-customer-service-detail__content" fxLayout="row" fxLayoutAlign="space-between start">
+    <div class="xb-customer-service-detail__content-left">
+      <div class="xb-customer-service-detail__content-left-message" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="xb-customer-service-detail__content-left-title">Message</div>
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div class="xb-customer-service-detail__content-left-status-title">Ticket Status</div>
+          <div class="xb-customer-service-detail__content-left-status">{{respondStatus}}</div>
+        </div>
+      </div>
+      <ng-container *ngFor="let i of messageList">
+        <app-customer-service-message [message]="i"
+                                      [customerName]="aCustomerName"
+                                      [supplierName]="aSuppierName">
+        </app-customer-service-message>
+      </ng-container>
+      <div class="xb-customer-service-detail__content-left-line"></div>
+      <div *ngIf="isClose && isExpired">
+        <form [formGroup]="replyMessageForm" class="xb-customer-service-detail__content-left-reply">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <textarea matInput placeholder="Leave a reply" formControlName="replyMessage"
+                        [ngModel]="replyMessage" (ngModelChange)="changeMessageStatus($event)"></textarea>
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+      <div class="xb-customer-service-detail__content-left-bottom" fxLayout="row" fxLayoutAlign="space-between center"
+           *ngIf="isClose && isExpired">
+        <div>
+          <div class="xb-customer-service-detail__content-left-close xb-pointer"
+               (click)="requestCloseMessage()" *ngIf="isShowCloseButton">Close This Ticket
+          </div>
+        </div>
+        <div class="xb-customer-service-detail__content-left-submit xb-pointer" (click)="submitCustomerService()"
+             [ngClass]="{'xb-customer-service-detail__content-left-submit-black':isMessageEmpty}">REPLY
+        </div>
+      </div>
+      <div class="xb-customer-service-detail__content-left-warn"
+           [ngStyle]="{'margin-top':isShowCloseButton || !isClose?'30px':'-25px'}">
+        {{tipWord}}
+      </div>
+    </div>
+    <div class="xb-customer-service-detail__content-right">
+      <div class="xb-customer-service-detail__content-right-title">
+        Related Order
+      </div>
+      <div class="xb-customer-service-detail__content-right-attribute md-margin-top-2">
+        Customer
+      </div>
+      <div class="xb-customer-service-detail__content-right-content md-margin-top-1">
+        {{message?.communication.customerName}}
+      </div>
+      <div class="xb-customer-service-detail__content-right-attribute md-margin-top-2">
+        Order Number
+      </div>
+      <div class="xb-customer-service-detail__content-right-content md-margin-top-1">
+        {{message?.number}}
+      </div>
+      <div class="xb-customer-service-detail__content-right-attribute md-margin-top-2">
+        Product Name
+      </div>
+      <div class="xb-customer-service-detail__content-right-content md-margin-top-1">
+        {{message?.title}}
+      </div>
+      <div class="xb-customer-service-detail__content-right-order-detail"
+           (click)="jumpOrderDetail()">View Order Detail
+      </div>
+    </div>
+  </div>
+
+</div>

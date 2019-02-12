@@ -6,59 +6,20 @@
 @import '../../../../node_modules/@angular/material/theming';
 
 @include mat-core();
-$primary: mat-palette($mat-cyan, 500);
+$primary: mat-palette($mat-grey, 900);
 $accent: mat-palette($mat-amber, A400);
 $warn: mat-palette($mat-red, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 
-$dark-primary: mat-palette($mat-grey, 900);
-$dark-accent: mat-palette($mat-amber, A400);
-$dark-warn: mat-palette($mat-red, 500);
-$dark-theme: mat-light-theme($dark-primary, $dark-accent, $dark-warn);
+.sc__accent-dark{
+  $darkTheme: mat-dark-theme($primary, $accent, $warn);
+  @include angular-material-theme($darkTheme);
 
-.unicorn-dark-theme {
-  @include angular-material-theme($dark-theme);
-  .mat-form-field-underline{
-    height: 1px;
-    background-color: #000;
-  }
-
-  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
-    color: #000;
-  }
-  .mat-option.mat-active{
-    background-color: rgba(0,0,0,.12) !important;
-  }
-}
-
-
-.unicorn-dark-theme-1 {
-  @include angular-material-theme($dark-theme);
-  .mat-raised-button {
+  .mat-raised-button{
     line-height: 32px;
-    border-radius: 4px;
-    .mat-button-wrapper{
-      font-size: 12px !important;
-    }
-  }
-  .mat-checkbox-inner-container{
-    width: 16px;
-    height: 16px;
-  }
-}
-
-.unicorn-theme {
-  @include angular-material-theme($dark-theme);
-  .mat-form-field-infix{
-    padding: 0;
-    border-top: 0;
-  }
-  .mat-form-field-wrapper{
-    padding-bottom: 0;
-  }
-  .mat-form-field-underline{
-    display: none;
+    font-size: 14px;
+    font-weight: normal;
   }
 }
 
@@ -67,7 +28,7 @@ $dark-theme: mat-light-theme($dark-primary, $dark-accent, $dark-warn);
 }
 
 .mat-form-field{
-  width: 280px;
+  width: 200px;
 }
 
 .mat-form-field-underline{
@@ -96,10 +57,43 @@ $dark-theme: mat-light-theme($dark-primary, $dark-accent, $dark-warn);
   }
 }
 
-.mat-tab-label{
-  &.mat-tab-label-active{
-    opacity: 1;
+.unicorn-dark-theme{
+  .mat-tab-label-container{
+    background-color: $whiteColor;
+    height: 56px;
   }
+
+  .mat-tab-label{
+    height: 56px;
+    color: $blackColor;
+    opacity: 1;
+    justify-content: flex-start;
+    padding: 0 16px;
+    font-size: 14px;
+    @include regular();
+    min-width: 0;
+    &.mat-tab-label-active{
+      @include media();
+      opacity: 1;
+    }
+  }
+
+  .mat-ink-bar{
+    display: none;
+  }
+
+  .mat-form-field-underline{
+    height: 2px;
+    background-color: #000;
+  }
+
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+    color: #000;
+  }
+}
+
+.mat-option.mat-active{
+  background-color: rgba(0,0,0,.12) !important;
 }
 
 .mat-tab-body-content{
@@ -130,7 +124,6 @@ textarea.mat-input-element{
   overflow: hidden !important;
   @include xb-xs-screen{
     background-color: transparent;
-    @include box-shadow(none !important);
   }
 }
 
@@ -139,33 +132,7 @@ textarea.mat-input-element{
     min-width: 100vw;
   }
 }
-
-.mat-chip:not(.mat-basic-chip)+.mat-chip:not(.mat-basic-chip) {
-  margin: 0 8px 3px 0;
-}
 .mat-chip:not(.mat-basic-chip){
-  margin: 0 8px 3px 0;
+  margin: 0 8px 3px 0 !important;
 }
 
-.mat-progress-bar.mat-accent .mat-progress-bar-background{
-  fill: transparent;
-}
-.mat-progress-bar.mat-accent .mat-progress-bar-buffer{
-  background-color: transparent;
-}
-.mat-progress-bar{
-  height: 4px;
-}
-.mat-paginator-decrement, .mat-paginator-increment{
-  width: 12px !important;
-  height: 12px !important;
-  border-color: $blackColor !important;
-}
-.mat-paginator-range-label{
-  font-size: 16px;
-  color: $blackColor;
-}
-.mat-paginator-page-size{
-  display: none !important;
-  color: $blackColor;
-}

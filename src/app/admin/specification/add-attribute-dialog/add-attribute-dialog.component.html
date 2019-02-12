@@ -1,0 +1,49 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    Add Attribute
+  </div>
+  <form class="md-margin-top-3" [formGroup]="attributeForm" novalidate>
+    <div class="xb-bold">
+      Attribute Type
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="Attribute Name" formControlName="name">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="attributeForm.get('name').invalid && (attributeForm.get('name').dirty ||
+              attributeForm.get('name').touched)" class="xb-input-error">
+        <div *ngIf="attributeForm.get('name').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+    <div class="xb-bold">
+      属性类(中文名称)
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="属性类" formControlName="chineseName">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="attributeForm.get('chineseName').invalid && (attributeForm.get('chineseName').dirty ||
+              attributeForm.get('chineseName').touched)" class="xb-input-error">
+        <div *ngIf="attributeForm.get('chineseName').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="error" class="xb-input-error">{{error}}</div>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="create()">SAVE</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">CANCEL</button>
+    </div>
+  </div>
+</div>

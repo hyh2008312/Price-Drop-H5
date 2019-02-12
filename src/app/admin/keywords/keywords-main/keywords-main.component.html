@@ -1,0 +1,76 @@
+<div class="xb-account md-padding-right-2 md-padding-top-2 md-padding-left-2 unicorn-dark-theme">
+  <div class="container">
+    <div class="xb-account__header">
+      Keywords
+    </div>
+    <mat-tab-group color="primary" (selectedTabChange)="changeLists($event)"  [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Featured Keywords">
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" (click)="createHotword()">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="material-icons">add</i>
+              <span class="md-margin-left-1">Add Featured Keywords</span>
+            </div>
+          </button>
+        </div>
+        <div class="md-margin-top-2"></div>
+        <app-admin-hotword-title></app-admin-hotword-title>
+        <div class="md-margin-top-2"></div>
+        <div *ngFor="let item of hotwordList;let i = index;">
+          <app-admin-hotword-item [item]="item" [status]="0" [index]="i" (userChange)="userChange($event)"></app-admin-hotword-item>
+        </div>
+        <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="hotwordList && hotwordList.length <= 0">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <i class="iconfontXberts icon-ic-empty"></i>
+            <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any featured keywords yet. </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Keywords Rank">
+        <div class="md-margin-left-2 md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+          <div>Filter by Search Time: </div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="csAll" [(ngModel)]="startDate" placeholder="Start Date" (dateInput)="addEvent('csAll', $event)">
+            <mat-datepicker-toggle matSuffix [for]="csAll"></mat-datepicker-toggle>
+            <mat-datepicker #csAll></mat-datepicker>
+          </mat-form-field>
+          <div class="md-margin-left-2">to</div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="ceAll" [(ngModel)]="endDate" placeholder="End Date" (dateInput)="addEvent('ceAll', $event)">
+            <mat-datepicker-toggle matSuffix [for]="ceAll"></mat-datepicker-toggle>
+            <mat-datepicker #ceAll></mat-datepicker>
+          </mat-form-field>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
+          </div>
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isLoading">
+            <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
+          </div>
+        </div>
+        <div class="md-margin-top-2"></div>
+        <app-admin-keywords-title></app-admin-keywords-title>
+        <div class="md-margin-top-2"></div>
+        <div *ngFor="let item of keywordsList;let i = index;">
+          <app-admin-keywords-item [item]="item" [status]="1" [index]="i" ></app-admin-keywords-item>
+        </div>
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="changePage($event)"
+                       *ngIf="keywordsList && keywordsList.length > 0">
+        </mat-paginator>
+        <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="keywordsList && keywordsList.length <= 0">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <i class="iconfontXberts icon-ic-empty"></i>
+            <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any keywords yet. </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

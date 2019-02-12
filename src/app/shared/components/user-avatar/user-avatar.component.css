@@ -1,0 +1,11 @@
+.xb-mobile-user__image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; }
+.xb-mobile-user__large {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: block; }
+
+/*# sourceMappingURL=user-avatar.component.css.map */

@@ -1,0 +1,113 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title" *ngIf="categoryForm.value.categoryType == 'first_Category'">
+    Add a Main Category
+  </div>
+  <div class="sc-order-dialog__title" *ngIf="categoryForm.value.categoryType == 'second_Category'">
+    Add a Session
+  </div>
+  <div class="sc-order-dialog__title" *ngIf="categoryForm.value.categoryType == 'third_Category'">
+    Add a Subcategory
+  </div>
+  <form class="md-margin-top-3" [formGroup]="categoryForm" novalidate>
+    <div class="md-margin-top-2 xb-bold" *ngIf="this.data.categoryType == 'third_Category'">
+      Choose a category
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="this.data.categoryType == 'third_Category'">
+      <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <mat-select name="category" placeholder="Select a Category" formControlName="grandParent"
+                      (valueChange)="categoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item">
+              {{ item.data.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+        <mat-form-field fxFlex>
+          <mat-select name="subcategory" placeholder="Select a Subcategory" formControlName="parent"
+                      (valueChange)="subCategoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item">
+              {{ item.data.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+        <mat-form-field fxFlex>
+          <mat-select name="thirdcategory" placeholder="Select a Thirdcategory" formControlName="child"
+                      (valueChange)="thirdCategoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item">
+              {{ item.data.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="xb-bold">
+      Category Display Name
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput formControlName="name">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="categoryForm.get('name').invalid && (categoryForm.get('name').dirty ||
+              categoryForm.get('name').touched)" class="xb-input-error">
+        <div *ngIf="categoryForm.get('name').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+    <div class="xb-bold">
+      Category Index
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput formControlName="index">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="categoryForm.get('index').invalid && (categoryForm.get('index').dirty ||
+              categoryForm.get('index').touched)" class="xb-input-error">
+        <div *ngIf="categoryForm.get('index').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+    <div class="xb-bold" *ngIf="this.data.categoryType == 'third_Category'">
+      Category Image
+    </div>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center" *ngIf="this.data.categoryType == 'third_Category'">
+      <app-category-image-upload-category [(previewImgFile)]="image"
+                                        [(previewImgSrcs)]="image"></app-category-image-upload-category>
+    </div>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center" >
+      <div class="xb-bold">
+        Category Display
+      </div>
+      <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+        <mat-checkbox type="text" formControlName="show"></mat-checkbox>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="categoryForm.get('show').invalid && (categoryForm.get('show').dirty ||
+              categoryForm.get('show').touched)" class="xb-input-error">
+        <div *ngIf="categoryForm.get('show').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="error" class="xb-input-error">{{error}}</div>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="create()">SAVE</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">CANCEL</button>
+    </div>
+  </div>
+</div>

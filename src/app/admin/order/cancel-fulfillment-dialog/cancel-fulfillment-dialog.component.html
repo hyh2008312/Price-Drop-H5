@@ -1,0 +1,18 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    Cancel Fulfillment
+  </div>
+  <div class="sc-order-dialog__content">
+    <div>Once you cancel this fulfillment, the payment will be full refunded to your customer. It will also affect your performance metrics.</div>
+    <div class="md-margin-top-2">Are you sure you want to cancel this fulfillment now?</div>
+  </div>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="close()">NO</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="cancel()">YES</button>
+    </div>
+  </div>
+</div>

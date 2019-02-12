@@ -1,0 +1,17 @@
+<div class="sc-product-dialog">
+  <div class="sc-product-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-product-dialog__title">
+    {{data.title}}
+  </div>
+  <div class="md-margin-top-2" [ngClass]="{'sc-product-dialog__title-1': data.red}">
+    {{data.content}}
+  </div>
+  <div class="sc-product-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" [disabled]="disabled" (click)="confirm()">{{data.button}}</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">取消</button>
+    </div>
+  </div>
+</div>

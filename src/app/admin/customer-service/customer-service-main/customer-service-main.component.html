@@ -1,0 +1,78 @@
+<div class="xb-customer-service-main xb-customer-service__w960px">
+  <div class="xb-customer-service-main__title">
+    Customer Support Tickets
+  </div>
+  <div class="xb-customer-service-main__tip">
+    Please note that you must respond to your support tickets within 48 hours. Otherwise,SocialCommer Customer Support
+    team will process your tickets
+    and resolve them for the customer.
+  </div>
+  <div class="xb-customer-service-main__content   unicorn-dark-theme">
+    <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)">
+      <mat-tab label="Awaiting Response">
+        <!--<div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+          <form class="xb-customer-service-main__search" [formGroup]="searchForm"
+                fxLayout="row" fxLayoutAlign="start center">
+            <i class="material-icons">search</i>
+            <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                   placeholder="Search by customer"
+                   (keyup.enter)="changeProducts({index:0})"/>
+            <div class="xb-customer-service-main__search-close" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="searchKey != ''" (click)="clearSearchKey()">
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>-->
+        <app-customer-service-title [status]="1"></app-customer-service-title>
+        <ng-container *ngFor="let i of messageAwaitingList">
+          <div class="xb-customer-service-main__item-background">
+            <app-customer-service-item [product]="i" [status]="1"></app-customer-service-item>
+            <div class="xb-customer-service-main__item-line"></div>
+          </div>
+        </ng-container>
+        <div [ngStyle]="{'background-color':'white'}">
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 0)"
+                         *ngIf="messageAwaitingList && messageAwaitingList.length > 0">
+          </mat-paginator>
+        </div>
+      </mat-tab>
+      <mat-tab label="Responded ">
+        <app-customer-service-title [status]="2"></app-customer-service-title>
+        <ng-container *ngFor="let i of messageRespondedList">
+          <div class="xb-customer-service-main__item-background">
+            <app-customer-service-item [product]="i" [status]="2"></app-customer-service-item>
+            <div class="xb-customer-service-main__item-line"></div>
+          </div>
+        </ng-container>
+        <div [ngStyle]="{'background-color':'white'}">
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 1)"
+                         *ngIf="messageRespondedList && messageRespondedList.length > 0">
+          </mat-paginator>
+        </div>
+      </mat-tab>
+      <mat-tab label="Closed">
+        <app-customer-service-title [status]="3"></app-customer-service-title>
+        <ng-container *ngFor="let i of messageClosedList">
+          <div class="xb-customer-service-main__item-background">
+            <app-customer-service-item [product]="i" [status]="3"></app-customer-service-item>
+            <div class="xb-customer-service-main__item-line"></div>
+          </div>
+        </ng-container>
+        <div [ngStyle]="{'background-color':'white'}">
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 2)"
+                         *ngIf="messageClosedList && messageClosedList.length > 0">
+          </mat-paginator>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

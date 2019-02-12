@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="md-margin-top-4 md-margin-left-2">
+    <span class="md-dark-secondary xb-pointer" routerLink="../../">Company Information</span>
+    <span class="md-dark-secondary">></span><span class="xb-bold"> Edit Address</span>
+  </div>
+  <form class="xb-address__create-bg md-margin-top-3" [formGroup]="addressForm" novalidate>
+    <div>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Contact Name</div>
+          <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex="100">
+              <input matInput placeholder="Contact Name" formControlName="contactName">
+            </mat-form-field>
+          </div>
+          <div *ngIf="addressForm.get('contactName').invalid && (addressForm.get('contactName').dirty ||
+            addressForm.get('contactName').touched)" class="xb-input-error">
+            <div *ngIf="addressForm.get('contactName').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Phone Number</div>
+          <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex="100">
+              <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+            </mat-form-field>
+          </div>
+          <div *ngIf="addressForm.get('phoneNumber').invalid && (addressForm.get('phoneNumber').dirty ||
+            addressForm.get('phoneNumber').touched)" class="xb-input-error">
+            <div *ngIf="addressForm.get('phoneNumber').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Province</div>
+          <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex="100">
+              <mat-select name="province" placeholder="Province" formControlName="province">
+                <mat-option *ngFor="let state of stateList" [value]="state.id">
+                  {{ state.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="addressForm.get('province').invalid && (addressForm.get('province').dirty ||
+                addressForm.get('province').touched)" class="xb-input-error">
+            <div *ngIf="addressForm.get('province').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">City</div>
+          <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex="100">
+              <input matInput placeholder="City" formControlName="city">
+            </mat-form-field>
+          </div>
+          <div *ngIf="addressForm.get('city').invalid && (addressForm.get('city').dirty ||
+                addressForm.get('city').touched)" class="xb-input-error">
+            <div *ngIf="addressForm.get('city').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Address</div>
+          <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex="100">
+              <input matInput placeholder="Address" formControlName="address">
+            </mat-form-field>
+          </div>
+          <div *ngIf="addressForm.get('address').invalid && (addressForm.get('address').dirty ||
+            addressForm.get('address').touched)" class="xb-input-error">
+            <div *ngIf="addressForm.get('address').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Postal Code</div>
+          <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex="100">
+              <input matInput placeholder="Postal Code" formControlName="postcode">
+            </mat-form-field>
+          </div>
+          <div *ngIf="addressForm.get('postcode').invalid && (addressForm.get('postcode').dirty ||
+              addressForm.get('postcode').touched)" class="xb-input-error">
+            <div *ngIf="addressForm.get('postcode').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-promote__promote-text xb-bold">Default</div>
+        <div class="md-margin-left-4" fxLayout="row" fxLayoutAlign="start center">
+          <mat-slide-toggle color="accent" formControlName="default"></mat-slide-toggle>
+        </div>
+      </div>
+      <div *ngIf="addressForm.get('default').invalid && (addressForm.get('default').dirty ||
+            addressForm.get('default').touched)" class="xb-input-error">
+        <div *ngIf="addressForm.get('default').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="md-margin-top-4" fxLayout="row" fxLayoutAlign="start center">
+      <button mat-raised-button color="primary" type="button" (click)="edit()">
+        SAVE
+      </button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" type="button" routerLink="../../">
+          CANCEL
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

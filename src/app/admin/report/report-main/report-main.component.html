@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="xb-shop__title xb-shop__container">
+    Reports
+  </div>
+  <div class="md-margin-top-2 xb-shop__container" fxLayout="row" fxLayoutAlign="start center">
+    <div class="md-margin-right-2">Date Range</div>
+    <div class="unicorn-dark-theme">
+      <mat-form-field class="xb-shop__products-sort">
+        <mat-select [ngModel]="date" name="date" (valueChange)="changeSort($event, 0)">
+          <mat-option *ngFor="let item of dateList" [value]="item.value">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="xb-shop__products-margin-left md-margin-right-2">Sort By</div>
+    <div class="unicorn-dark-theme">
+      <mat-form-field class="xb-shop__products-sort">
+        <mat-select [ngModel]="salesSort" name="salesSort" (valueChange)="changeSort($event, 1)">
+          <mat-option *ngFor="let item of salesSortList" [value]="item.value">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="md-margin-top-2">
+    <app-admin-report-title></app-admin-report-title>
+  </div>
+  <div class="xb-shop__product-bg">
+    <div class="xb-shop__product-list" *ngFor="let item of sales;let i = index;">
+      <app-admin-report-item [status]="0" [product]="item" [index]="i"
+                             [page]="salesIndex" [pageSize]="pageSize"></app-admin-report-item>
+    </div>
+    <mat-paginator [length]="length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="changePage($event, 0)"
+                   *ngIf="sales && sales.length > 0">
+    </mat-paginator>
+    <div class="xb-shop__product-none" fxLayout="row" fxLayoutAlign="center center"
+         *ngIf="sales && sales.length <= 0">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+        <span class="md-dark-secondary">You don't have sales performance yet.</span>
+      </div>
+    </div>
+  </div>
+</div>

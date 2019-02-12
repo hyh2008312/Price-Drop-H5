@@ -1,0 +1,30 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    Attribute Type: {{data.name}}
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field fxFlex>
+      <mat-select name="attribute value" placeholder="Add Attribute Value" (valueChange)="add($event)">
+        <mat-option class="md-align-center" *ngFor="let item of data.attributeValueList" [value]="item.specificationValueContent">
+          {{ item.specificationValueContent }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-chip-list>
+    <mat-chip *ngFor="let item of data.attributesValue" [selectable]="selectable"
+              [removable]="removable" (removed)="remove(item)">
+      {{item}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="close()">CONFIRM</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">CANCEL</button>
+    </div>
+  </div>
+</div>

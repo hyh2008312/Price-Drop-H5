@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
+    <div class="sc-product__header"></div>
+
+    <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Campaign">
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" routerLink="./campaign/create">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="material-icons">add</i>
+              <span class="md-margin-left-1">Add Campaign</span>
+            </div>
+          </button>
+        </div>
+        <div class="md-margin-top-2">
+          <div class="sc-promote__promote-bg">
+            <app-lottery-promote-title [status]="0" ></app-lottery-promote-title>
+            <div class="md-margin-top-2"></div>
+            <div class="sc-promote__promote-list" *ngFor="let item of promoteAll;let i = index;">
+              <app-lottery-promote-item [status]="0" [index]="i" (promotionChange)="promotionChange($event)" [promote]="item"></app-lottery-promote-item>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event, 0)"
+                           *ngIf="promoteAll && promoteAll.length > 0">
+            </mat-paginator>
+            <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="promoteAll && promoteAll.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any campaign yet. </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Prize" >
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" routerLink="./prize/create">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="material-icons">add</i>
+              <span class="md-margin-left-1">Add Prize</span>
+            </div>
+          </button>
+        </div>
+        <div class="md-margin-top-2">
+          <app-award-title ></app-award-title>
+        </div>
+        <div class="sc-product__product-bg md-margin-top-2" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of prize;let i = index;">
+            <app-award-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-award-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 1)"
+                         *ngIf="prize && prize.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="prize && prize.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any awards yet. </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="sc-promotion-dialog">
+  <div class="sc-promotion-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-promotion-dialog__title">Enter Product by ID</div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+    <div>Product ID</div>
+    <div class="md-margin-left-2 unicorn-dark-theme">
+      <mat-form-field class="sc-promotion-dialog__width-1">
+        <input matInput type="number" placeholder="Min Id" [(ngModel)]="min">
+      </mat-form-field>
+    </div>
+    <div class="md-margin-left-2 unicorn-dark-theme">
+      <mat-form-field class="sc-promotion-dialog__width-1">
+        <input matInput type="number" placeholder="Max Id" [(ngModel)]="max">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="confirm()">Save</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">Cancel</button>
+    </div>
+  </div>
+</div>

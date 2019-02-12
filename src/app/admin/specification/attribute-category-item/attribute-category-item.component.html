@@ -1,0 +1,45 @@
+<form class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch" [formGroup]="attributeForm" novalidate>
+  <div class="md-margin-right-2" fxFlex="35" fxLayout="column" fxLayoutAlign="space-between start">
+    <div class="sc-product__product-title" *ngIf="!isEdit">
+      {{product.name}}
+    </div>
+    <mat-form-field fxFlex="100" *ngIf="isEdit">
+      <mat-select name="attribute name" placeholder="Select Attribute Name" formControlName="specificationId">
+        <mat-option class="md-align-center" *ngFor="let item of attributeList" [value]="item.id">
+          {{ item.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="md-margin-right-2" fxFlex="25" fxLayout="column" fxLayoutAlign="space-between start">
+    <div class="sc-product__product-title" *ngIf="!isEdit">
+      {{product.sort}}
+    </div>
+    <mat-form-field fxFlex="100" *ngIf="isEdit">
+      <input class="md-align-center" type="text" matInput formControlName="sort">
+    </mat-form-field>
+  </div>
+  <div class="md-margin-right-2" fxFlex="25" fxLayout="column" fxLayoutAlign="center start">
+    <div class="sc-product__product-title" *ngIf="!isEdit">
+      {{product.specificationCount}}
+    </div>
+    <mat-form-field fxFlex="100" *ngIf="isEdit">
+      <input class="md-align-center" type="text" matInput formControlName="specificationCount">
+    </mat-form-field>
+  </div>
+  <div class="sc-product__product-action-buttons sc__accent-dark"
+       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="15">
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!isEdit">
+      <div>
+        <i class="material-icons md-dark-secondary xb-pointer" (click)="edit()">edit</i>
+      </div>
+      <div class="md-margin-left-2">
+        <i class="material-icons md-dark-secondary xb-pointer" (click)="delete()">delete</i>
+      </div>
+      <div class="md-margin-left-2">
+        <i class="material-icons md-dark-secondary xb-pointer" (click)="add()">add</i>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="save()" *ngIf="isEdit">Save</button>
+  </div>
+</form>

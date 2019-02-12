@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAIE,qBAAO;EACL,OAAO,EAAE,KAAK;EACd,UAAU,EAAE,MAAM;EAClB,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,SAAS,EAAE,IAAI;EACf,UAAU,EAAE,IAAI;EAChB,YAAY,EAAE,GAAG;EACjB,KAAK,EAAE,mBAAe;AAGxB,sBAAQ;EACN,KAAK,ECfO,OAAO",
+"sources": ["score-points.component.scss","../../../styles/utils/_color.scss"],
+"names": [],
+"file": "score-points.component.css"
+}

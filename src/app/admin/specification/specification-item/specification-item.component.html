@@ -1,0 +1,18 @@
+<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
+  <div class="md-margin-right-2" fxFlex="65" fxLayout="column" fxLayoutAlign="space-between start">
+    <div class="sc-product__product-title" >
+      <span *ngFor="let item of parent">{{item.data.name}} > </span>
+      {{product.data.name}}
+    </div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="20" fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-product__product-title" >
+      {{product.children && product.children.length > 0 ? product.children.length: 0}}
+    </div>
+  </div>
+  <div class="sc-product__product-action-buttons sc__accent-dark"
+       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="15">
+    <button mat-raised-button color="primary" (click)="edit()"
+            *ngIf="!product.children || product.children.length == 0">Edit</button>
+  </div>
+</div>

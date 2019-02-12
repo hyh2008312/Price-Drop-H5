@@ -14,82 +14,44 @@
 }
 
 // perk points animation
-.animation-add-to-cart{
+.animation-perks-points{
 
-  @include prefixer(animation, perks-points-flow .5s cubic-bezier(1,.5,.45,1) .1s 1 forwards, $prefix-list);
+  @include prefixer(animation, perks-points-flow 2s linear .1s 1 forwards, $prefix-list);
 
   @at-root {
 
     @include prefix-keyframes(perks-points-flow, $prefix-list) {
       0%   {
-        left: 50%;
+        opacity: 0;
         top:40%;
-        @include prefix-content(transform,translateX(-50%));
-      }
-      25%   {
-        @include prefix-content(transform,translateX(-50%));
+        @include prefix-content(transform,translateX(-50%) scale(.8, .8));
       }
       50%  {
-        @include prefix-content(transform,translateX(-50%));
+        opacity: 1;
+        @include prefix-content(transform,translateX(-50%) scale(.9, .9));
       }
       75%  {
+        opacity: 1;
       }
-      99% {
-        left: 90%;
-        top:16px;
-        @include prefix-content(transform,translateX(-50%));
+      100% {
+        opacity: 0;
+        top:35%;
+        @include prefix-content(transform,translateX(-50%) scale(1, 1));
         display: none;
       }
     }
   }
 }
 
-.animation-transform-auto{
+.animation-height-hide{
 
-  @include prefixer(animation, transform-auto .8s cubic-bezier(1,.5,.45,1) 0s 1 normal, $prefix-list);
-
-  @at-root {
-
-    @include prefix-keyframes(transform-auto, $prefix-list) {
-      0%   { opacity: 1;}
-      20%  { opacity: 0;}
-      100% { opacity: 1;}
-    }
-  }
-}
-
-.animation-transform-auto-1{
-
-  @include prefixer(animation, transform-auto-1 .5s cubic-bezier(1,.5,.45,1) 0s 1 normal, $prefix-list);
+  @include prefixer(animation, height-hide .2s linear 0s 1 normal, $prefix-list);
 
   @at-root {
 
-    @include prefix-keyframes(transform-auto-1, $prefix-list) {
-      0%   { opacity: 1;}
-      20%  { opacity: 0;}
-      100% { opacity: 1;}
-    }
-  }
-}
-
-.animation-background-position{
-
-  @include prefixer(animation, background-position-scroll 20s cubic-bezier(1,.8,.8,1) 0.5s infinite alternate, $prefix-list);
-
-  @at-root {
-
-    @include prefix-keyframes(background-position-scroll, $prefix-list) {
-      0%   { background-position-y: 0;}
-      15%  { background-position-y: 0;}
-      20%  { background-position-y: -150px;}
-      35%  { background-position-y: -150px;}
-      40%  { background-position-y: -300px;}
-      55%  { background-position-y: -300px;}
-      60%  { background-position-y: -450px;}
-      75%  { background-position-y: -450px;}
-      80%  { background-position-y: -600px;}
-      95%  { background-position-y: -600px;}
-      100% { background-position-y: -750px;}
+    @include prefix-keyframes(height-hide, $prefix-list) {
+      0%   { height: 56px;}
+      100% { height: 0;}
     }
   }
 }

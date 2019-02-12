@@ -8,20 +8,20 @@ import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent{
+export class AppComponent {
   title = 'SocialCommer';
 
   sub: any;
   sub1: any;
 
-  isLoadingShow: boolean = true;
+  isLoadingShow = true;
 
   constructor(
     private userService: UserService,
     private authenticationService: AuthenticationService,
     private angulartics2GoogleTagManager: Angulartics2GoogleTagManager
   ) {
-    let self = this;
+    const self = this;
 
 
     window.document.addEventListener('PrebootComplete', () => {
@@ -30,10 +30,10 @@ export class AppComponent{
     });
 
     // 防止懒加载重定向
-    if(!window['userInfo']) {
+    if (!window['userInfo']) {
       window['userInfo'] = true;
       self.userService.currentUser.subscribe((data) => {
-        if( data == null ) {
+        if ( data == null ) {
           self.userService.getUser().then((data) => {
             self.userService.addUser(data);
             // self.userService.addStore(data.store[0]);

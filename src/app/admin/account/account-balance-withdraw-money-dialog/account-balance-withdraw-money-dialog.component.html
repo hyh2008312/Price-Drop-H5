@@ -1,0 +1,82 @@
+<div class="xb-account-money-dialog">
+  <div [hidden]="!(status===1)">
+    <div class="xb-account-money-dialog__title">Withdraw Money</div>
+    <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="start start">
+      <div class="xb-account-money-dialog__14bold xb-account-money-dialog__color54">
+        Available balance
+      </div>
+      <div class="xb-account-money-dialog__14regular md-margin-left-4">$ 5.00</div>
+    </div>
+    <div class="xb-account-money-dialog__payment md-margin-top-3">Payment Information</div>
+    <div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+        <div class="xb-account-money-dialog__payment-name">服务商</div>
+        <div class="xb-account-money-dialog__payment-content md-margin-left-4">UMPAY</div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+        <div class="xb-account-money-dialog__payment-name">银行名称</div>
+        <div class="xb-account-money-dialog__payment-content md-margin-left-4">Union Pay</div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+        <div class="xb-account-money-dialog__payment-name">开户行名称</div>
+        <div class="xb-account-money-dialog__payment-content md-margin-left-4">Union Pay</div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+        <div class="xb-account-money-dialog__payment-name">收款人银行账户</div>
+        <div class="xb-account-money-dialog__payment-content md-margin-left-4">62222020403025787043</div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+        <div class="xb-account-money-dialog__payment-name">公司名称</div>
+        <div class="xb-account-money-dialog__payment-content md-margin-left-4">SocialCommer</div>
+      </div>
+    </div>
+    <div class="xb-account-money-dialog__payment md-margin-top-4">Withdraw Amount</div>
+    <div class="xb-account-money-dialog__14regular md-margin-top-3">The fund can only be withdrawn when your available
+      balance reaches $10.
+    </div>
+    <div class="md-margin-top-4" fxLayout="row" fxLayoutAlign="end start">
+      <div class="xb-account-money-dialog__payment-withdraw">Withdraw Now</div>
+      <div class="xb-account-money-dialog__payment-cancel" (click)="close()">Cancel</div>
+    </div>
+  </div>
+  <div [hidden]="!(status===2)">
+    <div class="xb-account-money-dialog__title">Withdraw Money</div>
+    <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="start start">
+      <div class="xb-account-money-dialog__14bold xb-account-money-dialog__color54">
+        Available balance
+      </div>
+      <div class="xb-account-money-dialog__14regular md-margin-left-4">$ 5.00</div>
+    </div>
+    <div class="xb-account-money-dialog__payment md-margin-top-3">Payment Information</div>
+    <div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+        <div class="xb-account-money-dialog__payment-name">Paypal Account</div>
+        <div class="xb-account-money-dialog__payment-content md-margin-left-4">Luzhenqiang@socialCommer.com</div>
+      </div>
+    </div>
+    <div class="xb-account-money-dialog__payment md-margin-top-4">Withdraw Amount</div>
+    <div fxLayout="row" fxLayoutAlign="start center" class="xb-account-money-dialog__14regular md-margin-top-3">
+      <div>$</div>
+      <div class="md-margin-left-1">
+        <mat-form-field>
+          <input type="text" matInput [(ngModel)]="money">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="md-margin-top-4" fxLayout="row" fxLayoutAlign="end start">
+      <div class="xb-account-money-dialog__payment-withdraw" style="background-color: black">Withdraw Now</div>
+      <div class="xb-account-money-dialog__payment-cancel" (click)="close()">Cancel</div>
+    </div>
+  </div>
+  <div [hidden]="!(status===3)">
+    <div class="xb-account-money-dialog__title">Withdraw Money</div>
+    <div class="xb-account-money-dialog__14regular md-margin-top-3">
+      To withdraw money from your account,please add your payment information first.
+    </div>
+    <div class="md-margin-top-4" fxLayout="row" fxLayoutAlign="end start">
+      <div class="xb-account-money-dialog__payment-withdraw" style="background-color: black">Add payment Information
+      </div>
+      <div class="xb-account-money-dialog__payment-cancel" (click)="close()">Cancel</div>
+    </div>
+  </div>
+</div>

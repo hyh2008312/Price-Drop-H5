@@ -1,0 +1,75 @@
+@import "../../../styles/utils/index.scss";
+@import "../../../styles/variables.scss";
+
+.preview-label {
+  width: 160px;
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+
+  &__not-upload{
+    border: 2px dashed rgba(0,0,0,.12);
+    .material-icons{
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 40px;
+      text-align: center;
+      color: rgba(0,0,0,.54);
+    }
+  }
+
+  &__upload{
+    border: 1px solid #EDEDED;
+  }
+
+  input{
+    display: none;
+  }
+
+  .popup-mask{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top:0;
+    background-color: rgba(0, 0, 0, .38);
+    .material-icons{
+      margin-right: 8px;
+      margin-top: 8px;
+      color: $whiteColor;
+    }
+  }
+
+  &:hover{
+    .popup-mask{
+      display: block;
+    }
+  }
+
+  &__cropper-bg{
+    border: 1px solid rgba(0,0,0,.12);
+    width: 300px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    >img{
+      width: 300px;
+      height: 300px;
+    }
+  }
+
+  &__hide{
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+
+  &__visible{
+    visibility: visible;
+    width: auto;
+    height: 300px;
+  }
+}

@@ -1,0 +1,101 @@
+@import "../../../styles/utils/_index";
+@import "../../../styles/_variables";
+
+.xb-navigation-header{
+  height: 72px;
+
+  @include xb-xs-screen{
+    height: 56px;
+  }
+
+  &__image{
+    width: 180px;
+    @include xb-xs-screen{
+      width: 140px;
+    }
+  }
+
+  &__margin-left{
+    margin-left: 16px;
+    &-logo{
+      position: relative;
+    }
+    &-badge{
+      position: absolute;
+      top: -2px;
+      left: 100%;
+      background-color: #fec32d;
+      color: $whiteColor;
+      line-height: 14px;
+      font-size: 10px;
+      border-radius: 2px;
+      padding: 0 4px;
+    }
+  }
+
+  &__login{
+    font-size: 16px;
+    color: $whiteColor;
+
+    &-active{
+      color: $primaryColor;
+    }
+  }
+
+  &__button{
+    font-size: 16px;
+    color: $primaryColor;
+    border: 1px solid $primaryColor;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 20px;
+    width: 100px;
+    display: block;
+    margin-left: 32px;
+    @include box-shadow(0 0 2px 0 $primaryColor);
+
+    &:hover{
+      color: $whiteColor;
+      background-color: $primaryColor;
+    }
+
+    @include xb-xs-screen{
+      line-height: 36px;
+      border-radius: 18px;
+      margin-left: 16px;
+    }
+  }
+
+  &__menu{
+    color: $primaryColor;
+    padding: 16px;
+    font-size: 24px;
+  }
+
+  &__mask{
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  &__black{
+    background: $blackColor;
+    height: 56px;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+  }
+
+  &__list{
+    background: $blackColor;
+    height: 48px;
+    text-align: center;
+    color: $whiteColor;
+    line-height: 48px;
+  }
+
+}
+

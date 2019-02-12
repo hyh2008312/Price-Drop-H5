@@ -1,0 +1,13 @@
+<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
+  <div class="md-margin-right-2" fxFlex="90" fxLayout="column" fxLayoutAlign="space-between start">
+    <div class="sc-product__product-title" >
+      {{product.name}}
+    </div>
+  </div>
+  <div class="sc-product__product-action-buttons sc__accent-dark"
+       fxLayout="row" fxLayoutAlign="center center" fxFlex="10">
+    <i class="material-icons md-dark-secondary xb-pointer" (click)="edit()">edit</i>
+    <div class="md-margin-left-1"></div>
+    <i class="material-icons md-dark-secondary xb-pointer" (click)="delete()">delete</i>
+  </div>
+</div>

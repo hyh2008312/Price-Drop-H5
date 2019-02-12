@@ -1,0 +1,118 @@
+<div class="unicorn-dark-theme">
+  <form [formGroup]="promotionForm" novalidate>
+    <div class="md-margin-top-3 sc-promote__create-bg">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Activity Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Template Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{templateName}}
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Color Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="color">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Tab Color Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="tabColor">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="md-margin-top-2">
+        <div class="sc-promote__promote-text md-margin-bottom-2 xb-bold">Activity Tab Image</div>
+        <app-topic-image-upload-additional [(previewImgFile)]="additionalList"
+                                           [previewImgSrcs]="additionalSrcs"></app-topic-image-upload-additional>
+      </div>
+      <div class="md-margin-top-2">
+        <div class="sc-promote__promote-text md-margin-bottom-2 xb-bold">Activity Banner</div>
+        <app-topic-image-upload-main [(previewImgFile)]="image"
+                                     [(previewImgSrcs)]="image"></app-topic-image-upload-main>
+      </div>
+      <div class="md-padding-top-3" fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" type="button" (click)="save()">
+          SAVE
+        </button>
+        <div class="md-margin-left-2">
+          <button mat-button color="primary" type="button" routerLink="../../">
+            CANCEL
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="md-margin-top-3 sc-promote__create-text" fxLayout="row" fxLayoutAlign="start center">
+    <div class="sc-promote__promote-text xb-bold">Add Subevent for This Event:</div>
+    <div class="md-margin-left-3 sc__accent-dark">
+      <button mat-raised-button color="primary" type="button" (click)="addTabName()">
+        Add Subevent
+      </button>
+    </div>
+    <div class="md-margin-left-3 sc__accent-dark">
+      <button mat-raised-button color="accent" type="button" routerLink="../">
+        Back
+      </button>
+    </div>
+  </div>
+  <div class="md-margin-top-2"></div>
+  <mat-tab-group *ngIf="subevents.length > 0" color="primary" (selectedTabChange)="getPromotionProductList($event)"  [(selectedIndex)]="selectedIndex">
+    <mat-tab *ngFor="let item of subevents">
+      <ng-template mat-tab-label>
+        {{item.name == ''? 'Empty Subevent': item.name}}
+      </ng-template>
+      <div class="md-margin-top-3 sc-promote__create-text sc__accent-dark" fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-promote__promote-text xb-bold">Add Product for {{item.name}}:</div>
+        <div class="md-margin-left-3 sc__accent-dark">
+          <button mat-raised-button color="primary" type="button" (click)="selectProduct(item.id)">
+            Select
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+          <div class="sc-promote__promote-text xb-bold md-margin-right-2">Tab Name:</div>
+          <mat-form-field >
+            <input matInput type="text" placeholder="" [(ngModel)]="tabName">
+          </mat-form-field>
+          <div class="md-margin-left-2"></div>
+          <button mat-raised-button color="primary" type="button" (click)="changeName($event)">
+            Change
+          </button>
+          <div class="md-margin-left-2"></div>
+          <button mat-raised-button color="accent" type="button" (click)="deleteName($event)">
+            Delete
+          </button>
+        </div>
+
+      </div>
+      <div class="md-margin-top-3 md-padding-bottom-3 sc-promote__promote-bg">
+        <app-promote-product-title></app-promote-product-title>
+        <div class="sc-promote__promote-list"
+             *ngFor="let item of promotionProducts;let i = index;">
+          <app-promote-product-item [promote]="item" [index]="i" [promoteId]="item.id"
+                                    (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
+        </div>
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="changePage($event)"
+                       *ngIf="promotionProducts && promotionProducts.length > 0">
+        </mat-paginator>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

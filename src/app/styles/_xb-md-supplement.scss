@@ -72,7 +72,7 @@ a.xb2-nostyle-link {
   font-weight: 500;
 }
 $directions: left top right bottom;
-$sizes: 0 1 2 3 4 5;
+$sizes: 0 1 2 3 4;
 @each $direction in $directions {
   @each $size in $sizes {
     .md-margin-#{$direction}-#{$size} {
@@ -138,6 +138,7 @@ $aligns: left right center justify;
 
 .ql-editor, .ql-container{
   height: auto;
+  max-height: 600px;
   box-sizing: border-box;
   @include xb-xs-screen{
     font-size: 10px !important;
@@ -170,12 +171,4 @@ $aligns: left right center justify;
 
 .xb-large-star{
   font-size: 16px;
-}
-
-.xb-loading{
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999999;
 }

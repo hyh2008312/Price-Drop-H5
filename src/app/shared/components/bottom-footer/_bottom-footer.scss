@@ -1,0 +1,35 @@
+@import "../../../styles/utils/_index";
+@import "../../../styles/_variables";
+
+.xb-bottom-footer{
+
+  &__footer{
+    background-color: #231d1a;
+    height: 72px;
+    @include xb-xs-screen{
+      height: auto;
+    }
+
+    &-text{
+      padding: 0 20px;
+      font-size: 14px;
+      cursor: pointer;
+      color: $whiteColor;
+
+      @include xb-xs-screen{
+        padding: 8px;
+        color: rgba(255,255,255,.54);
+        text-align: center;
+      }
+    }
+
+    &-inner{
+      height: 72px;
+
+      @include xb-xs-screen{
+        padding: 24px 0;
+        height: auto;
+      }
+    }
+  }
+}

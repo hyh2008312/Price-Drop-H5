@@ -1,0 +1,126 @@
+@import "../../styles/utils/index";
+@import "../../styles/variables";
+
+.xb-about {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
+  &__left-2{
+    margin-left: 20px;
+  }
+  &__banner {
+    height: 368px;
+    background-image: url("https://media.xberts.com/collector/source/web/pic/use-privacy.jpg");
+    background-position: center;
+    background-size: auto 110%;
+    background-repeat: no-repeat;
+    @include xb-xs-screen{
+      height: auto;
+      padding-bottom: 56px;
+    }
+  }
+
+  &__navigation {
+    height: 56px;
+    &-login {
+      font-size: 16px;
+      color: $whiteColor;
+    }
+
+    &-button {
+      font-size: 16px;
+      color: $whiteColor;
+      background-color: $primaryColor;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 16px;
+      width: 120px;
+      display: block;
+    }
+    &-title {
+      font-size: 48px;
+      font-weight: 300;
+      color: $whiteColor;
+      text-align: center;
+      margin-top: 120px;
+
+      @include xb-xs-screen{
+        font-size: 24px;
+        line-height: 32px;
+        margin-top: 56px;
+      }
+    }
+  }
+
+  &-container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 686px;
+    width: 100%;
+    @include xb-xs-screen{
+      padding: 0 16px;
+    }
+    @include xb-sm-screen{
+      padding: 0 16px;
+    }
+  }
+  &-privacy {
+    &__content-1 {
+      font-size: 16px;
+      line-height: 28px;
+      margin-top: 32px;
+      color: black;
+      @include light();
+    }
+    &__bold{
+      font-weight: bold;
+    }
+    &__content-2 {
+      font-size: 16px;
+      line-height: 28px;
+      color: black;
+      @include light();
+      &-title {
+        font-weight: bold;
+        color: black;
+        font-size: 16px;
+        line-height: 28px;
+      }
+    }
+    &__content-3 {
+      font-size: 16px;
+      line-height: 28px;
+      margin-top: 32px;
+      color: black;
+      margin-bottom: 72px;
+      @include light();
+    }
+  }
+  &__footer{
+    &-top{
+      background-color: #252525;
+      color: rgba(255,255,255,.5);
+      >div{
+        height: 80px;
+      }
+    }
+
+    &-text{
+      padding: 0 24px;
+      font-size: 16px;
+      color: $whiteColor;
+    }
+
+    &-bottom{
+      background-color: #252525;
+      color: rgba(255,255,255,.5);
+      overflow: hidden;
+    }
+  }
+  &-margin-top-2{
+    margin-top: 0;
+    @include xb-xs-screen{
+      margin-top: 8px;
+    }
+  }
+}

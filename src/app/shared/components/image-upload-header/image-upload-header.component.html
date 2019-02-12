@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+  <label class="preview-label" fxLayout="row" fxLayoutAlign="center center"
+    [ngClass]="{'preview-label__not-upload': !upload, 'large-header': larger}">
+    <input type="file" (change)="previewPic($event)" >
+    <i class="material-icons" *ngIf="!upload">photo_camera</i>
+    <img src="{{previewImgSrcs}}" *ngIf="upload">
+    <app-image-preview-loading [percent]="loading" *ngIf="!closeAnimate && !closeLoading"
+                               (loadingChange)="loadingChange($event)"></app-image-preview-loading>
+  </label>
+  <label class="md-margin-left-3 preview-label__color" *ngIf="!larger">
+    <input type="file" (change)="previewPic($event)" >Change Picture
+  </label>
+</div>

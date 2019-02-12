@@ -1,0 +1,103 @@
+<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
+  <div *ngIf="status == 1" fxFlex="5">
+    <mat-checkbox [checked]="product.isChecked" (change)="changeChecked($event)"></mat-checkbox>
+  </div>
+  <div class="sc-product__product-image" fxFlex="none">
+    <img [src]="product.mainImage">
+  </div>
+  <div class="md-margin-right-2" fxFlex="35" fxLayout="column" fxLayoutAlign="space-between start">
+    <div class="sc-product__product-title" >{{product.title}}</div>
+    <div>{{product.variantNum >= 2 ? product.variantNum + ' variants': ''}}</div>
+  </div>
+  <div class="sc-product__product-id md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="center center">
+    {{product.totalStockrecord}}</div>
+  <div class="sc-product__product-category md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div *ngIf="product.saleUnitPrice>0">
+      MRP: {{ product.saleUnitPrice | currency: currency: true }}</div>
+    <div *ngIf="product.costPrice>0">
+      Cost: {{ product.costPrice | currency: currency: true  }}
+    </div>
+    <div class="sc-product__product-price-sale" *ngIf="product.unitPrice>0">
+      Selling Price: {{ product.unitPrice | currency: currency: true  }}
+    </div>
+    <div *ngIf="product.lowestPrice>=0">
+      lowest: {{ product.lowestPrice | currency: currency: true  }}
+    </div>
+    <div class="line-through" *ngIf="product.lowestPrice == 0 && product.saleUnitPrice == 0">
+      &nbsp;&nbsp;&nbsp;
+    </div>
+  </div>
+  <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="space-around center">
+    <div>
+      {{product.purchaseMethod}}
+    </div>
+  </div>
+  <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 0">
+    <div>
+      Published
+    </div>
+  </div>
+  <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 1">
+    <div>
+      Pending
+    </div>
+  </div>
+  <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 2">
+    <div>
+      Disapproved
+    </div>
+  </div>
+  <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 3">
+    <div>
+      Unpublished
+    </div>
+  </div>
+  <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 4">
+    <div>
+      Drafts
+    </div>
+  </div>
+  <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 5">
+    <div>
+      Drops
+    </div>
+  </div>
+  <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 6">
+    <div>
+      Featured
+    </div>
+  </div>
+
+  <div class="sc-product__product-action-buttons sc__accent-dark"
+       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="15">
+    <button mat-raised-button color="primary" *ngIf="false && status == 0 && !product.isSelected && isSuperuser" (click)="add()">Add To Featured</button>
+    <button mat-raised-button color="accent" *ngIf="false && status == 0 && product.isSelected && isSuperuser" (click)="deleteSelected()">Remove Featured</button>
+    <div class="md-margin-top-1" *ngIf="status == 0"></div>
+    <button mat-raised-button color="primary" *ngIf="status == 0 && product.purchaseMethod == 'direct'" (click)="addToDrop()">Add To Drop</button>
+    <button mat-raised-button color="accent" *ngIf="status == 0 && product.purchaseMethod == 'drop'" (click)="deleteDrop()">Remove Drop</button>
+    <button mat-button color="primary" *ngIf="status == 6 && isSuperuser" (click)="deleteSelectedNew()">Remove Featured</button>
+    <button mat-button color="primary" *ngIf="status == 5" (click)="deleteDropNew()">Remove Drop</button>
+    <a fxLayout="column" fxLayoutAlign="center stretch" *ngIf="this.status == 4" routerLink="../draftedit/{{product.id}}" target="_blank">
+      <button mat-button color="primary">Edit</button>
+    </a>
+    <a fxLayout="column" fxLayoutAlign="center stretch" *ngIf="this.status == 6" routerLink="../edit/{{product.productId}}" target="_blank">
+      <button mat-button color="primary">Edit</button>
+    </a>
+    <a fxLayout="column" fxLayoutAlign="center stretch" *ngIf="this.status != 4 && this.status != 6" routerLink="../edit/{{product.id}}" target="_blank">
+      <button mat-button color="primary">Edit</button>
+    </a>
+    <button mat-button color="primary" *ngIf="(status == 1 || status == 3) && product.purchaseMethod != 'flash'" (click)="publish()">Publish</button>
+    <button mat-button color="primary" *ngIf="status == 1 && product.purchaseMethod != 'flash'" (click)="disapprove()">Disapprove</button>
+    <button mat-button color="primary" *ngIf="status == 0 && product.purchaseMethod != 'flash'" (click)="unpublish()">Unpublish</button>
+  </div>
+</div>

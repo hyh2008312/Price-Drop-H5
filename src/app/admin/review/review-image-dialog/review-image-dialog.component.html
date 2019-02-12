@@ -1,0 +1,13 @@
+<div class="sc-product-dialog">
+  <div class="sc-product-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-product-dialog__title">
+    Review Images
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="center center">
+    <div class="sc-product-dialog__slide">
+      <app-left-products-image [images]="data.uploadImages"></app-left-products-image>
+    </div>
+  </div>
+</div>

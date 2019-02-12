@@ -1,0 +1,16 @@
+<div class="sc-promotion-dialog__large">
+  <div class="sc-promotion-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-promotion-dialog__title">
+    {{data.title}}
+  </div>
+  <div class="sc-promotion-dialog__bg md-margin-top-3">
+    <app-promote-product-variant-title></app-promote-product-variant-title>
+    <div *ngFor="let item of variantPromotions;let i = index;">
+      <app-promote-change-variant-item [variant]="item" [index]="i" [promotionId]="data.promotionId"
+                                       [variantLength]="variantPromotions.length"
+         (variantChange)="variantChange($event)"></app-promote-change-variant-item>
+    </div>
+  </div>
+</div>

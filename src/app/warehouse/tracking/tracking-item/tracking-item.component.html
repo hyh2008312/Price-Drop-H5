@@ -1,0 +1,79 @@
+<div>
+  <div class="sc-product__product-item-top" fxLayout="row" fxLayoutAlign="start center">
+    <div>拣货单号: {{product.pickNumber}}</div>
+    <div class="md-margin-left-3">创建日期: {{product.created | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-left-3" *ngIf="product.pickStatus == 'Packaging Completed'">拣货日期: {{product.packagingTime | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-left-3" *ngIf="product.warehouseName">仓库: {{product.warehouseName}}</div>
+  </div>
+  <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="md-margin-right-2" fxFlex="60" fxLayout="column" fxLayoutAlign="start stretch">
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let item of product.pickVariants;let i = index;">
+        <div class="sc-product__product-image" fxFlex="none">
+          <img class="xb-pointer" [src]="item.mainImage" (click)="openLargeImage(item)">
+        </div>
+        <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
+          <div class="sc-product__product-title md-dark-secondary" >{{item.title}}</div>
+          <div>
+            <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+              <div class="xb-bold">SKU编码: {{item.sku}}</div>
+              <i class="material-icons md-dark-secondary sc-product__product-title md-margin-left-1 xb-pointer" ngxClipboard [cbContent]="item.sku" (cbOnSuccess)="copy($event)">file_copy</i>
+            </div>
+            <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+              <div>订单: {{item.orderNumber}}</div>
+              <div class="md-margin-left-2" *ngIf="item.attribute != ''">规格: {{item.attribute}}</div>
+              <div class="md-margin-left-2 sc-product__product-red">数量: {{item.quantity}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10"
+         fxLayout="column" fxLayoutAlign="center center">
+      <div *ngIf="product.pickStatus == 'Pending Packaging'">等待拣货</div>
+      <div *ngIf="product.pickStatus == 'Packaging Completed'">拣货已完成</div>
+      <div *ngIf="product.pickStatus == 'Package Deleted'">已删除</div>
+      <div *ngIf="product.pickStatus == 'Not Found'">找不到产品</div>
+    </div>
+    <div class="sc-product__product-category md-margin-right-2" fxFlex="10"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{ product.internationalTrackingNumber }}
+    </div>
+    <div class="sc-product__product-category md-margin-right-2" fxFlex="10"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{product.internationalCarrier }}
+    </div>
+    <div class="sc-product__product-category md-margin-right-2" fxFlex="5"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{ product.isBattery? '是':'否' }}
+    </div>
+    <div class="sc-product__product-category md-margin-right-2" fxFlex="5"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{ product.isCod? '是':'否' }}
+    </div>
+    <div class="sc-product__product-price sc__accent-dark" fxFlex="10"
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <div class="md-margin-top-2"></div>
+      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="edit()">编辑</button>
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
+      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="openNotesDialog()">备注</button>
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'" ></div>
+      <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'"
+              (click)="changeStatus()">已打包出库</button>
+      <!--<div class="md-margin-top-1" *ngIf="product.pickStatus == 'Packaging Completed'" ></div>-->
+      <!--<button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Packaging Completed'"-->
+              <!--(click)="changeStatus()">取消打包出库</button>-->
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
+      <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging'"
+              (click)="notFountStatus()">找不到产品</button>
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed' || product.pickStatus == 'Not Found'"></div>
+      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed' || product.pickStatus == 'Not Found'"
+              (click)="delete()">删除</button>
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Package Deleted'"></div>
+      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Package Deleted'"
+              (click)="delete()">取消删除</button>
+    </div>
+  </div>
+  <div class="sc-product__product-item-bottom" *ngIf="product.notes">
+    <div *ngIf="product.notes">备注: {{product.notes}}</div>
+  </div>
+</div>

@@ -22,7 +22,10 @@
         "_styles.scss",
         "app/styles/main.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/echarts/dist/extension/bmap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/browser/environment.ts",
@@ -49,7 +52,10 @@
         "_styles.scss",
         "app/styles/main.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/echarts/dist/extension/bmap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/browser/environment.ts",
@@ -75,7 +81,10 @@
         "_styles.scss",
         "app/styles/main.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/echarts/dist/extension/bmap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/server/environment.ts",
@@ -100,7 +109,10 @@
         "_styles.scss",
         "app/styles/main.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/echarts/dist/extension/bmap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/browser/environment.ts",
@@ -125,7 +137,10 @@
         "_styles.scss",
         "app/styles/main.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/echarts/dist/extension/bmap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/server/environment.ts",
@@ -151,7 +166,10 @@
         "_styles.scss",
         "app/styles/main.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/echarts/dist/extension/bmap.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/browser/environment.ts",

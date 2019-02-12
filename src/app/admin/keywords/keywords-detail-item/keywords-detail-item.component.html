@@ -1,0 +1,7 @@
+<div class="xb-account-item" fxLayout="row" fxLayoutAlign="start center">
+  <div class="xb-account-item__text" fxFlex="60">{{item.keyword}}</div>
+  <div class="xb-account-item__text md-align-center" fxFlex="20">{{item.productCount}}</div>
+  <div class="xb-account-item__text md-align-center" fxFlex="20">
+    {{item.created | amTz:'Asia/Kolkata' | amDateFormat:'YYYY, MM.DD, hh:mm A'}}
+  </div>
+</div>

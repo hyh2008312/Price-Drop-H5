@@ -1,0 +1,141 @@
+<div class="sc-order__product">
+  <div class="container md-padding-bottom-2">
+    <div class="md-margin-top-4 md-margin-left-2 sc-order__detail-title-2">
+      <span class="md-dark-secondary xb-pointer" routerLink="../../">My Order</span> <span class="md-dark-secondary">></span>
+      <span class="xb-bold">Order Details</span>
+    </div>
+    <div class="sc-order__detail-container md-margin-top-2">
+      <div class="sc-order__detail-title sc-order__detail-margin-left-1">Order Details</div>
+      <div class="sc-order__detail-margin-left-1 md-margin-top-3" fxLayout="row" fxLayoutAlign="start center">
+        <div class="xb-bold">Order Number</div>
+        <div class="md-margin-left-2">
+          {{order.number}}
+        </div>
+        <div class="xb-bold sc-order__detail-margin-left">Order Date</div>
+        <div class="md-margin-left-2">
+          {{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
+        </div>
+        <div class="xb-bold sc-order__detail-margin-left" *ngIf="order.paymentMode">Payment Provider</div>
+        <div class="md-margin-left-2" *ngIf="order.paymentMode == 'cod'">
+          COD <span>{{order.shippingProvider}}</span>
+        </div>
+        <div class="md-margin-left-2" *ngIf="order.paymentMode == 'imprest'">
+          {{order.paymentStatus}}
+        </div>
+      </div>
+      <div class="md-margin-top-3 sc-order__detail-border-bottom">
+        <app-warehouse-order-detail-title></app-warehouse-order-detail-title>
+      </div>
+      <div>
+        <app-warehouse-order-detail-item [order]="order" (productChange)="productChange($event)"></app-warehouse-order-detail-item>
+        <app-warehouse-order-detail-item [status]="1" *ngIf="order.status == 'Fulfilled'"
+                               [order]="order" (productChange)="productChange($event)"></app-warehouse-order-detail-item>
+        <app-warehouse-order-detail-item [status]="0" *ngIf="order.status == 'Canceled'"
+                               [order]="order" (productChange)="productChange($event)"></app-warehouse-order-detail-item>
+      </div>
+      <div class="sc-order__detail-container-1">
+        <div class="sc-order__detail-title-1 sc-order__detail-margin-top">
+          Shipping Information
+        </div>
+        <div class="sc-order__detail-margin-top-1" fxLayout="column">
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Name
+            </div>
+            <div>
+              {{order.username}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Email
+            </div>
+            <div>
+              {{order.email}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Shipping Address Line1
+            </div>
+            <div>
+              {{order.line1}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Shipping Address Line2
+            </div>
+            <div>
+              {{order.line2}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Shipping Address Line3
+            </div>
+            <div>
+              {{order.line3}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              City
+            </div>
+            <div>
+              {{order.city}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              State
+            </div>
+            <div>
+              {{order.state}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Postal / Zip Code
+            </div>
+            <div>
+              {{order.postcode}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Country
+            </div>
+            <div>
+              {{order.country}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Phone Number
+            </div>
+            <div>
+              {{order.phoneNumber}}
+            </div>
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+            <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+              Address
+            </div>
+            <div>
+              {{order.address}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-container-padding md-margin-top-2">
+      <div class="sc-order__detail-title sc-order__detail-margin-left-1">Tracking Information</div>
+      <div class="md-margin-top-3">
+        <div class="sc-order__detail-margin-bottom">
+          <app-warehouse-order-detail-tracking-item [order]="order"></app-warehouse-order-detail-tracking-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

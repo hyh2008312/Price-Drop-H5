@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="end center">
+  <div class="xb-pagination" *ngIf="hasPrevious"
+       (click)="changePreviousPagination()">Previous</div>
+  <ng-container *ngFor="let item of pageArray;let i = index;" >
+    <div class="xb-pagination md-margin-left-1" (click)="changePagination(item)"
+    [ngClass]="{'active': item == page}">
+      {{item}}
+    </div>
+  </ng-container>
+  <div class="xb-pagination md-margin-left-1" *ngIf="hasNext"
+       (click)="changeNextPagination()">Next</div>
+</div>

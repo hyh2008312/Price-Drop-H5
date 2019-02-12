@@ -1,0 +1,19 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    Order Cancellation Request
+  </div>
+  <div class="sc-order-dialog__content">
+    <div>Reason: {{data.order.cancelReason}}</div>
+    <div class="md-margin-top-2">Once you approve this request, the order will be cancelled and refunded to customers.
+    If you have already shipped the item, you can disapprove the request. </div>
+  </div>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="approved()">APPROVED</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="disapproved()">DISAPPROVED</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="xb-account md-padding-right-2 md-padding-top-2 md-padding-left-2 unicorn-dark-theme">
+  <div class="container">
+    <mat-tab-group color="primary" (selectedTabChange)="changeLists($event)" [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Pending">
+        <div class="md-margin-top-2" fxLayout="column">
+          <div *ngFor="let item of userPending;let i = index;">
+            <app-admin-user-item [status]="0" [item]="item" [index]="i" (userChange)="userChange($event)"></app-admin-user-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 0)"
+                         *ngIf="userPending && userPending.length > 0">
+          </mat-paginator>
+          <div class="xb-account__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="userPending && userPending.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+              <span class="md-dark-secondary">You haven't published any products yet.</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Skipped">
+        <div class="md-margin-top-2" fxLayout="column">
+          <div *ngFor="let item of userSkipped;let i = index;">
+            <app-admin-user-item [status]="1" [item]="item" [index]="i" (userChange)="userChange($event)"></app-admin-user-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 1)"
+                         *ngIf="userSkipped && userSkipped.length > 0">
+          </mat-paginator>
+          <div class="xb-account__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="userSkipped && userSkipped.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+              <span class="md-dark-secondary">You haven't published any products yet.</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Approved">
+        <div class="md-margin-top-2" fxLayout="column">
+          <div *ngFor="let item of userApproved;let i = index;">
+            <app-admin-user-item [status]="2" [item]="item" [index]="i" (userChange)="userChange($event)"></app-admin-user-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 2)"
+                         *ngIf="userApproved && userApproved.length > 0">
+          </mat-paginator>
+          <div class="xb-account__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="userApproved && userApproved.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+              <span class="md-dark-secondary">You haven't published any products yet.</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Disapproved">
+        <div class="md-margin-top-2" fxLayout="column">
+          <div *ngFor="let item of userDisapproved;let i = index;">
+            <app-admin-user-item [status]="3" [item]="item" [index]="i" (userChange)="userChange($event)"></app-admin-user-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 0)"
+                         *ngIf="userDisapproved && userDisapproved.length > 0">
+          </mat-paginator>
+          <div class="xb-account__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="userDisapproved && userDisapproved.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+              <span class="md-dark-secondary">You haven't published any products yet.</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
