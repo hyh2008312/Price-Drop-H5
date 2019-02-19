@@ -25,6 +25,9 @@ const routes: Routes = [
       }, {
         path: 'about',
         loadChildren: './about/about.module#AboutModule'
+      }, {
+        path: 'drops',
+        loadChildren: './drops/drops.module#DropsModule'
       }
     ]
   }, {

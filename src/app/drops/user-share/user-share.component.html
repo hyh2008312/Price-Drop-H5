@@ -1,0 +1,108 @@
+<div  class="overflow-body1">
+  <div class="header">
+    <div class="headertop" fxLayout="column" fxLayoutAlign="center end" >
+      <!--<div class="righticon"> ➡ </div>-->
+      <div class="lefticon"  >
+        <span class="iconfont-socialcommer lefticon-1">&#xe709;</span>Price Drop FAQ
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="midcard" >
+    <div class="overflow-user"  fxLayout="column" fxLayoutAlign="start center"  >
+      <div class="user">
+        <!--<img src="{{imgsrc}}" alt="">-->
+        <img class="user-img" src="{{imgsrc}}" alt="">
+      </div>
+    </div>
+
+    <div class="overflow-word" fxLayout="row" fxLayoutAlign="start" >
+      <img class="midcard-img" src="{{dropObj.mainImage}}" alt="">
+      <div class="midcardword"  fxLayout="column" fxLayoutAlign="space-between start">
+        <div class="midcardtop">{{dropObj.title}}</div>
+        <div class="midcardbottom">3500+ people joined !</div>
+      </div>
+    </div>
+    <div class="bottom-line" fxLayout="row" fxLayoutAlign="space-between center">
+      <img class="line-img" src="http://image.getpricedrop.com/appweb/line-1.png" alt="">
+      <img  class="line-img" src="http://image.getpricedrop.com/appweb/line-1.png" alt="">
+    </div>
+  </div>
+
+
+  <div class="wrapper-progress"   >
+    <div class="price-title"  fxLayoutAlign="center center">
+      <span class="iconfont-socialcommer" style="color: green;">&#xe6fb;</span> <span class="pt-2">Reward for Help</span> <span class="pt-3">₹{{dropObj.rewardBonus|number}}</span>
+    </div>
+    <div class="all-price" fxLayoutAlign="center center">
+      <span class="price-1">₹{{dropObj.currentPrice|number}}</span> <span class="price-2">₹{{dropObj.salePrice|number}}</span>
+    </div>
+
+    <div>
+      <div class="empty-div" fxLayout="row">
+        <img *ngFor="let i of [1,1,1,1,1]" class="empty-img" src="../../../assets/drop-avatar-icon.png" >
+
+      </div>
+      <div class="empty-div" fxLayout="row">
+        <img  *ngFor="let j of dropObj.friendsDrop" [src]="j.avatar" class="a-img">
+        <!--<img  *ngFor="let j of dropObj.friendsDrop" src="../../../assets/price-drop-logo.png" class="a-img">-->
+      </div>
+
+    </div>
+    <div class="m-progress" >
+      <div class="m-line2" ></div>
+      <div class="m-line1" [ngStyle]="{'margin-right': percentage }"></div>
+    </div>
+
+    <div class="sharebtn">
+      Help Me & Earn Cash on the App
+    </div>
+    <div class="time">
+      <div class="timehh">{{ahour}}</div>
+        <span class="timespan">:</span>
+      <div class="timehh">{{amin}}</div>
+        <span class="timespan">:</span>
+      <div class="timehh">{{asecond}}</div>
+    </div>
+  </div>
+
+  <div class="scroll" >
+    <div class="scrollhead">
+      Price Drop Contributors
+    </div>
+    <div class="scrollbottom">
+        <div class="bottom-card" *ngFor="let i of dropObj.friendsDrop" fxLayout="row" fxLayoutAlign="start center">
+          <img class="bottom-card-img" src="{{i.avatar}}" alt="">
+          <div class="bottom-card-name" fxFlex>{{i.userName}}</div>
+          <div class="bottom-card-price">Dropped <span style="font-weight: 900">₹{{i.dropAmount}}</span></div>
+        </div>
+    </div>
+  </div>
+
+  <div class="bottom-goods">
+    <div class="bottom-goods-head" id="bottom-goods-head">
+      Popular Drops
+    </div>
+      <div fxLayout="row"  *ngFor="let i of someGoodsList" class="bottom-goods-1" (click)="downApp()">
+        <img   class="bg-img" [src]="i.mainImage" alt="about product" >
+        <div class="bg-right"  fxLayout="column" fxLayoutAlign="space-between start">
+          <p class="bgg-title">{{i.title}}</p>
+
+          <div>
+            <div class="bgg-sd">{{i.cutProductNum||0}} people have started to drop</div>
+            <div fxLayout="row" fxLayoutAlign="start" class="bgg">
+              <span class="bgg-price">₹{{i.unitPrice|number}}</span>
+              <div class="bg-btn">
+                Drop Price
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+</div>
