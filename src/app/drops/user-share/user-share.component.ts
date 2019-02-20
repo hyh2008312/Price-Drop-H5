@@ -79,8 +79,8 @@ export class UserShareComponent implements OnInit, OnDestroy {
   }
   getSomeGoods() {
     const self = this
-    // self.cutid = self.activatedRoute.snapshot.params['cutId'];
-    self.cutid = 86;
+    self.cutid = self.activatedRoute.snapshot.params['cutId'];
+    // self.cutid = 86;
     self.dropsService.getSomeGoods().then((res) => {
       if (res === undefined) {
         return
