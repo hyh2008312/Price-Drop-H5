@@ -64,6 +64,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
         title: 'Help me drop the price & Earn up to Rs.50!',
         shareImage: res.mainImage,
       };
+      this.dropsService.addTitleDescription(data)
       this.dropObj = res;
       this.imgsrc = res.avatar;
       this.percentage = Math.ceil(((5 - res.friendsDrop.length) / 5 ) * 100 ) + '%';
