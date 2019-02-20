@@ -158,6 +158,9 @@ export class UserShareComponent implements OnInit, OnDestroy {
     })
     // alert(time / (24 * 3600 * 1000))
   }
+  openDeepLink() {
+    window.open(this.dropObj.dropLink)
+  }
   downApp() {
     // window.navigator
     const  sUserAgent: any = navigator.userAgent.toLowerCase();
