@@ -53,21 +53,21 @@ export class UserShareComponent implements OnInit, OnDestroy {
   openFaq(event) {}
   getDropDetail() {
     const self = this
-    self.cutid = self.activatedRoute.snapshot.params['cutId'];
-    // self.cutid = 86;
+    // self.cutid = self.activatedRoute.snapshot.params['cutId'];
+    self.cutid = 86;
     self.dropsService.getDropDetail(self.cutid).then((res) => {
       if (res === undefined) {
         return
       }
       const data = {
-        description: '#PriceDrop - Go to page & help me drop the price of ' + res.title + ' to Rs.' + res.lowestPrice + ' ! You can also get it for FREE.',
-        title: 'Help Me Drop The Price to Rs. 0!',
+        description: 'Click Help, no purchase needed!',
+        title: 'Help me drop the price & Earn up to Rs.50!',
         shareImage: res.mainImage,
       };
       this.dropObj = res;
       this.imgsrc = res.avatar;
       this.percentage = Math.ceil(((5 - res.friendsDrop.length) / 5 ) * 100 ) + '%';
-      // this.percentage = '0%';
+      // this.percentage = '20%';
       if (this.dropObj.dropStatus == 'progressing') {
         this.editTime(this.dropObj.endTimestamp);
       } else {

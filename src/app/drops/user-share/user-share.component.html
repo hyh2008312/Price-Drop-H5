@@ -41,13 +41,20 @@
       <span class="price-1">₹{{dropObj.currentPrice|number}}</span> <span class="price-2">₹{{dropObj.salePrice|number}}</span>
     </div>
 
-    <div>
+    <div fxLayout="column">
       <div class="empty-div" fxLayout="row">
-        <img *ngFor="let i of [1,1,1,1,1]" class="empty-img" src="../../../assets/drop-avatar-icon.png" >
+        <div  *ngFor="let i of [1,1,1,1,1]" fxFlex="20" fxLayout="row" fxLayoutAlign="end center">
+          <img  class="empty-img" src="http://image.getpricedrop.com/priceDrop/h5/drop-avatar-icon.png" >
+        </div>
 
       </div>
-      <div class="empty-div" fxLayout="row">
-        <img  *ngFor="let j of dropObj.friendsDrop" [src]="j.avatar" class="a-img">
+
+      <div class="user-div" fxLayout="row">
+        <div   *ngFor="let j of dropObj.friendsDrop"  fxFlex="20"  fxLayout="row" fxLayoutAlign="end center">
+
+          <img [src]="j.avatar" class="a-img">
+        </div>
+
         <!--<img  *ngFor="let j of dropObj.friendsDrop" src="../../../assets/price-drop-logo.png" class="a-img">-->
       </div>
 
@@ -86,9 +93,9 @@
     <div class="bottom-goods-head" id="bottom-goods-head">
       Popular Drops
     </div>
-      <div fxLayout="row"  *ngFor="let i of someGoodsList" class="bottom-goods-1" (click)="downApp()">
+      <div fxLayout="row" fxLayoutAlign="start center"  *ngFor="let i of someGoodsList" class="bottom-goods-1" (click)="downApp()">
         <img   class="bg-img" [src]="i.mainImage" alt="about product" >
-        <div class="bg-right"  fxLayout="column" fxLayoutAlign="space-between start">
+        <div class="bg-right"  fxLayout="column" fxLayoutAlign="space-between start" fxFlex>
           <p class="bgg-title">{{i.title}}</p>
 
           <div>
