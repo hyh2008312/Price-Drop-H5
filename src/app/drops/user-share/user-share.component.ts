@@ -1,9 +1,13 @@
-import {Component, OnInit, ChangeDetectorRef, NgZone, OnDestroy} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, NgZone, OnDestroy, Inject} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 
 import { DropsService } from '../drops.service';
 import { GuardLinkService } from '../../shared/services/guard-link/guard-link.service';
+
+import { isPlatformBrowser } from '@angular/common';
+
+import { PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-drops-detail',
@@ -28,6 +32,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
   title: any;
   currentPrice: any;
   salePrice: any;
+  priceOff: any;
   user: any;
   sUserAgent: any;
   dropObj: any = {};
@@ -42,10 +47,12 @@ export class UserShareComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private guardLinkService: GuardLinkService,
     // private userService: UserService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    this.getDropDetail()
-
+    if (isPlatformBrowser(platformId) ) {
+      this.getDropDetail()
+    }
   }
   ngOnInit(): void {
 
@@ -67,6 +74,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
       this.dropsService.addTitleDescription(data)
       this.dropObj = res;
       this.imgsrc = res.avatar;
+      this.priceOff =  Math.ceil((parseInt(res.saleUnitPrice) - parseInt(res.currentPrice)) / parseInt(res.saleUnitPrice) * 100) + '% OFF'
       this.percentage = Math.ceil(((5 - res.friendsDrop.length) / 5 ) * 100 ) + '%';
       // this.percentage = '20%';
       if (this.dropObj.dropStatus == 'progressing') {

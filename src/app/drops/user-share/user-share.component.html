@@ -1,11 +1,11 @@
 <div  class="overflow-body1">
   <div class="header">
-    <div class="headertop" fxLayout="column" fxLayoutAlign="center end" >
-      <!--<div class="righticon"> ➡ </div>-->
-      <div class="lefticon"  >
-        <span class="iconfont-socialcommer lefticon-1">&#xe709;</span>Price Drop FAQ
-      </div>
-    </div>
+    <!--<div class="headertop" fxLayout="column" fxLayoutAlign="center end" >-->
+      <!--&lt;!&ndash;<div class="righticon"> ➡ </div>&ndash;&gt;-->
+      <!--<div class="lefticon"  >-->
+        <!--<span class="iconfont-socialcommer lefticon-1">&#xe709;</span>Price Drop FAQ-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 
 
@@ -23,7 +23,7 @@
       <img class="midcard-img" src="{{dropObj.mainImage}}" alt="">
       <div class="midcardword"  fxLayout="column" fxLayoutAlign="space-between start">
         <div class="midcardtop">{{dropObj.title}}</div>
-        <div class="midcardbottom">3500+ people joined !</div>
+        <div class="midcardbottom">{{dropObj.dropsPeopleNumber|| 0}}+ people joined !</div>
       </div>
     </div>
     <div class="bottom-line" fxLayout="row" fxLayoutAlign="space-between center">
@@ -38,7 +38,7 @@
       <span class="iconfont-socialcommer" style="color: green;">&#xe6fb;</span> <span class="pt-2">Reward for Help</span> <span class="pt-3">₹{{dropObj.rewardBonus|number}}</span>
     </div>
     <div class="all-price" fxLayoutAlign="center center">
-      <span class="price-1">₹{{dropObj.currentPrice|number}}</span> <span class="price-2">₹{{dropObj.salePrice|number}}</span>
+      <span class="price-1">₹{{dropObj.currentPrice|number}}</span> <span class="price-2">₹{{dropObj.saleUnitPrice|number}}</span> <span class="price-3">{{priceOff|number}}</span>
     </div>
 
     <div fxLayout="column">
@@ -102,7 +102,7 @@
             <div class="bgg-sd">{{i.cutProductNum||0}} people have started to drop</div>
             <div fxLayout="row" fxLayoutAlign="start" class="bgg">
               <span class="bgg-price">₹{{i.unitPrice|number}}</span>
-              <div class="bg-btn">
+              <div class="bg-btn" fxLayout="row" fxLayoutAlign="center center">
                 Drop Price
               </div>
             </div>
