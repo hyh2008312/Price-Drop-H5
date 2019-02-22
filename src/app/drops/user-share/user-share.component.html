@@ -64,7 +64,7 @@
       <div class="m-line1" [ngStyle]="{'margin-right': percentage }"></div>
     </div>
 
-    <div class="sharebtn" (click)="openDeepLink()">
+    <div class="sharebtn drop-btn" (click)="openDeepLink()">
       Help Me & Earn Cash on the App
     </div>
     <div class="time">
@@ -93,7 +93,7 @@
     <div class="bottom-goods-head" id="bottom-goods-head">
       Popular Drops
     </div>
-      <div fxLayout="row" fxLayoutAlign="start center"  *ngFor="let i of someGoodsList" class="bottom-goods-1" (click)="downApp()">
+      <div fxLayout="row" fxLayoutAlign="start center"  *ngFor="let i of someGoodsList" class="bottom-goods-1 googleplay-btn " (click)="downApp()">
         <img   class="bg-img" [src]="i.mainImage" alt="about product" >
         <div class="bg-right"  fxLayout="column" fxLayoutAlign="space-between start" fxFlex>
           <p class="bgg-title">{{i.title}}</p>

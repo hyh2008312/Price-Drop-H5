@@ -144,11 +144,6 @@ export class UserShareComponent implements OnInit, OnDestroy {
     // alert(time / (24 * 3600 * 1000))
   }
   openDeepLink() {
-    (<any>window).dataLayer.push({
-      'event': 'VirtualPageView',
-      'virtualPageURL': '/OpenDeepLink',
-      'virtualPageTitle': 'OpenDeepLink'
-    });
     window.open(this.dropObj.dropLink);
   }
   downApp() {
@@ -162,20 +157,9 @@ export class UserShareComponent implements OnInit, OnDestroy {
     const  bIsUc =  sUserAgent.indexOf('ucbrowser') > -1;
     const  bIsAndroid = sUserAgent.match(/android/i) === 'android';
     if (bIsAndroid || bIsUc ||bIsQQ ) {
-
-      (<any>window).dataLayer.push({
-        'event': 'VirtualPageView',
-        'virtualPageURL': '/OpenAndroidGooglePlay',
-        'virtualPageTitle': 'OpenAndroidGooglePlay'
-      });
       window.open('market://details?id=com.socialcommer.wx');
       // window.open('https://www.getpricedrop.com/')
     } else {
-      (<any>window).dataLayer.push({
-        'event': 'VirtualPageView',
-        'virtualPageURL': '/OpenWebGooglePlay',
-        'virtualPageTitle': 'OpenWebGooglePlay'
-      });
       window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx&referrer=utm_source%3Dh5page%26utm_medium%3Dpage');
 
     }
