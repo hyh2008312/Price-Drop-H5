@@ -35,7 +35,9 @@ export class UserShareComponent implements OnInit, OnDestroy {
   priceOff: any;
   user: any;
   sUserAgent: any;
-  dropObj: any = {};
+  dropObj: any = {
+    friendsDrop: []
+  };
   timer: any;
 
   constructor(
