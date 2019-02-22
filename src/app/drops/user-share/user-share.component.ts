@@ -80,9 +80,9 @@ export class UserShareComponent implements OnInit, OnDestroy {
       this.percentage = Math.ceil(((5 - res.friendsDrop.length) / 5 ) * 100 ) + '%';
       // this.percentage = '20%';
       if (this.dropObj.dropStatus == 'progressing') {
-        this.editTime(this.dropObj.endTimestamp);
+        this.editTime(this.dropObj.endTime);
       } else {
-        this.editTime(this.dropObj.cancelTimestamp);
+        this.editTime(this.dropObj.cancelTime);
       }
       this.getSomeGoods();
       // console.log(res)
