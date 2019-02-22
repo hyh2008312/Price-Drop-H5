@@ -1,6 +1,7 @@
 User-agent: *
 
 Allow: /store/*
+Allow: /drops/detail/*
 Allow: /account/login
 Allow: /account/signup
 Allow: /about
