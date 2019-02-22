@@ -52,7 +52,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    if (!isPlatformBrowser(platformId) ) {
+    if (isPlatformBrowser(platformId) ) {
       this.getDropDetail()
     }
   }
