@@ -80,11 +80,12 @@ export class DropsService {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
+
     });
     let options = new RequestOptions({headers: headers});
 
-    const url = `${this.baseUrl.h5Url}/drops/hot/push/`
-    return this.http.post(url, options)
+    const url = `${this.baseUrl.h5Url}/drops/hot/push/h5/`
+    return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => {this.handleError(error, this)});

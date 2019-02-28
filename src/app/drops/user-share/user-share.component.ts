@@ -54,6 +54,8 @@ export class UserShareComponent implements OnInit, OnDestroy {
   ) {
     if (isPlatformBrowser(platformId) ) {
       this.getDropDetail()
+      this.getSomeGoods();
+
     }
   }
   ngOnInit(): void {
@@ -84,7 +86,6 @@ export class UserShareComponent implements OnInit, OnDestroy {
       } else {
         this.editTime(this.dropObj.cancelTime);
       }
-      this.getSomeGoods();
       // console.log(res)
     })
   }
