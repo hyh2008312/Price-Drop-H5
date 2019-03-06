@@ -12,14 +12,6 @@ const routes: Routes = [
         path: 'account',
         loadChildren: './login/login.module#LoginModule'
       }, {
-        path: 'admin',
-        canActivate: [ ProtectedGuard ],
-        loadChildren: './admin/admin.module#AdminModule'
-      }, {
-        path: 'warehouse',
-        canActivate: [ ProtectedGuard ],
-        loadChildren: './warehouse/warehouse.module#WarehouseModule'
-      }, {
         path: '',
         loadChildren: './landing-page/landing-page.module#LandingPageModule'
       }, {

@@ -7,6 +7,8 @@ import { DropsRoutingModule } from './drops.routes.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { DropsService } from './drops.service';
+import { CutPriceDialogComponent } from './cut-price-dialog/cut-price-dialog.component'
+
 
 
 @NgModule({
@@ -16,12 +18,13 @@ import { DropsService } from './drops.service';
   ],
   exports: [],
   declarations: [
-    UserShareComponent
+    UserShareComponent, CutPriceDialogComponent
   ],
   providers: [
     DropsService
   ],
   entryComponents: [
+    CutPriceDialogComponent
   ]
 })
 export class DropsModule { }

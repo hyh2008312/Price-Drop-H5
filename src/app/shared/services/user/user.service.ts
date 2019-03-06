@@ -14,7 +14,15 @@ export class UserService {
   currentUser: Subject<any> = new BehaviorSubject<any>(null);
   userCategory: Subject<any> = new BehaviorSubject<any>(null);
   pubCategory: Subject<any> = new BehaviorSubject<any>(null);
+  inLogin: Subject<any> = new BehaviorSubject<any>(null);
 
+  public addUser(newUser: User): void {
+    this.currentUser.next(newUser);
+  }
+  public addLogin(isLogin: any): void {
+    this.inLogin.next(isLogin);
+    console.log(isLogin)
+  }
   constructor(
     private http: Http,
     private baseUrl: BaseApi,
@@ -33,7 +41,6 @@ export class UserService {
     });
 
   }
-
   getUser(): Promise<User>  {
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -43,16 +50,12 @@ export class UserService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}user/user/`;
+    const url = `${this.baseUrl.h5Url}user/user/`;
 
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json() as User)
       .catch(this.handleError);
-  }
-
-  public addUser(newUser: User): void {
-    this.currentUser.next(newUser);
   }
 
   public addUserCategory(newCategory: any): void {

@@ -1,60 +1,95 @@
+<div class="xb-loading" *ngIf="showLoading">
+  <mat-progress-bar [mode]="determinate" [value]="loadingValue" color="accent"></mat-progress-bar>
+</div>
 <div class="xb-login__scroll background-bg-light">
   <div class="xb-login__scroll-inner" fxLayout="column">
-    <div class="background-bg-black" fxFlex="none">
+    <div class="background-bg-white" fxFlex="none">
       <div class="container">
-        <app-navigation-header [status]="true"></app-navigation-header>
       </div>
     </div>
-    <div  fxFlex="noshrink" fxLayout="row" fxLayoutAlign="center center">
+    <div *ngIf="verifyShow==false"  fxFlex="noshrink" fxLayout="row" fxLayoutAlign="center ">
+
       <div class="xb-login__container" fxLayout="column" >
-        <div class="xb-login__login-title">Log In</div>
-        <div class="xb-login__error md-margin-bottom-2" *ngIf="loginErr">{{loginErr}}</div>
-        <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="loginGroup" (ngSubmit)="login()" novalidate>
-          <div class="xb-login__width">
-            <mat-form-field>
-              <input matInput placeholder="Email Address" formControlName="username">
-            </mat-form-field>
-            <div *ngIf="formErrors['username']" class="xb-input-error">
-              {{ formErrors['username'] }}
-            </div>
-            <mat-form-field>
-              <input matInput type="password" placeholder="Password" formControlName="password">
-            </mat-form-field>
-            <div *ngIf="formErrors['password']" class="xb-input-error">
-              {{ formErrors['password'] }}
-            </div>
+        <!--<div>-->
+          <!--<i class="iconfont-socialcommer icon-ic-close"></i>-->
+        <!--</div>-->
+        <div fxLayout="column" >
+
+          <div fxLayoutAlign="center center" class="icon-img">
+            <img style="width: 60px;" src="http://image.getpricedrop.com/appweb/price-drop-logo.png"  alt="">
           </div>
-          <div fxLayout="row">
-            <a class="text-underline md-margin-bottom-3 md-dark-primary" routerLink="/account/resetPassword">Forgot password?</a>
-          </div>
-          <div fxLayout="column">
-            <button mat-raised-button color="primary" type="submit">
-              <div class="gtag-login-email-btn">LOG IN</div>
-            </button>
-          </div>
-        </form>
-        <div fxLayout="column" fxHide>
-          <div class="md-align-center md-margin-top-2 md-margin-bottom-2">OR</div>
-          <button class="xb-login__facebook" mat-raised-button (click)="facebookLogin('facebook')">
-            <div fxLayout="row" fxLayoutAlign="start center">
-              <i class="iconfontXberts icon-ic-facebook"></i>
-              <span class="md-align-center gtag-login-facebook-btn" fxFlex>Continue with Facebook</span>
-            </div>
-          </button>
+          <div class="price-name">PriceDrop</div>
+
+
+          <p style="" class="icon-dec">To help your friend drop the price, please login with your Google account first! </p>
+
+          <!--<div class="md-align-center md-margin-top-2 md-margin-bottom-2">OR</div>-->
+          <!--<button class="xb-login__facebook" mat-raised-button (click)="facebookLogin('facebook')">-->
+            <!--<div fxLayout="row" fxLayoutAlign="start center">-->
+              <!--<i class="iconfontXberts icon-ic-facebook"></i>-->
+              <!--<span class="md-align-center gtag-login-facebook-btn" fxFlex>Continue with Facebook</span>-->
+            <!--</div>-->
+          <!--</button>-->
+
           <button class="xb-login__google" mat-raised-button (click)="googleLogin('google')">
             <div fxLayout="row" fxLayoutAlign="start center">
-              <i class="iconfontXberts icon-pic-google"></i>
+              <i class="iconfont-socialcommer icon-pic-google"></i>
               <span class="md-align-center gtag-login-google-btn" fxFlex>Continue with Google</span>
             </div>
           </button>
+
         </div>
-        <div class="md-margin-top-2">Don't have an account?
-          <a class="text-underline md-margin-left-1 md-dark-primary" routerLink="/account/signup">Sign Up</a>
+
+      </div>
+    </div>
+
+    <div *ngIf="verifyShow==true" fxFlex="noshrink" fxLayout="row" fxLayoutAlign="center ">
+      <div class="xb-login__container" fxLayout="column" >
+          <div fxLayout="column" >
+
+          <div fxLayoutAlign="center center" class="icon-img1">
+            <!--<img style="width: 60px;" src="http://image.getpricedrop.com/appweb/price-drop-logo.png"  alt="">-->
+            <img src="../../../assets/phone.png" alt="" style="width: 96px;opacity: 0.2">
+
+          </div>
+          <div class="title-bold">The Final Step to Get Started & Earn Free Gifts!</div>
+          <div class="title">Please enter your phone number to verify you are a real user: </div>
+          <!--<p>The Final Step to Get Started & Earn Free Gifts! </p>-->
+          <!--<p>Please enter your phone number to verify you are a real user: </p>-->
+          <div class="phone-div" fxLayout="row" fxLayoutAlign="start center ">
+              <span class="phone-span">+91</span>
+              <input type="tel" class="phone-num" name="phone"
+                     pattern="[0-9]"
+                     (click)="scoller()"
+                     onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)"
+                     onblur="this.v();"
+                     maxlength="10"
+                     [(ngModel)]="phoneNum" placeholder="Enter Mobile Number">
+          </div>
+
+          <div class="code-div" fxLayout="row" fxLayoutAlign="start center ">
+              <input type="tel" class="code-num" name="vcode" maxlength="4" [(ngModel)]="Vcode" placeholder="Verification Code">
+              <button  class="code-btn" (click)="getCodeF()"  [disabled]="disabled" >{{second||'Get Code'}}</button>
+          </div>
+            <span class="err-msg">{{errMsg}}</span>
+            <div class="err-msg" *ngIf="errTwo">
+              <p  style="color: red">
+                Oh! Your mobile number has been tied to another Google account.
+              </p>
+              <p style="color: red">
+                According to our policy, each user can only use one account to drop price for friends!
+              </p>
+            </div>
+
+            <!--<label for="">Verification Code</label><input type="text" placeholder="Verification Code">-->
+
+            <button class="price-btn" (click)="enterCode()">Drop Price</button>
+
+            <!--<button (click)="">Drop Price</button>-->
+
         </div>
       </div>
     </div>
-    <div>
-      <app-bottom-footer></app-bottom-footer>
-    </div>
+
   </div>
 </div>

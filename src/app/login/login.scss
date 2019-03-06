@@ -8,14 +8,14 @@
     padding: 40px 40px 54px;
     background-color: $whiteColor;
     border-radius: 4px;
-    @include box-shadow(0 0 3px 1px rgba(0, 0, 0, 0.19));
+    //@include box-shadow(0 0 3px 1px rgba(0, 0, 0, 0.19));
     width: 100%;
     @include xb-xs-screen{
       margin: 0;
-      padding: 40px 16px 56px;
+      padding: 15px 16px 56px;
     }
     @include xb-sm-screen{
-      padding: 40px 16px 56px;
+      padding: 15px 16px 56px;
     }
   }
 
@@ -209,5 +209,133 @@
   }
 }
 
+.sc-login-dialog{
 
+  padding: 40px 40px 48px;
+  max-width: 660px;
+  max-height: 100vh;
+  overflow-y: scroll;
+  position: relative;
+  background-color: $whiteColor;
+  border-radius: 4px;
+  @include xb-xs-screen{
+    padding: 40px 16px;
+  }
+
+  &__close{
+    position: absolute;
+    left: calc(100% - 36px);
+    top: 12px;
+    color: $blackColor;
+    cursor: pointer;
+    i{
+      font-size: 24px;
+      line-height: 24px;
+      @include media();
+    }
+  }
+
+  &__content{
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    @include regular();
+  }
+
+  &__margin-top{
+    margin-top: 24px;
+  }
+
+  &__color{
+    color: $blackColor;
+  }
+
+}
+.price-name{
+  text-align: center;
+  font-size: 16px;
+  font-style: italic;
+  color: #EF8A31;
+  font-weight: bold;
+}
+.title-bold{
+  text-align: center;
+  width: 250px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: black;
+  line-height: 24px;
+  font-weight: 700;
+}
+.title{
+  text-align: center;
+  width: 250px;
+  margin: 7px auto 24px auto;
+  font-size: 12px;
+  color: black;
+}
+.phone-div{
+  margin:0 44px;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.12);
+  border-radius: 4px;
+}
+.phone-span{
+  opacity: 0.21;
+  margin: 0 8px;
+
+}
+.phone-num{
+  background: #FFFFFF;
+  border: 0;
+  height: 40px;
+  width: 200px;
+}
+.code-div{
+  margin:8px 44px  0 44px;
+}
+.err-msg{
+  margin:8px 44px 8px 44px;
+  color: red;
+}
+.code-num{
+  width: 165px;
+  height: 40px;
+  padding-left: 8px;
+  margin-right: 8px;
+  border: 0;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.12);
+  border-radius: 4px;
+}
+.code-btn{
+  height: 40px;
+  width: 110px;
+  padding: 0 8px;
+  font-size: 12px;
+  color: white;
+  background-color: #579CDE;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.12);
+  border-radius: 4px;
+  border: 0;
+}
+.price-btn{
+  color: white;
+  border: 0;
+  margin: 0 44px;
+  height: 40px;
+  background-color: #EF8A31;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.12);
+  border-radius: 4px;
+}
+.icon-img{
+  margin: 35px 0 10px 0 ;
+}
+.icon-img1{
+  margin: -18px 0 10px 0 ;
+}
+.icon-dec{
+  text-align: center;
+  margin: 10px 0 40px 0 ;
+  font-size: 14px;
+}
 

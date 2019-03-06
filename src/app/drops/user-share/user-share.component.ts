@@ -3,16 +3,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 
 import { DropsService } from '../drops.service';
+import { UserService } from '../../shared/services/user/user.service';
 import { GuardLinkService } from '../../shared/services/guard-link/guard-link.service';
 
 import { isPlatformBrowser } from '@angular/common';
 
 import { PLATFORM_ID } from '@angular/core';
+import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
+import {CutPriceDialogComponent} from '../cut-price-dialog/cut-price-dialog.component';
+
+
 
 @Component({
   selector: 'app-drops-detail',
   templateUrl: './user-share.component.html',
-  styleUrls: ['./_user-share.scss']
+  styleUrls: ['./_user-share.scss'],
+  entryComponents: [CutPriceDialogComponent]
 })
 
 export class UserShareComponent implements OnInit, OnDestroy {
@@ -33,30 +39,51 @@ export class UserShareComponent implements OnInit, OnDestroy {
   currentPrice: any;
   salePrice: any;
   priceOff: any;
-  user: any;
+  user: any= {
+    id: ''
+  };
+  isMe: any;
+  errMsg: any = '';
+  cutAmount: any;
   sUserAgent: any;
+  isLogin = false;
+  cutPriceStauts : any = false;
+  userId: any;
   dropObj: any = {
-    friendsDrop: []
+    friendsDrop: [],
+    dropStatus: '',
+    user: '',
+    canDrop: '',
   };
   timer: any;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    // private auth: AuthenticationService,
+    private auth: AuthenticationService,
     private dropsService: DropsService,
     public activatedRoute: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef,
     private guardLinkService: GuardLinkService,
-    // private userService: UserService,
+    private userService: UserService,
     private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    if (isPlatformBrowser(platformId) ) {
-      this.getDropDetail()
-      this.getSomeGoods();
+      this.auth.isOnlyAuthorized().subscribe((data) => {
+        if (data) {
+          this.isLogin = true
+          this.userService.currentUser.subscribe((data) => {
+            if(data){
+              this.user = data
+              this.getADropDetail()
+            }
+          })
+        } else {
+          this.getDropDetail()
 
-    }
+        }
+      });
+      this.getSomeGoods();
   }
   ngOnInit(): void {
 
@@ -66,28 +93,96 @@ export class UserShareComponent implements OnInit, OnDestroy {
     const self = this
     self.cutid = self.activatedRoute.snapshot.params['cutId'];
     // self.cutid = 86;
-    self.dropsService.getDropDetail(self.cutid).then((res) => {
-      if (res === undefined) {
+    self.dropsService.getDropDetail(self.cutid, this.isLogin).then((res) => {
+        if (res === undefined) {
+          return
+        }
+        const data = {
+          description: 'Click Help, no purchase needed!',
+          title: 'Help me drop the price & Earn up to Rs.50!',
+          shareImage: res.mainImage,
+        };
+        this.dropsService.addTitleDescription(data)
+        this.dropObj = res;
+        this.imgsrc = res.avatar;
+        this.priceOff =  Math.ceil((parseInt(res.saleUnitPrice) - parseInt(res.currentPrice)) / parseInt(res.saleUnitPrice) * 100) + '% OFF'
+        this.percentage = Math.ceil(((5 - res.friendsDrop.length) / 5 ) * 100 ) + '%';
+        // this.percentage = '20%';
+        if (this.dropObj.dropStatus === 'progressing') {
+          this.editTime(this.dropObj.endTime);
+        } else {
+          this.editTime(this.dropObj.cancelTime);
+        }
+        // console.log(res)
+      })
+  }
+  getADropDetail() {
+    const self = this
+    self.cutid = self.activatedRoute.snapshot.params['cutId'];
+    // self.cutid = 86;
+      self.dropsService.getADropDetail(self.cutid, this.isLogin, this.user.id).then((res) => {
+        if (res === undefined) {
+          return
+        }
+        const data = {
+          description: 'Click Help, no purchase needed!',
+          title: 'Help me drop the price & Earn up to Rs.50!',
+          shareImage: res.mainImage,
+        };
+        this.dropsService.addTitleDescription(data)
+        this.dropObj = res;
+        this.imgsrc = res.avatar;
+        this.priceOff =  Math.ceil((parseInt(res.saleUnitPrice) - parseInt(res.currentPrice)) / parseInt(res.saleUnitPrice) * 100) + '% OFF'
+        this.percentage = Math.ceil(((5 - res.friendsDrop.length) / 5 ) * 100 ) + '%';
+        // this.percentage = '20%';
+        if (this.dropObj.dropStatus === 'progressing') {
+          this.editTime(this.dropObj.endTime);
+        } else {
+          this.editTime(this.dropObj.cancelTime);
+        }
+        // console.log(res)
+      })
+  }
+
+  cutPrice() {
+    this.cutid = this.activatedRoute.snapshot.params['cutId'];
+    if (this.isLogin) {
+      if (this.dropObj.user === 'friend') {
+        this.isMe = false
+        if(this.dropObj.dropStatus ==='progressing'&& this.dropObj.canDrop){
+          this.dropsService.friendCutPrice(this.cutid).then((res) => {
+            console.log(res)
+            if (res) {
+              this.dropObj = res;
+              this.priceOff =  Math.ceil((parseInt(res.saleUnitPrice) - parseInt(res.currentPrice)) / parseInt(res.saleUnitPrice) * 100) + '% OFF'
+              this.percentage = Math.ceil(((5 - res.friendsDrop.length) / 5 ) * 100 ) + '%';
+              this.cutAmount =  res.rewardBonus
+              this.openCutPrice(Event, true)
+            } else {
+              this.openCutPrice(Event, true)
+              // this.errNum = 409
+            }
+          }).catch((res) => {
+            console.log('cutPrice--------catch:' + res)
+            this.openCutPrice(Event, true)
+            this.errMsg = res
+            // console.log('cutPrice--------catch:' + res)
+          })
+        } else {
+          this.openCutPrice(Event, true)
+        }
+      } else {
+        this.isMe = true
+      }
+    } else  {
+
+      if (!this.isLogin) {
+        this.guardLinkService.addRouterLink(window.location.pathname);
+        this.router.navigate(['/account/login' ]);
         return
       }
-      const data = {
-        description: 'Click Help, no purchase needed!',
-        title: 'Help me drop the price & Earn up to Rs.50!',
-        shareImage: res.mainImage,
-      };
-      this.dropsService.addTitleDescription(data)
-      this.dropObj = res;
-      this.imgsrc = res.avatar;
-      this.priceOff =  Math.ceil((parseInt(res.saleUnitPrice) - parseInt(res.currentPrice)) / parseInt(res.saleUnitPrice) * 100) + '% OFF'
-      this.percentage = Math.ceil(((5 - res.friendsDrop.length) / 5 ) * 100 ) + '%';
-      // this.percentage = '20%';
-      if (this.dropObj.dropStatus == 'progressing') {
-        this.editTime(this.dropObj.endTime);
-      } else {
-        this.editTime(this.dropObj.cancelTime);
-      }
-      // console.log(res)
-    })
+    }
+
   }
   getSomeGoods() {
     const self = this
@@ -99,6 +194,9 @@ export class UserShareComponent implements OnInit, OnDestroy {
       }
       this.someGoodsList = [...res];
     });
+  }
+  openCutPrice($event,a?:any) {
+    this.cutPriceStauts = !this.cutPriceStauts
   }
   editTime(time) {
     // const tmp = 1527753479
@@ -147,28 +245,22 @@ export class UserShareComponent implements OnInit, OnDestroy {
   openDeepLink() {
     window.open(this.dropObj.dropLink);
   }
-  downApp() {
-    // window.navigator
-    const  sUserAgent: any = navigator.userAgent.toLowerCase();
-    this.sUserAgent = sUserAgent;
-    const  bIsIpad = sUserAgent.match(/ipad/i) === 'ipad';
-    const  bIsIphoneOs = sUserAgent.match(/iphone os/i) === 'iphone os';
-    const  bIsMidp = sUserAgent.match(/midp/i) === 'midp';
-    const  bIsQQ= sUserAgent.indexOf('mqqbrowser') > -1;
-    const  bIsUc =  sUserAgent.indexOf('ucbrowser') > -1;
-    const  bIsAndroid = sUserAgent.match(/android/i) === 'android';
-    if (bIsAndroid || bIsUc ||bIsQQ ) {
-      window.open('market://details?id=com.socialcommer.wx');
-      // window.open('https://www.getpricedrop.com/')
-    } else {
-      window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx&referrer=utm_source%3Dh5page%26utm_medium%3Dpage');
+  downApp(i) {
+    window.open(i.shareUrl);
 
-    }
-    // if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid) {
-    //   window.open('market://details?id=com.socialcommer.wx')
-    //   window.open('https://www.getpricedrop.com/')
+    // const  sUserAgent: any = navigator.userAgent.toLowerCase();
+    // this.sUserAgent = sUserAgent;
+    // const  bIsIpad = sUserAgent.match(/ipad/i) === 'ipad';
+    // const  bIsIphoneOs = sUserAgent.match(/iphone os/i) === 'iphone os';
+    // const  bIsMidp = sUserAgent.match(/midp/i) === 'midp';
+    // const  bIsQQ= sUserAgent.indexOf('mqqbrowser') > -1;
+    // const  bIsUc =  sUserAgent.indexOf('ucbrowser') > -1;
+    // const  bIsAndroid = sUserAgent.match(/android/i) === 'android';
+    // if (bIsAndroid || bIsUc ||bIsQQ ) {
+    //   window.open('market://details?id=com.socialcommer.wx');
+    //   // window.open('https://www.getpricedrop.com/')
     // } else {
-    //   window.open('https://www.getpricedrop.com/')
+    //   window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx&referrer=utm_source%3Dh5page%26utm_medium%3Dpage');
     //
     // }
   }
