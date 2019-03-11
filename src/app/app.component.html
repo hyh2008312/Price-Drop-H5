@@ -10,6 +10,57 @@
       <div class="navigation__text">{{user.firstName}} {{user.lastName}}</div>
       <div class="navigation__text-1">{{user.email}}</div>
     </div>
+
+    <div class="" fxLayout="column" fxLayoutAlign="center flex-start">
+      <div class="border-bottom1">
+        <div class="nav-cell mag-t-8" (click)="jumpNewPage('/home')" fxLayout="row" fxLayoutAlign="flex-start center">
+        <i class="iconfont-socialcommer navigation__icon1 xb-color-gray-light pad-r-16">&#xe704;</i>
+        Home
+        </div>
+        <div class="nav-cell mag-b-8" (click)="jumpNewPage('/home')"   fxLayout="row" fxLayoutAlign="flex-start center">
+          <i class="iconfont-socialcommer xb-color-gray-light pad-r-16">&#xe6d9;</i>
+          Orders
+          <div class="red-dot"></div>
+        </div>
+      </div>
+
+      <div class="border-bottom1">
+        <div  class="nav-cell mag-t-8 mag-b-8" (click)="jumpNewPage('/home')" fxLayout="row" fxLayoutAlign="flex-start center">
+          <i class="iconfont-socialcommer xb-color-gray-light pad-r-16">&#xe762;</i>
+          Categories
+        </div>
+      </div>
+
+      <div class="border-bottom1">
+        <div class="nav-cell mag-b-8" (click)="jumpNewPage('/home')" fxLayout="row" fxLayoutAlign="flex-start center">
+          <i class="iconfont-socialcommer xb-color-gray-light pad-r-16" style="font-size: 20px">&#xe770;</i>
+          Customer Support
+        </div>
+        <div class="nav-cell mag-b-8" (click)="jumpNewPage('/home')" fxLayout="row" fxLayoutAlign="flex-start center">
+          <i class="iconfont-socialcommer xb-color-gray-light pad-r-16" style="font-size: 20px">&#xe772;</i>
+          My Address
+        </div>
+      </div>
+
+      <div class="border-bottom1">
+        <div  class="nav-cell mag-b-8" (click)="jumpNewPage('/home')" fxLayout="row" fxLayoutAlign="flex-start center">
+          <i class="iconfont-socialcommer xb-color-gray-light pad-r-16">&#xe771;</i>
+          About
+        </div>
+
+        <div  class="nav-cell mag-b-8" (click)="jumpNewPage('/home')" fxLayout="row" fxLayoutAlign="flex-start center">
+          <i class="iconfont-socialcommer xb-color-gray-light pad-r-16" style="font-size: 18px">&#xe773;</i>
+          FAQ
+        </div>
+
+        <div  class="nav-cell mag-b-8" (click)="jumpNewPage('/home')" fxLayout="row" fxLayoutAlign="flex-start center">
+          <i class="iconfont-socialcommer xb-color-gray-light pad-r-16">&#xe774;</i>
+          Settings
+        </div>
+      </div>
+
+
+    </div>
   </mat-drawer>
   <mat-drawer-content>
     <div class="navigation__bg">

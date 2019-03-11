@@ -44,6 +44,9 @@ export class AppComponent {
         }).catch((data) => {
           self.isLogin = false;
         });
+      } else {
+        self.user = data;
+        self.isLogin = true;
       }
     });
   }
@@ -51,5 +54,12 @@ export class AppComponent {
   jump(drawer, link?: any) {
     drawer.close();
     this.router.navigate([link]);
+  }
+  jumpNewPage(link?: any) {
+    if (this.isLogin) {
+      this.router.navigate([link]);
+    } else {
+      this.router.navigate(['/account/login']);
+    }
   }
 }
