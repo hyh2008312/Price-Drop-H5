@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ViewChild, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ViewChild, forwardRef, ChangeDetectorRef, NgZone} from '@angular/core';
 import 'rxjs/add/operator/takeWhile';
 
 import { CarouselService, ICarouselConfig, WindowWidthService } from '../../services';
@@ -29,7 +29,8 @@ export class CarouselComponent implements OnInit, OnDestroy {
   public galleryLength: number;
   public currentSlide = 0;
 
-  constructor(private carouselService: CarouselService, private windowWidthService: WindowWidthService) { }
+  constructor(private carouselService: CarouselService, private windowWidthService: WindowWidthService,
+              private ref: ChangeDetectorRef, private ngZone: NgZone) { }
 
   ngOnInit() {
     this.initData();
@@ -106,11 +107,15 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   private startAutoplay(delay: number): void {
-    this.autoplayIntervalId = setInterval(() => {
-      this.onChangeSlide('next');
-      this.pinsComponent.disableNavButtons();
-      this.carouselArrowsComponent.disableNavButtons();
-    }, delay);
+    this.ngZone.runOutsideAngular(() => {
+      this.autoplayIntervalId = setInterval(() => {
+        this.onChangeSlide('next');
+        this.pinsComponent.disableNavButtons();
+        // self.carouselArrowsComponent.disableNavButtons();
+        this.ref.detectChanges();
+      }, delay);
+    });
+
   }
 
   private disableCarouselNavBtns(): void {
@@ -118,7 +123,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.carouselArrowsComponent.disableNavButtons();
+    // this.carouselArrowsComponent.disableNavButtons();
     this.pinsComponent.disableNavButtons();
   }
 

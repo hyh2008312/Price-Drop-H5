@@ -1,7 +1,6 @@
 <div class="xb-image-display__slide"
      *ngIf="images.length >= 2" >
   <carousel [sources]="images" [config]="config" (currentSlideChange)="slideChange($event)"></carousel>
-  <span>{{ (slideNumber + 1) + ' / ' + images.length }}</span>
 </div>
 <div class="xb-image-display__slide"
      *ngIf="images.length == 1" >

@@ -16,7 +16,7 @@ export class LeftProductsImageComponent implements OnInit {
     log: false,
     animation: true,
     animationType: AnimationConfig.SLIDE,
-    autoplay: false,
+    autoplay: true,
     autoplayDelay: 5000,
     stopAutoplayMinWidth: 0
   };

@@ -2,33 +2,36 @@ $color-red: #e55342;
 
 .carousel-nav-list {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
   margin: 0;
   text-align: center;
+  list-style-type: none;
+  background-color: rgba(255,255,255,.38);
+  border-radius: 4px;
+  padding: 1px;
 
   &__item {
-    display: none;
-    margin: 0 6px;
-    width: 15px;
-    height: 15px;
+    float: left;
+    margin: 0 2px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background-color: #ffffff;
     cursor: pointer;
-    opacity: 0.6;
 
     &:hover {
-      opacity: 0.9;
+
     }
 
     &--active {
-      opacity: 0.9;
+
     }
   }
 
   &__item--current {
-    background-color: $color-red;
+    background-color: #EF8A31;
     opacity: 1;
   }
 
