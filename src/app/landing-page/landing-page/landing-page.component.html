@@ -1,5 +1,12 @@
-<div class="landing__bg">
-  <div class="landing__slide" *ngIf="banner.length > 0">
-    <app-left-products-image [images]="banner"></app-left-products-image>
+<div class="container">
+  <div class="landing__bg">
+    <div class="landing__slide" *ngIf="banner.length > 0">
+      <app-left-products-image [images]="banner"></app-left-products-image>
+    </div>
+  </div>
+  <div class="landing__notification-bg">
+    <div class="landing__notification" *ngIf="notification.length > 0">
+      <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
+    </div>
   </div>
 </div>

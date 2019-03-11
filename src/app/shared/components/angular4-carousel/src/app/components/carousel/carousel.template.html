@@ -1,13 +1,13 @@
-<div class="carousel-wrapper" appCarouselHandler (handleAutoplay)="onHandleAutoplay($event)">
+<div class="carousel-wrapper" appCarouselHandler *ngIf="!direction" (handleAutoplay)="onHandleAutoplay($event)">
   <carousel-slide
-       *ngFor="let img of loadedImages; let i = index"
-       [src]="img"
-       [slideNo]="i"
-       [isHidden]="i !== 0">
+    *ngFor="let img of loadedImages; let i = index"
+    [src]="img"
+    [slideNo]="i"
+    [isHidden]="i !== 0">
   </carousel-slide>
 
   <carousel-pins
-    *ngIf="galleryLength > 1"
+    *ngIf="!direction && galleryLength > 1"
     [images]="loadedImages"
     [currentSlide]="currentSlide"
     (changeSlide)="onChangeSlideIndex($event);">
@@ -16,4 +16,12 @@
   <carousel-arrows
     *ngIf="false && galleryLength > 1"
     (changeSlide)="onChangeSlide($event);"></carousel-arrows>
+</div>
+<div class="carousel-wrapper" *ngIf="direction" appCarouselHandlerNew (handleAutoplay)="onHandleAutoplay($event)">
+  <carousel-new-slide
+    *ngFor="let img of loadedImages; let i = index"
+    [src]="img"
+    [slideNo]="i"
+    [isHidden]="i !== 0">
+  </carousel-new-slide>
 </div>

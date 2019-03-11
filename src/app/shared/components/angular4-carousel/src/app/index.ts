@@ -6,21 +6,24 @@ import { CarouselService, WindowWidthService } from './services';
 import {
   AppComponent,
   CarouselComponent,
+  SlideNewComponent,
   SlideComponent,
   CarouselArrowsComponent,
   PinsComponent
 } from './components';
 
-import { CarouselHandlerDirective } from './directives';
+import { CarouselHandlerDirective, CarouselHandlerNewDirective } from './directives';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarouselComponent,
     SlideComponent,
+    SlideNewComponent,
     CarouselArrowsComponent,
     PinsComponent,
-    CarouselHandlerDirective
+    CarouselHandlerDirective,
+    CarouselHandlerNewDirective
   ],
   imports: [
     CommonModule

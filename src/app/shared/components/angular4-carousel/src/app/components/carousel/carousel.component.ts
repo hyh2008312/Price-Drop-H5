@@ -5,7 +5,7 @@ import { CarouselService, ICarouselConfig, WindowWidthService } from '../../serv
 
 import { PinsComponent } from './pins';
 import { CarouselArrowsComponent } from './arrows';
-import { CarouselHandlerDirective } from '../../directives';
+import { CarouselHandlerDirective, CarouselHandlerNewDirective } from '../../directives';
 
 @Component({
   selector: 'carousel',
@@ -13,19 +13,22 @@ import { CarouselHandlerDirective } from '../../directives';
   styleUrls: ['assets/carousel.styles.scss']
 })
 export class CarouselComponent implements OnInit, OnDestroy {
-  @Input() private sources: string[];
+  @Input() private sources: any[];
   @Input() private config: ICarouselConfig;
+
+  @Input() direction: boolean = false;
 
   @Output() public currentSlideChange: EventEmitter<number> = new EventEmitter();
 
   @ViewChild(forwardRef(() => CarouselHandlerDirective)) private carouselHandlerDirective: CarouselHandlerDirective;
+  @ViewChild(forwardRef(() => CarouselHandlerNewDirective)) private carouselHandlerNewDirective: CarouselHandlerNewDirective;
   @ViewChild(CarouselArrowsComponent) private carouselArrowsComponent: CarouselArrowsComponent;
   @ViewChild(PinsComponent) private pinsComponent: PinsComponent;
 
   private autoplayIntervalId;
   private preventAutoplay: boolean;
 
-  public loadedImages: string[];
+  public loadedImages: any[];
   public galleryLength: number;
   public currentSlide = 0;
 
@@ -41,6 +44,8 @@ export class CarouselComponent implements OnInit, OnDestroy {
 
     const [showImmediate, ...showWhenLoad] = this.sources;
     this.loadedImages = this.config.verifyBeforeLoad ? [showImmediate] : this.sources;
+
+    console.log(this.loadedImages)
 
     if (this.galleryLength < 2) {
       return;
@@ -78,7 +83,12 @@ export class CarouselComponent implements OnInit, OnDestroy {
     }
     this.currentSlideChange.emit(this.currentSlide);
 
-    this.carouselHandlerDirective.setNewSlide(this.currentSlide, direction);
+    if(this.carouselHandlerDirective) {
+      this.carouselHandlerDirective.setNewSlide(this.currentSlide, direction);
+    }
+    if(this.carouselHandlerNewDirective) {
+      this.carouselHandlerNewDirective.setNewSlide(this.currentSlide, direction);
+    }
     this.disableCarouselNavBtns();
   }
 
@@ -110,7 +120,9 @@ export class CarouselComponent implements OnInit, OnDestroy {
     this.ngZone.runOutsideAngular(() => {
       this.autoplayIntervalId = setInterval(() => {
         this.onChangeSlide('next');
-        this.pinsComponent.disableNavButtons();
+        if(this.pinsComponent) {
+          this.pinsComponent.disableNavButtons();
+        }
         // self.carouselArrowsComponent.disableNavButtons();
         this.ref.detectChanges();
       }, delay);
@@ -124,7 +136,9 @@ export class CarouselComponent implements OnInit, OnDestroy {
     }
 
     // this.carouselArrowsComponent.disableNavButtons();
-    this.pinsComponent.disableNavButtons();
+    if(this.pinsComponent) {
+      this.pinsComponent.disableNavButtons();
+    }
   }
 
   ngOnDestroy() {

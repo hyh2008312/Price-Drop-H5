@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ICarouselConfig, AnimationConfig } from '../../shared/components/angular4-carousel/index';
 import { LandingPageService } from '../landing-page.service';
 
 @Component({
@@ -12,6 +11,7 @@ import { LandingPageService } from '../landing-page.service';
 export class LandingPageComponent implements OnInit {
 
   banner: any = [];
+  notification: any = [];
 
   constructor(
     private router: Router,
@@ -20,6 +20,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit():void {
     this.getBanner();
+    this.getNotification();
   }
 
   getBanner() {
@@ -27,6 +28,14 @@ export class LandingPageComponent implements OnInit {
       for(let item of res) {
         this.banner.push(item.image);
       }
+    });
+  }
+
+  getNotification() {
+    let param: any = {};
+    param.placement = 'Home';
+    this.landingPageService.getNotification(param).then((res) => {
+      this.notification = [...res];
     });
   }
 }

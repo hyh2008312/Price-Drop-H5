@@ -1,0 +1,153 @@
+.slide-new {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1.0, 1.0);
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  place-content: center center;
+  align-items: center;
+  flex: 1 1 100%;
+
+  &--hidden-initial {
+    display: none;
+  }
+
+  // Animation Slide Overlap
+
+  &--hidden-1-next {
+    top: -100%;
+    transition: left 0.7s linear;
+  }
+
+  &--hidden-1-prev {
+    top: 100%;
+    transition: left 0.7s linear;
+  }
+
+  @keyframes next-1 {
+    0% {
+      top: 99%;
+    }
+
+    100% {
+      top: 0;
+    }
+  }
+
+  @keyframes prev-1 {
+    0% {
+      top: -99%;
+    }
+
+    100% {
+      top: 0;
+    }
+  }
+
+  &--show-1-next {
+    animation: next-1 0.7s 1 ease-out;
+  }
+
+  &--show-1-prev {
+    animation: prev-1 0.7s 1 ease-out;
+  }
+
+  // Animation Slide
+
+  &--hidden-2-next {
+    top: -100%;
+    transition: left 0.7s ease-out;
+  }
+
+  &--hidden-2-prev {
+    top: 100%;
+    transition: left 0.7s ease-out;
+  }
+
+  @keyframes next-overlap-1 {
+    0% {
+      top: 99%;
+    }
+
+    100% {
+      top: 0;
+    }
+  }
+
+  @keyframes prev-overlap-1 {
+    0% {
+      top: -99%;
+    }
+
+    100% {
+      top: 0;
+    }
+  }
+
+  &--show-2-next {
+    animation: next-overlap-1 0.7s 1 ease-out;
+  }
+
+  &--show-2-prev {
+    animation: prev-overlap-1 0.7s 1 ease-out;
+  }
+
+  // Animation Appear
+
+  &--hidden-0-next {
+    transition: opacity 0.7s ease-in;
+    opacity: 0;
+  }
+
+  &--hidden-0-prev {
+    transition: opacity 0.7s ease-in;
+    opacity: 0;
+  }
+
+  @keyframes next-appear-1 {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes prev-appear-1 {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  &--show-0-next {
+    animation: next-appear-1 0.7s 1 ease-out;
+  }
+
+  &--show-0-prev {
+    animation: prev-appear-1 0.7s 1 ease-out;
+  }
+
+  &__icon{
+    font-size: 20px;
+    line-height: 32px;
+    text-align: center;
+    width: 32px;
+    margin-right: 8px;
+  }
+
+  &__text{
+    font-size: 12px;
+    line-height: 32px;
+    font-weight: bold;
+  }
+}

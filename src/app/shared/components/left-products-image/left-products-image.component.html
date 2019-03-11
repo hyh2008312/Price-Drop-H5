@@ -1,6 +1,6 @@
 <div class="xb-image-display__slide"
      *ngIf="images.length >= 2" >
-  <carousel [sources]="images" [config]="config" (currentSlideChange)="slideChange($event)"></carousel>
+  <carousel [sources]="images" [config]="config" (currentSlideChange)="slideChange($event)" [direction]="direction"></carousel>
 </div>
 <div class="xb-image-display__slide"
      *ngIf="images.length == 1" >

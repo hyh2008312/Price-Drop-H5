@@ -77,6 +77,19 @@ export class LandingPageService {
       .catch(this.handleError1);
   }
 
+  getNotification(params): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    let url = `${this.baseUrl.h5Url}notice/app/list/?${this.serializeParams(params)}`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+
   private handleError(error: Response | any, target?: any, option?:any) {
     let errMsg: string;
 

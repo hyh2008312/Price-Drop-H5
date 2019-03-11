@@ -11,8 +11,10 @@ export class LeftProductsImageComponent implements OnInit {
 
   @Input() public images:any = [];
 
+  @Input() direction: boolean = false;
+
   public config: ICarouselConfig = {
-    verifyBeforeLoad: true,
+    verifyBeforeLoad: false,
     log: false,
     animation: true,
     animationType: AnimationConfig.SLIDE,

@@ -1,0 +1,11 @@
+<div class="slide-new" *ngIf="src"
+     [class.slide-new--hidden-initial]="isHidden"
+     [attr.data-slide]="slideNo" fxLayout="row" fxLayoutAlign="start center">
+  <i class="slide-new__icon iconfont-socialcommer icon-pic-freeshipping" *ngIf="src.notificationType == 'Free Shipping'"></i>
+  <i class="slide-new__icon iconfont-socialcommer icon-pic-report" *ngIf="src.notificationType == 'Server Maintenance'"></i>
+  <i class="slide-new__icon iconfont-socialcommer icon-pic-report" *ngIf="src.notificationType == 'Holiday Shipping'"></i>
+  <i class="slide-new__icon iconfont-socialcommer icon-pic-discount" *ngIf="src.notificationType == 'Payment Discount'"></i>
+  <i class="slide-new__icon iconfont-socialcommer icon-pic-discount" *ngIf="src.notificationType == 'Coupon Promotion'"></i>
+  <i class="slide-new__icon iconfont-socialcommer icon-pic-report" *ngIf="src.notificationType == 'Other'"></i>
+  <span class="slide-new__text">{{src.context}}</span>
+</div>

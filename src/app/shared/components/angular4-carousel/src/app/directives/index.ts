@@ -1,3 +1,4 @@
 import { CarouselHandlerDirective } from './carouselHandler.directive';
+import {CarouselHandlerNewDirective} from "./carouselHandlerNew.directive";
 
-export { CarouselHandlerDirective };
+export { CarouselHandlerDirective, CarouselHandlerNewDirective };

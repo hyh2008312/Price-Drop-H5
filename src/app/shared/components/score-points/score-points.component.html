@@ -1,9 +1,0 @@
-<ng-container *ngFor="let num of number;">
-  <i class="material-icons xb-rating-star__star xb-rating-star__color"
-     *ngIf="num < score + 1 && num <= score">star</i>
-  <i class="material-icons xb-rating-star__star xb-rating-star__color"
-     *ngIf="num < score + 1 && score < num">star_half</i>
-  <i class="material-icons xb-rating-star__star"
-     *ngIf="num >= score + 1">star_border</i>
-</ng-container>
-
