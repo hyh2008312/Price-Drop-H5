@@ -12,7 +12,7 @@ import { AuthService } from 'angular2-social-login';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../login.scss']
+  styleUrls: ['../_login.scss']
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
@@ -159,13 +159,17 @@ export class LoginComponent implements OnInit, OnDestroy {
       self.userService.getUser().then((data) => {
         self.userService.addUser(data);
         self.auth.inviteToken(data.isInvite);
+        console.log(self.loginLink)
         if (self.loginLink) {
           self.router.navigate([self.loginLink]).then((data) => {
             self.showLoading = false;
             self.loadingValue = 0;
           });
         } else {
-          window.open('https://www.getpricedrop.com/')
+          self.router.navigate(['/']).then((data) => {
+            self.showLoading = false;
+            self.loadingValue = 0;
+          });
         }
       });
     }).catch((data) => {
@@ -197,7 +201,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               self.userService.addUser(res.user);
               self.user = res.user;
               self.auth.inviteToken(res.user.isInvite);
-              self.loginStatus = true
+              self.loginStatus = true;
               if (self.loginLink) {
                   self.router.navigate([self.loginLink]).then((data) => {
                     self.showLoading = false;
@@ -205,7 +209,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                     self.userService.addLogin(true);
                   });
               } else {
-                self.router.navigate([self.loginLink]).then((data) => {
+                self.router.navigate(['/']).then((data) => {
                   self.showLoading = false;
                   self.loadingValue = 0;
                   self.userService.addLogin(true);

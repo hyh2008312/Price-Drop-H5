@@ -1,2 +1,36 @@
-<router-outlet></router-outlet>
 <app-loading *ngIf="isLoadingShow"></app-loading>
+<mat-drawer-container class="navigation__bg-1">
+  <mat-drawer #drawer [mode]="over">
+    <div class="navigation__login" *ngIf="!isLogin" fxLayout="column" fxLayoutAlign="center center">
+      <div class="navigation__text">Welcome!</div>
+      <div class="navigation__button" (click)="jump(drawer, '/account/login')">Log In / Sign Up</div>
+    </div>
+    <div class="navigation__login" *ngIf="isLogin" fxLayout="column" fxLayoutAlign="center center">
+      <img class="navigation__avatar" [src]="user.avatar" alt="User Avatar">
+      <div class="navigation__text">{{user.firstName}} {{user.lastName}}</div>
+      <div class="navigation__text-1">{{user.email}}</div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="navigation__bg">
+      <div class="container" fxLayout="column">
+        <app-navigation-header></app-navigation-header>
+      </div>
+    </div>
+    <div class="navigation__bg-2">
+      <div class="container navigation__bg-2-inner" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+        <i class="material-icons navigation__icon" (click)="drawer.toggle()">
+          menu
+        </i>
+        <div class="navigation__title xb-italic" fxFlex>PriceDrop</div>
+        <div [ngStyle]="{visibility: !isLogin? 'visible':'hidden'}">
+          <i class="iconfont-socialcommer icon-pic-contactor navigation__icon" (click)="jump(drawer, '/account/login')"></i>
+        </div>
+      </div>
+    </div>
+    <div class="navigation__bg-3">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+

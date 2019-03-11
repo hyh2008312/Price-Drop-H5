@@ -1,11 +1,8 @@
 import { RouterModule, Routes} from '@angular/router';
 
-import { AppComponent } from './app.component';
-
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
     children: [
       {
         path: 'account',
@@ -18,9 +15,6 @@ const routes: Routes = [
         loadChildren: './drops/drops.module#DropsModule'
       }
     ]
-  }, {
-    path: '**',
-    redirectTo: ''
   }
 ];
 

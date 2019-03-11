@@ -56,4 +56,4 @@ import { GuardLinkService } from './shared/services/guard-link/guard-link.servic
   providers: [BaseApi, SystemConstant, DataApi, HttpClientModule, CookieService, GuardLinkService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppInModule {}

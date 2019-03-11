@@ -10,7 +10,7 @@ import { TranslatesBrowserModule } from './shared-server/translates/translates-b
 
 // components
 import { AppComponent } from './app.component';
-import { AppModule } from './app.module';
+import { AppInModule } from './app.module';
 
 // the Request object only lives on the server
 export function getRequest(): any {
@@ -20,7 +20,7 @@ export function getRequest(): any {
 @NgModule({
   bootstrap: [AppComponent],
   imports: [
-    AppModule,
+    AppInModule,
     TranslatesBrowserModule
   ],
   providers: [

@@ -9,13 +9,13 @@ import { AppStorage } from './shared-server/for-storage/universal.inject';
 import { TranslatesServerModule } from './shared-server/translates/translates-server';
 // components
 import { AppComponent } from './app.component';
-import { AppModule } from './app.module';
+import { AppInModule } from './app.module';
 
 import {FlexLayoutServerModule} from '@angular/flex-layout/server';
 
 @NgModule({
   imports: [
-    AppModule,
+    AppInModule,
     ServerModule,
     ModuleMapLoaderModule,
     TranslatesServerModule,

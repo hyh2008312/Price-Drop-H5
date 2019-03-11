@@ -9,7 +9,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export class NavigationHeaderComponent implements OnInit {
 
-  @Input() status: boolean = false;
+  display: boolean = true;
 
   constructor(
     private dialog: MatDialog
@@ -21,10 +21,8 @@ export class NavigationHeaderComponent implements OnInit {
 
   }
 
-  isPopOpen: boolean = false;
-
-  openPop() {
-    this.isPopOpen = !this.isPopOpen;
+  close() {
+    this.display = !this.display;
   }
 
 

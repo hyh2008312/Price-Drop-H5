@@ -119,7 +119,8 @@ const providers = {
     ClipboardModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    MatSidenavModule
   ],
   declarations: [
     SafeHtmlPipe,
@@ -210,7 +211,8 @@ const providers = {
     MatProgressSpinnerModule,
     MatProgressBarModule,
     NgxEchartsModule,
-    LoadingComponent
+    LoadingComponent,
+    MatSidenavModule
   ],
   providers: [
     FollowService,
