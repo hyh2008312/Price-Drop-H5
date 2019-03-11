@@ -1,6 +1,3 @@
-///<reference path="../../node_modules/preboot/typings/module.d.ts"/>
-///<reference path="shared/services/authentication/authentication.module.ts"/>
-///<reference path="../../node_modules/angulartics2/gtm/angulartics2-gtm.d.ts"/>
 import { NgModule } from '@angular/core';
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';

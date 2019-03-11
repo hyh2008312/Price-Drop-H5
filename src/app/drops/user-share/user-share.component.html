@@ -64,8 +64,8 @@
       <div class="m-line1" [ngStyle]="{'margin-right': percentage }"></div>
     </div>
 
-    <div class="sharebtn drop-btn" (click)="openDeepLink()">
-      Help Me & Earn Cash on the App
+    <div class="sharebtn drop-btn" (click)="cutPrice()">
+      Help Me & Claim Your Cash Reward
     </div>
     <div class="time">
       <div class="timehh">{{ahour}}</div>
@@ -74,6 +74,11 @@
         <span class="timespan">:</span>
       <div class="timehh">{{asecond}}</div>
     </div>
+  </div>
+
+  <div class="overflow-popup" *ngIf="cutPriceStauts" fxLayout="column" fxLayoutAlign="center center">
+    <cut-price-dialog fxFlex="none" class="popup" (statusChange)="openCutPrice($event)" [data]="dropObj.rewardBonus" [isMe]="isMe" [errMsg]="errMsg" ></cut-price-dialog>
+
   </div>
 
   <div class="scroll"  *ngIf="dropObj.friendsDrop.length!=0">
@@ -93,7 +98,7 @@
     <div class="bottom-goods-head" id="bottom-goods-head">
       Popular Drops
     </div>
-      <div fxLayout="row" fxLayoutAlign="start center"  *ngFor="let i of someGoodsList" class="bottom-goods-1 googleplay-btn " (click)="downApp()">
+      <div fxLayout="row" fxLayoutAlign="start center"  *ngFor="let i of someGoodsList" class="bottom-goods-1 googleplay-btn " (click)="downApp(i)">
         <img   class="bg-img" [src]="i.mainImage" alt="about product" >
         <div class="bg-right"  fxLayout="column" fxLayoutAlign="space-between start" fxFlex>
           <p class="bgg-title">{{i.title}}</p>

@@ -63,18 +63,46 @@ export class DropsService {
     return array.join('&');
   }
 
-  getDropDetail(id): Promise<any> {
+  getDropDetail(id, login): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
+    let url
+    url = `${this.baseUrl.h5Url}drops/detail/${id}/`
     let options = new RequestOptions({headers: headers});
-
-    const url = `${this.baseUrl.h5Url}/drops/detail/${id}/`
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {this.handleError(error, this)});
+      .catch((error) => this.handleError(error, this));
+  }
+  getADropDetail(id, login, userId): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    let url
+    this.createAuthorizationHeader(headers);
+    url = `${this.baseUrl.h5Url}drops/detail/${id}/?user_id=${userId}`
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
+  friendCutPrice(id): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+    let options = new RequestOptions({headers: headers});
+
+    const url = `${this.baseUrl.h5Url}drops/friend/down/${id}/`
+    return this.http.post(url, {}, options)
+      .toPromise()
+      .then(response => this.checkIsAuth(response))
+      .catch((error) => this.handleError(error, this));
   }
   getSomeGoods(): Promise<any> {
 
@@ -84,26 +112,34 @@ export class DropsService {
     });
     let options = new RequestOptions({headers: headers});
 
-    const url = `${this.baseUrl.h5Url}/drops/hot/push/h5/`
+    const url = `${this.baseUrl.h5Url}product/hotpush/html/list/`
+    // const url = `http://149.129.135.114/product/hotpush/html/list/`
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {this.handleError(error, this)});
+      .catch((error) =>  this.handleError(error, this));
   }
   checkIsAuth(response) {
     if(response.status == 401) {
       return Promise.reject(401);
     }
+    console.log(response)
     return response.json();
   }
 
   private handleError(error: Response | any, target?: any, option?:any) {
     let errMsg: string;
+
     if (error instanceof Response) {
-      if(error.status == 401) {}
-      if(error.status == 409) {
-        window.location.href = 'http://www.getpricedrop.com';
-        return Promise.reject(409);
+      if(error.status == 401) {
+        if(target) {
+          if(!target.routerLink) {
+            target.routerLink = window.location.pathname;
+            target.guardLinkService.addRouterLink(target.routerLink);
+          }
+          target.router.navigate(['/account/login']);
+          return Promise.reject(401);
+        }
       }
       const body = error.json() || '';
       const err = body.error || body;
@@ -113,6 +149,10 @@ export class DropsService {
         if (err.error) {
           errMsg = 'Sorry! Server is busy now!';
         }
+      }
+
+      if(error.status == 409) {
+        return Promise.reject(errMsg);
       }
     } else {
       errMsg = error.msg ? error.msg : error.toString();

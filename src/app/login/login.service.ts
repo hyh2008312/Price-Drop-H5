@@ -28,7 +28,7 @@ export class LoginService {
 
   }
 
-  login(token:any): Promise<Login> {
+  login(token:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ export class LoginService {
 
     return this.http.post(url, token, options)
       .toPromise()
-      .then(response => response.json() as Login)
+      .then(response => response.json() as any)
       .catch(this.handleError);
   }
 
@@ -55,7 +55,7 @@ export class LoginService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}user/google_sign/`;
+    const url = `${this.baseUrl.h5Url}user/google_sign/`;
 
     token.client_id = this.systemConstant.clientId;
 
@@ -64,7 +64,42 @@ export class LoginService {
       .then(response => response.json())
       .catch(this.handleError);
   }
+  getCode(num: any, login: any): Promise<any> {
 
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    if(login){
+      this.createAuthorizationHeader(headers);
+    }
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}user/send_sms/`;
+
+    return this.http.post(url, num, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+  verifyCode(num: any, login: any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    if(login){
+      this.createAuthorizationHeader(headers);
+    }
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}user/verify_code/`;
+
+    return this.http.post(url, num, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
   facebookLogin(token:any): Promise<any> {
 
     let headers = new Headers({
@@ -82,24 +117,7 @@ export class LoginService {
       .then(response => response.json())
       .catch(this.handleError);
   }
-
-  signUp(object: any): Promise<SignUp> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}user/signup/`;
-
-    return this.http.post(url, JSON.stringify(object), options)
-      .toPromise()
-      .then(response => response.json() as SignUp)
-      .catch(this.handleError);
-  }
-
-  settingProfile(object: any): Promise<SignUp> {
+  settingProfile(object: any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -116,7 +134,7 @@ export class LoginService {
       .catch(this.handleError);
   }
 
-  createStore(object: any): Promise<Store> {
+  createStore(object: any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -125,7 +143,7 @@ export class LoginService {
     let options = new RequestOptions({headers:headers});
     this.createAuthorizationHeader(headers);
 
-    const url = `${this.baseUrl.url}store_create/`;
+    const url = `${this.baseUrl.url}store/create/`;
 
     return this.http.post(url, JSON.stringify(object), options)
       .toPromise()
@@ -203,6 +221,22 @@ export class LoginService {
     const url = `${this.baseUrl.url}set/social/link`;
 
     return this.http.put(url, JSON.stringify(object), options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getCountryList(): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}address/country/ship/list/`;
+
+    return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);

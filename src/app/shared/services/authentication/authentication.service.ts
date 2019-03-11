@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -6,6 +6,8 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 
 import { AuthService } from 'ngx-auth';
+import { AppStorage } from '../../../shared-server/for-storage/universal.inject';
+
 
 import { BaseApi,SystemConstant } from '../../../config/app.api';
 
@@ -17,6 +19,7 @@ export class AuthenticationService implements AuthService {
   constructor(
     private http: Http,
     private baseUrl: BaseApi,
+    @Inject(AppStorage) private appStorage,
     private systemConstant: SystemConstant
   ) {
 
@@ -24,15 +27,18 @@ export class AuthenticationService implements AuthService {
 
   public isAuthorized(): Observable<boolean> {
     const isAuthorized: boolean = !!localStorage.getItem('accessToken');
-
+    return Observable.of(isAuthorized);
+  }
+  public isOnlyAuthorized(): Observable<boolean> {
+    const isAuthorized: boolean = !!this.appStorage.getItem('accessToken');
     return Observable.of(isAuthorized);
   }
 
   public setAccessToken(data: any): void {
     this.logout();
-    localStorage.setItem('accessToken', data.access_token);
-    localStorage.setItem('refreshToken', data.refresh_token);
-    localStorage.setItem('expireDate', new Date().getTime() + (data.expires_in  * 1000) + '');
+    this.appStorage.setItem('accessToken', data.access_token, new Date(new Date().getTime() + (data.expires_in  * 1000)));
+    this.appStorage.setItem('refreshToken', data.refresh_token, new Date(new Date().getTime() + (data.expires_in  * 1000)));
+    this.appStorage.setItem('expireDate', new Date().getTime() + (data.expires_in  * 1000) + '', new Date(new Date().getTime() + (data.expires_in  * 1000)));
   }
 
   public inviteToken(data: any): void {
@@ -45,14 +51,14 @@ export class AuthenticationService implements AuthService {
   }
 
   public getAccessToken(): Observable<string> {
-    let accessToken: string = localStorage.getItem('accessToken');
+    let accessToken: string = this.appStorage.getItem('accessToken');
 
     return Observable.of(accessToken);
   }
 
   public refreshToken(): Observable<any> {
     const refreshToken: string = localStorage.getItem('refreshToken');
-    const url = `${this.baseUrl.url}oauth2/convert-token/`;
+    const url = `${this.baseUrl.h5Url}oauth2/convert-token/`;
     const token: Object = {
       grant_type: 'convert_token',
       client_id: this.systemConstant.clientId,

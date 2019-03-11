@@ -49,11 +49,6 @@ import { AngularCropperjsModule } from 'angular-cropperjs';
 import { CarouselModule } from './components/angular4-carousel/index';
 import { ClipboardModule } from 'ngx-clipboard';
 
-import { LoginDialogComponent } from '../login/login/login-dialog.component';
-import { SignUpDialogComponent } from '../login/sign-up/sign-up-dialog.component';
-import { ResetPasswordComponent } from '../login/reset-password/reset-password.component';
-import { ResetPasswordConfirmComponent } from '../login/reset-password-confirm/reset-password-confirm.component';
-
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { LoginService } from '../login/login.service';
@@ -78,7 +73,8 @@ import {
   MatSnackBarModule,
   MatSidenavModule,
   MatDatepickerModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatProgressBarModule
 } from '@angular/material';
 
 import { GoogleClientId, FacebookClientId } from '../config/app.api';
@@ -122,6 +118,7 @@ const providers = {
     MatDatepickerModule,
     ClipboardModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     NgxEchartsModule
   ],
   declarations: [
@@ -152,10 +149,6 @@ const providers = {
     ShareButtonRowComponent,
     NavigationHeaderComponent,
     BottomFooterComponent,
-    LoginDialogComponent,
-    SignUpDialogComponent,
-    ResetPasswordComponent,
-    ResetPasswordConfirmComponent,
     LoadingComponent
   ],
   exports: [
@@ -186,10 +179,6 @@ const providers = {
     ShareButtonRowComponent,
     NavigationHeaderComponent,
     BottomFooterComponent,
-    LoginDialogComponent,
-    SignUpDialogComponent,
-    ResetPasswordComponent,
-    ResetPasswordConfirmComponent,
     CommonModule,
     RouterModule,
     FormsModule,
@@ -219,6 +208,7 @@ const providers = {
     MatDatepickerModule,
     ClipboardModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     NgxEchartsModule,
     LoadingComponent
   ],
@@ -231,10 +221,6 @@ const providers = {
     LoginService
   ],
   entryComponents: [
-    LoginDialogComponent,
-    SignUpDialogComponent,
-    ResetPasswordComponent,
-    ResetPasswordConfirmComponent
   ]
 })
 export class SharedModule {
