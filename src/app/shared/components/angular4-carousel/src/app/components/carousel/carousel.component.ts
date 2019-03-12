@@ -45,8 +45,6 @@ export class CarouselComponent implements OnInit, OnDestroy {
     const [showImmediate, ...showWhenLoad] = this.sources;
     this.loadedImages = this.config.verifyBeforeLoad ? [showImmediate] : this.sources;
 
-    console.log(this.loadedImages)
-
     if (this.galleryLength < 2) {
       return;
     }
