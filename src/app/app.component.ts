@@ -49,6 +49,14 @@ export class AppComponent {
         self.isLogin = true;
       }
     });
+
+    self.userService.navigation.subscribe((data) => {
+      if(data) {
+        self.title = data;
+      } else {
+        self.title = 'PriceDrop'
+      }
+    })
   }
 
   jump(drawer, link?: any) {

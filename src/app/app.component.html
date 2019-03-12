@@ -73,7 +73,8 @@
         <i class="material-icons navigation__icon" (click)="drawer.toggle()">
           menu
         </i>
-        <div class="navigation__title xb-italic" fxFlex>PriceDrop</div>
+        <div class="navigation__title xb-italic" fxFlex *ngIf="title == 'PriceDrop'">PriceDrop</div>
+        <div class="navigation__title-1" fxFlex *ngIf="title != 'PriceDrop'">{{title}}</div>
         <div [ngStyle]="{visibility: !isLogin? 'visible':'hidden'}">
           <i class="iconfont-socialcommer icon-pic-contactor navigation__icon" (click)="jump(drawer, '/account/login')"></i>
         </div>

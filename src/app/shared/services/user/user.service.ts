@@ -12,16 +12,17 @@ import { User } from './user';
 @Injectable()
 export class UserService {
   currentUser: Subject<any> = new BehaviorSubject<any>(null);
-  userCategory: Subject<any> = new BehaviorSubject<any>(null);
-  pubCategory: Subject<any> = new BehaviorSubject<any>(null);
   inLogin: Subject<any> = new BehaviorSubject<any>(null);
+  navigation: Subject<any> = new BehaviorSubject<any>(null);
 
   public addUser(newUser: User): void {
     this.currentUser.next(newUser);
   }
   public addLogin(isLogin: any): void {
     this.inLogin.next(isLogin);
-    console.log(isLogin)
+  }
+  public addNavigation(title: any): void {
+    this.inLogin.next(title);
   }
   constructor(
     private http: Http,
@@ -56,14 +57,6 @@ export class UserService {
       .toPromise()
       .then(response => response.json() as User)
       .catch(this.handleError);
-  }
-
-  public addUserCategory(newCategory: any): void {
-    this.userCategory.next(newCategory);
-  }
-
-  public addPubCategory(newCategory: any): void {
-    this.pubCategory.next(newCategory);
   }
 
   private handleError (error: Response | any) {
