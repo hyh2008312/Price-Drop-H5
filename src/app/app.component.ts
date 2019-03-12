@@ -11,6 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class AppComponent {
+  over: any = 'over';
+
   title = 'PriceDrop';
 
   isLoadingShow = true;
