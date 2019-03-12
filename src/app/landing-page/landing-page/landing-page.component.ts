@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LandingPageService } from '../landing-page.service';
+import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,12 +16,14 @@ export class LandingPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private landingPageService: LandingPageService
+    private landingPageService: LandingPageService,
+    private userService: UserService
   ) {}
 
   ngOnInit():void {
     this.getBanner();
     this.getNotification();
+    this.userService.addNavigation('PriceDrop');
   }
 
   getBanner() {

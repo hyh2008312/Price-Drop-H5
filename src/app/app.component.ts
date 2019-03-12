@@ -54,9 +54,9 @@ export class AppComponent {
       if(data) {
         self.title = data;
       } else {
-        self.title = 'PriceDrop'
+        self.title = 'PriceDrop';
       }
-    })
+    });
   }
 
   jump(drawer, link?: any) {
