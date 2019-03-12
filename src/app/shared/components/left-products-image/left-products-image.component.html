@@ -8,14 +8,14 @@
 </div>
 <div class="xb-image-display__slide-1"
      *ngIf="images.length == 1 && direction" >
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-freeshipping" *ngIf="src.notificationType == 'Free Shipping'"></i>
-    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-report" *ngIf="src.notificationType == 'Server Maintenance'"></i>
-    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-report" *ngIf="src.notificationType == 'Holiday Shipping'"></i>
-    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-discount" *ngIf="src.notificationType == 'Payment Discount'"></i>
-    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-discount" *ngIf="src.notificationType == 'Coupon Promotion'"></i>
-    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-report" *ngIf="src.notificationType == 'Other'"></i>
-    <span class="xb-image-display__slide-1-text">{{src.context}}</span>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-freeshipping" *ngIf="images[0].notificationType == 'Free Shipping'"></i>
+    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-report" *ngIf="images[0].notificationType == 'Server Maintenance'"></i>
+    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-report" *ngIf="images[0].notificationType == 'Holiday Shipping'"></i>
+    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-discount" *ngIf="images[0].notificationType == 'Payment Discount'"></i>
+    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-discount" *ngIf="images[0].notificationType == 'Coupon Promotion'"></i>
+    <i class="xb-image-display__slide-1-icon iconfont-socialcommer icon-pic-report" *ngIf="images[0].notificationType == 'Other'"></i>
+    <span class="xb-image-display__slide-1-text">{{images[0].context}}</span>
   </div>
 
 </div>
