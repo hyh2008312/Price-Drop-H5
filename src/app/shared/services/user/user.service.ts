@@ -14,6 +14,7 @@ export class UserService {
   currentUser: Subject<any> = new BehaviorSubject<any>(null);
   inLogin: Subject<any> = new BehaviorSubject<any>(null);
   navigation: Subject<any> = new BehaviorSubject<any>(null);
+  closeDownload: Subject<any> = new BehaviorSubject<any>(null);
 
   public addUser(newUser: User): void {
     this.currentUser.next(newUser);
@@ -24,6 +25,10 @@ export class UserService {
   public addNavigation(title: any): void {
     this.navigation.next(title);
   }
+  public addCloseDownload(close: any): void {
+    this.closeDownload.next(close);
+  }
+
   constructor(
     private http: Http,
     private baseUrl: BaseApi,

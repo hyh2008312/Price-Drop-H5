@@ -43,7 +43,6 @@ export class LandingPageComponent implements OnInit {
     param.placement = 'Home';
     this.landingPageService.getNotification(param).then((res) => {
       this.notification = [...res];
-      console.log(this.notification)
     });
   }
   getFlashSale() {

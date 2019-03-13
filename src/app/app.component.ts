@@ -62,9 +62,11 @@ export class AppComponent {
   }
 
   jump(drawer, link?: any) {
-    drawer.close();
-    this.router.navigate([link]);
+    this.router.navigate([link]).then(() => {
+      drawer.close();
+    });
   }
+
   jumpNewPage(link?: any) {
     if (this.isLogin) {
       this.router.navigate([link]);

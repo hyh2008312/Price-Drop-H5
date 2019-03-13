@@ -15,8 +15,18 @@
 .overflow-body{
   height: calc(100vh - 112px);
 }
+.overflow-body-height{
+  height: calc(100vh - 56px);
+}
 .left{
   height: calc(100vh - 112px);
+  //max-height: 112px;
+  width: 88px;
+  overflow-y: auto;
+  background-color:#ECECEC;
+}
+.left-height{
+  height: calc(100vh - 56px);
   //max-height: 112px;
   width: 88px;
   overflow-y: auto;
@@ -28,15 +38,19 @@
 .left-cell{
   //height: 96px;
   font-size: 12px;
+  line-height: 14px;
   padding: 20px 0 14px 0;
   text-align: center;
   background-color: #ECECEC;
+  font-weight: 500;
 }
 .left-cell-active{
   font-size: 12px;
+  line-height: 14px;
   padding: 20px 0 14px 0;
   text-align: center;
   background-color: white;
+  font-weight: 500;
 }
 .right{
   //width: 300vw;
@@ -47,8 +61,10 @@
   display: none;
 }
 .second-item{
-  display: inline-block;
-  margin: 20px 0 24px 17px;
+  margin: 20px 0 24px 16px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
 }
 .mag-r-14{
   margin-right: 14px;
@@ -58,17 +74,21 @@
 }
 .three-item{
   border-bottom: 1px rgba(0,0,0,.08) solid;
-  margin-left: 17px;
+  margin-left: 16px;
+  //padding: 0 0 10px 0;
+}
+.three-item-bottom{
+  margin-left: 16px;
   //padding: 0 0 10px 0;
 }
 .three-img{
-  width: 50px;
   height: 50px;
 }
 .three-title{
-  width: 70px;
-  font-size:10px;
-  -webkit-transform:scale(0.8);
+  margin-top: 4px;
+  font-size: 10px;
+  line-height: 14px;
+  transform: scale(0.8);
   text-align: center;
   color: #000000;
 }

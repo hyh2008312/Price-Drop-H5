@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ICarouselConfig, AnimationConfig } from '../../shared/components/angular4-carousel/index';
+import { UserService } from '../../shared/services/user/user.service';
 import { CategoryService } from '../category.service';
 
 @Component({
@@ -15,10 +15,18 @@ export class CategoryPageComponent implements OnInit {
   flag: any= 0;
   tagList: any = [];
 
+  addHeight: any = false;
+
   constructor(
     private router: Router,
-    private categoryService: CategoryService
-  ) {}
+    private categoryService: CategoryService,
+    private userService: UserService
+  ) {
+    this.userService.addNavigation('Category');
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
+  }
 
   ngOnInit(): void {
     this.getList();

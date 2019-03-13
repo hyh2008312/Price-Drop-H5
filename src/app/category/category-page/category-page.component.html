@@ -1,15 +1,15 @@
-<div class="overflow-body" fxLayout="row" fxLayoutAlign="start">
-  <div class="left" fxFlex="none">
+<div [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'" fxLayout="row" fxLayoutAlign="start">
+  <div [ngClass]="!addHeight? 'left-height': 'left'" fxFlex="none">
     <div  *ngFor="let item of tagList; let i = index"  (click)="selTag(i,item)" >
       <div  [class]="[flag==i?'left-cell-active':'left-cell']">{{tranString(item.name)}}</div>
     </div>
   </div>
   <div class="right" fxFlex>
-    <div *ngFor="let item of categoryList; let i = index">
+    <div *ngFor="let item of categoryList; let i = index;">
       <div class="second-item">{{item.name}}</div>
-      <div class="three-item">
-        <div  *ngFor="let i of tranArr(item.subCat)" class="mag-b-18" fxLayout="row wrap" fxLayoutAlign="start center">
-          <div *ngFor="let n of i"  fxLayout="column" fxLayoutAlign="center center" fxFlex="33">
+      <div [ngClass]="i == categoryList.length - 1 ? 'three-item-bottom': 'three-item'" >
+        <div  *ngFor="let i of tranArr(item.subCat)" class="mag-b-18" fxLayout="row wrap" fxLayoutAlign="start start">
+          <div *ngFor="let n of i"  fxLayout="column" fxLayoutAlign="start center" fxFlex="33">
             <img class="three-img"  [src]="n.image" alt="">
             <span class="three-title">{{tranString(n.name)}}</span>
           </div>
