@@ -21,13 +21,15 @@ export class LandingPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private landingPageService: LandingPageService
+    private landingPageService: LandingPageService,
+    private userService: UserService
   ) {}
 
   ngOnInit():void {
     this.getBanner();
     this.getNotification();
     this.getFlashSale();
+    this.userService.addNavigation('PriceDrop');
   }
 
   getBanner() {
