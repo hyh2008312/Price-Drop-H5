@@ -30,6 +30,7 @@ export class LeftProductsImageComponent implements OnInit {
   }
 
   ngOnInit():void {
+    console.log(this.images[0])
   }
 
   slideChange(event) {

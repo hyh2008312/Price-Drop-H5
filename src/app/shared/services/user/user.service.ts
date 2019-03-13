@@ -22,7 +22,7 @@ export class UserService {
     this.inLogin.next(isLogin);
   }
   public addNavigation(title: any): void {
-    this.inLogin.next(title);
+    this.navigation.next(title);
   }
   constructor(
     private http: Http,

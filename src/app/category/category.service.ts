@@ -8,7 +8,7 @@ import {GuardLinkService} from '../shared/services/guard-link/guard-link.service
 import { Title, Meta } from '@angular/platform-browser';
 
 @Injectable()
-export class LandingPageService {
+export class CategoryService {
 
   routerLink: any = false;
 
@@ -64,58 +64,18 @@ export class LandingPageService {
     return array.join('&');
   }
 
-  getBanner(): Promise<any> {
+  getList(): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    let url = `${this.baseUrl.h5Url}promotion/banner/list/`;
+    let url = `${this.baseUrl.h5Url}directory/app/category/list/`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError1);
   }
-
-  getNotification(params): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    let url = `${this.baseUrl.h5Url}notice/app/list/?${this.serializeParams(params)}`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-  getFlashSale(): Promise<any> {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    let url = `${this.baseUrl.h5Url}flashsale/flash/customer/home/`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-  // getActivity() {
-  //   this.$fetch({
-  //     method: 'GET',
-  //     name: ``
-  //   }).then((res) => {
-  //     if(res.length > 0){
-  //       this.activity = res.splice(0, 3);
-  //       this.time = new Date(this.activity[0].flashPromotionEndtime).getTime();
-  //     }
-  //     this.refreshApiFinished();
-  //   }).catch((res) => {
-  //     if(error.status == 10) {
-  //       this.hasWifi = false;
-  //     }
-  //   });
-  // },
   private handleError(error: Response | any, target?: any, option?:any) {
     let errMsg: string;
 

@@ -13,17 +13,21 @@ export class LandingPageComponent implements OnInit {
 
   banner: any = [];
   notification: any = [];
+  flashSaleList: any = [];
+  flashSaleTime: any;
+  ahour: any = 11;
+  amin: any = 12;
+  asecond: any = 13;
 
   constructor(
     private router: Router,
-    private landingPageService: LandingPageService,
-    private userService: UserService
+    private landingPageService: LandingPageService
   ) {}
 
   ngOnInit():void {
     this.getBanner();
     this.getNotification();
-    this.userService.addNavigation('PriceDrop');
+    this.getFlashSale();
   }
 
   getBanner() {
@@ -39,6 +43,30 @@ export class LandingPageComponent implements OnInit {
     param.placement = 'Home';
     this.landingPageService.getNotification(param).then((res) => {
       this.notification = [...res];
+      console.log(this.notification)
     });
+  }
+  getFlashSale() {
+    this.landingPageService.getFlashSale().then((res) => {
+      if (res.length > 0) {
+        this.flashSaleList = res.splice(0, 3);
+        this.flashSaleTime = new Date(this.flashSaleList[0].flashPromotionEndtime).getTime();
+      }
+    });
+  }
+
+  countOff (s, o) {
+    if (o > 0) {
+      return Math.ceil((o - s) / o * 100) + '%'
+    } else {
+      return ''
+    }
+  }
+  countPrice (s, o) {
+    if (o > 0) {
+      return Math.floor(s * (o / 100))  // 解决多一块钱的问题
+    } else {
+      return ''
+    }
   }
 }
