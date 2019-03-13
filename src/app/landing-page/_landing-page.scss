@@ -52,7 +52,14 @@
   display: none;
 }
 
-
+.circle{
+  background-color:blue;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-top: -35px;
+  z-index: -1
+}
 
 .flash-sale{
   padding:16px;
@@ -107,6 +114,10 @@
     color: #FFFFFF;
   }
 }
+.fs-img{
+  width: 104px;
+  height: 104px;
+}
 .fs-price1{
   margin-top: 4px;
   font-size: 14px;
@@ -120,5 +131,7 @@
   text-decoration: line-through;
   color: #000000;
 }
-
+.mag-b-14{
+  margin-bottom: 14px;
+}
 

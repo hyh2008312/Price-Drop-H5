@@ -23,13 +23,13 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="center" >
-    <div  style="background-color:blue;width: 200px;height: 200px; border-radius: 50%;margin-top: -35px;z-index: -1"></div>
+    <div class="circle"></div>
   </div>
 
 
 
   <div class="flash-sale" >
-    <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom:14px ">
+    <div class="mag-b-14" fxLayout="row" fxLayoutAlign="space-between" >
 
       <div fxLayout="row" fxLayoutAlign="start center">
         <i class="iconfont-socialcommer flash-sale-icon" >&#xe745;</i>
@@ -56,7 +56,7 @@
         <div class="fs-tag" fxLayout="row" fxLayoutAlign="center center">
           <span class="fs-tag-font">-{{countOff(countPrice(i.unitPrice, i.discount), i.saleUnitPrice)}} </span>
         </div>
-        <img [src]="i.mainImage" alt="">
+        <img class="fs-img" [src]="i.mainImage" alt="">
         <div fxLayout="column" fxLayoutAlign="start center">
           <div class="fs-price1">₹{{countPrice(i.unitPrice, i.discount)|number}}</div>
           <div class="fs-price2">₹{{i.saleUnitPrice|number}}</div>
