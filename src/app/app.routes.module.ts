@@ -16,6 +16,9 @@ const routes: Routes = [
       }, {
         path: 'category',
         loadChildren: './category/category.module#CategoryModule'
+      }, {
+        path: 'goodsdetail',
+        loadChildren: './goods-detail/goods-detail.module#GoodsDetailModule'
       }
     ]
   }

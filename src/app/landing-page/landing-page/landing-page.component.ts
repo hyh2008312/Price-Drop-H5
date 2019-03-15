@@ -14,6 +14,8 @@ export class LandingPageComponent implements OnInit {
   banner: any = [];
   notification: any = [];
   flashSaleList: any = [];
+  commodityProductList: any = [];
+  featuredProductList: any = [];
   flashSaleTime: any;
   ahour: any = 11;
   amin: any = 12;
@@ -29,6 +31,8 @@ export class LandingPageComponent implements OnInit {
     this.getBanner();
     this.getNotification();
     this.getFlashSale();
+    this.getCommodityProduct();
+    this.getFeaturedProduct();
     this.userService.addNavigation('PriceDrop');
   }
 
@@ -45,6 +49,7 @@ export class LandingPageComponent implements OnInit {
     param.placement = 'Home';
     this.landingPageService.getNotification(param).then((res) => {
       this.notification = [...res];
+      console.log(this.notification)
     });
   }
   getFlashSale() {
@@ -55,19 +60,34 @@ export class LandingPageComponent implements OnInit {
       }
     });
   }
-
-  countOff (s, o) {
-    if (o > 0) {
-      return Math.ceil((o - s) / o * 100) + '%'
-    } else {
-      return ''
-    }
+  getCommodityProduct() {
+    this.landingPageService.getCommodityProduct().then((res) => {
+      if (res) {
+        this.commodityProductList = res
+      }
+    });
   }
-  countPrice (s, o) {
-    if (o > 0) {
-      return Math.floor(s * (o / 100))  // 解决多一块钱的问题
-    } else {
-      return ''
+  getFeaturedProduct() {
+    this.landingPageService.getFeaturedProduct().then((res) => {
+      console.log(res.results)
+      if (res) {
+        // this.featuredProductList = res
+        this.featuredProductList = this.tranArr(res.results)
+      }
+    });
+  }
+  tranArr (data) {
+    let arr = [];
+    let goods3 = [];
+    for (let i = 0; i < data.length; i++) {
+      let item = data[i];
+      arr.push(item);
+      if ((i > 0 && i % 2 === 1) || (i === data.length - 1)) {
+        goods3.push(arr);
+        arr = [];
+      }
     }
+    return goods3
   }
 }
+

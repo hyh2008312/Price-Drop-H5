@@ -21,13 +21,11 @@ import { CategoryPageComponent } from './category-page/category-page.component';
     ProductListComponent,
     CategoryPageComponent
   ],
-  providers: [
-    CategoryService
-  ],
   entryComponents: [
     ProductListComponent,
     CategoryPageComponent
-  ]
+  ],
+  providers: [CategoryService],
 })
 export class CategoryModule { }
 

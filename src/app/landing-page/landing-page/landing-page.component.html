@@ -22,48 +22,15 @@
     </div>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="center" >
-    <div class="circle"></div>
-  </div>
+  <!--<div fxLayout="row" fxLayoutAlign="center" >-->
+    <!--<div class="circle"></div>-->
+  <!--</div>-->
 
 
+  <app-flash-sale  [flashSaleList]="flashSaleList" [flashSaleTime]="flashSaleTime"></app-flash-sale>
 
-  <div class="flash-sale" >
-    <div class="mag-b-14" fxLayout="row" fxLayoutAlign="space-between" >
+  <app-commodity [commodityProductList]="commodityProductList"></app-commodity>
 
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <i class="iconfont-socialcommer flash-sale-icon" >&#xe745;</i>
-        <span class="flash-sale-title">Flash Sale</span>
-
-        <div class="time">
-          <div class="timehh">{{ahour}}</div>
-          <span class="timespan">:</span>
-          <div class="timehh">{{amin}}</div>
-          <span class="timespan">:</span>
-          <div class="timehh">{{asecond}}</div>
-        </div>
-
-      </div>
-      <div class="flash-sale-view">
-        VIEW MORE
-      </div>
-
-    </div>
-
-    <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="8px">
-      <div  *ngFor="let i of flashSaleList let n = index"  fxLayout="column" fxFlex >
-
-        <div class="fs-tag" fxLayout="row" fxLayoutAlign="center center">
-          <span class="fs-tag-font">-{{countOff(countPrice(i.unitPrice, i.discount), i.saleUnitPrice)}} </span>
-        </div>
-        <img class="fs-img" [src]="i.mainImage" alt="">
-        <div fxLayout="column" fxLayoutAlign="start center">
-          <div class="fs-price1">₹{{countPrice(i.unitPrice, i.discount)|number}}</div>
-          <div class="fs-price2">₹{{i.saleUnitPrice|number}}</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <app-featured [featuredProductList]="featuredProductList" ></app-featured>
 
 </div>

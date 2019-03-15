@@ -1,0 +1,18 @@
+<div class="container background-bg-white goods-dec">
+  <div class="description-word"  fxLayout="row"  fxLayoutAlign="space-between center" >
+    <div class="dec">You Might Also Like</div>
+    <div class="s-c-s">&nbsp;</div>
+  </div>
+  <div *ngFor="let item of tranArr(goodsList)" class="recommend-row" fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="space-between center">
+    <div class="i-good" *ngFor="let i of item" fxLayout="column" fxLayoutAlign="start center" fxFlex>
+      <div class="gd-img-image">
+        <img [src]="i.mainImage" >
+      </div>
+      <div class="gd-tlt-bg" fxLayout="row" fxLayoutAlign="start center">
+        <div class="gd-tlt" >₹{{i.unitPrice|number}}</div>
+        <div class="gd-info" >{{countOff(i.unitPrice, i.saleUnitPrice)}}off</div>
+      </div>
+      <div class="gd-price" >₹{{i.saleUnitPrice|number}}</div>
+    </div>
+  </div>
+</div>

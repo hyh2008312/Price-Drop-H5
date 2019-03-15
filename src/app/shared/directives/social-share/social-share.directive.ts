@@ -78,7 +78,7 @@ export class SocialShareDirective {
       /*params: {
        url: this.url,
        media: this.image,
-       description: this.description
+       dec-return: this.dec-return
        }*/
     },
     tumblr: {
@@ -108,7 +108,7 @@ export class SocialShareDirective {
       /*params: {
        url: this.url,
        title: this.title,
-       description: this.caption,
+       dec-return: this.caption,
        image: this.image
        }*/
     },
@@ -134,7 +134,7 @@ export class SocialShareDirective {
       /*params: {
        url: this.url,
        title: this.title,
-       description: this.description
+       dec-return: this.dec-return
        }*/
     },
     pocket: {
@@ -187,7 +187,7 @@ export class SocialShareDirective {
       /*params: {
        u: this.url,
        t: this.title,
-       c: this.description
+       c: this.dec-return
        }*/
     },
     blogger: {
@@ -195,7 +195,7 @@ export class SocialShareDirective {
       /*params: {
        u: this.url,
        n: this.title,
-       t: this.description
+       t: this.dec-return
        }*/
     },
     baidu: {

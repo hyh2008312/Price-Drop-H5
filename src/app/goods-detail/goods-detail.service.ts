@@ -8,7 +8,7 @@ import {GuardLinkService} from '../shared/services/guard-link/guard-link.service
 import { Title, Meta } from '@angular/platform-browser';
 
 @Injectable()
-export class LandingPageService {
+export class GoodsDetailService {
 
   routerLink: any = false;
 
@@ -64,12 +64,24 @@ export class LandingPageService {
     return array.join('&');
   }
 
-  getBanner(): Promise<any> {
+  getGoodsDetail(id): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    let url = `${this.baseUrl.h5Url}promotion/banner/list/`;
+    let url = `${this.baseUrl.h5Url}product/customer/detail/${id}/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+  getRecommendGoods(id): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    let url = `${this.baseUrl.h5Url}product/relations/recommend/list/?id=${id}`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
@@ -77,88 +89,6 @@ export class LandingPageService {
       .catch(this.handleError1);
   }
 
-  getNotification(params): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    let url = `${this.baseUrl.h5Url}notice/app/list/?${this.serializeParams(params)}`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-  getFlashSale(): Promise<any> {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    let url = `${this.baseUrl.h5Url}flashsale/flash/customer/home/`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-  getCommodityProduct(): Promise<any> {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    let url = `${this.baseUrl.h5Url}product/category/product/home/new/list/v3/`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-  getFeaturedProduct(): Promise<any> {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    let url = `${this.baseUrl.h5Url}product/new/customer/list/`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-  // getProductCategory() {
-  //   this.products = [];
-  //   this.$fetch({
-  //     method: 'GET',
-  //     name: 'product.category.product.home.new.list',
-  //     data: {}
-  //   }).then(resData => {
-  //     this.products = [];
-  //     for(let i = 0; i < resData.length;i++) {
-  //       const item = resData[i];
-  //       this.products.push(item)
-  //       if(item.product.length > 0) {
-  //         const goods = [];
-  //         const goods1 = [];
-  //         for(let i = 0; i < item.product.length; i++) {
-  //           const itm = item.product[i];
-  //           if(i < 3) {
-  //             goods.push(itm);
-  //           } else if(i >= 3 && i < 6) {
-  //             goods1.push(itm);
-  //           }
-  //         }
-  //         this.products.push({
-  //           items: [...goods]
-  //         });
-  //         this.products.push({
-  //           items: [...goods1]
-  //         });
-  //       }
-  //     }
-  //     this.refreshApiFinished();
-  //   }, error => {
-  //     if(error.status == 10) {
-  //       this.hasWifi = false;
-  //     }
-  //   });
-  // },
   private handleError(error: Response | any, target?: any, option?:any) {
     let errMsg: string;
 

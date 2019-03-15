@@ -1,0 +1,105 @@
+<div class="container bg-f4" >
+  <div class="goods__bg">
+    <div class="goods__slide" *ngIf="banner.length > 0">
+      <app-left-products-image [images]="banner" ></app-left-products-image>
+    </div>
+  </div>
+
+  <div class="goods-title-price" >
+    <div class="goods-title-price-1" >
+      <div class="goods-title">{{goods.title}}</div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span class="goods-price1">₹{{goods.unitPrice|number}}</span>
+        <span class="goods-price2">₹{{goods.saleUnitPrice|number}}</span>
+        <div class="goods-tag1">15%OFF</div>
+        <div class="goods-tag2">Tax included</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ship-item" fxLayout="column" fxLayoutAlign="start">
+    <div class="s-i-1"  fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="s-i-2" fxLayout="row" fxLayoutAlign="start center">
+        <img class="s-i-img" src="http://image.getpricedrop.com/priceDrop/h5/express-01.png">
+        <!--<image class="s-i-img" src="bmlocal://assets/express-01.png"></image>-->
+        <div class="s-i-t" *ngIf="goods.shipping">Estimated Arrival: {{getNowDay1(goods.shipping.shippingTimeMin) | amDateFormat:'YYYY.MM.DD'}} - {{getNowDay1(goods.shipping.shippingTimeMax)| amDateFormat:'YYYY.MM.DD'}}</div>
+      </div>
+      <div class="s-i-t1" >Details</div>
+    </div>
+    <div class="ship-label" fxLayout="row" fxLayoutAlign="start">
+      <div class="s-i-icon">Free Shipping</div>
+      <div class="s-i-icon-imp">Imported</div>
+    </div>
+  </div>
+
+  <div class="reward-points" fxLayout="column" fxLayoutAlign="start">
+    <div class="r-p-t" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="r-p-t1">Reward Points</div>
+      <div class="r-p-t2" >Details</div>
+    </div>
+    <div class="r-p-c"  fxLayout="row" fxLayoutAlign="start center">
+      <img class="r-p-i" src="https://image.getpricedrop.com/priceDrop/h5/gold-coin.png">
+
+      <div class="r-p-w"  fxLayout="row" fxLayoutAlign="start center" *ngIf="((goods.purchaseMethod==='flash'&&goods.flashSale.flashStatus=='Scheduled')||goods.purchaseMethod==='direct')">
+        <div class="r-p-w1">Earn</div> <span class="r-p-w1b">{{countPoints(goods.unitPrice,goods.divider,goods.dividend)}}</span> <div class="r-p-w1"> points by purchasing this product </div>
+      </div>
+      <div class="r-p-w"  fxLayout="row" fxLayoutAlign="start center" *ngIf="goods.flashSale&&goods.flashSale.flashStatus=='Ongoing'">
+        <div class="r-p-w1">Earn</div> <span class="r-p-w1b"> {{countPoints(calc(goods.unitPrice,goods.flashSale.discount),goods.divider,goods.dividend)}} </span> <div class="r-p-w1"> points by purchasing this product </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="mid1" fxLayout="column" >
+
+    <div class="dec-word1" fxLayout="row"  fxLayoutAlign="space-between ">
+      <div class="dec">Size / Color</div>
+      <div class="s-c-s">Select</div>
+    </div>
+    <!--<div class="dec-word" >-->
+    <!--<text class="dec">Size Chart</text>-->
+    <!--<text class="s-c-s">Check</text>-->
+    <!--</div>-->
+  </div>
+
+
+  <div class="mid">
+    <div class="dec-word"  fxLayout="row"  fxLayoutAlign="space-between center" >
+      <div class="dec">Shipping Time & Cost</div>
+      <div class="s-c-s">Select</div>
+    </div>
+
+    <div class="slogan"  fxLayout="row"  fxLayoutAlign="space-between"  >
+      <div class="slg" fxLayout="column" fxLayoutAlign="center center" fxFlex="25">
+        <div class="i-slg-icon iconfont-socialcommer">&#xe714;</div>
+        <div class="i-slg-1" > Quality  </div>
+        <div class="i-slg-2" > Guaranteed </div>
+      </div>
+
+      <div class="slg" fxLayout="column" fxLayoutAlign="center center" fxFlex="25" >
+        <div class="i-slg-icon iconfont-socialcommer">&#xe75d;</div>
+        <div class="i-slg-1" > Direct From </div>
+        <div class="i-slg-2"  > Manufacturers </div>
+      </div>
+
+      <div class="slg" fxLayout="column" fxLayoutAlign="center center" fxFlex="25" >
+        <div class="i-slg-icon iconfont-socialcommer">&#xe713;</div>
+        <div class="i-slg-1" > Secured  </div>
+        <div class="i-slg-2"  > Payments </div>
+      </div>
+
+      <div class="slg" fxLayout="column" fxLayoutAlign="center center" fxFlex="25" >
+        <div class="i-slg-icon iconfont-socialcommer">&#xe715;</div>
+        <div class="i-slg-1" > Easy </div>
+        <div class="i-slg-2" > Return </div>
+      </div>
+    </div>
+  </div>
+
+  <app-dec-return [goods]="goods"> </app-dec-return>
+
+  <app-recommend-goods [goodsList]="recommendGoods"></app-recommend-goods>
+
+
+</div>

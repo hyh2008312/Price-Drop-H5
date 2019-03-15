@@ -1,0 +1,16 @@
+<div class="featured" style="background-color: white">
+  <div class="featured-title">Featured</div>
+
+  <div *ngFor="let item of featuredProductList" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign=" center center" >
+    <div *ngFor="let i of item" fxLayout="column"  fxLayoutAlign="center center" fxFlex>
+        <div class="featured-img">
+          <img [src]="i.mainImage" alt="">
+        </div>
+      <div fxLayout="row" fxLayoutAlign="center center" >
+            <span class="featured-price1">₹{{i.unitPrice |number}}</span>
+            <span class="featured-off">{{countOff(i.unitPrice, i.saleUnitPrice)}}off</span>
+      </div>
+      <div class="featured-price2">₹{{i.saleUnitPrice |number}}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="container background-bg-white goods-dec">
+  <div class="description-word"  fxLayout="row"  fxLayoutAlign="space-between center" >
+    <div class="dec">Description</div>
+    <div class="s-c-s">&nbsp;</div>
+  </div>
+
+  <div class="overflow-dec" >
+    <div  *ngFor="let i of trimNullObj(goods.productSpecification);let num = index" >
+      <div class="p-s"  [ngClass]="{'rowGray':num%2==0,'rowWithe':num%2!=0}" fxLayout="row"  fxLayoutAlign="start center" >
+
+        <div class="p-s-t1" fxFlex >{{i.name}}</div>
+        <div class="p-s-t2" fxFlex >{{i.content}}</div>
+      </div>
+    </div>
+
+    <div *ngFor="let i of goods.newDescription" >
+      <div *ngIf="i.type=='text'" >
+        <div class="dec-bottom-text">{{i.context}}</div>
+      </div>
+      <img *ngIf="i.type=='image'" [src]="i.context">
+    </div>
+  </div>
+  <div class="dec-see-more"  fxLayout="row"  fxLayoutAlign="center">
+    <div class="d-sm-w">SEE MORE</div>
+  </div>
+
+</div>
+<div class="goods-return background-bg-white">
+  <div class="description-word"  fxLayout="row"  fxLayoutAlign="space-between center" >
+    <div class="dec">Return Policy</div>
+    <div class="s-c-s">&nbsp;</div>
+  </div>
+  <div class="return-word"  [ngStyle]="{'overflow':returnStu ? 'hidden' : '', 'height':returnStu ? '50px' : 'auto'}">
+    <p class="dec-bottom-text">You may return all items sold by PriceDrop within 9 days of delivery for a refund, as long as it is unused and in a good condition.</p>
+    <p class="dec-bottom-text" >Currently we are not able to offer item exchange service for any shipped orders. If you want a new item, please apply for the refund and then place a new order.</p>
+    <!--<p class="dec-bottom-text" >Currently we are not able to offer item exchange service for any shipped orders. If you want a new item, please apply for a refund and start to drop the price again. If this product is no longer available for a Drop, we will fully refund you.</p>-->
+    <p class="dec-bottom-text" >To learn more about our return policy, please visit our FAQ page.</p>
+  </div>
+
+  <div class="dec-see-more" (click)="turnreturnStu()"  fxLayout="row"  fxLayoutAlign="center">
+    <div class="d-sm-w" *ngIf="returnStu">SEE MORE</div>
+    <div class="d-sm-w" *ngIf="!returnStu">SEE LESS</div>
+  </div>
+</div>

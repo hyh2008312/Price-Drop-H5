@@ -9,7 +9,7 @@ export function metaFactory(): MetaLoader {
     applicationName: 'App Universal',
     defaults: {
       title: 'Default page title',
-      description: 'Default description',
+      description: 'Default dec-return',
       'og:site_name': 'App site Universal',
       'og:type': 'website',
       'og:locale': 'ru_RU',

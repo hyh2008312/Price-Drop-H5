@@ -1,0 +1,31 @@
+<div class="commodity" >
+  <div *ngFor="let item of commodityProductList">
+    <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <img [src]="item.bgSrc"  style="height: 45px;width: 100%">
+        </div>
+      <div fxLayout="row" fxLayoutAlign="start center" class="commodity-head1"  >
+        <div fxLayout="row" fxLayoutAlign="center center" class="" style="margin-top: -11px;margin-left: 16px;">
+          <img [src]="item.src" class="commodity-headimg" >
+        </div>
+        <div  class="commodity-headname" fxFlex>{{item.name}}</div>
+        <div class="mag-r-15" fxLayout="row" fxLayoutAlign="start center">
+          <span class="commodity-headword" fxFlex>VIEW MORE</span>
+          <div class="commodity-headoverflow-icon"  fxLayout="row" fxLayoutAlign="center" >
+            <i class="iconfont-socialcommer commodity-headicon" [ngStyle]="{'color': item.color} ">&#xe626;</i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let j of tranArr(item.product)" class="commodity-goods-row" fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="space-between center">
+        <div  *ngFor="let n of  j " class="commodity-goods"  fxLayout="column"  fxLayoutAlign="center center" fxFlex>
+          <div class="gd-img-image">
+            <img  [src]="n.mainImage" >
+          </div>
+          <div class="commodity-price1" >₹{{n.unitPrice|number}}</div>
+          <div class="commodity-price2" style="text-align: center">₹{{n.saleUnitPrice|number}}</div>
+        </div>
+    </div>
+  </div>
+</div>
