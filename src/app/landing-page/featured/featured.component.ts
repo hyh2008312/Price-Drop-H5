@@ -31,6 +31,7 @@ export class FeaturedComponent implements OnInit {
         // this.featuredProductList = res
         this.featuredProductList = this.tranArr(res.results);
 
+
         this.buffer.push(...this.featuredProductList);
       }
     });
