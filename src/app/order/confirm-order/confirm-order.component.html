@@ -1,0 +1,116 @@
+<div class=" confirm-order mg-rl-16 " >
+  <div class="landing__bg"  *ngIf="notification.length > 0">
+    <div class="landing__notification-bg">
+      <div class="landing__notification">
+        <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
+      </div>
+    </div>
+  </div>
+
+  <div class="co-card-top  mg-t-12">
+    <div fxLayout="row" fxLayoutAlign="start center" >
+      <div  *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]" fxLayout="row" fxLayoutAlign="start center">
+        <div style="background-color:#7E7DC3; transform: skewX(-45deg);height: 6px;width: 24px"></div>
+        <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
+        <div style="background-color:#E96672; transform: skewX(-45deg);height: 6px;width: 24px"></div>
+        <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
+      </div>
+    </div>
+    <div class="coct-content" fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <div class="coct-content-word1">Shipping To</div>
+        <div>
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <i class="coct-content-icon iconfont-socialcommer">&#xe707;</i>
+            <div class="coct-content-word2">{{'zhoucc'}}</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <i class="coct-content-icon iconfont-socialcommer">&#xe706;</i>
+            <div class="coct-content-word2">{{'+91 9999999999'}}</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <i class="coct-content-icon iconfont-socialcommer">&#xe705;</i>
+            <div class="coct-content-word2">{{'北京232312323123213123 111 soho21424234234 北京2342342423234 11000 Chhattisgarh'}}</div>
+          </div>
+        </div>
+      </div>
+      <i class="iconfont-socialcommer">&#xe626;</i>
+    </div>
+
+  </div>
+
+  <div class="co-card-mid  mg-t-12">
+    <div class="cocm-content">
+      <div class="cocm-content-block" fxLayout="row" fxLayoutAlign="start">
+        <img class="cocm-content-img" src="http://image.getpricedrop.com/source/product/main/800x800/8631ed75-192a-46a7-b900-a75aba030789.jpg"  alt="product">
+        <div fxLayout="column" fxLayoutAlign="space-between start">
+          <div class="cocm-content-title">{{'Toyota’s Latest is an Entire Mobility Service Platform'}}</div>
+          <div class="cocm-content-num"  fxLayout="row" fxLayoutAlign="space-between center">
+            <div>{{'Pink L'}}</div>
+            <div>x1</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="cocm-content-price1">Subtotal</div>
+          <div class="cocm-content-price1">₹{{'1000'}}</div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="cocm-content-price1">Shipping</div>
+          <div class="cocm-content-price1">₹{{'1000'}}</div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="cocm-content-price1">Tax</div>
+          <div class="cocm-content-price1">₹{{'1000'}}</div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="cocm-content-price2">Total</div>
+          <div class="cocm-content-price2">₹{{'1000'}}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="co-card-bottom mg-t-12">
+    <div class="cocb-content" fxLayout="row" fxLayoutAlign="space-between start">
+      <div fxLayout="column" fxLayoutAlign="start">
+        <div class="cocb-content-word0">Delivery</div>
+        <div>
+          <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="cocb-content-word1">Estimated Arrival</div>
+            <div class="cocb-content-word2">{{'zhoucc'}}</div>
+          </div>
+          <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="cocb-content-word1">Order Preparing Before Shipping</div>
+            <div class="cocb-content-word2">{{'+91 9999999999'}}</div>
+          </div>
+          <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="cocb-content-word1">Shipping Time After Processing</div>
+            <div class="cocb-content-word2">{{'7-12 days'}}</div>
+          </div>
+        </div>
+        <div class="cocb-content-word3">Please Note: In some cases,order might be delayed for a few days due to Custom Duty Check.</div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="bottom-div" fxLayout="row" fxLayoutAlign="space-between center">
+  <div>&nbsp;</div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="bd-total">Total: &nbsp;</div>
+      <div class="bd-price">₹{{'8000'}}</div>
+    </div>
+    <button class="bd-btn">Place Order</button>
+  </div>
+
+</div>

@@ -19,6 +19,9 @@ const routes: Routes = [
       }, {
         path: 'goodsdetail',
         loadChildren: './goods-detail/goods-detail.module#GoodsDetailModule'
+      }, {
+        path: 'order',
+        loadChildren: './order/order.module#OrderModule'
       }
     ]
   }

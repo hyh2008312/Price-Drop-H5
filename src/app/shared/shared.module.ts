@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule }    from '@angular/flex-layout';
 import { MomentModule }        from 'angular2-moment';
 import { MomentTimezoneModule } from 'angular-moment-timezone';
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
 import { SafeHtmlPipe }         from './pipes/safe-html/safe-html.pipe';
 import { SafeUrlPipe }         from './pipes/safe-url/safe-url.pipe';
@@ -109,7 +110,8 @@ const providers = {
     MatProgressSpinnerModule,
     MatProgressBarModule,
     NgxEchartsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    VirtualScrollerModule
   ],
   declarations: [
     SafeHtmlPipe,
@@ -183,7 +185,8 @@ const providers = {
     MatProgressBarModule,
     NgxEchartsModule,
     LoadingComponent,
-    MatSidenavModule
+    MatSidenavModule,
+    VirtualScrollerModule
   ],
   providers: [
     ImageUploadPreviewService,

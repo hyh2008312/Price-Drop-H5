@@ -1,9 +1,46 @@
-<div class="landing__bg" style="height: 800px; width: 400px">
-  <!--<div class="">-->
-
-    <!--<div *ngFor=" i in categoryList" >-->
-      <!--<div>{{i}}</div>-->
+<div class="container">
+  <div class="category__bg">
+    <div class="category__notification-bg">
+      <div class="category__notification" *ngIf="notification.length > 0">
+        <!--<span>{{notification[0].context}}</span>-->
+        <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center" *ngIf="categoryList.length>2" class="horizon-scroll">
+    <div *ngFor="let i of categoryList; let n = index;" (click)="selHtag(i.id)">
+      <div class="horizon-tag" [ngStyle]="{'margin-left':n==0  ? '15px' : '8px', 'margin-right':n == categoryList.length-1 ? '15px' : ''  }">
+        {{i.name}}
+      </div>
+    </div>
+  </div>
+  <div>
+    <!--<div>-->
+      <!--<div>-->
+        <!--<div>Popularity</div>-->
+        <!--<i></i>-->
+      <!--</div>-->
+      <!--<i></i>-->
     <!--</div>-->
 
-  <!--</div>-->
+    <div style="margin: 28px 16px 0 16px">
+
+      <div *ngFor="let item of ProductList" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign=" center center" >
+        <div *ngFor="let i of item" fxLayout="column"  fxLayoutAlign="center center" fxFlex>
+          <div class="featured-img">
+            <img [src]="i.mainImage" alt="">
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center" >
+            <span class="featured-price1">₹{{i.unitPrice |number}}</span>
+            <!--<span class="featured-off">{{countOff(i.unitPrice, i.saleUnitPrice)}}off</span>-->
+            <span class="featured-off">{{i.unitPrice |saleDiscount: i.saleUnitPrice}}off</span>
+
+          </div>
+          <div class="featured-price2">₹{{i.saleUnitPrice |number}}</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </div>

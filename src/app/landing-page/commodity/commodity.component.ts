@@ -21,6 +21,13 @@ export class CommodityComponent implements OnInit {
 
   ngOnInit():void {
   }
+  countOff (s, o) {
+    if (o > 0) {
+      return Math.ceil((o - s) / o * 100) + '%'
+    } else {
+      return ''
+    }
+  }
   tranArr (data) {
     let arr = [];
     const rArr = [];

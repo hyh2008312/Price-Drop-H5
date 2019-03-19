@@ -42,11 +42,11 @@ export class CategoryPageComponent implements OnInit {
     this.flag = index;
     this.categoryList = [...i.subCat]
   }
-
+  openProductList(item) {
+    console.log(item.id)
+  }
   tranString (s) {
     if (s.indexOf('&') !== -1 && s.length >= 13) {
-      // str2 = s.replace("\\n", " \n ");
-      // s.substring(0, s.indexOf('&'))
       return s.replace(' & ', '\n')
     } else {
       if (s.length >= 18) {

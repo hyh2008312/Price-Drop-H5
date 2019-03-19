@@ -15,6 +15,7 @@ export class LandingPageComponent implements OnInit {
   notification: any = [];
   flashSaleList: any = [];
   commodityProductList: any = [];
+  buffer:any = [];
   featuredProductList: any = [];
   flashSaleTime: any;
   ahour: any = 11;
@@ -72,7 +73,9 @@ export class LandingPageComponent implements OnInit {
       console.log(res.results)
       if (res) {
         // this.featuredProductList = res
-        this.featuredProductList = this.tranArr(res.results)
+        this.featuredProductList = this.tranArr(res.results);
+
+        this.buffer.push(...this.featuredProductList);
       }
     });
   }

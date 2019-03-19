@@ -9,7 +9,7 @@
       <div class="second-item">{{item.name}}</div>
       <div [ngClass]="i == categoryList.length - 1 ? 'three-item-bottom': 'three-item'" >
         <div  *ngFor="let i of tranArr(item.subCat)" class="mag-b-18" fxLayout="row wrap" fxLayoutAlign="start start">
-          <div *ngFor="let n of i"  fxLayout="column" fxLayoutAlign="start center" fxFlex="33">
+          <div *ngFor="let n of i"  fxLayout="column" fxLayoutAlign="start center" fxFlex="33" routerLink="./list/{{n.categoryId}}" (click)="openProductList(n)">
             <img class="three-img"  [src]="n.image" alt="">
             <span class="three-title">{{tranString(n.name)}}</span>
           </div>

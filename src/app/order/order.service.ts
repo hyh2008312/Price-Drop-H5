@@ -8,7 +8,7 @@ import {GuardLinkService} from '../shared/services/guard-link/guard-link.service
 import { Title, Meta } from '@angular/platform-browser';
 
 @Injectable()
-export class CategoryService {
+export class OrderService {
 
   routerLink: any = false;
 
@@ -27,7 +27,7 @@ export class CategoryService {
 
     this.metaService.updateTag({name: 'description', content: data.description});
     this.metaService.updateTag({property: "og:title", content: data.title});
-    this.metaService.updateTag({property: "og:description", content: data.description});
+    this.metaService.updateTag({property: "og:dec-return", content: data.description});
     this.metaService.updateTag({property: "og:image", content: data.shareImage});
     this.metaService.updateTag({property: "og:image:width", content: '600'});
     this.metaService.updateTag({property: "og:image:height", content: '600'});
@@ -64,78 +64,68 @@ export class CategoryService {
     return array.join('&');
   }
 
-  getList(): Promise<any> {
+  getBanner(): Promise<any> {
+
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    let url = `${this.baseUrl.h5Url}directory/app/category/list/`;
+    let url = `${this.baseUrl.h5Url}promotion/banner/list/`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError1);
   }
-  getTitle(id): Promise<any> {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    let url = `${this.baseUrl.h5Url}/product/category/${id}/`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
+
   getNotification(): Promise<any> {
+
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    let url = `${this.baseUrl.h5Url}notice/app/list/?placement=Category`;
+    let url = `${this.baseUrl.h5Url}notice/app/list/?placement=Order Confirm`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError1);
   }
-  getSubCategory(id): Promise<any> {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    let url = `${this.baseUrl.h5Url}product/app/category/${id}/`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-  getProduct(id, selId): Promise<any> {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    let cId  = id
-    if (selId) {
-      cId = selId
-    }
-    let url = `${this.baseUrl.h5Url}product/app/category/product/?cat=${cId}&page=${'1'}&page_size=${'10'}&sort=${false}`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-//   getSubCategory () {
-//                 this.$fetch({
-//                     method: 'GET',
-//                     url: `${baseUrl}/product/app/category/${this.id}/`
-//                 }).then(data => {
-//                     this.isFirstLoad = false;
-//                     this.subCategory = [...data];
-//                     this.subCategory.unshift({
-//                         id: false,
-//                         name: 'All'
-//                     });
-//                 }, error => {});
-//             },
+  // getProductCategory() {
+  //   this.products = [];
+  //   this.$fetch({
+  //     method: 'GET',
+  //     name: 'product.category.product.home.new.list',
+  //     data: {}
+  //   }).then(resData => {
+  //     this.products = [];
+  //     for(let i = 0; i < resData.length;i++) {
+  //       const item = resData[i];
+  //       this.products.push(item)
+  //       if(item.product.length > 0) {
+  //         const goods = [];
+  //         const goods1 = [];
+  //         for(let i = 0; i < item.product.length; i++) {
+  //           const itm = item.product[i];
+  //           if(i < 3) {
+  //             goods.push(itm);
+  //           } else if(i >= 3 && i < 6) {
+  //             goods1.push(itm);
+  //           }
+  //         }
+  //         this.products.push({
+  //           items: [...goods]
+  //         });
+  //         this.products.push({
+  //           items: [...goods1]
+  //         });
+  //       }
+  //     }
+  //     this.refreshApiFinished();
+  //   }, error => {
+  //     if(error.status == 10) {
+  //       this.hasWifi = false;
+  //     }
+  //   });
+  // },
   private handleError(error: Response | any, target?: any, option?:any) {
     let errMsg: string;
 

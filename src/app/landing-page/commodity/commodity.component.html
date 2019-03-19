@@ -1,30 +1,32 @@
-<div class="commodity" >
-  <div *ngFor="let item of commodityProductList">
-    <div>
+<div class="commodity"  >
+  <div *ngFor="let item of commodityProductList" class="commodity-block" style="">
+    <div fxLayout="row" fxLayoutAlign="space-between center" routerLink="../category/list/{{item.id}}">
         <div fxLayout="row" fxLayoutAlign="start center">
-          <img [src]="item.bgSrc"  style="height: 45px;width: 100%">
+          <!--<i class="iconfont-socialcommer commodity-icon" style="color:rgb(127, 6, 255)">&#xe77e;</i>-->
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Kids'"                   style="color:rgb(255, 194, 39);">&#xe77e;</i>
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Electronic'"             style="color:rgb(255, 167, 21);">&#xe779;</i>
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Home'"                   style="color:rgb(0, 219, 225);">&#xe77a;</i>
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Bags'"                   style="color:rgb(255, 63, 109);">&#xe778;</i>
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Women'"                  style="color:rgb(255, 69, 118);">&#xe77c;</i>
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Women’s Shoes'"          style="color:rgb(231, 138, 0);">&#xe77d;</i>
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Men'"                    style="color:rgb(8, 66, 255);">&#xe776;</i>
+
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Men’s Shoes'"            style="color:rgb(36, 155, 255);">&#xe77b;</i>
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Jewellery & Watches'"    style="color:rgb(127, 6, 255);">&#xe77f;</i>
+          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Beauty & Personal Care'" style="color:rgb(255, 50, 202);">&#xe777;</i>
+
+          <div class="commodity-title">{{item.name}}</div>
         </div>
-      <div fxLayout="row" fxLayoutAlign="start center" class="commodity-head1"  >
-        <div fxLayout="row" fxLayoutAlign="center center" class="" style="margin-top: -11px;margin-left: 16px;">
-          <img [src]="item.src" class="commodity-headimg" >
-        </div>
-        <div  class="commodity-headname" fxFlex>{{item.name}}</div>
-        <div class="mag-r-15" fxLayout="row" fxLayoutAlign="start center">
-          <span class="commodity-headword" fxFlex>VIEW MORE</span>
-          <div class="commodity-headoverflow-icon"  fxLayout="row" fxLayoutAlign="center" >
-            <i class="iconfont-socialcommer commodity-headicon" [ngStyle]="{'color': item.color} ">&#xe626;</i>
-          </div>
-        </div>
-      </div>
+        <div class="commodity-view">VIEW MORE</div>
     </div>
 
-    <div *ngFor="let j of tranArr(item.product)" class="commodity-goods-row" fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="space-between center">
+    <div *ngFor="let j of tranArr(item.product)" class="commodity-goods-row" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="space-between center">
         <div  *ngFor="let n of  j " class="commodity-goods"  fxLayout="column"  fxLayoutAlign="center center" fxFlex>
           <div class="gd-img-image">
             <img  [src]="n.mainImage" >
           </div>
           <div class="commodity-price1" >₹{{n.unitPrice|number}}</div>
-          <div class="commodity-price2" style="text-align: center">₹{{n.saleUnitPrice|number}}</div>
+          <div class="commodity-price2" >{{countOff(n.unitPrice, n.saleUnitPrice)}}OFF</div>
         </div>
     </div>
   </div>

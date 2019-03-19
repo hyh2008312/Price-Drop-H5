@@ -12,9 +12,10 @@
   </div>
 
   <div class="category-line" fxLayout="row" fxLayoutAlign="start">
-    <div *ngFor="let i of ['categories','kids','women','men','women','men','women','men','women','men','women','men','women','men','women','men','shoes']">
-      <div class="overflow-block" fxLayout="column" fxLayoutAlign="center center">
-        <div class="category-line-block" fxLayout="column" fxLayoutAlign="center center">
+    <div *ngFor="let i of ['categories','kids','women','men','women','men','women','men','women','men','women','men','women','men','women','men','shoes'];let n=index">
+      <div class="overflow-block" [ngStyle]="{'margin-left':n==0 ? '16px' : '24px' }" fxLayout="column" fxLayoutAlign="center center">
+        <!--<div class="category-line-block"  [ngStyle]="{'padding-left':n==0 ? '24px' : '' }" fxLayout="column" fxLayoutAlign="center center">-->
+        <div class="category-line-block"   fxLayout="column" fxLayoutAlign="center center">
           <i class="iconfont-socialcommer category-line-icon">&#xe6d9;</i>
         </div>
         <div class="category-line-word">{{i}}</div>
@@ -31,6 +32,6 @@
 
   <app-commodity [commodityProductList]="commodityProductList"></app-commodity>
 
-  <app-featured [featuredProductList]="featuredProductList" ></app-featured>
+  <app-featured [featuredProductList]="featuredProductList" [buffer]="buffer" *ngIf="buffer.length > 0"></app-featured>
 
 </div>
