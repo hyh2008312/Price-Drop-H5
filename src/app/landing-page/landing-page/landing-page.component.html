@@ -1,37 +1,49 @@
-<div class="container">
-  <div class="landing__bg">
-    <div class="landing__slide" *ngIf="banner.length > 0">
-      <app-left-products-image [images]="banner"></app-left-products-image>
-    </div>
-  </div>
-  <div class="landing__notification-bg">
-    <div class="landing__notification" *ngIf="notification.length > 0">
-      <!--<span>{{notification[0].context}}</span>-->
-      <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
-    </div>
-  </div>
+<div #scroll [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+  <div infinite-scroll
+       [infiniteScrollDistance]="0.1"
+       [infiniteScrollUpDistance]="1"
+       [infiniteScrollThrottle]="50"
+       [infiniteScrollContainer]="scroll"
+       (scrolledUp)="onUp($event)"
+       (scrolled)="onScrollDown($event)">
 
-  <div class="category-line" fxLayout="row" fxLayoutAlign="start">
-    <div *ngFor="let i of ['categories','kids','women','men','women','men','women','men','women','men','women','men','women','men','women','men','shoes'];let n=index">
-      <div class="overflow-block" [ngStyle]="{'margin-left':n==0 ? '16px' : '24px' }" fxLayout="column" fxLayoutAlign="center center">
-        <!--<div class="category-line-block"  [ngStyle]="{'padding-left':n==0 ? '24px' : '' }" fxLayout="column" fxLayoutAlign="center center">-->
-        <div class="category-line-block"   fxLayout="column" fxLayoutAlign="center center">
-          <i class="iconfont-socialcommer category-line-icon">&#xe6d9;</i>
-        </div>
-        <div class="category-line-word">{{i}}</div>
+    <div class="landing__bg">
+      <div class="landing__slide" *ngIf="banner.length > 0">
+        <app-left-products-image [images]="banner"></app-left-products-image>
       </div>
     </div>
-  </div>
+    <div class="landing__notification-bg">
+      <div class="landing__notification" *ngIf="notification.length > 0">
+        <!--<span>{{notification[0].context}}</span>-->
+        <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
+      </div>
+    </div>
 
-  <!--<div fxLayout="row" fxLayoutAlign="center" >-->
+    <div class="category-line" fxLayout="row" fxLayoutAlign="start">
+      <div *ngFor="let i of ['categories','kids','women','men','women','men','women','men','women','men','women','men','women','men','women','men','shoes'];let n=index">
+        <div class="overflow-block" [ngStyle]="{'margin-left':n==0 ? '16px' : '24px' }" fxLayout="column" fxLayoutAlign="center center">
+          <!--<div class="category-line-block"  [ngStyle]="{'padding-left':n==0 ? '24px' : '' }" fxLayout="column" fxLayoutAlign="center center">-->
+          <div class="category-line-block"   fxLayout="column" fxLayoutAlign="center center">
+            <i class="iconfont-socialcommer category-line-icon">&#xe6d9;</i>
+          </div>
+          <div class="category-line-word">{{i}}</div>
+        </div>
+      </div>
+    </div>
+
+    <!--<div fxLayout="row" fxLayoutAlign="center" >-->
     <!--<div class="circle"></div>-->
-  <!--</div>-->
+    <!--</div>-->
 
 
-  <app-flash-sale  [flashSaleList]="flashSaleList" [flashSaleTime]="flashSaleTime"></app-flash-sale>
+    <app-flash-sale  [flashSaleList]="flashSaleList" [flashSaleTime]="flashSaleTime"></app-flash-sale>
 
-  <app-commodity [commodityProductList]="commodityProductList"></app-commodity>
+    <app-commodity [commodityProductList]="commodityProductList"></app-commodity>
 
-  <app-featured [featuredProductList]="featuredProductList" [buffer]="buffer" *ngIf="buffer.length > 0"></app-featured>
-
+    <div class="featured" style="background-color: white;">
+      <div class="featured-title">Featured</div>
+      <app-featured *ngFor="let item of buffer" [item]="item" ></app-featured>
+    </div>
+    <div *ngIf="loading">loading...</div>
+  </div>
 </div>

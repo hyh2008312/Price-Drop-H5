@@ -111,11 +111,11 @@ export class LandingPageService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
-  getFeaturedProduct(): Promise<any> {
+  getFeaturedProduct(params: any): Promise<any> {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    let url = `${this.baseUrl.h5Url}product/new/customer/list/`;
+    let url = `${this.baseUrl.h5Url}product/new/customer/list/?${this.serializeParams(params)}`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()

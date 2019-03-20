@@ -236,7 +236,6 @@
 }
 .featured{
   padding: 16px 16px 0 16px;
-  height: 100vh;
   &-title{
     font-size: 16px;
     margin-bottom: 12px;
@@ -305,3 +304,11 @@
   margin-right: 15px
 }
 
+.overflow-body{
+  height: calc(100vh - 112px);
+  overflow: scroll;
+}
+.overflow-body-height{
+  height: calc(100vh - 56px);
+  overflow: scroll;
+}

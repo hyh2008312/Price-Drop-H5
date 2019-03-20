@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule }    from '@angular/flex-layout';
 import { MomentModule }        from 'angular2-moment';
 import { MomentTimezoneModule } from 'angular-moment-timezone';
-import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
 import { SafeHtmlPipe }         from './pipes/safe-html/safe-html.pipe';
 import { SafeUrlPipe }         from './pipes/safe-url/safe-url.pipe';
@@ -38,6 +37,7 @@ import { QuillEditorModule } from 'ngx-quill-editor';
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { CarouselModule } from './components/angular4-carousel/index';
 import { ClipboardModule } from 'ngx-clipboard';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 
@@ -111,7 +111,7 @@ const providers = {
     MatProgressBarModule,
     NgxEchartsModule,
     MatSidenavModule,
-    VirtualScrollerModule
+    InfiniteScrollModule
   ],
   declarations: [
     SafeHtmlPipe,
@@ -186,7 +186,7 @@ const providers = {
     NgxEchartsModule,
     LoadingComponent,
     MatSidenavModule,
-    VirtualScrollerModule
+    InfiniteScrollModule
   ],
   providers: [
     ImageUploadPreviewService,

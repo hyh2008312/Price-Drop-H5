@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LandingPageService } from '../landing-page.service';
 import { UserService } from '../../shared/services/user/user.service';
@@ -11,29 +11,40 @@ import { UserService } from '../../shared/services/user/user.service';
 
 export class LandingPageComponent implements OnInit {
 
+  selector = '.main-panel';
   banner: any = [];
   notification: any = [];
   flashSaleList: any = [];
   commodityProductList: any = [];
   buffer:any = [];
-  featuredProductList: any = [];
   flashSaleTime: any;
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
+  loading: boolean = false;
+  addHeight: any = false;
+  page: any = 1;
+  pageSize: any = 12;
+  throttle = 300;
+  scrollDistance = 1;
+  scrollUpDistance = 2;
 
   constructor(
     private router: Router,
     private landingPageService: LandingPageService,
     private userService: UserService
-  ) {}
+  ) {
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
+  }
 
   ngOnInit():void {
     this.getBanner();
     this.getNotification();
     this.getFlashSale();
     this.getCommodityProduct();
-    this.getFeaturedProduct();
+    this.getFeaturedProduct(1);
     this.userService.addNavigation('PriceDrop');
   }
 
@@ -68,17 +79,20 @@ export class LandingPageComponent implements OnInit {
       }
     });
   }
-  getFeaturedProduct() {
-    this.landingPageService.getFeaturedProduct().then((res) => {
-      console.log(res.results)
+  getFeaturedProduct(page) {
+    this.landingPageService.getFeaturedProduct({
+      page,
+      page_size: this.pageSize
+    }).then((res) => {
       if (res) {
         // this.featuredProductList = res
-        this.featuredProductList = this.tranArr(res.results);
-
-        this.buffer.push(...this.featuredProductList);
+        this.buffer = this.buffer.concat(this.tranArr(res.results));
+        this.page++;
+        this.loading = false;
       }
     });
   }
+
   tranArr (data) {
     let arr = [];
     let goods3 = [];
@@ -92,5 +106,15 @@ export class LandingPageComponent implements OnInit {
     }
     return goods3
   }
+
+  onUp(ev) {
+    console.log('scrolled up!', ev);
+  }
+
+  onScrollDown (ev) {
+    this.loading = true;
+    this.getFeaturedProduct(this.page);
+  }
+
 }
 
