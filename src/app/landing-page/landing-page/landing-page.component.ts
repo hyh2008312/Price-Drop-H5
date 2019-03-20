@@ -21,7 +21,7 @@ export class LandingPageComponent implements OnInit {
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
-  loading: boolean = false;
+  loading: boolean = true;
   addHeight: any = false;
   page: any = 1;
   pageSize: any = 12;

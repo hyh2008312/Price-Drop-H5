@@ -306,9 +306,9 @@
 
 .overflow-body{
   height: calc(100vh - 112px);
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .overflow-body-height{
   height: calc(100vh - 56px);
-  overflow: scroll;
+  overflow-y: scroll;
 }
