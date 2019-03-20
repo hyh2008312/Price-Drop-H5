@@ -5,6 +5,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { ChangeAddressComponent } from './change-address/change-address.component';
 import { ChooseAddressComponent } from './choose-address/choose-address.component';
 import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
+import { CityListComponent } from './city-list/city-list.component';
 
 import { OrderService } from './order.service';
 
@@ -18,7 +19,8 @@ import { OrderService } from './order.service';
     OrderListComponent,
     ChangeAddressComponent,
     ChooseAddressComponent,
-    ConfirmOrderComponent
+    ConfirmOrderComponent,
+    CityListComponent
   ],
   entryComponents: [],
   providers: [OrderService]

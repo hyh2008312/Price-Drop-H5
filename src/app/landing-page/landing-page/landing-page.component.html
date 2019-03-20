@@ -43,6 +43,14 @@
       <div class="featured-title">Featured</div>
       <app-featured *ngFor="let item of buffer" [item]="item" ></app-featured>
     </div>
-    <div *ngIf="loading">loading...</div>
+    <div class="md-padding-top-2 md-padding-bottom-2" fxLayout="row" fxLayoutAlign="center center">
+      <mat-progress-spinner
+        color="accent"
+        mode="indeterminate"
+        [diameter]="value"
+        *ngIf="loading">
+
+      </mat-progress-spinner>
+    </div>
   </div>
 </div>

@@ -21,13 +21,11 @@ export class LandingPageComponent implements OnInit {
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
-  loading: boolean = true;
+  loading: boolean = false;
   addHeight: any = false;
   page: any = 1;
   pageSize: any = 12;
-  throttle = 300;
-  scrollDistance = 1;
-  scrollUpDistance = 2;
+  value = 36;
 
   constructor(
     private router: Router,
@@ -80,10 +78,7 @@ export class LandingPageComponent implements OnInit {
     });
   }
   getFeaturedProduct(page) {
-    this.landingPageService.getFeaturedProduct({
-      page,
-      page_size: this.pageSize
-    }).then((res) => {
+    this.landingPageService.getFeaturedProduct({'page': page , page_size: this.pageSize}).then((res) => {
       if (res) {
         // this.featuredProductList = res
         this.buffer = this.buffer.concat(this.tranArr(res.results));
