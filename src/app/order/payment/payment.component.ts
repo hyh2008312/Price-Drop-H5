@@ -4,15 +4,16 @@ import { OrderService } from '../order.service';
 import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
+  selector: 'app-payment',
+  templateUrl: './payment.component.html',
   styleUrls: ['../_order.scss']
 })
 
-export class OrderListComponent implements OnInit {
+export class PaymentComponent implements OnInit {
 
   @Input() flashSaleList: any = [];
   @Input() flashSaleTime: any;
+  notification: any = []
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
@@ -24,8 +25,16 @@ export class OrderListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.addNavigation('My Orders');
+    this.userService.addNavigation('Payment');
+    this.getNotification()
 
+  }
+  getNotification () {
+    this.orderService.getNotification().then((res) => {
+      this.notification = res
+    }).catch((res) => {
+      console.log(res)
+    })
   }
   countOff (s, o) {
     if (o > 0) {
@@ -34,5 +43,11 @@ export class OrderListComponent implements OnInit {
       return ''
     }
   }
-
+  countPrice (s, o) {
+    if (o > 0) {
+      return Math.floor(s * (o / 100))  // 解决多一块钱的问题
+    } else {
+      return ''
+    }
+  }
 }

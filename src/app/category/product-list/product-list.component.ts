@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ICarouselConfig, AnimationConfig } from '../../shared/components/angular4-carousel/index';
 import { CategoryService } from '../category.service';
 import {UserService} from '../../shared/services/user/user.service';
 
@@ -17,6 +16,12 @@ export class ProductListComponent implements OnInit {
   ProductList: any = [];
   notification: any = [];
   selId: any =  false;
+  sort: any =  false;
+  loading: any =  false;
+  page: any = 1;
+  pageSize: any = 12;
+  value = 36;
+  addHeight: any = false;
 
 
   constructor(
@@ -27,14 +32,16 @@ export class ProductListComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
 
 ) {
-
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
   }
 
   ngOnInit(): void {
     this.getCategoryTitle();
     this.getNotification();
     this.getSubCategory();
-    this.getProduct(false);
+    this.getProduct();
   }
 
   getCategoryTitle () {
@@ -46,11 +53,20 @@ export class ProductListComponent implements OnInit {
         console.log(res)
     })
   }
-  getProduct (selId) {
+  getProduct () {
     let id = this.activatedRoute.snapshot.params['id'];
-    this.categoryService.getProduct(id, selId).then((res) => {
+    let cId  = id
+    if (this.selId) {
+      cId = this.selId
+    }
+    let params = {
+      'cat' : cId,
+      'page' : this.page,
+      'page_size' : this.pageSize,
+      'sort' : this.sort,
+    }
+    this.categoryService.getProduct(params).then((res) => {
       // console.log(res)
-
         let arr = [];
         for (let i = 0; i < res.results.length; i++) {
           const item = res.results[i];
@@ -60,11 +76,22 @@ export class ProductListComponent implements OnInit {
             arr = [];
           }
         }
-      this.changeDetectorRef.markForCheck();
-      this.changeDetectorRef.detectChanges();
+      this.page++;
+      this.loading = false;
+      // this.changeDetectorRef.markForCheck();
+      // this.changeDetectorRef.detectChanges();
     }).catch((res) => {
         console.log(res)
     })
+  }
+  onUp(ev) {
+    console.log('scrolled up!', ev);
+  }
+
+  onScrollDown (ev) {
+    this.loading = true;
+    console.log('scrolled down!', ev);
+    this.getProduct();
   }
   getSubCategory () {
     let id = this.activatedRoute.snapshot.params['id'];
@@ -93,8 +120,8 @@ export class ProductListComponent implements OnInit {
     } else {
       this.selId = false;
     }
-    this.changeDetectorRef.markForCheck();
-    this.getProduct(this.selId);
-    this.changeDetectorRef.detectChanges();
+    // this.changeDetectorRef.markForCheck();
+    // this.changeDetectorRef.detectChanges();
+    this.getProduct();
   }
 }

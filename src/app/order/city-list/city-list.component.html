@@ -1,5 +1,15 @@
 <div class="city-list" >
-  <div>
+  <div *ngFor="let i of city">
+    <div class="cl-item-word">{{i.fWord}}</div>
+    <div *ngFor="let n of i.city">
 
+      <div class="cl-item-word1" fxLayout="row" fxLayoutAlign="space-between">
+        <div>{{n.name}}</div>
+        <i class="iconfont-socialcommer  cl-item-icon">&#xe6fb;</i>
+      </div>
+    </div>
   </div>
+</div>
+<div class="ca-bottom">
+  <button class="ca-bottom-btn">Save</button>
 </div>

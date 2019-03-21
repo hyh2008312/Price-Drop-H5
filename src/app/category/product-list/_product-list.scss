@@ -89,3 +89,11 @@
     text-decoration: line-through;
   }
 }
+.overflow-body{
+  height: calc(100vh - 112px);
+  overflow-y: scroll;
+}
+.overflow-body-height{
+  height: calc(100vh - 56px);
+  overflow-y: scroll;
+}

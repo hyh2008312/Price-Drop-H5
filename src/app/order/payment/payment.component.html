@@ -1,0 +1,111 @@
+<div class=" payment mg-rl-16 " >
+  <div class="landing__bg"  *ngIf="notification.length > 0">
+    <div class="landing__notification-bg">
+      <div class="landing__notification">
+        <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
+      </div>
+    </div>
+  </div>
+
+  <div class="payment-box mg-t-12" fxLayout="row" fxLayoutAlign="space-between center"  >
+    <div fxLayout="column" fxLayoutAlign="start start">
+      <div class="payment-box-title">Cash/Card on Delivery</div>
+      <div class="overflow-cod" fxLayout="row" fxLayoutAlign="start start" >
+        <img class="payment-box-image1"  [src]="codSrc">
+        <div class="payment-box-text" >Cash / Debit Card / Credit Card at your doorstep</div>
+      </div>
+      <div class="payment-box-text-err" *ngIf="false">Your last COD order is not completed yet</div>
+      <!--<div class="payment-box-text-err" >&nbsp;</div>-->
+    </div>
+    <i class="iconfont-socialcommer" *ngIf="false">&#xe6fb;</i>
+    <i class="iconfont-socialcommer" *ngIf="true">&#xe73f;</i>
+  </div>
+
+  <div>
+    <div class="payment-box  mg-t-12">
+
+      <div class="payment-box-border-b" fxLayout="row" fxLayoutAlign="space-between center">
+
+        <div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="payment-box-title1" >Debit or Credit Card</div>
+            <div class="payment-box-tag-5">Extra 5% Off</div>
+          </div>
+          <img class="payment-box-img1" src="http://image.getpricedrop.com/priceDrop/h5/credit-card-2.jpg" alt="">
+        </div>
+
+        <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
+        <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+      </div>
+
+
+      <div class="payment-box-border-b mg-t-12" fxLayout="row" fxLayoutAlign="space-between center">
+          <div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <div class="payment-box-title1" >Net Banking</div>
+              <div class="payment-box-tag-5">Extra 5% Off</div>
+            </div>
+            <img class="payment-box-img2" src="http://image.getpricedrop.com/priceDrop/h5/net-bank-2.jpg" alt="">
+          </div>
+        <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
+        <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+      </div>
+
+
+
+      <div class="payment-box-border-b mg-t-12" fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="payment-box-title1" >UPI</div>
+            <div class="payment-box-tag-5">Extra 5% Off</div>
+          </div>
+          <img class="payment-box-img3" src="http://image.getpricedrop.com/priceDrop/h5/upi.jpg" alt="">
+        </div>
+
+        <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
+        <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+      </div>
+
+
+      <div class="mg-t-12">
+         <div fxLayout="row" fxLayoutAlign="start center" >
+           <div>Wallet</div>
+           <div class="payment-box-tag-5">Extra 5% Off</div>
+         </div>
+         <div fxLayout="row" fxLayoutAlign="space-between center">
+           <img class="payment-box-img4" src="http://image.getpricedrop.com/priceDrop/h5/paytm.jpg" alt="">
+           <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
+           <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+         </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+           <img class="payment-box-img5" src="http://image.getpricedrop.com/priceDrop/h5/payu.png" alt="">
+           <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
+           <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+         </div>
+      </div>
+
+    </div>
+
+
+    <div class="mg-t-12 payment-box" fxLayout="row" fxLayoutAlign="space-between center"  >
+      <div class="payment-box-wallet">Wallet Balance <span class="payment-box-wallet1">₹20</span></div>
+      <mat-slide-toggle></mat-slide-toggle>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="bottom-div" fxLayout="row" fxLayoutAlign="space-between center">
+  <div>&nbsp;</div>
+  <div fxLayout="row" fxLayoutAlign="start">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="bd-total">Total: &nbsp;</div>
+      <div class="bd-price">₹{{'8000'}}</div>
+      <div class="bd-price-line" style="margin: 0 8px">₹{{'10000'}}</div>
+      <div class="bd-price-off">₹ 5%OFF</div>
+    </div>
+    <button class="bd-btn">Pay Now</button>
+  </div>
+
+</div>

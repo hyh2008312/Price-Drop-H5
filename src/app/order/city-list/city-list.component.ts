@@ -11,8 +11,10 @@ import { UserService } from '../../shared/services/user/user.service';
 
 export class CityListComponent implements OnInit {
 
-  @Input() flashSaleList: any = [];
-  @Input() flashSaleTime: any;
+  city: any = [{
+    fWord: '',
+    city: []
+  }];
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
@@ -25,13 +27,41 @@ export class CityListComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.addNavigation('Edit Address');
+    this.getCityList()
 
   }
-  countOff (s, o) {
-    if (o > 0) {
-      return Math.ceil((o - s) / o * 100) + '%'
-    } else {
-      return ''
+  getCityList () {
+    this.orderService.getCityList().then((res) => {
+      // this.city = res
+      this.citySort(res)
+      console.log(res)
+    }).catch((res) => {
+      console.log(res)
+    })
+  }
+  citySort (arr) {
+    const tmp = [];
+    const resultArr = [];
+    for (const item of arr) {
+      if ( tmp.toString().indexOf(item.name.substring(0 , 1)) === -1 ) { // 去重
+        tmp.push(item.name.substring(0 , 1))
+      }
     }
+    for (const item of tmp) {
+      resultArr.push({
+        fWord: item,
+        city: []
+      })
+    }
+    for (const i of arr) {
+      for (const j of resultArr) {
+        if (i.name.substring(0, 1) === j.fWord) {
+          j.city.push({
+            name: i.name, code: i.code
+          })
+        }
+      }
+    }
+    this.city = resultArr
   }
 }

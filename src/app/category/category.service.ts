@@ -108,15 +108,13 @@ export class CategoryService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
-  getProduct(id, selId): Promise<any> {
+  getProduct(params): Promise<any> {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    let cId  = id
-    if (selId) {
-      cId = selId
-    }
-    let url = `${this.baseUrl.h5Url}product/app/category/product/?cat=${cId}&page=${'1'}&page_size=${'10'}&sort=${false}`;
+
+    // ${this.serializeParams(params)}
+    let url = `${this.baseUrl.h5Url}product/app/category/product/?${this.serializeParams(params)}`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()

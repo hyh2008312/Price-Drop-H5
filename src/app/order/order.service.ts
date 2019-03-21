@@ -89,42 +89,26 @@ export class OrderService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
-  // getProductCategory() {
-  //   this.products = [];
+  getCityList(): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    let url = `${this.baseUrl.h5Url}address/state/list/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+  // getState () {
   //   this.$fetch({
-  //     method: 'GET',
-  //     name: 'product.category.product.home.new.list',
+  //     method: 'GET', // 大写
+  //     name: 'address.state.list',
   //     data: {}
-  //   }).then(resData => {
-  //     this.products = [];
-  //     for(let i = 0; i < resData.length;i++) {
-  //       const item = resData[i];
-  //       this.products.push(item)
-  //       if(item.product.length > 0) {
-  //         const goods = [];
-  //         const goods1 = [];
-  //         for(let i = 0; i < item.product.length; i++) {
-  //           const itm = item.product[i];
-  //           if(i < 3) {
-  //             goods.push(itm);
-  //           } else if(i >= 3 && i < 6) {
-  //             goods1.push(itm);
-  //           }
-  //         }
-  //         this.products.push({
-  //           items: [...goods]
-  //         });
-  //         this.products.push({
-  //           items: [...goods1]
-  //         });
-  //       }
-  //     }
-  //     this.refreshApiFinished();
-  //   }, error => {
-  //     if(error.status == 10) {
-  //       this.hasWifi = false;
-  //     }
-  //   });
+  //   }).then(data => {
+  //     this.$storage.set('state', data);
+  //   }, error => {})
   // },
   private handleError(error: Response | any, target?: any, option?:any) {
     let errMsg: string;

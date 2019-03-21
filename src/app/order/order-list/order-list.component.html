@@ -1,5 +1,54 @@
 <div class="order-list" >
-  <div>
+  <div class="ol-top"  fxLayout="row" fxLayoutAlign="space-between center">
+    <div *ngFor="let i of ['All', 'Confirmed', 'Preparing', 'Shipped', 'Delivered']">
+      <div fxLayout="column" fxLayoutAlign="start center">
+        <div class="ol-top-word">{{i}}</div>
+        <div class="ol-top-line"></div>
+      </div>
+    </div>
+  </div>
 
+  <div class="ol-bottom">
+    <div *ngFor=" let i of [1,1,1]" >
+      <div class="olb-card" >
+
+
+        <div class="olb-card-item1" fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="olb-card-time">May 16th, 2018</div>
+
+          <div class="olb-card-stu">Unpaid</div>
+        </div>
+
+        <div class="olb-card-item2" fxLayout="row" fxLayoutAlign="start center">
+          <img class="olb-card-img" style="" src="http://image.getpricedrop.com/source/product/main/800x800/8631ed75-192a-46a7-b900-a75aba030789.jpg" alt="">
+          <div style="height: 80px" fxLayout="column" fxLayoutAlign="space-between start">
+            <div class="olb-card-title">Toyota’s Latest is an Entire Mobility Service 111111111111111111111111111111111111111</div>
+            <div class="olb-card-variant">Pink L</div>
+            <div class="olb-card-price" >₹1299 <span style="opacity: 0.38;color: rgba(0,0,0,0.87);">x 1</span></div>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div class="olb-card-pword" >Dropped: <span style="color:#EF8A31; "> - ₹1299</span> </div>
+          <div class="olb-card-pword">Final: <span class="olb-card-pword1">₹1000</span></div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-top: 7px">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <i class="iconfont-socialcommer olb-card-icon">&#xe6fa;</i>
+            <div class="olb-card-time1-word">Ends in</div>
+            <div  class="olb-card-time1"style="">12 : 12 : 59</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <button class="olb-card-btn">Pay Now</button>
+            <button class="olb-card-btn1" >Delete</button>
+            <button class="olb-card-btn1" *ngIf="false">Track Package</button>
+            <button *ngIf="false" class="">Buy Again</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

@@ -1,4 +1,10 @@
-<div class="container">
+<div #scroll [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+  <div class="scroll" infinite-scroll
+       [infiniteScrollDistance]="0.5"
+       [infiniteScrollUpDistance]="1"
+       [infiniteScrollContainer]="scroll"
+       (scrolledUp)="onUp($event)"
+       (scrolled)="onScrollDown($event)">
   <div class="category__bg">
     <div class="category__notification-bg">
       <div class="category__notification" *ngIf="notification.length > 0">
@@ -40,7 +46,17 @@
         </div>
       </div>
 
+      <div class="md-padding-top-2 md-padding-bottom-2" fxLayout="row" fxLayoutAlign="center center">
+        <mat-progress-spinner
+          color="accent"
+          mode="indeterminate"
+          [diameter]="value"
+          *ngIf="loading">
+
+        </mat-progress-spinner>
+      </div>
     </div>
 
+  </div>
   </div>
 </div>
