@@ -8,7 +8,6 @@ import { GoodsDetailRoutingModule } from './goods-detail.routes.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { GoodsDetailService } from './goods-detail.service';
-import {LandingPageComponent} from '../landing-page/landing-page/landing-page.component';
 import { GoodsVariantDialogComponent } from './variant-dialog/goods-variant-dialog.component';
 
 @NgModule({

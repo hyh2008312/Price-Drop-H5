@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { GoodsDetailService } from '../goods-detail.service';
 import { GoodsVariantDialogComponent } from '../variant-dialog/goods-variant-dialog.component';
-
-import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-goods-detail',
@@ -26,6 +24,7 @@ export class GoodsDetailComponent implements OnInit {
     private router: Router,
     private goodsDetailService: GoodsDetailService,
     public dialog: MatDialog,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit():void {
@@ -42,7 +41,7 @@ export class GoodsDetailComponent implements OnInit {
     });
   }
   getRecommendGoods() {
-    let id = 9999
+    let id = this.activatedRoute.snapshot.params['id'];
     this.goodsDetailService.getRecommendGoods(id).then((res) => {
       this.recommendGoods = res
       // console.log(res)
@@ -66,11 +65,7 @@ export class GoodsDetailComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(dialogRef.componentInstance.data.isEdit == true) {
-
-      }
-    });
+    dialogRef.afterClosed().subscribe(result => {});
   }
   countPoints (p, a, b) {
     return (Math.floor(parseInt(p) / a)) * b;
