@@ -161,9 +161,7 @@ textarea.mat-input-element{
 }
 
 .cdk-overlay-pane{
-  @include xb-xs-screen{
-    min-width: 100vw;
-  }
+  min-width: 100vw;
 }
 .mat-chip:not(.mat-basic-chip){
   margin: 0 8px 3px 0 !important;
