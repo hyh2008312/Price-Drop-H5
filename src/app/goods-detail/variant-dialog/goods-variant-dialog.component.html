@@ -1,0 +1,33 @@
+<div class="xb-guide-dialog">
+  <div class="xb-guide-dialog__close">
+    <i class="icon-ic-close iconfont-socialcommer " (click)="close()" ></i>
+  </div>
+  <div class="popup-bottom">
+    <div *ngFor=" let val of goodsType; let index = index" >
+      <div class="popup-color" *ngIf="val.name=='Color'">{{goods.aliasColor || val.name}}</div>
+      <div class="popup-size-item" *ngIf="val.name=='Size'">
+        <div class="popup-color" *ngIf="">{{goods.aliasSize || val.name}}</div>
+        <div class="popup-size-chart" (click)="openGoodsSize"  *ngIf="goods.productSize!== '' && goods.productSize != undefined">Size Chart ></div>
+      </div>
+
+      <div style="width: 718px;flex-wrap: wrap;flex-direction: row;justify-content: start;align-items: center">
+
+        <div  class="popup-color-chd" *ngFor="let val1 of val.value" >
+          <div class="popup-color-chdname"
+
+
+                (click)="clickColor(val1, val.value)">{{val1.value}}</div>
+        </div>
+      </div>
+      <!--<div  class="popup-color-chd"  v-for="(val1, key1) in tranArr(val.value)" :key="key1">-->
+      <!--<text class="popup-color-chdname"-->
+      <!--v-for="(i,key2) in val1"-->
+      <!--:key="key2"-->
+      <!--:class="[i.isActive ?'popup-color-chdname-active':'',i.seldisable ?'popup-color-chdname-disable':'']"-->
+      <!--@click="clickColor(i, val.value)">{{i.value}}</text>-->
+      <!--</div>-->
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    </div>
+  </div>
+</div>

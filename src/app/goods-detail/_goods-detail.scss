@@ -271,6 +271,23 @@
   color: #000000;
   margin-bottom: 12px;
 }
+
+
+.overflow-popup{
+  background-color: rgba(0,0,0,.288);
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.popup{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
 .bg-f4{
   background-color: #f4f4f4;
 }

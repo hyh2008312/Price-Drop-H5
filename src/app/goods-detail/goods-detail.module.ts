@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { GoodsDetailService } from './goods-detail.service';
 import {LandingPageComponent} from '../landing-page/landing-page/landing-page.component';
+import { GoodsVariantDialogComponent } from './variant-dialog/goods-variant-dialog.component';
 
 @NgModule({
   imports: [
@@ -20,13 +21,15 @@ import {LandingPageComponent} from '../landing-page/landing-page/landing-page.co
     GoodsDetailComponent,
     DecReturnComponent,
     SizeColorComponent,
-    RecommendGoodsComponent
+    RecommendGoodsComponent,
+    GoodsVariantDialogComponent
   ],
   entryComponents: [
     GoodsDetailComponent,
     DecReturnComponent,
     SizeColorComponent,
-    RecommendGoodsComponent
+    RecommendGoodsComponent,
+    GoodsVariantDialogComponent
   ],
   providers: [GoodsDetailService]
 })
