@@ -60,7 +60,16 @@ export class GoodsDetailComponent implements OnInit {
       data: {
         goods: this.goods
       },
-      bottom : '0'
+      position: {
+        bottom: '0',
+        left: '0'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+
+      }
     });
   }
   countPoints (p, a, b) {
