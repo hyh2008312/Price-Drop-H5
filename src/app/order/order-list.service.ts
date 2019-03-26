@@ -8,7 +8,7 @@ import {GuardLinkService} from '../shared/services/guard-link/guard-link.service
 import { Title, Meta } from '@angular/platform-browser';
 
 @Injectable()
-export class OrderService {
+export class OrderListService {
 
   routerLink: any = false;
 
@@ -64,12 +64,13 @@ export class OrderService {
     return array.join('&');
   }
 
-  getBanner(): Promise<any> {
+  getDefaultAddress(): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    let url = `${this.baseUrl.h5Url}promotion/banner/list/`;
+    this.createAuthorizationHeader(headers)
+    let url = `${this.baseUrl.h5Url}address/get/default/`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
@@ -97,6 +98,44 @@ export class OrderService {
     let url = `${this.baseUrl.h5Url}address/state/list/`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+  getBalance(): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers)
+    let url = `${this.baseUrl.h5Url}point/cashing/amount/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+  getOrderList(parmas): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers)
+    let url = `${this.baseUrl.h5Url}order/customer/list/?${this.serializeParams(parmas)}`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+  postDirectOrder(params: any){
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers)
+    let url = `${this.baseUrl.h5Url}order/create/pure/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError1);

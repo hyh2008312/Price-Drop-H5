@@ -1,5 +1,9 @@
 import {Component, Input, Inject, OnInit, Output, EventEmitter} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { OrderService } from '../../shared/services/order/order.service';
+import { ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
+import {GuardLinkService} from '../../shared/services/guard-link/guard-link.service';
 
 
 
@@ -12,7 +16,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export class GoodsVariantDialogComponent implements OnInit {
 
-  @Output() statusChange: any = new EventEmitter();
+
   goods: any;
   goodsVariants: any;
   goodsType: any;
@@ -24,33 +28,87 @@ export class GoodsVariantDialogComponent implements OnInit {
   selunitPrice: any;
   selsaleUnitPrice: any;
   tmpArray: any;
-  hasVariants: any;
-  nextPage: any = {
-    mainImage: ''
+  hasVariants: any = true;
+  flashSale: any = {
+    flashStatus: ''
   };
+  purchaseMethod: any;
+  productId: any;
+  nextPage: any = {
+    title: '',
+    mainImage: '',
+    salePrice: '',
+    currentPrice: '', // 计算价钱的金额
+    attributes: '',
+    productId: '',
+    quantity: '1',
+    id: '',
+    shippingPrice: '',
+    shippingTimeMin: '',
+    shippingTimeMax: '',
+    processingTimeMin: '',
+    processingTimeMax: '',
+    proId: '',
+    flashSale: {}
+  };
+  isLogin = false;
 
   constructor(
+    private router: Router,
+    private auth: AuthenticationService,
+    private guardLinkService: GuardLinkService,
     public dialogRef: MatDialogRef<GoodsVariantDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private orderService: OrderService,
+  ) {
+    this.auth.isOnlyAuthorized().subscribe((res) => {
+      if (res) {
+        this.isLogin = true
+      }
+    });
+  }
 
   ngOnInit(): void {
-    this.getGoods(this.data.goods)
-    this.goods = this.data.goods
-    // this.goods.aliasSize = this.data.goods.aliasSize
-    // this.goods.aliasColor = this.data.goods.aliasColor
-    // this.goods.productSize = this.data.goods.productSize
-    // console.log(this.data.goods)
+    this.getGoods(this.data.goods);
+    this.goods = this.data.goods;
+    this.selsaleUnitPrice = this.data.goods.saleUnitPrice;
+    this.purchaseMethod = this.goods.purchaseMethod;
+    // res.saleUnitPrice;
+    this.purchaseMethod = this.goods.purchaseMethod;
+
+    if (this.purchaseMethod === 'flash') {
+      this.flashSale = this.goods.flashSale;
+      this.nextPage.flashSale = this.goods.flashSale;
+      if (this.flashSale.flashStatus == 'Ongoing') {
+        // this.countDate(this.flashSale.endTime)
+      } else {
+        // this.countDate(this.flashSale.startTime)
+      }
+    }
   }
   getGoods(res) {
-    console.log(res)
+
     this.goodsVariants = res.variants;
+    this.nextPage.title = res.title
+
+    this.nextPage.title = res.title;
+    this.nextPage.productId = res.id
+    this.nextPage.proId = res.purchaseMethod;
+
     if (res.images != null) {
       this.selimgsrc = res.images[0]
       this.nextPage.mainImage = this.selimgsrc
     } else {
       this.selimgsrc = ''
     }
+
+    this.nextPage.shippingPrice = res.shipping.priceItem;
+    this.nextPage.shippingTimeMin = res.shipping.shippingTimeMin;
+    this.nextPage.shippingTimeMax = res.shipping.shippingTimeMax;
+
+    this.nextPage.processingTimeMin = res.shipping.processingTimeMin;
+    this.nextPage.processingTimeMax = res.shipping.processingTimeMax;
+
 
     if (res.attributes != null && res.attributes.length > 0) {
       if (this.goodsVariants.length == 1) {
@@ -77,7 +135,6 @@ export class GoodsVariantDialogComponent implements OnInit {
       this.nextPage.id = res.variants[0].id;
       this.nextPage.salePrice = res.variants[0].saleUnitPrice;
       this.nextPage.currentPrice = res.variants[0].unitPrice;
-      // this.nextPage.mainImage =
     }
 
   }
@@ -208,7 +265,43 @@ export class GoodsVariantDialogComponent implements OnInit {
       }
     }
   }
+  checkedSelected () {
+    this.tmpArray = [];
+    for (let i = 0; i < this.goodsType.length; i++) {
+      for (let j = 0; j < this.goodsType[i].value.length; j++) {
+        if (this.goodsType[i].value[j].isActive == true) {
+          this.tmpArray.push(this.goodsType[i].value[j]);
+          break;
+        }
+        if (j == this.goodsType[i].value.length - 1) {
+          alert('Please select a ' + this.goodsType[i].name.toLowerCase() + '!');
+          return false
+        }
+      }
+    }
+    return true;
+  }
+  confirm() {
+    if (!this.checkedSelected()) {
+      return;
+    } else {
+      // this.orderService.addOrder(false);
+
+      this.nextPage.id = this.variantsId;
+      this.orderService.addOrder(this.nextPage);
+      this.close()
+      if (this.isLogin) {
+        this.router.navigate([`./order/confirmOrder`]);
+      } else {
+        this.guardLinkService.addRouterLink(window.location.pathname);
+        this.router.navigate([`/account/login`]);
+      }
+      // console.log(this.isLogin)
+      // console.log(this.nextPage)
+    }
+  }
   close(): void {
+
     this.dialogRef.close();
     // this.statusChange.emit(true)
   }

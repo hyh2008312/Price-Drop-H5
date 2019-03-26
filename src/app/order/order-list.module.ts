@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { OrderRoutingModule } from './order.routes.module';
-import { OrderService } from './order.service';
+import { OrderListRoutingModule } from './order-list.routes.module';
+import { OrderListService } from './order-list.service';
 
 import { SharedModule } from '../shared/shared.module';
 import { OrderListComponent } from './order-list/order-list.component';
@@ -14,7 +14,7 @@ import { PaymentComponent } from './payment/payment.component';
 @NgModule({
   imports: [
     SharedModule,
-    OrderRoutingModule
+    OrderListRoutingModule
   ],
   exports: [],
   declarations: [
@@ -25,9 +25,10 @@ import { PaymentComponent } from './payment/payment.component';
     CityListComponent,
     OrderDetailComponent,
     PaymentComponent
+
   ],
   entryComponents: [],
-  providers: [OrderService]
+  providers: [OrderListService]
 })
-export class OrderModule { }
+export class OrderListModule { }
 

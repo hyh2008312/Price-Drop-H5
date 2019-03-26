@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderService } from '../order.service';
+import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class CityListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private orderService: OrderService,
+    private orderService: OrderListService,
     private userService: UserService
   ) {}
 

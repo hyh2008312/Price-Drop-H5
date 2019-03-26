@@ -324,8 +324,20 @@
   line-height: 14px;
   color: #000000;
 }
-.ol-top-line{
+.ol-top-word-active{
+  font-size: 12px;
+  line-height: 14px;
+  color: #EF8A31;
+}
+.ol-top-line-active{
   background-color: #EF8A31;
+  margin-top: 4px;
+  height: 3px;
+  width: 23px;
+  border-radius: 8px;
+}
+.ol-top-line{
+  background-color: transparent;
   margin-top: 4px;
   height: 3px;
   width: 23px;
@@ -427,7 +439,7 @@
     background: white;
     border: #EF8A31 1px solid;
     border-radius: 18px;
-    margin-right: 8px;
+    //margin-right: 8px;
   }
 }
 .od-word{
@@ -529,7 +541,14 @@
     margin-left: 11px;
   }
 }
-
+.overflow-body{
+  height: calc(100vh - 168px);
+  overflow-y: scroll;
+}
+.overflow-body-height{
+  height: calc(100vh - 112px);
+  overflow-y: scroll;
+}
 
 
 

@@ -1,6 +1,6 @@
 <div #scroll [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
   <div class="scroll" infinite-scroll
-       [infiniteScrollDistance]="0.5"
+       [infiniteScrollDistance]="0"
        [infiniteScrollUpDistance]="1"
        [infiniteScrollContainer]="scroll"
        (scrolledUp)="onUp($event)"

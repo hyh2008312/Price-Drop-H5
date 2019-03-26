@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderService } from '../order.service';
+import { OrderListService } from '../order-list.service';
+import { OrderService } from '../../shared/services/order/order.service';
 import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
@@ -13,28 +14,53 @@ export class PaymentComponent implements OnInit {
 
   @Input() flashSaleList: any = [];
   @Input() flashSaleTime: any;
-  notification: any = []
-  ahour: any = 11;
-  amin: any = 12;
+  notification: any = [];
+  balance: any ;
+  isShowBalance: any ;
+  checkBalance: any = false ;
+  order: any = {};
   asecond: any = 13;
 
   constructor(
     private router: Router,
-    private orderService: OrderService,
-    private userService: UserService
-  ) {}
+    private orderListService: OrderListService,
+    private userService: UserService,
+    private orderService: OrderService
+  ) {
+    this.orderService.paymentDetail.subscribe((res) => {
+      if (res) {
+        this.order = res
+      } else {
+        this.router.navigate([`/`]);
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.userService.addNavigation('Payment');
-    this.getNotification()
+    this.getNotification();
+    this.getBalance();
 
   }
   getNotification () {
-    this.orderService.getNotification().then((res) => {
+    this.orderListService.getNotification().then((res) => {
       this.notification = res
     }).catch((res) => {
       console.log(res)
     })
+  }
+  getBalance () {
+    this.orderListService.getBalance().then((res) => {
+      this.balance = res.amount;
+      if (res.amount > 0 && this.order.paymentAmount > 0) {
+        this.isShowBalance = true;
+      }
+    }).catch((res) => {
+      console.log(res)
+    })
+  }
+  payNow () {
+    console.log(this.checkBalance)
   }
   countOff (s, o) {
     if (o > 0) {

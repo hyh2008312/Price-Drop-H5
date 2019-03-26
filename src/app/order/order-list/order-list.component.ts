@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderService } from '../order.service';
+import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
@@ -10,29 +10,97 @@ import { UserService } from '../../shared/services/user/user.service';
 })
 
 export class OrderListComponent implements OnInit {
+  loading: boolean = false;
+  addHeight: any = true;
+  canRun: any = true;
+  page: any = 1;
+  pageSize: any = 1;
+  value = 36;
+  activeTop: any = null
+  ordertList: any = [];
+  topChannel: any = [
+    {
+      name: 'All',
+      value: null
+    }, {
+      name: 'Paid',
+      value: 'Confirmed'
+    }, {
+      name: 'Packing',
+      value: 'Preparing'
+    }, {
+      name: 'Shipped',
+      value: 'Shipped'
+    }, {
+      name: 'Completed',
+      value: 'Delivered'
+    },
 
-  @Input() flashSaleList: any = [];
-  @Input() flashSaleTime: any;
-  ahour: any = 11;
-  amin: any = 12;
+  ];
+
   asecond: any = 13;
 
   constructor(
     private router: Router,
-    private orderService: OrderService,
+    private orderListService: OrderListService,
     private userService: UserService
-  ) {}
+  ) {
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
+  }
 
   ngOnInit(): void {
     this.userService.addNavigation('My Orders');
+    this.getOrderList()
+
 
   }
-  countOff (s, o) {
-    if (o > 0) {
-      return Math.ceil((o - s) / o * 100) + '%'
-    } else {
-      return ''
+  getOrder() {
+    if (!this.canRun) {
+      return
     }
+    this.canRun = false;
+    setTimeout( () => {
+      this.canRun = true;
+      this.getOrderList()
+    }, 300 )
+  }
+  getOrderList() {
+    if (this.canRun) {
+      let parmas = {
+        'page' : this.page,
+        'pageSize' : this.pageSize,
+        'version' : 1,
+        'status' : this.activeTop,
+      };
+      this.orderListService.getOrderList(parmas).then((res) => {
+        // console.log(res)
+        this.ordertList = this.ordertList.concat(res.results);
+        // this.ordertList = res.results.splice(0,1);
+        console.log(this.ordertList[0])
+        this.page++;
+        this.loading = false;
+      }).catch((res) => {
+        console.log(res);
+        this.loading = false;
+      })
+    }
+
+  }
+  selChannel (index) {
+    this.activeTop = this.topChannel[index].value
+  }
+  formatDate(p) {
+    return new Date(p).getTime();
+  }
+  onUp(ev) {
+    console.log('scrolled up!', ev);
+  }
+
+  onScrollDown (ev) {
+    this.loading = true;
+    this.getOrder();
   }
 
 }

@@ -1,0 +1,19 @@
+@import "../../../styles/utils/_index";
+@import "../../../styles/_variables";
+
+.xb-sc-loading{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-color: $whiteColor;
+  z-index: 999999;
+
+  &__circle{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    @include transform(translate(-50%, -50%));
+  }
+}

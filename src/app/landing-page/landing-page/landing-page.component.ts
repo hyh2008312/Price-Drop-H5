@@ -22,7 +22,8 @@ export class LandingPageComponent implements OnInit {
   amin: any = 12;
   asecond: any = 13;
   loading: boolean = false;
-  addHeight: any = false;
+  canRun: boolean = true;
+  addHeight: any = true;
   page: any = 1;
   pageSize: any = 12;
   value = 36;
@@ -42,7 +43,7 @@ export class LandingPageComponent implements OnInit {
     this.getNotification();
     this.getFlashSale();
     this.getCommodityProduct();
-    this.getFeaturedProduct(1);
+    this.getFeaturedProductList(1);
     this.userService.addNavigation('PriceDrop');
   }
 
@@ -78,14 +79,26 @@ export class LandingPageComponent implements OnInit {
     });
   }
   getFeaturedProduct(page) {
-    this.landingPageService.getFeaturedProduct({'page': page , page_size: this.pageSize}).then((res) => {
-      if (res) {
-        // this.featuredProductList = res
-        this.buffer = this.buffer.concat(this.tranArr(res.results));
-        this.page++;
-        this.loading = false;
-      }
-    });
+    if(!this.canRun){
+      return
+    }
+    this.canRun = false
+    setTimeout( () => {
+      this.canRun = true
+      this.getFeaturedProductList(page)
+    },300)
+  }
+  getFeaturedProductList(page) {
+    if(this.canRun){
+      this.landingPageService.getFeaturedProduct({'page': page , page_size: this.pageSize}).then((res) => {
+        if (res) {
+          // this.featuredProductList = res
+          this.buffer = this.buffer.concat(this.tranArr(res.results));
+          this.page++;
+          this.loading = false;
+        }
+      });
+    }
   }
 
   tranArr (data) {

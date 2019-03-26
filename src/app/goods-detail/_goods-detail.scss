@@ -273,19 +273,32 @@
 }
 
 
-.overflow-popup{
-  background-color: rgba(0,0,0,.288);
-  overflow: hidden;
-  height: 100%;
+//.overflow-popup{
+//  background-color: rgba(0,0,0,.288);
+//  overflow: hidden;
+//  height: 100%;
+//  width: 100%;
+//  position: fixed;
+//  bottom: 0;
+//  left: 0;
+//}
+.bottom-div{
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  background-color: white;
+  box-shadow: 0 -1px 3px 0 rgba(0,0,0,0.12);
 }
-.popup{
-  position: fixed;
-  bottom: 0;
-  left: 0;
+.bottom-btn{
+  background-color: #EF8A31;
+  margin: 8px 16px;
+  padding: 12px 0;
+  width: 100%;
+  border: 0;
+  font-size: 14px;
+  border-radius: 20px;
+  color: white;
 }
 
 .bg-f4{

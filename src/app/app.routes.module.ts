@@ -21,7 +21,7 @@ const routes: Routes = [
         loadChildren: './goods-detail/goods-detail.module#GoodsDetailModule'
       }, {
         path: 'order',
-        loadChildren: './order/order.module#OrderModule'
+        loadChildren: './order/order-list.module#OrderListModule'
       }
     ]
   }

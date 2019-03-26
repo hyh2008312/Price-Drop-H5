@@ -87,9 +87,9 @@
     </div>
 
 
-    <div class="mg-t-12 payment-box" fxLayout="row" fxLayoutAlign="space-between center"  >
-      <div class="payment-box-wallet">Wallet Balance <span class="payment-box-wallet1">₹20</span></div>
-      <mat-slide-toggle></mat-slide-toggle>
+    <div class="mg-t-12 payment-box" fxLayout="row" fxLayoutAlign="space-between center"  *ngIf="isShowBalance">
+      <div class="payment-box-wallet">Wallet Balance <span class="payment-box-wallet1">₹{{balance}}</span></div>
+      <mat-slide-toggle [checked]="checkBalance"></mat-slide-toggle>
     </div>
 
   </div>
@@ -105,7 +105,7 @@
       <div class="bd-price-line" style="margin: 0 8px">₹{{'10000'}}</div>
       <div class="bd-price-off">₹ 5%OFF</div>
     </div>
-    <button class="bd-btn">Pay Now</button>
+    <button class="bd-btn" (click)="payNow()">Pay Now</button>
   </div>
 
 </div>

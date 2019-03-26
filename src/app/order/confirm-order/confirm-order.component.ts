@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderService } from '../order.service';
+import { OrderService } from '../../shared/services/order/order.service';
+import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
@@ -14,27 +15,84 @@ export class ConfirmOrderComponent implements OnInit {
   @Input() flashSaleList: any = [];
   @Input() flashSaleTime: any;
   notification: any = []
-  ahour: any = 11;
+  card: any = {};
+  order: any = {
+    title: '',
+    mainImage: '',
+    salePrice: '',
+    currentPrice: '', // 计算价钱的金额
+    attributes: '',
+    productId: '',
+    quantity: '1',
+    id: '',
+    shippingPrice: '',
+    shippingTimeMin: '',
+    shippingTimeMax: '',
+    processingTimeMin: '',
+    processingTimeMax: '',
+    proId: '',
+    flashSale: {}
+  };
+  address: any = {
+    'id': false,
+    'firstName': '',
+    'lastName': '',
+    'postcode': '',
+    'line1': '',
+    'line2': '',
+    'line3': '',
+    'city': '',
+    'stateName': '',
+    'countryName': '',
+    'isDefault': false,
+    'phoneNumber': '',
+    'stateId': 5
+  }
+  isFirst: any = false; // 防止重复下单
   amin: any = 12;
   asecond: any = 13;
 
   constructor(
     private router: Router,
+    private orderListService: OrderListService,
     private orderService: OrderService,
     private userService: UserService
-  ) {}
+  ) {
+    this.orderService.detail.subscribe((res) => {
+      if (res) {
+        this.order = res
+      } else {
+        this.router.navigate([`/`]);
+      }
+    })
+
+  }
 
   ngOnInit(): void {
     this.userService.addNavigation('Confirm Order');
     this.getNotification()
+    this.getDefaultAddress()
 
   }
+  getDefaultAddress () {
+    this.orderListService.getDefaultAddress().then((res) => {
+      this.address = res
+    }).catch((res) => {
+      console.log(res)
+    })
+  }
   getNotification () {
-    this.orderService.getNotification().then((res) => {
+    this.orderListService.getNotification().then((res) => {
       this.notification = res
     }).catch((res) => {
       console.log(res)
     })
+  }
+  getTotalPrice (a, b) {
+    return parseInt(a) + parseInt(b)
+  }
+  formatDate(p) {
+    return (new Date().getTime() + (p + 7) * 24 * 60 * 60 * 1000);
   }
   countOff (s, o) {
     if (o > 0) {
@@ -43,11 +101,32 @@ export class ConfirmOrderComponent implements OnInit {
       return ''
     }
   }
-  countPrice (s, o) {
-    if (o > 0) {
-      return Math.floor(s * (o / 100))  // 解决多一块钱的问题
-    } else {
-      return ''
+  placeOrder () {
+    if (!this.address.id) {
+      alert('Please add address first!');
+      return
+    }
+    console.log(this.isFirst)
+    if (!this.isFirst) {
+      this.isFirst = true;
+      const voucherId = this.card ? this.card.id : null;
+      let params = {
+        vid: this.order.id,
+        quantity: this.order.quantity,
+        voucherId: voucherId
+      }
+      if (this.order.proId === 'direct') {
+        this.orderListService.postDirectOrder(params).then((res) => {
+          if (res) {
+            this.orderService.paymentOrder(res)
+            this.router.navigate([`/order/payment`]);
+          } else {
+            alert('servers are too busy')
+          }
+        }).catch((res) => {
+          console.log(res)
+        })
+      }
     }
   }
 }

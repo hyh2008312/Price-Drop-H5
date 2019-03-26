@@ -28,6 +28,7 @@ import { ImagePreviewLoadingComponent } from './components/image-preview-loading
 import { LeftProductsImageComponent } from './components/left-products-image/left-products-image.component';
 import { NavigationHeaderComponent } from './components/navigation-header/navigation-header.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { CountDownComponent } from './components/count-down/count-down.component';
 
 import { ImageUploadPreviewService } from './components/image-upload-preview/image-upload-preview.service';
 import { ConstantService } from './services/constant/constant.service';
@@ -132,7 +133,8 @@ const providers = {
     ImagePreviewLoadingComponent,
     LeftProductsImageComponent,
     NavigationHeaderComponent,
-    LoadingComponent
+    LoadingComponent,
+    CountDownComponent
   ],
   exports: [
     SafeHtmlPipe,
@@ -185,6 +187,7 @@ const providers = {
     MatProgressBarModule,
     NgxEchartsModule,
     LoadingComponent,
+    CountDownComponent,
     MatSidenavModule,
     InfiniteScrollModule
   ],

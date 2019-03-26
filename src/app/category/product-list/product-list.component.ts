@@ -35,6 +35,7 @@ export class ProductListComponent implements OnInit {
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
+
   }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class ProductListComponent implements OnInit {
         console.log(res)
     })
   }
-  getProduct () {
+  getProduct (isFirst?: any) {
     let id = this.activatedRoute.snapshot.params['id'];
     let cId  = id
     if (this.selId) {
@@ -66,7 +67,9 @@ export class ProductListComponent implements OnInit {
       'sort' : this.sort,
     }
     this.categoryService.getProduct(params).then((res) => {
-      // console.log(res)
+       if (isFirst) {
+         this.ProductList = []
+       }
         let arr = [];
         for (let i = 0; i < res.results.length; i++) {
           const item = res.results[i];
@@ -122,6 +125,6 @@ export class ProductListComponent implements OnInit {
     }
     // this.changeDetectorRef.markForCheck();
     // this.changeDetectorRef.detectChanges();
-    this.getProduct();
+    this.getProduct(true);
   }
 }

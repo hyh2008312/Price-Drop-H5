@@ -25,6 +25,7 @@ import { TransferHttpCacheModule } from '@nguniversal/common';
 import { PrebootModule } from 'preboot';
 
 import { GuardLinkService } from './shared/services/guard-link/guard-link.service';
+import { OrderService } from './shared/services/order/order.service';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { GuardLinkService } from './shared/services/guard-link/guard-link.servic
       appRoot: 'app-root'
     })
   ],
-  providers: [BaseApi, SystemConstant, DataApi, HttpClientModule, CookieService, GuardLinkService],
+  providers: [BaseApi, SystemConstant, DataApi, HttpClientModule, CookieService, GuardLinkService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppInModule {}
