@@ -14,7 +14,7 @@ export class ChooseAddressComponent implements OnInit {
   @Input() flashSaleList: any = [];
   @Input() flashSaleTime: any;
   addressList: any = [];
-  defaultAddress: any = '';
+  defaultAddress: any = {};
   stu: any = true;
   asecond: any = 13;
 
@@ -57,13 +57,6 @@ export class ChooseAddressComponent implements OnInit {
   countOff (s, o) {
     if (o > 0) {
       return Math.ceil((o - s) / o * 100) + '%'
-    } else {
-      return ''
-    }
-  }
-  countPrice (s, o) {
-    if (o > 0) {
-      return Math.floor(s * (o / 100))  // 解决多一块钱的问题
     } else {
       return ''
     }

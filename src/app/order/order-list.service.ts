@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router';
 
-import {BaseApi, PAYTMMID} from '../config/app.api';
+import {BaseApi} from '../config/app.api';
 import {AuthenticationService} from '../shared/services/authentication/authentication.service';
 import {GuardLinkService} from '../shared/services/guard-link/guard-link.service';
 import { Title, Meta } from '@angular/platform-browser';
@@ -77,6 +77,19 @@ export class OrderListService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
+  editDefaultAddress(id): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers)
+    let url = `${this.baseUrl.h5Url}address/set/default/${id}/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
   getDefaultAddress(): Promise<any> {
 
     let headers = new Headers({
@@ -141,20 +154,7 @@ export class OrderListService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
-  getOrder(id): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers)
-    let url = `${this.baseUrl.h5Url}order/customer/detail/${id}/`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-  postDirectOrder(params: any): Promise<any> {
+  postDirectOrder(params: any){
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
@@ -175,62 +175,6 @@ export class OrderListService {
   //     this.$storage.set('state', data);
   //   }, error => {})
   // },
-
-  getRazorpay(params): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let url = `${this.baseUrl.h5Url}payment/razorpay/create/?${this.serializeParams(params)}`;
-
-    let options = new RequestOptions({headers: headers});
-    return this.http.post(url, params, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-
-  checkRazorpay(params): Promise<any> {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-    let url = `${this.baseUrl.h5Url}payment/razorpay/check/`;
-    let options = new RequestOptions({headers: headers});
-    return this.http.post(url, params, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError1);
-  }
-
-  createPaytm(postParams: any): Promise<any> {
-
-    let formData = new FormData();
-
-
-    formData.append('MID', PAYTMMID);
-    formData.append('WEBSITE', 'APPPROD');
-    formData.append('ORDER_ID', postParams['paytmOrderId']);
-    formData.append('CUST_ID', postParams['orderNumber']);
-    formData.append('MOBILE_NO',  postParams['order']['phoneNumber']);
-    formData.append('EMAIL',  postParams['order']['ownerEmail']);
-    formData.append('INDUSTRY_TYPE_ID',  'Retail109');
-    formData.append('CHANNEL_ID', 'WEB');
-    formData.append('TXN_AMOUNT', postParams['amount']);
-    formData.append('CALLBACK_URL',  window.location.href);
-    formData.append('CHECKSUMHASH',  postParams['paytmChecksum']);
-
-
-    let url = `https://securegw.paytm.in/theia/processTransaction`;
-
-    return this.http.post(url, formData)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
   private handleError(error: Response | any, target?: any, option?:any) {
     let errMsg: string;
 
