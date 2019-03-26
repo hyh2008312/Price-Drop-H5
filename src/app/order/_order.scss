@@ -114,6 +114,9 @@
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.12);
   background-color: white;
 }
+.coct-content1{
+  padding: 16px;
+}
 .coct-content{
   padding: 12px 16px 16px;
   &-word1{
@@ -279,6 +282,11 @@
 }
 .ca-word-del{
   margin: 16px 0 16px 0;
+  color: #EF8A31;
+}
+.ca-icon2{
+  font-size: 16px;
+  margin-right: 9px;
   color: #EF8A31;
 }
 .ca-icon{
@@ -541,6 +549,19 @@
     margin-left: 11px;
   }
 }
+.gb-icon{
+  font-size: 14px;
+  margin-right: 12px;
+  color: rgba(0,0,0,0.54);
+}
+
+.gb-text{
+  font-size: 14px;
+  color: rgba(0,0,0, 0.87);
+}
+.gd-text-color{
+  color: #EF8A31;
+}
 .overflow-body{
   height: calc(100vh - 168px);
   overflow-y: scroll;
@@ -556,6 +577,9 @@
 
 .mg-rl-16{
   margin: 0 16px 80px 16px;
+}
+.mg-r-12{
+  margin-right: 12px;
 }
 .mg-t-16{
   margin-top: 16px;

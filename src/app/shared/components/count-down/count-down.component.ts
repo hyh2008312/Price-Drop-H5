@@ -8,15 +8,15 @@ import { Component, Input, OnDestroy, AfterViewInit } from '@angular/core';
 
 export class CountDownComponent implements AfterViewInit, OnDestroy{
 
-  @Input() endDate: any;
+  @Input() endDate: any = 0;
   hour: any = '00';
   minute: any = '00';
   second: any = '00';
   _diff: number;
-  get diff() {
+  public get diff() {
     return this._diff;
   }
-  set diff(val) {
+  public set diff(val) {
     this._diff = Math.floor(val / 1000);
 
     this.hour = Math.floor(this._diff / 3600);
@@ -37,9 +37,10 @@ export class CountDownComponent implements AfterViewInit, OnDestroy{
       this.second = '00';
     }
   }
-  timer;
+  public timer;
 
   ngAfterViewInit() {
+    // console.log( new Date(this.endDate))
     const myDate: any = new Date(this.endDate)
     this.timer = setInterval(() => {
       this.diff =   myDate - Date.now();

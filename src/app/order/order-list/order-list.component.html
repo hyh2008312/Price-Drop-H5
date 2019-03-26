@@ -16,115 +16,109 @@
          (scrolled)="onScrollDown($event)">
 
       <div class="ol-bottom">
-        <div *ngFor=" let order of ordertList">
-          <div class="olb-card" >
+        <ng-container  *ngIf="ordertList.length>0">
+          <div *ngFor="let order of ordertList"   >
+            <div class="olb-card" routerLink="/order/orderDetail/{{order.id}}">
 
-            <div class="olb-card-item1" fxLayout="row" fxLayoutAlign="space-between center">
-              <div class="olb-card-time">{{formatDate(order.created) | date}}</div>
+              <div class="olb-card-item1" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="olb-card-time">{{formatDate(order.created) | date}}</div>
 
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Audit canceled'">Pending Cancel</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Paid'">Confirmed</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Unpaid'">Pending</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Expired'">Expired</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Canceled'">Cancelled</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Completed'">Delivered</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Shipped'">Shipped</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Undelivered'">Undelivered</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Packing'">Preparing</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Partially Refunded'">Partially Refunded</div>
-              <div class="olb-card-stu" *ngIf="order.orderStatus == 'Fully Refunded'">Fully Refunded</div>
-            </div>
-
-            <div class="olb-card-item2" fxLayout="row" fxLayoutAlign="start center">
-              <img class="olb-card-img" style="" [src]="order.lines[0].mainImage" alt="product">
-              <div style="height: 80px" fxLayout="column" fxLayoutAlign="space-between start">
-                <div class="olb-card-title">{{order.lines[0].title}}</div>
-                <div class="olb-card-variant">{{order.lines[0].attributes}}</div>
-                <div class="olb-card-price" >₹{{order.realAmount|number}} <span style="opacity: 0.38;color: rgba(0,0,0,0.87);">x {{order.lines[0].quantity}}</span></div>
-              </div>
-            </div>
-
-            <div fxLayout="row" fxLayoutAlign="end center">
-              <div class="olb-card-pword" >Dropped: <span style="color:#EF8A31; "> - ₹1299</span> </div>
-              <div class="olb-card-pword">Final: <span class="olb-card-pword1">₹{{order.realAmount}}</span></div>
-            </div>
-
-            <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-top: 7px">
-              <div fxLayout="row" fxLayoutAlign="start center" *ngIf="order.orderStatus == 'Unpaid' && order">
-                <i class="iconfont-socialcommer olb-card-icon">&#xe6fa;</i>
-                <div class="olb-card-time1-word">Ends in</div>
-                <app-count-down [endDate]="order.cancelTime"  class="olb-card-time1"></app-count-down>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Audit canceled'">Pending Cancel</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Paid'">Confirmed</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Unpaid'">Pending</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Expired'">Expired</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Canceled'">Cancelled</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Completed'">Delivered</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Shipped'">Shipped</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Undelivered'">Undelivered</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Packing'">Preparing</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Partially Refunded'">Partially Refunded</div>
+                <div class="olb-card-stu" *ngIf="order.orderStatus == 'Fully Refunded'">Fully Refunded</div>
               </div>
 
-              <div fxLayout="row" fxLayoutAlign="start center" *ngIf="order.orderStatus !== 'Unpaid'">
-               <div>&nbsp;</div>
+              <div class="olb-card-item2" fxLayout="row" fxLayoutAlign="start center">
+                <img class="olb-card-img" style="" [src]="order.lines[0].mainImage" alt="product">
+                <div style="height: 80px" fxLayout="column" fxLayoutAlign="space-between start">
+                  <div class="olb-card-title">{{order.lines[0].title}}</div>
+                  <div class="olb-card-variant">{{order.lines[0].attributes}}</div>
+                  <div class="olb-card-price" >₹{{order.realAmount|number}} <span style="opacity: 0.38;color: rgba(0,0,0,0.87);">x {{order.lines[0].quantity}}</span></div>
+                </div>
               </div>
 
-              <div fxLayout="row" fxLayoutAlign="start center">
-
-                <div    *ngIf="order.orderStatus == 'Unpaid' && order">
-                  <button class="olb-card-btn"  (click)="deleteOrder" *ngIf="order.orderType != 'Drop'">Delete</button>
-                  <button class="olb-card-btn1" (click)="openBottomPopup">Pay Now</button>
-                </div>
-
-                <div   *ngIf="order.orderStatus == 'Packing'">
-                  <button class="olb-card-btn" *ngIf="order.sourcingStatus == 'Not Started'" (click)="cancel">Cancel Order</button>
-                  <button class="olb-card-btn1" (click)="tracking">Track Package</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Paid'">
-                  <button class="olb-card-btn" (click)="cancel">Cancel Order</button>
-                  <button class="olb-card-btn1" (click)="editAddress" *ngIf="order.paymentMode!='cod'">Change Address</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Audit canceled'">
-                  <button class="olb-card-btn1">Order cancellation pending</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() != 'GATICN'">
-                  <button class="olb-card-btn" (click)="tracking">Track Package</button>
-                  <button class="olb-card-btn1" (click)="receipt">Package Arrival Confirm</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() == 'GATICN'">
-                  <button class="olb-card-btn1" (click)="tracking">Track Package</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Expired'">
-                  <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
-                  <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Canceled'">
-                  <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
-                  <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Partially Refunded'">
-                  <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
-                  <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Fully Refunded'">
-                  <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
-                  <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Completed'">
-                  <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
-                  <!--<text class="od-button-1 gt-mr" @click="buyProduct">Buy Again</text>-->
-                  <!--<div class="od-button-1 gt-mr" v-if="order.orderComment==''" @click="writeReviews(1)">Write Reviews</div>-->
-                  <!--<div class="od-button-1 gt-mr" v-if="order.orderComment" @click="writeReviews(2)">See Reviews</div>-->
-                  <button class="olb-card-btn1" (click)="tracking">Track Package</button>
-                </div>
-                <div   *ngIf="order.orderStatus == 'Undelivered'">
-                  <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
-                  <button class="olb-card-btn1" (click)="tracking">Track Package</button>
-                </div>
-
-
-
-
-
-                <!--<button class="olb-card-btn">Pay Now</button>-->
-                <!--<button class="olb-card-btn1" >Delete</button>-->
-                <!--<button class="olb-card-btn1" *ngIf="false">Track Package</button>-->
-                <!--<button *ngIf="false" class="">Buy Again</button>-->
+              <div fxLayout="row" fxLayoutAlign="end center">
+                <div class="olb-card-pword" >Dropped: <span style="color:#EF8A31; "> - ₹1299</span> </div>
+                <div class="olb-card-pword">Final: <span class="olb-card-pword1">₹{{order.realAmount}}</span></div>
               </div>
 
-        </div>
+              <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-top: 7px">
+                <div fxLayout="row" fxLayoutAlign="start center" *ngIf="order.orderStatus == 'Unpaid' && order">
+                  <i class="iconfont-socialcommer olb-card-icon">&#xe6fa;</i>
+                  <div class="olb-card-time1-word">Ends in</div>
+                  <app-count-down [endDate]="order.cancelTime"  class="olb-card-time1"></app-count-down>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center" *ngIf="order.orderStatus !== 'Unpaid'">&nbsp;</div>
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+
+                  <div    *ngIf="order.orderStatus == 'Unpaid' && order">
+                    <button class="olb-card-btn"  (click)="deleteOrder" *ngIf="order.orderType != 'Drop'">Delete</button>
+                    <button class="olb-card-btn1" (click)="openBottomPopup">Pay Now</button>
+                  </div>
+
+                  <div   *ngIf="order.orderStatus == 'Packing'">
+                    <button class="olb-card-btn" *ngIf="order.sourcingStatus == 'Not Started'" (click)="cancel">Cancel Order</button>
+                    <button class="olb-card-btn1" (click)="tracking">Track Package</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Paid'">
+                    <button class="olb-card-btn" (click)="cancel">Cancel Order</button>
+                    <button class="olb-card-btn1" (click)="editAddress" *ngIf="order.paymentMode!='cod'">Change Address</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Audit canceled'">
+                    <button class="olb-card-btn1">Order cancellation pending</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() != 'GATICN'">
+                    <button class="olb-card-btn" (click)="tracking">Track Package</button>
+                    <button class="olb-card-btn1" (click)="receipt">Package Arrival Confirm</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() == 'GATICN'">
+                    <button class="olb-card-btn1" (click)="tracking">Track Package</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Expired'">
+                    <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
+                    <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Canceled'">
+                    <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
+                    <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Partially Refunded'">
+                    <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
+                    <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Fully Refunded'">
+                    <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
+                    <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Completed'">
+                    <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
+                    <!--<text class="od-button-1 gt-mr" @click="buyProduct">Buy Again</text>-->
+                    <!--<div class="od-button-1 gt-mr" v-if="order.orderComment==''" @click="writeReviews(1)">Write Reviews</div>-->
+                    <!--<div class="od-button-1 gt-mr" v-if="order.orderComment" @click="writeReviews(2)">See Reviews</div>-->
+                    <button class="olb-card-btn1" (click)="tracking">Track Package</button>
+                  </div>
+                  <div   *ngIf="order.orderStatus == 'Undelivered'">
+                    <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
+                    <button class="olb-card-btn1" (click)="tracking">Track Package</button>
+                  </div>
+                </div>
+
           </div>
+            </div>
+          </div>
+        </ng-container>
+        <div *ngIf="ordertList.length==0" fxLayout="row" fxLayoutAlign="center center">
+          There is no order to show
         </div>
       </div>
 

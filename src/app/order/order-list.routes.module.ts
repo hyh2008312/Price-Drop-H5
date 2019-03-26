@@ -20,7 +20,7 @@ const routes: Routes = [
   }, {
     path: 'cityList', component:  CityListComponent,
   }, {
-    path: 'orderDetail', component: OrderDetailComponent,
+    path: 'orderDetail/:id', component: OrderDetailComponent,
   }, {
     path: 'orderList', component: OrderListComponent,
   }, {

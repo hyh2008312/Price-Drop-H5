@@ -77,8 +77,7 @@ export class OrderListComponent implements OnInit {
       this.orderListService.getOrderList(parmas).then((res) => {
         // console.log(res)
         this.ordertList = this.ordertList.concat(res.results);
-        // this.ordertList = res.results.splice(0,1);
-        console.log(this.ordertList[0])
+        console.log(this.ordertList)
         this.page++;
         this.loading = false;
       }).catch((res) => {
@@ -90,6 +89,9 @@ export class OrderListComponent implements OnInit {
   }
   selChannel (index) {
     this.activeTop = this.topChannel[index].value
+    this.page = 1;
+    this.ordertList = []
+    this.getOrderList()
   }
   formatDate(p) {
     return new Date(p).getTime();

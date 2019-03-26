@@ -21,7 +21,12 @@
     </div>
 
     <div *ngFor="let j of tranArr(item.product)" class="commodity-goods-row" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="space-between center">
-        <div  *ngFor="let n of  j " class="commodity-goods"  fxLayout="column"  fxLayoutAlign="center center" fxFlex>
+        <div  *ngFor="let n of  j "
+              class="commodity-goods"
+              routerLink="/goodsdetail/{{n.productId}}"
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              fxFlex>
           <div class="gd-img-image">
             <img  [src]="n.mainImage" >
           </div>

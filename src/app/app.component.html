@@ -17,7 +17,7 @@
         <i class="iconfont-socialcommer navigation__icon1 xb-color-gray-light pad-r-16">&#xe704;</i>
         Home
         </div>
-        <div class="nav-cell mag-b-8" (click)="jumpNewPage('/home')"   fxLayout="row" fxLayoutAlign="flex-start center">
+        <div class="nav-cell mag-b-8" (click)="jump(drawer,'./order/orderList')"   fxLayout="row" fxLayoutAlign="flex-start center">
           <i class="iconfont-socialcommer xb-color-gray-light pad-r-16">&#xe6d9;</i>
           Orders
           <div class="red-dot"></div>
@@ -36,7 +36,7 @@
           <i class="iconfont-socialcommer xb-color-gray-light pad-r-16" style="font-size: 20px">&#xe770;</i>
           Customer Support
         </div>
-        <div class="nav-cell mag-b-8" (click)="jumpNewPage('/home')" fxLayout="row" fxLayoutAlign="flex-start center">
+        <div class="nav-cell mag-b-8" (click)="jump(drawer,'/order/chooseAddress')" fxLayout="row" fxLayoutAlign="flex-start center">
           <i class="iconfont-socialcommer xb-color-gray-light pad-r-16" style="font-size: 20px">&#xe772;</i>
           My Address
         </div>

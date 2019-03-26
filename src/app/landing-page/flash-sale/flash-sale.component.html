@@ -19,7 +19,7 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="8px">
-    <div  *ngFor="let i of flashSaleList let n = index"  fxLayout="column" fxFlex >
+    <div  *ngFor="let i of flashSaleList let n = index"  fxLayout="column" fxFlex routerLink="/goodsdetail/{{i.productId}}">
 
       <div class="fs-tag" fxLayout="row" fxLayoutAlign="center center">
         <span class="fs-tag-font">-{{countOff(countPrice(i.unitPrice, i.discount), i.saleUnitPrice)}} </span>
