@@ -20,6 +20,7 @@ export class PaymentComponent implements OnInit {
   checkBalance: any = false ;
   order: any = {};
   asecond: any = 13;
+  user: any;
 
   constructor(
     private router: Router,
@@ -33,7 +34,11 @@ export class PaymentComponent implements OnInit {
       } else {
         this.router.navigate([`/`]);
       }
-    })
+    });
+
+    this.userService.currentUser.subscribe((res) => {
+      this.user = res;
+    });
   }
 
   ngOnInit(): void {
@@ -61,6 +66,7 @@ export class PaymentComponent implements OnInit {
   }
   payNow () {
     console.log(this.checkBalance)
+    this.startRazorypay();
   }
   countOff (s, o) {
     if (o > 0) {
@@ -69,11 +75,59 @@ export class PaymentComponent implements OnInit {
       return ''
     }
   }
-  countPrice (s, o) {
-    if (o > 0) {
-      return Math.floor(s * (o / 100))  // 解决多一块钱的问题
-    } else {
-      return ''
-    }
+
+  startRazorypay() {
+
+    let params = {
+      orderId: this.order.id,
+      bonus: this.checkBalance ? this.checkBalance : null
+    };
+
+    this.orderListService.getRazorpay(params).then((res) => {
+      console.log(res);
+      const price = res.amount.split('.');
+      const payAmount = price[0] + price[1];
+      if (res.amount <= 0) {
+        return;
+      }
+
+      let options = {
+        "key": 'rzp_live_S1L7BaoXwjfcux',
+        "amount": payAmount, /// The amount is shown in currency subunits. Actual amount is ₹599.
+        "name": res.order.lines[0].title,
+        "order_id": res.razorpayOrderId, // Pass the order ID if you are using Razorpay Orders.
+        "currency": 'INR', // Optional. Same as the Order currency
+        "description": 'Order#: ' + res.orderNumber,
+        "image": res.order.lines[0].mainImage,
+        "handler": (response) => {
+          console.log(response);
+
+          let params = {
+            orderId: res.order.id,
+            razorpayPaymentId: res.razorpay_payment_id,
+            razorpayOrderId: res.razorpayOrderId,
+            razorpaySignature: response.razorSignature,
+            bonus: this.checkBalance ? this.checkBalance : null
+          };
+
+          this.orderListService.checkRazorpay(params).then((res) => {
+            console.log(res)
+          });
+        },
+        "prefill": {
+          "contact": this.user.defaultAddress.phoneNumber,
+          "email": this.user.email
+        },
+        "notes": {
+          "address": ""
+        },
+        "theme": {
+          "color": "#EF8A31"
+        }
+      };
+
+      let rzp1:any = new (<any>window).Razorpay(options);
+      rzp1.open();
+    });
   }
 }
