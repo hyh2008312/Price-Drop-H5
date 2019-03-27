@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, Input, OnDestroy, AfterViewInit, ChangeDetectorRef, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-count-down',
@@ -41,15 +41,18 @@ export class CountDownComponent implements AfterViewInit, OnDestroy{
 
   ngAfterViewInit() {
     // console.log( new Date(this.endDate))
-    const myDate: any = new Date(this.endDate)
-    this.timer = setInterval(() => {
-      this.diff =   myDate - Date.now();
-    }, 1000);
+    const myDate: any = new Date(this.endDate);
+    this.ngZone.runOutsideAngular(() => {
+      this.timer = setInterval(() => {
+        this.diff = myDate - Date.now();
+        this.ref.detectChanges();
+      }, 1000);
+    });
   }
   ngOnDestroy() {
     if (this.timer) {
       clearInterval(this.timer);
     }
   }
-  constructor() {}
+  constructor(private ref: ChangeDetectorRef, private ngZone: NgZone) {}
 }
