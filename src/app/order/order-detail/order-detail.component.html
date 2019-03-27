@@ -28,7 +28,8 @@
       <div fxLayout="row" fxLayoutAlign="start center">
         <i class="gb-icon iconfont-socialcommer gd-text-color">&#xe703;</i>
         <div class="gd-text gd-text-color mg-r-12">Ends in</div>
-        <!--<app-count-down *ngIf="order.cancelTime"  [endDate]="order.cancelTime"  class="gd-text-color" > </app-count-down>-->
+        <!--<div class="gd-text gd-text-color mg-r-12">{{order.cancelTime}}</div>-->
+        <app-count-down *ngIf="order.cancelTime"  [endDate]="order.cancelTime"  class="gd-text-color" > </app-count-down>
       </div>
 
     <div class="gb-bg-2" *ngIf="order.refundAmount > 0">
@@ -143,6 +144,7 @@
       </div>
     </div>
   </div>
+
 
   <div class="co-card-top coct-content1 mg-t-12" fxLayout="column" fxLayoutAlign="space-between start">
     <!--<div class="od-word">Transaction Number: {{'123123123123123'}}</div>-->

@@ -73,7 +73,7 @@ export class LandingPageComponent implements OnInit {
   getCommodityProduct() {
     this.landingPageService.getCommodityProduct().then((res) => {
       if (res) {
-        this.commodityProductList = res
+        this.commodityProductList = res;
       }
     });
   }
@@ -105,7 +105,7 @@ export class LandingPageComponent implements OnInit {
         arr = [];
       }
     }
-    return goods3
+    return goods3;
   }
 
   onUp(ev) {}

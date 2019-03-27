@@ -40,10 +40,10 @@ export class ChangeAddressComponent implements OnInit {
     private userService: UserService
   ) {
     this.attributeForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.maxLength(15)]],
-      phoneNumber: ['', [Validators.required, Validators.maxLength(10)]],
-      phoneNumberConfirm: ['', [Validators.required, Validators.maxLength(10)]],
-      postcode: ['', [Validators.required, Validators.maxLength(6)]],
+      firstName: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+      phoneNumberConfirm: ['', [Validators.required, Validators.minLength(10)]],
+      postcode: ['', [Validators.required, Validators.minLength(6)]],
       line1: ['', Validators.required],
       line2: ['', Validators.required],
       line3: ['', Validators.required],

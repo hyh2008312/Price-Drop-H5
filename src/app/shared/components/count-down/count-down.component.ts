@@ -36,6 +36,7 @@ export class CountDownComponent implements AfterViewInit, OnDestroy{
       this.minute = '00';
       this.second = '00';
     }
+    console.log(this.diff)
   }
   public timer;
 
@@ -54,5 +55,7 @@ export class CountDownComponent implements AfterViewInit, OnDestroy{
       clearInterval(this.timer);
     }
   }
+
+
   constructor(private ref: ChangeDetectorRef, private ngZone: NgZone) {}
 }

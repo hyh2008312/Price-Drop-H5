@@ -48,22 +48,23 @@ export class OrderDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.addNavigation('Order Detail');
-    this.getNotification()
+    this.getNotification();
+    // this.orderId = this.activatedRoute.snapshot.params['id'];
 
   }
   getNotification () {
     this.orderId = this.activatedRoute.snapshot.params['id'];
-    // this.orderListService.getOrder(this.orderId).then((res) => {
-    //   this.order = res
-    // }).catch((res) => {
-    //   console.log(res)
-    // })
+    this.orderListService.getOrder(this.orderId).then((res) => {
+      this.order = res;
+    }).catch((res) => {
+      console.log(res);
+    });
   }
   countOff (s, o) {
     if (o > 0) {
       return Math.ceil((o - s) / o * 100) + '%'
     } else {
-      return ''
+      return '';
     }
   }
 }

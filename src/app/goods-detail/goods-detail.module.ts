@@ -9,6 +9,8 @@ import { SharedModule } from '../shared/shared.module';
 
 import { GoodsDetailService } from './goods-detail.service';
 import { GoodsVariantDialogComponent } from './variant-dialog/goods-variant-dialog.component';
+import { RewardPointsDialogComponent } from './reward-points-dialog/reward-points-dialog.component';
+import { ShipCostDialogComponent } from './ship-cost-dialog/ship-cost-dialog.component';
 
 @NgModule({
   imports: [
@@ -21,14 +23,18 @@ import { GoodsVariantDialogComponent } from './variant-dialog/goods-variant-dial
     DecReturnComponent,
     SizeColorComponent,
     RecommendGoodsComponent,
-    GoodsVariantDialogComponent
+    GoodsVariantDialogComponent,
+    RewardPointsDialogComponent,
+    ShipCostDialogComponent
   ],
   entryComponents: [
     GoodsDetailComponent,
     DecReturnComponent,
     SizeColorComponent,
     RecommendGoodsComponent,
-    GoodsVariantDialogComponent
+    GoodsVariantDialogComponent,
+    RewardPointsDialogComponent,
+    ShipCostDialogComponent
   ],
   providers: [GoodsDetailService]
 })

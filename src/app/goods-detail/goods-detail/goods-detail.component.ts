@@ -6,6 +6,8 @@ import { OrderService } from '../../shared/services/order/order.service';
 import { GoodsVariantDialogComponent } from '../variant-dialog/goods-variant-dialog.component';
 import { GuardLinkService} from '../../shared/services/guard-link/guard-link.service';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
+import {RewardPointsDialogComponent} from '../reward-points-dialog/reward-points-dialog.component';
+import {ShipCostDialogComponent} from '../ship-cost-dialog/ship-cost-dialog.component';
 
 @Component({
   selector: 'app-goods-detail',
@@ -112,7 +114,7 @@ export class GoodsDetailComponent implements OnInit {
         this.nextPage.salePrice = res.variants[0].saleUnitPrice;
         this.nextPage.currentPrice = res.variants[0].unitPrice;
       }
-      // console.log(res)
+      console.log(res);
     });
   }
   getRecommendGoods() {
@@ -131,7 +133,7 @@ export class GoodsDetailComponent implements OnInit {
   buyNow () {
     if (this.isLogin) {
       if (this.hasVariants) {
-        this.openVariant(Event)
+        this.openVariant(Event);
       } else {
         console.log(this.nextPage);
         this.orderService.addOrder(this.nextPage);
@@ -161,6 +163,26 @@ export class GoodsDetailComponent implements OnInit {
       this.guardLinkService.addRouterLink(window.location.pathname);
       this.router.navigate([`/account/login`]);
     }
+  }
+  openShip(){
+    let dialogRef = this.dialog.open(ShipCostDialogComponent, {
+      data: {
+        ship: this.goods.shipping
+      },
+      position: {
+        bottom: '0',
+        left: '0'
+      }
+    });
+  }
+  openReward(){
+    let dialogRef = this.dialog.open(RewardPointsDialogComponent, {
+
+      position: {
+        bottom: '0',
+        left: '0'
+      }
+    });
   }
   countPoints (p, a, b) {
     return (Math.floor(parseInt(p) / a)) * b;

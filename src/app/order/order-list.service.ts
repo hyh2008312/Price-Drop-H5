@@ -149,6 +149,19 @@ export class OrderListService {
       .then(response => response.json())
       .catch((res)=>this.handleError(res, this));
   }
+  getOrder(id): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers)
+    let url = `${this.baseUrl.h5Url}order/customer/detail/${id}/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
   getOrderList(parmas): Promise<any> {
 
     let headers = new Headers({

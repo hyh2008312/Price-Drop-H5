@@ -1,0 +1,25 @@
+<div class="xb-guide-dialog">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="s-item">Buy Now to Enjoy Free Shipping</div>
+    <div class="xb-guide-dialog__close">
+      <i class="icon-ic-close iconfont-socialcommer " (click)="close()" ></i>
+    </div>
+  </div>
+  <div class="s-item-row" fxLayout="row" fxLayoutAlign="start center" >
+    <div class="s-item-t">Shipping Cost:</div>
+    <div class="s-item-t1">₹ 0 </div>
+    <div class="s-item-t2">₹ 100</div>
+  </div>
+  <div class="s-item-row" fxLayout="row" fxLayoutAlign="start center" >
+    <div class="s-item-t">Order Processing Before Shipping:</div>
+    <div class="s-item-t1">5 - 7 days</div>
+  </div>
+  <div class="s-item-row" fxLayout="row" fxLayoutAlign="start center">
+    <div class="s-item-t">Shipping Time After Processing:</div>
+    <div class="s-item-t1">{{shipObj.shippingTimeMin}} - {{shipObj.shippingTimeMax}} days</div>
+  </div>
+  <div class="s-item-row" fxLayout="row" fxLayoutAlign="start center">
+    <div class="s-item-t">Estimated Arrival Date:</div>
+    <div class="s-item-t1"> {{getNowDay1(shipObj.shippingTimeMin) | amDateFormat:'YYYY.MM.DD'}} - {{getNowDay1(shipObj.shippingTimeMax) | amDateFormat:'YYYY.MM.DD'}}</div>
+  </div>
+</div>

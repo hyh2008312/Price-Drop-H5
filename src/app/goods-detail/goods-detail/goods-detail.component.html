@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="ship-item" fxLayout="column" fxLayoutAlign="start">
+  <div class="ship-item" fxLayout="column" fxLayoutAlign="start" (click)="openShip()">
     <div class="s-i-1"  fxLayout="row" fxLayoutAlign="space-between center">
       <div class="s-i-2" fxLayout="row" fxLayoutAlign="start center">
         <img class="s-i-img" src="http://image.getpricedrop.com/priceDrop/h5/express-01.png">
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="reward-points" fxLayout="column" fxLayoutAlign="start">
+  <div class="reward-points" fxLayout="column" fxLayoutAlign="start" (click)="openReward()">
     <div class="r-p-t" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="r-p-t1">Reward Points</div>
       <div class="r-p-t2" >Details</div>
@@ -65,7 +65,7 @@
 
 
   <div class="mid">
-    <div class="dec-word"  fxLayout="row"  fxLayoutAlign="space-between center" >
+    <div class="dec-word"  fxLayout="row"  fxLayoutAlign="space-between center"  (click)="openShip()">
       <div class="dec">Shipping Time & Cost</div>
       <div class="s-c-s">Select</div>
     </div>
