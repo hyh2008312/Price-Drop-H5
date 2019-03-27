@@ -16,7 +16,8 @@
     "import-spacing": true,
     "indent": [
       true,
-      "spaces"
+      "spaces",
+      4
     ],
     "interface-over-type-literal": true,
     "label-position": true,
@@ -43,6 +44,7 @@
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-variable": true,
+    "no-duplicate-imports": true,
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
@@ -70,7 +72,9 @@
     ],
     "radix": true,
     "semicolon": [
-      "always"
+      true,
+      "always",
+      "ignore-interfaces"
     ],
     "triple-equals": [
       true,
@@ -111,6 +115,23 @@
     "directive-class-suffix": true,
     "no-access-missing-member": true,
     "templates-use-public": true,
-    "invoke-injectable": true
+    "invoke-injectable": true,
+    "arrow-parens": 0,
+    "generator-star-spacing": 0,
+    "semi": ["error", "always"],
+    "no-mergeable-namespace": true,
+    "encoding": true,
+    "no-consecutive-blank-lines": [
+      true,
+      3
+    ],
+    "space-before-function-paren": [
+      true,
+      "asyncArrow"
+    ],
+    "space-within-parens": [
+      true,
+      0
+    ]
   }
 }

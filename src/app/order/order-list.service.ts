@@ -20,8 +20,8 @@ export class OrderListService {
     public titleService: Title,
     public metaService: Meta,
     public router: Router
-  ) {
-  }
+  ) {}
+
   addTitleDescription(data:any) {
     this.titleService.setTitle(data.title);
 
