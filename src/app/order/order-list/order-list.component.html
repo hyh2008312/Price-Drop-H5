@@ -37,7 +37,9 @@
               </div>
 
               <div class="olb-card-item2" fxLayout="row" fxLayoutAlign="start center">
-                <img class="olb-card-img" style="" [src]="order.lines[0].mainImage" alt="product">
+                <div class="olb-card-img" fxFlex="none">
+                  <img  style="" [src]="order.lines[0].mainImage" alt="product">
+                </div>
                 <div class="olb-card-bg" fxLayout="column" fxLayoutAlign="space-between stretch">
                   <div class="olb-card-title">{{order.lines[0].title}}</div>
                   <div class="md-margin-bottom-1" fxLayout="row" fxLayoutAlign="space-between center">

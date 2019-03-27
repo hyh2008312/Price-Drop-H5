@@ -22,7 +22,6 @@ export class LandingPageComponent implements OnInit {
   amin: any = 12;
   asecond: any = 13;
   loading: boolean = false;
-  canRun: boolean = true;
   addHeight: any = true;
   page: any = 1;
   pageSize: any = 12;
@@ -36,6 +35,7 @@ export class LandingPageComponent implements OnInit {
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
+    this.userService.addNavigation(false);
   }
 
   ngOnInit():void {
@@ -44,7 +44,6 @@ export class LandingPageComponent implements OnInit {
     this.getFlashSale();
     this.getCommodityProduct();
     this.getFeaturedProductList(1);
-    this.userService.addNavigation('PriceDrop');
   }
 
   getBanner() {
@@ -60,9 +59,9 @@ export class LandingPageComponent implements OnInit {
     param.placement = 'Home';
     this.landingPageService.getNotification(param).then((res) => {
       this.notification = [...res];
-      console.log(this.notification)
     });
   }
+
   getFlashSale() {
     this.landingPageService.getFlashSale().then((res) => {
       if (res.length > 0) {
@@ -79,17 +78,11 @@ export class LandingPageComponent implements OnInit {
     });
   }
   getFeaturedProduct(page) {
-    if(!this.canRun){
-      return
-    }
-    this.canRun = false
-    setTimeout( () => {
-      this.canRun = true
-      this.getFeaturedProductList(page)
-    },300)
+    this.getFeaturedProductList(page);
   }
   getFeaturedProductList(page) {
-    if(this.canRun){
+    if(!this.loading){
+      this.loading = true;
       this.landingPageService.getFeaturedProduct({'page': page , page_size: this.pageSize}).then((res) => {
         if (res) {
           // this.featuredProductList = res
@@ -115,12 +108,9 @@ export class LandingPageComponent implements OnInit {
     return goods3
   }
 
-  onUp(ev) {
-    console.log('scrolled up!', ev);
-  }
+  onUp(ev) {}
 
   onScrollDown (ev) {
-    this.loading = true;
     this.getFeaturedProduct(this.page);
   }
 
