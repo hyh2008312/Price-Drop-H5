@@ -138,9 +138,9 @@ export class GoodsDetailComponent implements OnInit {
       if (this.hasVariants) {
         this.openVariant(Event)
       } else {
-        console.log(this.nextPage)
-        this.orderService.addOrder(this.nextPage)
-        this.router.navigate([`./confirmOrder`]);
+        console.log(this.nextPage);
+        this.orderService.addOrder(this.nextPage);
+        this.router.navigate([`/order/confirmOrder`]);
       }
     } else {
       this.guardLinkService.addRouterLink(window.location.pathname);

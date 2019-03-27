@@ -291,7 +291,7 @@ export class GoodsVariantDialogComponent implements OnInit {
       this.orderService.addOrder(this.nextPage);
       this.close()
       if (this.isLogin) {
-        this.router.navigate([`./order/confirmOrder`]);
+        this.router.navigate([`/order/confirmOrder`]);
       } else {
         this.guardLinkService.addRouterLink(window.location.pathname);
         this.router.navigate([`/account/login`]);

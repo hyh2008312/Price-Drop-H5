@@ -175,6 +175,65 @@
         "dev": "environments/browser/environment.ts",
         "prod": "environments/browser/environment.prod.ts"
       }
+    },
+    {
+      "root": "src",
+      "outDir": "dist/browser",
+      "assets": [
+        "assets",
+        "favicon.ico",
+        "robots.txt"
+      ],
+      "index": "index.html",
+      "main": "main.browser.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "deployUrl": "https://app-cdn-staging.getpricedrop.com/",
+      "styles": [
+        "_styles.scss",
+        "app/styles/main.scss"
+      ],
+      "scripts": [
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/echarts/dist/extension/bmap.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/browser/environment.ts",
+        "prod": "environments/browser/environment.prod.ts"
+      }
+    },
+    {
+      "platform": "server",
+      "root": "src",
+      "outDir": "dist/server",
+      "assets": [
+        "assets",
+        "favicon.ico",
+        "robots.txt"
+      ],
+      "index": "index.html",
+      "main": "main.server.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.server.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "_styles.scss",
+        "app/styles/main.scss"
+      ],
+      "scripts": [
+        "../node_modules/echarts/dist/echarts.min.js",
+        "../node_modules/echarts/dist/extension/bmap.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/server/environment.ts",
+        "prod": "environments/server/environment.prod.ts"
+      }
     }
   ],
   "e2e": {

@@ -21,6 +21,7 @@ export class PaymentComponent implements OnInit {
   order: any = {};
   asecond: any = 13;
   user: any;
+  codSrc: any;
 
   constructor(
     private router: Router,
@@ -100,11 +101,12 @@ export class PaymentComponent implements OnInit {
         "description": 'Order#: ' + res.orderNumber,
         "image": res.order.lines[0].mainImage,
         "handler": (response) => {
-          console.log(response);
+          alert(response);
+          return;
 
           let params = {
             orderId: res.order.id,
-            razorpayPaymentId: res.razorpay_payment_id,
+            razorpayPaymentId: response.razorpay_payment_id,
             razorpayOrderId: res.razorpayOrderId,
             razorpaySignature: response.razorSignature,
             bonus: this.checkBalance ? this.checkBalance : null
@@ -117,9 +119,6 @@ export class PaymentComponent implements OnInit {
         "prefill": {
           "contact": this.user.defaultAddress.phoneNumber,
           "email": this.user.email
-        },
-        "notes": {
-          "address": ""
         },
         "theme": {
           "color": "#EF8A31"
