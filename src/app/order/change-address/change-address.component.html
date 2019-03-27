@@ -13,7 +13,7 @@
         <div fxLayout="row" fxLayoutAlign="start center" class="w-100" style="overflow: hidden">
           <div style="font-size: 14px;color: #262626;margin: -6px 8px 0 0;">+91</div>
           <mat-form-field fxFlex color="accent">
-            <input matInput placeholder=""  max="9999999999" type="number" formControlName="phoneNumber">
+            <input matInput placeholder=""  maxlength="10" type="tel" formControlName="phoneNumber">
           </mat-form-field>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <div fxLayout="row" fxLayoutAlign="start center" class="w-100" style="overflow: hidden">
         <div style="font-size: 14px;color: #262626;margin: -6px 8px 0 0;">+91</div>
         <mat-form-field fxFlex color="accent" class="w-100" >
-          <input matInput placeholder="" max="9999999999" type="number" formControlName="phoneNumberConfirm">
+          <input matInput placeholder="" maxlength="10" type="tel" formControlName="phoneNumberConfirm">
         </mat-form-field>
       </div>
     </div>
@@ -34,7 +34,7 @@
     <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
       <div class="ca-title">Pincode</div>
       <mat-form-field fxFlex color="accent" class="w-100" >
-        <input matInput placeholder=""   type="number" formControlName="postcode">
+        <input matInput placeholder="" maxlength="6" type="tel" formControlName="postcode">
       </mat-form-field>
     </div>
 
