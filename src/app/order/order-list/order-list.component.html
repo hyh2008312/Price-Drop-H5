@@ -61,46 +61,46 @@
 
                 <div fxLayout="row" fxLayoutAlign="start center">
 
-                  <div    *ngIf="order.orderStatus == 'Unpaid' && order">
+                  <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Unpaid' && order">
                     <button class="olb-card-btn"  (click)="deleteOrder" *ngIf="order.orderType != 'Drop'">Delete</button>
                     <button class="olb-card-btn1" (click)="openBottomPopup">Pay Now</button>
                   </div>
 
-                  <div   *ngIf="order.orderStatus == 'Packing'">
+                  <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Packing'">
                     <button class="olb-card-btn" *ngIf="order.sourcingStatus == 'Not Started'" (click)="cancel">Cancel Order</button>
                     <button class="olb-card-btn1" (click)="tracking">Track Package</button>
                   </div>
-                  <div   *ngIf="order.orderStatus == 'Paid'">
+                  <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Paid'">
                     <button class="olb-card-btn" (click)="cancel">Cancel Order</button>
                     <button class="olb-card-btn1" (click)="editAddress" *ngIf="order.paymentMode!='cod'">Change Address</button>
                   </div>
-                  <div   *ngIf="order.orderStatus == 'Audit canceled'">
+                  <div  fxLayout="row" fxLayoutAlign="start center" *ngIf="order.orderStatus == 'Audit canceled'">
                     <button class="olb-card-btn1">Order cancellation pending</button>
                   </div>
-                  <div   *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() != 'GATICN'">
+                  <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() != 'GATICN'">
                     <button class="olb-card-btn" (click)="tracking">Track Package</button>
                     <button class="olb-card-btn1" (click)="receipt">Package Arrival Confirm</button>
                   </div>
-                  <div   *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() == 'GATICN'">
+                  <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() == 'GATICN'">
                     <button class="olb-card-btn1" (click)="tracking">Track Package</button>
                   </div>
-                  <div   *ngIf="order.orderStatus == 'Expired'">
+                  <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Expired'">
                     <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
                     <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
                   </div>
-                  <div   *ngIf="order.orderStatus == 'Canceled'">
+                  <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Canceled'">
                     <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
                     <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
                   </div>
-                  <div   *ngIf="order.orderStatus == 'Partially Refunded'">
+                  <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Partially Refunded'">
                     <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
                     <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
                   </div>
-                  <div   *ngIf="order.orderStatus == 'Fully Refunded'">
+                  <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Fully Refunded'">
                     <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
                     <button class="olb-card-btn1" (click)="buyProduct">Buy Again</button>
                   </div>
-                  <div   *ngIf="order.orderStatus == 'Completed'">
+                  <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Completed'">
                     <button class="olb-card-btn" (click)="deleteOrder">Delete</button>
                     <!--<text class="od-button-1 gt-mr" @click="buyProduct">Buy Again</text>-->
                     <!--<div class="od-button-1 gt-mr" v-if="order.orderComment==''" @click="writeReviews(1)">Write Reviews</div>-->

@@ -74,6 +74,9 @@ export class OrderListComponent implements OnInit {
         'version' : 1,
         'status' : this.activeTop,
       };
+      if(this.page == 1) {
+        this.ordertList = [];
+      }
       this.orderListService.getOrderList(parmas).then((res) => {
         // console.log(res)
         this.ordertList = this.ordertList.concat(res.results);

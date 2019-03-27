@@ -320,12 +320,14 @@
 }
 
 .order-list{
-
+  background-color: #f1f1f1;
 }
 .ol-top{
   padding: 18px 16px 8px 11px;
   background-color: white;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.12);
+  position: relative;
+  z-index: 1;
 }
 .ol-top-word{
   font-size: 12px;
@@ -431,22 +433,22 @@
     color: #EF8A31;
   }
   &-btn{
-    padding: 7px 16px;
+    padding: 7px 12px;
     font-size: 12px;
     color: #FFFFFF;
     font-weight: 500;
     background: #EF8A31;
-    border-radius: 18px;
+    border-radius: 15px;
     margin-right: 8px;
   }
   &-btn1{
-    padding: 6px 15px;
+    padding: 6px 11px;
     font-size: 12px;
     color: #EF8A31;
     font-weight: 500;
     background: white;
     border: #EF8A31 1px solid;
-    border-radius: 18px;
+    border-radius: 15px;
     //margin-right: 8px;
   }
 }
@@ -565,10 +567,12 @@
 .overflow-body{
   height: calc(100vh - 168px);
   overflow-y: scroll;
+  z-index: 0;
 }
 .overflow-body-height{
   height: calc(100vh - 112px);
   overflow-y: scroll;
+  z-index: 0;
 }
 
 
