@@ -17,7 +17,7 @@ export class OrderListComponent implements OnInit {
   pageSize: any = 1;
   value = 36;
   activeTop: any = null;
-  ordertList: any;
+  orderList: any = [];
   topChannel: any = [
     {
       name: 'All',
@@ -74,12 +74,9 @@ export class OrderListComponent implements OnInit {
         'version' : 1,
         'status' : this.activeTop,
       };
-      if(this.page == 1) {
-        this.ordertList = [];
-      }
       this.orderListService.getOrderList(parmas).then((res) => {
         // console.log(res)
-        this.ordertList = this.ordertList.concat(res.results);
+        this.orderList = this.orderList.concat(res.results);
         this.page++;
         this.loading = false;
       }).catch((res) => {
@@ -91,7 +88,7 @@ export class OrderListComponent implements OnInit {
   selChannel (index) {
     this.activeTop = this.topChannel[index].value;
     this.page = 1;
-    this.ordertList = [];
+    this.orderList = [];
     this.getOrderList();
   }
   formatDate(p) {

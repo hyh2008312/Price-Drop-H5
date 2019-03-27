@@ -1,5 +1,5 @@
 <div class="order-list" >
-  <div class="ol-top"  fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="ol-top"  fxLayout="row" fxLayoutAlign="space-between end">
     <div *ngFor="let i of topChannel let index = index">
       <div fxLayout="column" fxLayoutAlign="start center" (click)="selChannel(index)">
         <div [ngClass]="activeTop==topChannel[index].value?'ol-top-word-active':'ol-top-word'">{{i.name}}</div>
@@ -16,8 +16,8 @@
          (scrolled)="onScrollDown($event)">
 
       <div class="ol-bottom">
-        <ng-container  *ngIf="ordertList && ordertList.length>0">
-          <div *ngFor="let order of ordertList"   >
+        <ng-container  *ngIf="orderList && orderList.length>0">
+          <div *ngFor="let order of orderList"   >
             <div class="olb-card" routerLink="/order/orderDetail/{{order.id}}">
 
               <div class="olb-card-item1" fxLayout="row" fxLayoutAlign="space-between center">
@@ -119,7 +119,7 @@
             </div>
           </div>
         </ng-container>
-        <div *ngIf="ordertList && ordertList.length==0" fxLayout="row" fxLayoutAlign="center center">
+        <div *ngIf="orderList && orderList.length==0" fxLayout="row" fxLayoutAlign="center center">
           There is no order to show
         </div>
       </div>

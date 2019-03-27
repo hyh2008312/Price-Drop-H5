@@ -90,83 +90,6 @@ p, li{
   color: rgba(0,0,0,.87);
 }
 
-.note-editor {
-  border: 1px solid $lightGrayColor;
-}
-
-.growl-container.top-right {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.growl-container.growl-fixed.top-right {
-  top: 100px;
-}
-
-.border-clear {
-  border: none;
-}
-
-.note-editable img {
-  max-width: 100%;
-}
-
-.col-centered {
-  float: none;
-  margin: 0 auto;
-}
-
-.optional-field {
-  color: $grayColor;
-}
-
-//summer-note overrides
-
-.note-editable img {
-  width: 100% !important;
-  max-width: 850px !important;
-  height: auto !important;
-  &.pre-loading {
-    background: url("https://xberts.imgix.net/static/icon/loading.gif?s=1dc284fd55a3626df1317018bf299bcd") no-repeat center center;
-    width: 200px;
-    height: 200px !important;
-  }
-}
-
-.note-diseditable img {
-  width: 100% !important;
-  max-width: 850px !important;
-  height: auto !important;
-}
-
-.note-editable h1 {
-  font-size: 24px;
-  span {
-    font-size: 24px !important;
-  }
-}
-
-.note-product {
-  h1 {
-    font-size: 24px;
-    span {
-      font-size: 24px !important;
-    }
-  }
-}
-
-.note-editor.note-frame.fullscreen {
-  z-index: 1040;
-}
-
-.pr {
-  position: relative;
-}
-
 // fixed older popup form field name position problem
 .form-group{
   position: relative;
@@ -180,4 +103,8 @@ iframe{
 
 img{
   max-width: 100%;
+}
+
+button{
+  border: none;
 }

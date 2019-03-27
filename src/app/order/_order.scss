@@ -322,7 +322,8 @@
   background-color: #f1f1f1;
 }
 .ol-top{
-  padding: 18px 16px 8px 11px;
+  padding: 9px 16px 9px 11px;
+  height: 48px;
   background-color: white;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.12);
   position: relative;
@@ -337,6 +338,7 @@
   font-size: 12px;
   line-height: 14px;
   color: #EF8A31;
+  font-weight: 500;
 }
 .ol-top-line-active{
   background-color: #EF8A31;
@@ -584,12 +586,12 @@
   color: #EF8A31;
 }
 .overflow-body{
-  height: calc(100vh - 168px);
+  height: calc(100vh - 160px);
   overflow-y: scroll;
   z-index: 0;
 }
 .overflow-body-height{
-  height: calc(100vh - 112px);
+  height: calc(100vh - 102px);
   overflow-y: scroll;
   z-index: 0;
 }
