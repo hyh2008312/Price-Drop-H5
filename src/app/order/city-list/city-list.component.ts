@@ -15,15 +15,23 @@ export class CityListComponent implements OnInit {
     fWord: '',
     city: []
   }];
+  activeState: any = '';
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
 
+
   constructor(
     private router: Router,
-    private orderService: OrderListService,
+    private orderListService: OrderListService,
     private userService: UserService
-  ) {}
+  ) {
+    this.orderListService.defaultState.subscribe((data) => {
+      if (data) {
+        this.activeState = data;
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.userService.addNavigation('Edit Address');
@@ -31,13 +39,20 @@ export class CityListComponent implements OnInit {
 
   }
   getCityList () {
-    this.orderService.getCityList().then((res) => {
-      // this.city = res
+    this.orderListService.getCityList().then((res) => {
+      this.activeState = res[0]
       this.citySort(res)
-      console.log(res)
     }).catch((res) => {
       console.log(res)
     })
+  }
+  seletCity(item) {
+    this.activeState = item;
+  }
+  saveCity() {
+    this.orderListService.addState(this.activeState);
+    console.log(111111)
+    history.back();
   }
   citySort (arr) {
     const tmp = [];

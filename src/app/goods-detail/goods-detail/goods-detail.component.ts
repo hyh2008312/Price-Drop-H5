@@ -148,19 +148,24 @@ export class GoodsDetailComponent implements OnInit {
     }
   }
   openVariant($event,a?:any) {
-    let dialogRef = this.dialog.open(GoodsVariantDialogComponent, {
-      data: {
-        goods: this.goods
-      },
-      position: {
-        bottom: '0',
-        left: '0'
-      }
-    });
+    if (this.isLogin) {
+      let dialogRef = this.dialog.open(GoodsVariantDialogComponent, {
+        data: {
+          goods: this.goods
+        },
+        position: {
+          bottom: '0',
+          left: '0'
+        }
+      });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(dialogRef.componentInstance.data.aa);
-    // });
+      // dialogRef.afterClosed().subscribe(result => {
+      //   console.log(dialogRef.componentInstance.data.aa);
+      // });
+    } else {
+      this.guardLinkService.addRouterLink(window.location.pathname);
+      this.router.navigate([`/account/login`]);
+    }
   }
   countPoints (p, a, b) {
     return (Math.floor(parseInt(p) / a)) * b;

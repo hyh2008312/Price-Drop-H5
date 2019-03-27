@@ -23,17 +23,17 @@ export class OrderListComponent implements OnInit {
       name: 'All',
       value: null
     }, {
-      name: 'Paid',
-      value: 'Confirmed'
+      name: 'Confirmed',
+      value: 'Paid'
     }, {
-      name: 'Packing',
-      value: 'Preparing'
+      name: 'Preparing',
+      value: 'Packing'
     }, {
       name: 'Shipped',
       value: 'Shipped'
     }, {
-      name: 'Completed',
-      value: 'Delivered'
+      name: 'Delivered',
+      value: 'Completed'
     },
 
   ];

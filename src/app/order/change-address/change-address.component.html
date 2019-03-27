@@ -1,71 +1,73 @@
 <div class="container change-address" >
-  <div class=" change-address-line1" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
-    <div fxFlex="48" fxLayout="column" fxLayoutAlign="start start" >
-      <div class="ca-title">Name</div>
-      <mat-form-field fxFlex color="accent" class="w-100">
-        <input matInput placeholder="Name">
+
+  <form [formGroup]="attributeForm" novalidate >
+    <div class=" change-address-line1" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+      <div fxFlex="48" fxLayout="column" fxLayoutAlign="start start" >
+        <div class="ca-title">Name</div>
+        <mat-form-field fxFlex color="accent" class="w-100" >
+          <input matInput formControlName="name">
+        </mat-form-field>
+      </div>
+      <div fxFlex="48" fxLayout="column" fxLayoutAlign="start start">
+        <div class="ca-title">Phone</div>
+        <div fxLayout="row" fxLayoutAlign="start center" class="w-100" style="overflow: hidden">
+          <div style="font-size: 14px;color: #262626;margin: -6px 8px 0 0;">+91</div>
+          <mat-form-field fxFlex color="accent">
+            <input matInput placeholder="" maxlength="11" formControlName="phone">
+          </mat-form-field>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
+      <div class="ca-title">Pincode</div>
+      <mat-form-field fxFlex color="accent" class="w-100" >
+        <input matInput placeholder="" formControlName="pinCode">
       </mat-form-field>
     </div>
 
 
-    <div fxFlex="48" fxLayout="column" fxLayoutAlign="start start">
-      <div class="ca-title">Phone</div>
-      <div fxLayout="row" fxLayoutAlign="start center" class="w-100" style="overflow: hidden">
-        <div style="font-size: 14px;color: #262626;margin: -6px 8px 0 0;">+91</div>
-        <mat-form-field fxFlex color="accent">
-          <input matInput placeholder="" maxlength="11">
-        </mat-form-field>
-      </div>
+    <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
+      <div class="ca-title">House No./Floor/Building</div>
+      <mat-form-field fxFlex color="accent" class="w-100" >
+        <input matInput placeholder="" formControlName="house">
+      </mat-form-field>
     </div>
 
-  </div>
+    <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
+      <div class="ca-title">Street/Locality</div>
+      <mat-form-field fxFlex color="accent" class="w-100">
+        <input matInput placeholder=""   formControlName="street">
+      </mat-form-field>
+    </div>
 
+    <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
+      <div class="ca-title">Landmark:Near/Behind(Optional)</div>
+      <mat-form-field fxFlex color="accent" class="w-100">
+        <input matInput placeholder="" formControlName="landMark">
+      </mat-form-field>
+    </div>
 
-  <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
-    <div class="ca-title">Pincode</div>
-    <mat-form-field fxFlex color="accent" class="w-100">
-      <input matInput placeholder="">
-    </mat-form-field>
-  </div>
-
-
-  <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
-    <div class="ca-title">House No./Floor/Building</div>
-    <mat-form-field fxFlex color="accent" class="w-100">
-      <input matInput placeholder="">
-    </mat-form-field>
-  </div>
-
-  <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
-    <div class="ca-title">Street/Locality</div>
-    <mat-form-field fxFlex color="accent" class="w-100">
-      <input matInput placeholder="">
-    </mat-form-field>
-  </div>
-
-  <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
-    <div class="ca-title">Landmark:Near/Behind(Optional)</div>
-    <mat-form-field fxFlex color="accent" class="w-100">
-      <input matInput placeholder="">
-    </mat-form-field>
-  </div>
-
-  <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
+    <div class="mg-t-16" fxLayout="column" fxLayoutAlign="start start" >
     <div class="ca-title">City</div>
     <mat-form-field fxFlex color="accent" class="w-100">
-      <input matInput placeholder="">
+      <input matInput placeholder="" formControlName="city">
     </mat-form-field>
   </div>
 
   <div class="mg-t-16" >
     <div class="ca-title">State</div>
-    <div class="ca-ov-input-2" fxLayout="row" fxLayoutAlign="space-between center" routerLink="/order/chooseAddress">
+    <div class="ca-ov-input-2" fxLayout="row" fxLayoutAlign="space-between center" routerLink="/order/cityList">
       <div class="ca-last">Choose</div>
       <i class="ca-last-icon iconfont-socialcommer"> &#xe626; </i>
     </div>
   </div>
+  </form>
+
 </div>
-<div class="ca-bottom">
+<div class="ca-bottom" (click)="save()">
   <button class="ca-bottom-btn">Save</button>
 </div>
 

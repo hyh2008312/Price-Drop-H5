@@ -1,107 +1,108 @@
-<div class=" confirm-order mg-rl-16 " >
-  <div class="landing__bg"  *ngIf="notification.length > 0">
-    <div class="landing__notification-bg">
-      <div class="landing__notification">
-        <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
-      </div>
-    </div>
-  </div>
+<div class=" confirm-order overflow-body-height pd-rl-16 " >
 
-  <div class="co-card-top  mg-t-12">
-    <div fxLayout="row" fxLayoutAlign="start center" >
-      <div  *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]" fxLayout="row" fxLayoutAlign="start center">
-        <div style="background-color:#7E7DC3; transform: skewX(-45deg);height: 6px;width: 24px"></div>
-        <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
-        <div style="background-color:#E96672; transform: skewX(-45deg);height: 6px;width: 24px"></div>
-        <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
+    <div class="landing__bg"  *ngIf="notification.length > 0">
+      <div class="landing__notification-bg">
+        <div class="landing__notification">
+          <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
+        </div>
       </div>
     </div>
-    <div class="coct-content" fxLayout="row" fxLayoutAlign="space-between center">
-      <div>
-        <div class="coct-content-word1">Shipping To</div>
-        <div  *ngIf="address.id">
-          <div fxLayout="row" fxLayoutAlign="start start">
-            <i class="coct-content-icon iconfont-socialcommer">&#xe707;</i>
-            <div class="coct-content-word2">{{address.firstName}}</div>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="start start">
-            <i class="coct-content-icon iconfont-socialcommer">&#xe706;</i>
-            <div class="coct-content-word2">+91 {{address.phoneNumber}}</div>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="start start">
-            <i class="coct-content-icon iconfont-socialcommer">&#xe705;</i>
-            <div class="coct-content-word2">{{address.line1}}, {{address.line2}}, {{address.line3}}, {{address.city}}, {{address.postcode}}, {{address.stateName}}</div>
+
+    <div class="co-card-top  mg-t-12">
+      <div fxLayout="row" fxLayoutAlign="start center" >
+        <div  *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]" fxLayout="row" fxLayoutAlign="start center">
+          <div style="background-color:#7E7DC3; transform: skewX(-45deg);height: 6px;width: 24px"></div>
+          <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
+          <div style="background-color:#E96672; transform: skewX(-45deg);height: 6px;width: 24px"></div>
+          <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
+        </div>
+      </div>
+      <div routerLink="/order/chooseAddress" class="coct-content" fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <div class="coct-content-word1">Shipping To</div>
+          <div  *ngIf="address.id">
+            <div fxLayout="row" fxLayoutAlign="start start">
+              <i class="coct-content-icon iconfont-socialcommer">&#xe707;</i>
+              <div class="coct-content-word2">{{address.firstName}}</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+              <i class="coct-content-icon iconfont-socialcommer">&#xe706;</i>
+              <div class="coct-content-word2">+91 {{address.phoneNumber}}</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start start">
+              <i class="coct-content-icon iconfont-socialcommer">&#xe705;</i>
+              <div class="coct-content-word2">{{address.line1}}, {{address.line2}}, {{address.line3}}, {{address.city}}, {{address.postcode}}, {{address.stateName}}</div>
+            </div>
           </div>
         </div>
         <div *ngIf="!address.id">
           <div>Add New Address</div>
         </div>
+        <i class="iconfont-socialcommer">&#xe626;</i>
       </div>
-      <i class="iconfont-socialcommer">&#xe626;</i>
+
     </div>
 
-  </div>
-
-  <div class="co-card-mid  mg-t-12">
-    <div class="cocm-content">
-      <div class="cocm-content-block" fxLayout="row" fxLayoutAlign="start">
-        <img class="cocm-content-img" [src]="order.mainImage"  alt="product">
-        <div fxLayout="column" fxLayoutAlign="space-between start">
-          <div class="cocm-content-title">{{order.title}}</div>
-          <div class="cocm-content-num"  fxLayout="row" fxLayoutAlign="space-between center">
-            <div>{{order.attributes}}</div>
-            <div>x{{order.quantity}}</div>
+    <div class="co-card-mid  mg-t-12">
+      <div class="cocm-content">
+        <div class="cocm-content-block" fxLayout="row" fxLayoutAlign="start">
+          <img class="cocm-content-img" [src]="order.mainImage"  alt="product">
+          <div fxLayout="column" fxLayoutAlign="space-between start">
+            <div class="cocm-content-title">{{order.title}}</div>
+            <div class="cocm-content-num"  fxLayout="row" fxLayoutAlign="space-between center">
+              <div>{{order.attributes}}</div>
+              <div>x{{order.quantity}}</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="cocm-content-price1">Subtotal</div>
-          <div class="cocm-content-price1">₹{{ order.currentPrice * order.quantity }}</div>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="cocm-content-price1">Shipping</div>
-          <div class="cocm-content-price1">₹{{(order.shippingPrice|number)||'0'}}</div>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="cocm-content-price1">Tax</div>
-          <div class="cocm-content-price1">₹{{'0'}}</div>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="cocm-content-price2">Total</div>
-          <div class="cocm-content-price2">₹{{getTotalPrice(order.currentPrice , order.shippingPrice)}}</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="co-card-bottom mg-t-12">
-    <div class="cocb-content" fxLayout="row" fxLayoutAlign="space-between start">
-      <div fxLayout="column" fxLayoutAlign="start">
-        <div class="cocb-content-word0">Delivery</div>
         <div>
-          <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="cocb-content-word1">Estimated Arrival</div>
-            <div class="cocb-content-word2">{{formatDate(order.shippingTimeMin)| date}} - {{formatDate(order.shippingTimeMax)| date}}</div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="cocm-content-price1">Subtotal</div>
+            <div class="cocm-content-price1">₹{{ order.currentPrice * order.quantity }}</div>
           </div>
-          <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="cocb-content-word1">Order Preparing Before Shipping</div>
-            <div class="cocb-content-word2">{{order.processingTimeMin || 0}}-{{order.processingTimeMax || 0}} days</div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="cocm-content-price1">Shipping</div>
+            <div class="cocm-content-price1">₹{{(order.shippingPrice|number)||'0'}}</div>
           </div>
-          <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="cocb-content-word1">Shipping Time After Processing</div>
-            <div class="cocb-content-word2">{{order.shippingTimeMin || 0}}-{{order.shippingTimeMax || 0}} days</div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="cocm-content-price1">Tax</div>
+            <div class="cocm-content-price1">₹{{'0'}}</div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="cocm-content-price2">Total</div>
+            <div class="cocm-content-price2">₹{{getTotalPrice(order.currentPrice , order.shippingPrice)}}</div>
           </div>
         </div>
-        <div class="cocb-content-word3">Please Note: In some cases,order might be delayed for a few days due to Custom Duty Check.</div>
+      </div>
+
+    </div>
+
+    <div class="co-card-bottom mg-t-12">
+      <div class="cocb-content" fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="column" fxLayoutAlign="start">
+          <div class="cocb-content-word0">Delivery</div>
+          <div>
+            <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="cocb-content-word1">Estimated Arrival</div>
+              <div class="cocb-content-word2">{{formatDate(order.shippingTimeMin)| date}} - {{formatDate(order.shippingTimeMax)| date}}</div>
+            </div>
+            <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="cocb-content-word1">Order Preparing Before Shipping</div>
+              <div class="cocb-content-word2">{{order.processingTimeMin || 0}}-{{order.processingTimeMax || 0}} days</div>
+            </div>
+            <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="cocb-content-word1">Shipping Time After Processing</div>
+              <div class="cocb-content-word2">{{order.shippingTimeMin || 0}}-{{order.shippingTimeMax || 0}} days</div>
+            </div>
+          </div>
+          <div class="cocb-content-word3">Please Note: In some cases,order might be delayed for a few days due to Custom Duty Check.</div>
+        </div>
       </div>
     </div>
-  </div>
 
 
 </div>

@@ -6,10 +6,18 @@ import {BaseApi, PAYTMMID} from '../config/app.api';
 import {AuthenticationService} from '../shared/services/authentication/authentication.service';
 import {GuardLinkService} from '../shared/services/guard-link/guard-link.service';
 import { Title, Meta } from '@angular/platform-browser';
+import {BehaviorSubject, Subject} from 'rxjs/Rx';
 
 @Injectable()
 export class OrderListService {
-
+  state: Subject<any> = new BehaviorSubject<any>(null);
+  defaultState: Subject<any> = new BehaviorSubject<any>(null);
+  public addState(state: any): void {
+    this.state.next(state);
+  }
+  public adddefaultState(defaultState: any): void {
+    this.defaultState.next(defaultState);
+  }
   routerLink: any = false;
 
   constructor(
@@ -20,8 +28,8 @@ export class OrderListService {
     public titleService: Title,
     public metaService: Meta,
     public router: Router
-  ) {}
-
+  ) {
+  }
   addTitleDescription(data:any) {
     this.titleService.setTitle(data.title);
 
@@ -164,7 +172,7 @@ export class OrderListService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((res)=>this.handleError(res, this));
+      .catch(this.handleError1);
   }
   // getState () {
   //   this.$fetch({

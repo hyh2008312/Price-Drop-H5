@@ -1,10 +1,11 @@
-<div #scroll [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
-  <div class="scroll" infinite-scroll
-       [infiniteScrollDistance]="0"
-       [infiniteScrollUpDistance]="1"
-       [infiniteScrollContainer]="scroll"
-       (scrolledUp)="onUp($event)"
-       (scrolled)="onScrollDown($event)">
+<div class="container">
+  <div #scroll [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+    <div class="scroll" infinite-scroll
+         [infiniteScrollDistance]="0"
+         [infiniteScrollUpDistance]="1"
+         [infiniteScrollContainer]="scroll"
+         (scrolledUp)="onUp($event)"
+         (scrolled)="onScrollDown($event)">
 
     <div class="landing__bg">
       <div class="landing__slide">
@@ -50,7 +51,8 @@
         [diameter]="value"
         *ngIf="loading">
 
-      </mat-progress-spinner>
+        </mat-progress-spinner>
+      </div>
     </div>
   </div>
 </div>

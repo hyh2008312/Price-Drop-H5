@@ -1,4 +1,4 @@
-import {Component, Input, Inject, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { OrderService } from '../../shared/services/order/order.service';
 import { ActivatedRoute, Router} from '@angular/router';
@@ -22,9 +22,9 @@ export class GoodsVariantDialogComponent implements OnInit {
   goodsType: any;
   canBuy: any;
   variantsId: any;
-  selimgsrc: any;
-  selsize: any;
-  selcolor: any;
+  selimgsrc: any = '';
+  selsize: any = '';
+  selcolor: any = '';
   selunitPrice: any;
   selsaleUnitPrice: any;
   tmpArray: any;

@@ -29,6 +29,7 @@ import { LeftProductsImageComponent } from './components/left-products-image/lef
 import { NavigationHeaderComponent } from './components/navigation-header/navigation-header.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { CountDownComponent } from './components/count-down/count-down.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 import { ImageUploadPreviewService } from './components/image-upload-preview/image-upload-preview.service';
 import { ConstantService } from './services/constant/constant.service';
@@ -134,7 +135,8 @@ const providers = {
     LeftProductsImageComponent,
     NavigationHeaderComponent,
     LoadingComponent,
-    CountDownComponent
+    CountDownComponent,
+    ToastComponent
   ],
   exports: [
     SafeHtmlPipe,
@@ -188,6 +190,7 @@ const providers = {
     NgxEchartsModule,
     LoadingComponent,
     CountDownComponent,
+    ToastComponent,
     MatSidenavModule,
     InfiniteScrollModule
   ],
@@ -198,6 +201,7 @@ const providers = {
     LoginService
   ],
   entryComponents: [
+    ToastComponent
   ]
 })
 export class SharedModule {

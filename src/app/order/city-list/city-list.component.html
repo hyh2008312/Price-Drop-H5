@@ -3,13 +3,13 @@
     <div class="cl-item-word">{{i.fWord}}</div>
     <div *ngFor="let n of i.city">
 
-      <div class="cl-item-word1" fxLayout="row" fxLayoutAlign="space-between">
+      <div class="cl-item-word1" fxLayout="row" fxLayoutAlign="space-between" (click)="seletCity(n)">
         <div>{{n.name}}</div>
-        <i class="iconfont-socialcommer  cl-item-icon">&#xe6fb;</i>
+        <i class="iconfont-socialcommer  cl-item-icon" *ngIf="activeState.code==n.code">&#xe6fb;</i>
       </div>
     </div>
   </div>
 </div>
 <div class="ca-bottom">
-  <button class="ca-bottom-btn">Save</button>
+  <button class="ca-bottom-btn" (click)="saveCity()">Save</button>
 </div>

@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
+import {MatSnackBar} from '@angular/material';
+import {ToastComponent} from '../../shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-choose-address',
@@ -21,11 +23,13 @@ export class ChooseAddressComponent implements OnInit {
   constructor(
     private router: Router,
     private orderListService: OrderListService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    public snackBar: MatSnackBar
+  ) {
+    this.userService.addNavigation('Choose Address');
+  }
 
   ngOnInit(): void {
-    this.userService.addNavigation('Choose Address');
     this.getAddressList()
   }
   getAddressList() {
@@ -47,12 +51,22 @@ export class ChooseAddressComponent implements OnInit {
       this.orderListService.editDefaultAddress(item.id).then((res) => {
         this.stu = true
       }).catch((res) => {
-        alert('error')
-        console.log(res)
+        // alert('error')
+        this.openSnackBar(res)
+        // console.log(res)
       })
     } else if (!this.stu) {
-      alert('wait for minute')
+      this.openSnackBar('wait for minute')
+      // alert('wait for minute')
     }
+  }
+  openSnackBar(res) {
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: {
+        string: res
+      },
+      duration: 500,
+    });
   }
   countOff (s, o) {
     if (o > 0) {
