@@ -74,6 +74,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private guardLinkService: GuardLinkService
   ) {
+    this.userService.addNavigation('Log In');
+
     this.loginGroup = this.fb.group({
       username: ['', [
         Validators.required

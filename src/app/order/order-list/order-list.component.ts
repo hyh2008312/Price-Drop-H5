@@ -16,8 +16,8 @@ export class OrderListComponent implements OnInit {
   page: any = 1;
   pageSize: any = 1;
   value = 36;
-  activeTop: any = null
-  ordertList: any = [];
+  activeTop: any = null;
+  ordertList: any;
   topChannel: any = [
     {
       name: 'All',
@@ -45,15 +45,15 @@ export class OrderListComponent implements OnInit {
     private orderListService: OrderListService,
     private userService: UserService
   ) {
+    this.userService.addNavigation('My Orders');
+
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
   }
 
   ngOnInit(): void {
-    this.userService.addNavigation('My Orders');
-    this.getOrderList()
-
+    this.getOrderList();
 
   }
   getOrder() {
@@ -63,8 +63,8 @@ export class OrderListComponent implements OnInit {
     this.canRun = false;
     setTimeout( () => {
       this.canRun = true;
-      this.getOrderList()
-    }, 300 )
+      this.getOrderList();
+    }, 300 );
   }
   getOrderList() {
     if (this.canRun) {
@@ -77,21 +77,19 @@ export class OrderListComponent implements OnInit {
       this.orderListService.getOrderList(parmas).then((res) => {
         // console.log(res)
         this.ordertList = this.ordertList.concat(res.results);
-        console.log(this.ordertList)
         this.page++;
         this.loading = false;
       }).catch((res) => {
-        console.log(res);
         this.loading = false;
       })
     }
 
   }
   selChannel (index) {
-    this.activeTop = this.topChannel[index].value
+    this.activeTop = this.topChannel[index].value;
     this.page = 1;
-    this.ordertList = []
-    this.getOrderList()
+    this.ordertList = [];
+    this.getOrderList();
   }
   formatDate(p) {
     return new Date(p).getTime();

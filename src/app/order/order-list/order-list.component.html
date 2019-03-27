@@ -16,7 +16,7 @@
          (scrolled)="onScrollDown($event)">
 
       <div class="ol-bottom">
-        <ng-container  *ngIf="ordertList.length>0">
+        <ng-container  *ngIf="ordertList && ordertList.length>0">
           <div *ngFor="let order of ordertList"   >
             <div class="olb-card" routerLink="/order/orderDetail/{{order.id}}">
 
@@ -50,7 +50,7 @@
                 <div class="olb-card-pword">Final: <span class="olb-card-pword1">₹{{order.realAmount}}</span></div>
               </div>
 
-              <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-top: 7px">
+              <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxLayout="row" fxLayoutAlign="start center" *ngIf="order.orderStatus == 'Unpaid' && order">
                   <i class="iconfont-socialcommer olb-card-icon">&#xe6fa;</i>
                   <div class="olb-card-time1-word">Ends in</div>
@@ -117,7 +117,7 @@
             </div>
           </div>
         </ng-container>
-        <div *ngIf="ordertList.length==0" fxLayout="row" fxLayoutAlign="center center">
+        <div *ngIf="ordertList && ordertList.length==0" fxLayout="row" fxLayoutAlign="center center">
           There is no order to show
         </div>
       </div>

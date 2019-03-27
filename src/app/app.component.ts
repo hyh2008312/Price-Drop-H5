@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class AppComponent {
   over: any = 'over';
 
-  title = 'PriceDrop';
+  title: any;
 
   isLoadingShow = true;
 
@@ -28,35 +28,34 @@ export class AppComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    const self = this;
 
 
     window.document.addEventListener('PrebootComplete', () => {
       // put your code here that you want to run once preboot is complete
-      self.isLoadingShow = false;
+      this.isLoadingShow = false;
     });
 
     // 防止懒加载重定向
-    self.userService.currentUser.subscribe((data) => {
+    this.userService.currentUser.subscribe((data) => {
       if ( data == null ) {
-        self.userService.getUser().then((data) => {
-          self.userService.addUser(data);
-          self.user = data;
-          self.isLogin = true;
+        this.userService.getUser().then((data) => {
+          this.userService.addUser(data);
+          this.user = data;
+          this.isLogin = true;
         }).catch((data) => {
-          self.isLogin = false;
+          this.isLogin = false;
         });
       } else {
-        self.user = data;
-        self.isLogin = true;
+        this.user = data;
+        this.isLogin = true;
       }
     });
 
-    self.userService.navigation.subscribe((data) => {
+    this.userService.navigation.subscribe((data) => {
       if(data) {
-        self.title = data;
+        this.title = data;
       } else {
-        self.title = 'PriceDrop';
+        this.title = 'PriceDrop';
       }
     });
   }

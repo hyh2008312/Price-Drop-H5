@@ -69,39 +69,39 @@ export class OrderListService {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    this.createAuthorizationHeader(headers)
+    this.createAuthorizationHeader(headers);
     let url = `${this.baseUrl.h5Url}address/shipping/list/`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
   editDefaultAddress(id): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    this.createAuthorizationHeader(headers)
+    this.createAuthorizationHeader(headers);
     let url = `${this.baseUrl.h5Url}address/set/default/${id}/`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
   getDefaultAddress(): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    this.createAuthorizationHeader(headers)
+    this.createAuthorizationHeader(headers);
     let url = `${this.baseUrl.h5Url}address/get/default/`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
 
   getNotification(): Promise<any> {
@@ -114,7 +114,7 @@ export class OrderListService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
   getCityList(): Promise<any> {
 
@@ -126,45 +126,45 @@ export class OrderListService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
   getBalance(): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    this.createAuthorizationHeader(headers)
+    this.createAuthorizationHeader(headers);
     let url = `${this.baseUrl.h5Url}point/cashing/amount/`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
   getOrderList(parmas): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    this.createAuthorizationHeader(headers)
+    this.createAuthorizationHeader(headers);
     let url = `${this.baseUrl.h5Url}order/customer/list/?${this.serializeParams(parmas)}`;
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
   postDirectOrder(params: any){
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    this.createAuthorizationHeader(headers)
+    this.createAuthorizationHeader(headers);
     let url = `${this.baseUrl.h5Url}order/create/pure/`;
     let options = new RequestOptions({headers: headers});
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
   // getState () {
   //   this.$fetch({
@@ -189,20 +189,20 @@ export class OrderListService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
 
   checkRazorpay(params): Promise<any> {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
-    this.createAuthorizationHeader(headers)
+    this.createAuthorizationHeader(headers);
     let url = `${this.baseUrl.h5Url}order/create/pure/`;
     let options = new RequestOptions({headers: headers});
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError1);
+      .catch((res)=>this.handleError(res, this));
   }
 
   createPaytm(postParams: any): Promise<any> {
@@ -228,7 +228,7 @@ export class OrderListService {
     return this.http.post(url, formData)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((res)=>this.handleError(res, this));
   }
 
   private handleError(error: Response | any, target?: any, option?:any) {
