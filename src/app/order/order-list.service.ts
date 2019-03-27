@@ -174,15 +174,35 @@ export class OrderListService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
-  // getState () {
-  //   this.$fetch({
-  //     method: 'GET', // 大写
-  //     name: 'address.state.list',
-  //     data: {}
-  //   }).then(data => {
-  //     this.$storage.set('state', data);
-  //   }, error => {})
-  // },
+  postAddress(params: any){
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+    let url = `${this.baseUrl.h5Url}address/shipping/list/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+//   this.$fetch({
+//                 method: 'POST', // 大写
+//                 name: 'address.shipping.list',
+//                 data: this.address,
+//   header: {
+//     needAuth: true
+//   }
+// }).then(resData => {
+//   // 成功回调
+//   this.$event.emit('editAddress');
+//   this.$router.finish();
+// }, error => {
+//   // 错误回调
+//   this.$notice.toast({
+//     message: error
+//   })
+// })
 
   getRazorpay(params): Promise<any> {
 

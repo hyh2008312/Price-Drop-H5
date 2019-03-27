@@ -31,7 +31,7 @@ export class PaymentComponent implements OnInit {
   ) {
     this.orderService.paymentDetail.subscribe((res) => {
       if (res) {
-        this.order = res
+        this.order = res;
       } else {
         this.router.navigate([`/`]);
       }
@@ -50,10 +50,10 @@ export class PaymentComponent implements OnInit {
   }
   getNotification () {
     this.orderListService.getNotification().then((res) => {
-      this.notification = res
+      this.notification = res;
     }).catch((res) => {
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
   getBalance () {
     this.orderListService.getBalance().then((res) => {
@@ -62,18 +62,18 @@ export class PaymentComponent implements OnInit {
         this.isShowBalance = true;
       }
     }).catch((res) => {
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
   payNow () {
-    console.log(this.checkBalance)
+    console.log(this.checkBalance);
     this.startRazorypay();
   }
   countOff (s, o) {
     if (o > 0) {
-      return Math.ceil((o - s) / o * 100) + '%'
+      return Math.ceil((o - s) / o * 100) + '%';
     } else {
-      return ''
+      return '';
     }
   }
 
@@ -101,9 +101,6 @@ export class PaymentComponent implements OnInit {
         "description": 'Order#: ' + res.orderNumber,
         "image": res.order.lines[0].mainImage,
         "handler": (response) => {
-          alert(response);
-          return;
-
           let params = {
             orderId: res.order.id,
             razorpayPaymentId: response.razorpay_payment_id,
@@ -113,7 +110,7 @@ export class PaymentComponent implements OnInit {
           };
 
           this.orderListService.checkRazorpay(params).then((res) => {
-            console.log(res)
+            console.log(res);
           });
         },
         "prefill": {
