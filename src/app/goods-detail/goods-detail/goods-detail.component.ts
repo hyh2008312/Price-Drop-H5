@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material';
 import { GoodsDetailService } from '../goods-detail.service';
 import { OrderService } from '../../shared/services/order/order.service';
 import { GoodsVariantDialogComponent } from '../variant-dialog/goods-variant-dialog.component';
-import {GuardLinkService} from '../../shared/services/guard-link/guard-link.service';
+import { GuardLinkService} from '../../shared/services/guard-link/guard-link.service';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class GoodsDetailComponent implements OnInit {
   @Input() selimgsrc: any;
   banner: any = [];
   goods: any = {};
-  recommendGoods: any = {};
+  recommendGoods;
   productId: any = '';
   variantsId: any = '';
   hasVariants: any = true;
@@ -41,8 +41,6 @@ export class GoodsDetailComponent implements OnInit {
     flashSale: {}
   };
 
-
-
   isLogin = false;
   ahour: any = 11;
   amin: any = 12;
@@ -59,30 +57,27 @@ export class GoodsDetailComponent implements OnInit {
   ) {
     this.auth.isOnlyAuthorized().subscribe((res) => {
       if (res) {
-        this.isLogin = true
+        this.isLogin = true;
       }
     });
+
+    this.productId = this.activatedRoute.snapshot.params['id'];
+    this.getGoodsDetail();
+    this.getRecommendGoods();
   }
 
-  ngOnInit():void {
-    this.productId = this.activatedRoute.snapshot.params['id'];
-    if (this.productId) {
-      this.getGoodsDetail();
-      this.getRecommendGoods();
-    }
-  }
+  ngOnInit():void {}
 
   getGoodsDetail() {
     this.goodsDetailService.getGoodsDetail(this.productId).then((res) => {
-      this.banner = res.images
-      this.goods = res
-      console.log(res)
+      this.banner = res.images;
+      this.goods = res;
 
       this.nextPage.title = res.title;
-      this.nextPage.productId = this.productId
+      this.nextPage.productId = this.productId;
       this.nextPage.proId = res.purchaseMethod;
       if (res.images != null) {
-        this.selimgsrc = res.images[0]
+        this.selimgsrc = res.images[0];
         this.nextPage.mainImage = this.selimgsrc
       } else {
         this.selimgsrc = ''
@@ -122,15 +117,15 @@ export class GoodsDetailComponent implements OnInit {
   }
   getRecommendGoods() {
     this.goodsDetailService.getRecommendGoods(this.productId).then((res) => {
-      this.recommendGoods = res
-      // console.log(res)
+      this.recommendGoods = res;
     });
   }
-  getNowDay1 (str) {
+  getNowDay1 (str: any) {
     if (str) {
-      const date = new Date().valueOf();
-      const tmp = (date + ((24 * 60 * 60 * 1000) * (7 + str)))
-      return tmp ;
+      const date = new Date().getTime();
+      return new Date(date + ((24 * 60 * 60 * 1000) * (7 + str)));
+    } else {
+      return new Date();
     }
   }
   buyNow () {
