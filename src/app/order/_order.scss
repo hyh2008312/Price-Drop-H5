@@ -362,6 +362,10 @@
   border-radius: 8px;
   background-color: white;
   margin-top: 12px;
+
+  &-bg{
+    height: 80px;
+  }
   &-item1{
     margin-bottom: 8px;
   }
@@ -383,12 +387,15 @@
     width: 80px;
     height: 80px;
     margin-right: 12px;
-    border-radius: 4px
+    border-radius: 4px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.12);
   }
   &-title{
     font-size: 14px;
     line-height: 20px;
     font-weight: 500;
+    max-height: 40px;
+    overflow: hidden;
     text-overflow: ellipsis;
     color: rgba(0,0,0,0.87);
   }
@@ -396,7 +403,19 @@
     opacity: 0.54;
     font-size: 12px;
     line-height: 14px;
+    max-height: 14px;
     color: rgba(0,0,0,0.87);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-right: 8px;
+    white-space: nowrap;
+  }
+  &-quantity{
+    opacity: 0.38;
+    color: rgba(0,0,0,0.87);
+    font-size: 12px;
+    line-height: 14px;
+    white-space: nowrap;
   }
   &-price{
     font-size: 12px;
@@ -407,12 +426,14 @@
     font-size: 12px;
     transform: scale(.8);
     color: #000000;
-    line-height: 12px
+    line-height: 16px;
+    margin-right: 8px;
   }
   &-pword1{
     font-size: 15px;
     color: #000000;
-    font-weight: 500
+    font-weight: 500;
+    line-height: 18px;
   }
   &-icon{
     font-size: 12px;
@@ -433,23 +454,22 @@
     color: #EF8A31;
   }
   &-btn{
+    margin-right: 8px;
+    padding: 6px 11px;
+    font-size: 12px;
+    color: #EF8A31;
+    font-weight: 500;
+    background-color: white;
+    border: #EF8A31 1px solid;
+    border-radius: 14px;
+  }
+  &-btn1{
     padding: 7px 12px;
     font-size: 12px;
     color: #FFFFFF;
     font-weight: 500;
     background: #EF8A31;
-    border-radius: 15px;
-    margin-right: 8px;
-  }
-  &-btn1{
-    padding: 6px 11px;
-    font-size: 12px;
-    color: #EF8A31;
-    font-weight: 500;
-    background: white;
-    border: #EF8A31 1px solid;
-    border-radius: 15px;
-    //margin-right: 8px;
+    border-radius: 14px;
   }
 }
 .od-word{

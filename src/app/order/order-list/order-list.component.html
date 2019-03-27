@@ -38,16 +38,18 @@
 
               <div class="olb-card-item2" fxLayout="row" fxLayoutAlign="start center">
                 <img class="olb-card-img" style="" [src]="order.lines[0].mainImage" alt="product">
-                <div style="height: 80px" fxLayout="column" fxLayoutAlign="space-between start">
+                <div class="olb-card-bg" fxLayout="column" fxLayoutAlign="space-between stretch">
                   <div class="olb-card-title">{{order.lines[0].title}}</div>
-                  <div class="olb-card-variant">{{order.lines[0].attributes}}</div>
-                  <div class="olb-card-price" >₹{{order.realAmount|number}} <span style="opacity: 0.38;color: rgba(0,0,0,0.87);">x {{order.lines[0].quantity}}</span></div>
+                  <div class="md-margin-bottom-1" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="olb-card-variant" fxFlex>{{order.lines[0].attributes}}</div>
+                    <div class="olb-card-quantity">x&nbsp;{{order.lines[0].quantity}}</div>
+                  </div>
                 </div>
               </div>
 
-              <div fxLayout="row" fxLayoutAlign="end center">
-                <div class="olb-card-pword" >Dropped: <span style="color:#EF8A31; "> - ₹1299</span> </div>
-                <div class="olb-card-pword">Final: <span class="olb-card-pword1">₹{{order.realAmount}}</span></div>
+              <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="end center">
+                <div class="olb-card-pword">Total:</div>
+                <div class="olb-card-pword1">₹{{order.realAmount}}</div>
               </div>
 
               <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="space-between center">
