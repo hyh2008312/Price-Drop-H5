@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { GoodsDetailService } from '../goods-detail.service';
+import {UserService} from '../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-goods-description',
@@ -13,14 +14,22 @@ export class GoodsDescriptionComponent implements OnInit {
   banner: any = [];
   productId: any= '';
   goods: any = {};
+  addHeight = true
   returnStu = true
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private userService: UserService,
     private goodsDetailService: GoodsDetailService
-  ) {}
+  ) {
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
+  }
 
   ngOnInit():void {
+    this.userService.addNavigation('Description');
+
     this.productId = this.activatedRoute.snapshot.params['id'];
     if(this.productId){
       this.getGoodsDetail();

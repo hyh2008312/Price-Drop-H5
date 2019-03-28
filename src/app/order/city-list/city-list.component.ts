@@ -16,6 +16,7 @@ export class CityListComponent implements OnInit {
     city: []
   }];
   activeState: any = '';
+  addHeight: any = true;
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
@@ -30,6 +31,9 @@ export class CityListComponent implements OnInit {
       if (data) {
         this.activeState = data;
       }
+    });
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
     });
   }
 

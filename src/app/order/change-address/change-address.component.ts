@@ -28,6 +28,7 @@ export class ChangeAddressComponent implements OnInit {
     phoneNumberConfirm: ''
   };
   name: any = '';
+  addHeight: any = true;
   stateName: any = 'Choose';
   stateId: any = '';
   asecond: any = 13;
@@ -51,6 +52,9 @@ export class ChangeAddressComponent implements OnInit {
       stateId: ['', Validators.required]
     });
     this.userService.addNavigation('Edit Address');
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
   }
 
   ngOnInit(): void {
@@ -64,7 +68,7 @@ export class ChangeAddressComponent implements OnInit {
         this.attributeForm.patchValue({
           firstName : res.firstName,
           phoneNumber : res.phoneNumber,
-          phoneNumberConfirm : res.phoneNumberConfirm,
+          phoneNumberConfirm : res.phoneNumber,
           postcode : res.postcode,
           line1 : res.line1,
           line2 : res.line2,

@@ -19,6 +19,7 @@ export class ChooseAddressComponent implements OnInit {
   addressList: any = [];
   defaultAddress: any = {};
   stu: any = true;
+  addHeight: any = true;
   asecond: any = 13;
 
   constructor(
@@ -29,6 +30,9 @@ export class ChooseAddressComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {
     this.userService.addNavigation('Choose Address');
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
   }
 
   ngOnInit(): void {

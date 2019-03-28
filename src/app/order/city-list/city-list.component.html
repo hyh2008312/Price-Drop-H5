@@ -1,11 +1,15 @@
-<div class="city-list" >
-  <div *ngFor="let i of city">
-    <div class="cl-item-word">{{i.fWord}}</div>
-    <div *ngFor="let n of i.city">
+<div  [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+  <div class="container">
+    <div class="city-list" >
+      <div *ngFor="let i of city">
+        <div class="cl-item-word">{{i.fWord}}</div>
+        <div *ngFor="let n of i.city">
 
-      <div class="cl-item-word1" fxLayout="row" fxLayoutAlign="space-between" (click)="seletCity(n)">
-        <div>{{n.name}}</div>
-        <i class="iconfont-socialcommer  cl-item-icon" *ngIf="activeState.id==n.id">&#xe6fb;</i>
+          <div class="cl-item-word1" fxLayout="row" fxLayoutAlign="space-between" (click)="seletCity(n)">
+            <div>{{n.name}}</div>
+            <i class="iconfont-socialcommer  cl-item-icon" *ngIf="activeState.id==n.id">&#xe6fb;</i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
