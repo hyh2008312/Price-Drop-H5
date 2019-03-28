@@ -4,6 +4,7 @@ import { GoodsDetailComponent} from './goods-detail/goods-detail.component';
 import { DecReturnComponent} from './dec-return/dec-return.component';
 import { SizeColorComponent} from './size-color/size-color.component';
 import { RecommendGoodsComponent} from './recommend-goods/recommend-goods.component';
+import { GoodsDescriptionComponent} from './goods-description/goods-description.component';
 import { GoodsDetailRoutingModule } from './goods-detail.routes.module';
 import { SharedModule } from '../shared/shared.module';
 
@@ -23,6 +24,7 @@ import { ShipCostDialogComponent } from './ship-cost-dialog/ship-cost-dialog.com
     DecReturnComponent,
     SizeColorComponent,
     RecommendGoodsComponent,
+    GoodsDescriptionComponent,
     GoodsVariantDialogComponent,
     RewardPointsDialogComponent,
     ShipCostDialogComponent
@@ -32,6 +34,7 @@ import { ShipCostDialogComponent } from './ship-cost-dialog/ship-cost-dialog.com
     DecReturnComponent,
     SizeColorComponent,
     RecommendGoodsComponent,
+    GoodsDescriptionComponent,
     GoodsVariantDialogComponent,
     RewardPointsDialogComponent,
     ShipCostDialogComponent

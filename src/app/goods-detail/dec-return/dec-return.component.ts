@@ -21,8 +21,9 @@ export class DecReturnComponent implements OnInit {
 
   ngOnInit():void {
   }
-  opendec () {
-    console.log(1111)
+  openDec () {
+    // console.log(111)
+    // this.router.navigate([`/goodsDescription`], {queryParams: {goods: this.goods}});
   }
   trimNullObj (arr: any = []) {
     const tmpArr = [];

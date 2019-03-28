@@ -56,9 +56,13 @@ export class ChangeAddressComponent implements OnInit {
   ngOnInit(): void {
     this.orderListService.state.subscribe((res) => {
       if (res) {
+        if (this.activatedRoute.snapshot.queryParams['name'] || res.stateName) {
+          this.stateName = this.activatedRoute.snapshot.queryParams['name'] || res.stateName;
+          this.stateId = this.activatedRoute.snapshot.queryParams['id'] || res.stateId;
+        }
         console.log(res);
         this.attributeForm.patchValue({
-          firstName : res.name,
+          firstName : res.firstName,
           phoneNumber : res.phoneNumber,
           phoneNumberConfirm : res.phoneNumberConfirm,
           postcode : res.postcode,
@@ -66,12 +70,8 @@ export class ChangeAddressComponent implements OnInit {
           line2 : res.line2,
           line3 : res.line3,
           city : res.city,
-          stateId : this.activatedRoute.snapshot.queryParams['id'],
+          stateId : this.stateId,
         });
-        if (this.activatedRoute.snapshot.queryParams['name']) {
-          this.stateName = this.activatedRoute.snapshot.queryParams['name'];
-          this.stateId = this.activatedRoute.snapshot.queryParams['id'];
-        }
       }
     });
   }
@@ -81,10 +81,9 @@ export class ChangeAddressComponent implements OnInit {
   }
   save () {
     this.orderListService.postAddress(this.attributeForm.value).then((res) => {
-      console.log(res);
+      this.router.navigate([`/order/chooseAddress`]);
     }).catch((res) => {
       console.log(res);
-    })
-   // console.log(this.attributeForm.value);
+    });
   }
 }

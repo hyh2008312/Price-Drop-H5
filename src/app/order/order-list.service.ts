@@ -199,23 +199,49 @@ export class OrderListService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
-//   this.$fetch({
-//                 method: 'POST', // 大写
-//                 name: 'address.shipping.list',
-//                 data: this.address,
-//   header: {
-//     needAuth: true
-//   }
-// }).then(resData => {
-//   // 成功回调
-//   this.$event.emit('editAddress');
-//   this.$router.finish();
-// }, error => {
-//   // 错误回调
-//   this.$notice.toast({
-//     message: error
-//   })
-// })
+  delOrder(id){
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+    let url = `${this.baseUrl.h5Url}order/customer/cancel/${id}/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+  delAddress(id){
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+    let url = `${this.baseUrl.h5Url}address/shipping/detail/${id}/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+  // this.$fetch({
+  //               method: 'DELETE', // 大写
+  //               url: `${baseUrl}/order/customer/cancel/${this.order.id}/`,
+  // data: {},
+  // header: {
+  // needAuth: true
+  // }
+  // }).then(resData => {
+  // this.$notice.loading.hide();
+  // this.$notice.toast('Deleted successfully!');
+  // this.$router.setBackParams({
+  // status: 'delete'
+  // });
+  // this.$router.finish();
+  // }, error => {
+  // this.$notice.toast({
+  // message: error.errorMsg
+  // });
+  // })
 
   getRazorpay(params): Promise<any> {
 

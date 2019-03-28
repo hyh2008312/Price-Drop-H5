@@ -1,0 +1,17 @@
+<div class="xb-guide-dialog">
+  <!--<div fxLayout="row" fxLayoutAlign="space-between center">-->
+    <!--<div class="s-item"></div>-->
+    <div class="xb-guide-dialog__close">
+      <i class="icon-ic-close iconfont-socialcommer " (click)="close()" ></i>
+    </div>
+  <!--</div>-->
+  <div>
+    <div fxLayout="row" fxLayoutAlign="center center">{{content}}</div>
+
+    <div class="bottom" fxLayout="row" fxLayoutAlign="end center">
+      <div class="bottom-btn" (click)="OK()">OK</div>
+      <div class="bottom-btn1" (click)="Cancel()">Cancel</div>
+    </div>
+
+  </div>
+</div>

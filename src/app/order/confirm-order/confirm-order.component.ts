@@ -60,51 +60,51 @@ export class ConfirmOrderComponent implements OnInit {
   ) {
     this.orderService.detail.subscribe((res) => {
       if (res) {
-        this.order = res
+        this.order = res;
       } else {
         this.router.navigate([`/`]);
       }
-    })
+    });
 
   }
 
   ngOnInit(): void {
     this.userService.addNavigation('Confirm Order');
     this.getNotification()
-    this.getDefaultAddress()
+    this.getDefaultAddress();
 
   }
   getDefaultAddress () {
     this.orderListService.getDefaultAddress().then((res) => {
-      this.address = res
+      this.address = res;
     }).catch((res) => {
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
   getNotification () {
     this.orderListService.getNotification().then((res) => {
-      this.notification = res
+      this.notification = res;
     }).catch((res) => {
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
   getTotalPrice (a, b) {
-    return parseInt(a) + parseInt(b)
+    return parseInt(a) + parseInt(b);
   }
   formatDate(p) {
     return (new Date().getTime() + (p + 7) * 24 * 60 * 60 * 1000);
   }
   countOff (s, o) {
     if (o > 0) {
-      return Math.ceil((o - s) / o * 100) + '%'
+      return Math.ceil((o - s) / o * 100) + '%';
     } else {
-      return ''
+      return '';
     }
   }
   placeOrder () {
     if (!this.address.id) {
       alert('Please add address first!');
-      return
+      return;
     }
     console.log(this.isFirst)
     if (!this.isFirst) {
@@ -114,18 +114,18 @@ export class ConfirmOrderComponent implements OnInit {
         vid: this.order.id,
         quantity: this.order.quantity,
         voucherId: voucherId
-      }
+      };
       if (this.order.proId === 'direct') {
         this.orderListService.postDirectOrder(params).then((res) => {
           if (res) {
             this.orderService.paymentOrder(res)
             this.router.navigate([`/order/payment`]);
           } else {
-            alert('servers are too busy')
+            alert('server are too busy');
           }
         }).catch((res) => {
-          console.log(res)
-        })
+          console.log(res);
+        });
       }
     }
   }
