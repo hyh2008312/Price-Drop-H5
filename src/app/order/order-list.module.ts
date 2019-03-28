@@ -10,6 +10,7 @@ import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 import { CityListComponent } from './city-list/city-list.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { PaymentComponent } from './payment/payment.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
   imports: [
@@ -24,10 +25,13 @@ import { PaymentComponent } from './payment/payment.component';
     ConfirmOrderComponent,
     CityListComponent,
     OrderDetailComponent,
-    PaymentComponent
+    PaymentComponent,
+    DeleteDialogComponent
 
   ],
-  entryComponents: [],
+  entryComponents: [
+    DeleteDialogComponent
+  ],
   providers: [OrderListService]
 })
 export class OrderListModule { }

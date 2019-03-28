@@ -1,7 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderListService } from '../order-list.service';
+import { OrderService } from '../../shared/services/order/order.service';
 import { UserService } from '../../shared/services/user/user.service';
+import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component'
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {ToastComponent} from '../../shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-order-list',
@@ -43,6 +47,9 @@ export class OrderListComponent implements OnInit {
   constructor(
     private router: Router,
     private orderListService: OrderListService,
+    public snackBar: MatSnackBar,
+    private orderService: OrderService,
+    public dialog: MatDialog,
     private userService: UserService
   ) {
     this.userService.addNavigation('My Orders');
@@ -61,10 +68,10 @@ export class OrderListComponent implements OnInit {
       return
     }
     this.canRun = false;
-    setTimeout( () => {
+    setTimeout(() => {
       this.canRun = true;
       this.getOrderList();
-    }, 300 );
+    }, 300);
   }
   getOrderList() {
     if (this.canRun) {
@@ -81,7 +88,7 @@ export class OrderListComponent implements OnInit {
         this.loading = false;
       }).catch((res) => {
         this.loading = false;
-      })
+      });
     }
 
   }
@@ -90,6 +97,32 @@ export class OrderListComponent implements OnInit {
     this.page = 1;
     this.orderList = [];
     this.getOrderList();
+  }
+  payNow(i) {
+    this.orderService.paymentOrder(i);
+    this.router.navigate([`/order/payment`]);
+  }
+  deleteOrder(i, index) {
+    let dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: {
+        content: 'Are you sure you want to delete this order？',
+        type: 'order',
+        id: i.id
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (dialogRef.componentInstance.data.stu === 'ok') {
+        this.orderList.splice(index, 1);
+      }
+    });
+  }
+  toast() {
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: {
+        string: 'Deleted successfully!'
+      },
+      duration: 500,
+    });
   }
   formatDate(p) {
     return new Date(p).getTime();
