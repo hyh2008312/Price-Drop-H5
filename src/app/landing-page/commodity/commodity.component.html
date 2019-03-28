@@ -2,18 +2,7 @@
   <div *ngFor="let item of commodityProductList" class="commodity-block" style="">
     <div fxLayout="row" fxLayoutAlign="space-between center" routerLink="../category/list/{{item.id}}">
         <div fxLayout="row" fxLayoutAlign="start center">
-          <!--<i class="iconfont-socialcommer commodity-icon" style="color:rgb(127, 6, 255)">&#xe77e;</i>-->
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Kids'"                   style="color:rgb(255, 194, 39);">&#xe77e;</i>
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Electronic'"             style="color:rgb(255, 167, 21);">&#xe779;</i>
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Home'"                   style="color:rgb(0, 219, 225);">&#xe77a;</i>
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Bags'"                   style="color:rgb(255, 63, 109);">&#xe778;</i>
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Women'"                  style="color:rgb(255, 69, 118);">&#xe77c;</i>
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Women’s Shoes'"          style="color:rgb(231, 138, 0);">&#xe77d;</i>
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Men'"                    style="color:rgb(8, 66, 255);">&#xe776;</i>
-
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Men’s Shoes'"            style="color:rgb(36, 155, 255);">&#xe77b;</i>
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Jewellery & Watches'"    style="color:rgb(127, 6, 255);">&#xe77f;</i>
-          <i class="iconfont-socialcommer commodity-icon" *ngIf="item.name=='Beauty & Personal Care'" style="color:rgb(255, 50, 202);">&#xe777;</i>
+          <i class="iconfont-socialcommer commodity-icon {{item.icon}}" [ngStyle]="{color:item.color}"></i>
 
           <div class="commodity-title">{{item.name}}</div>
         </div>
