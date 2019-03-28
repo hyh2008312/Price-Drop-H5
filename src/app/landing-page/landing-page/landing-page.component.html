@@ -7,57 +7,57 @@
          (scrolledUp)="onUp($event)"
          (scrolled)="onScrollDown($event)">
 
-    <div class="landing__bg">
-      <div class="landing__slide">
-        <app-left-products-image [images]="banner"></app-left-products-image>
-      </div>
-    </div>
-    <div class="landing__notification-bg">
-      <div class="landing__notification" *ngIf="notification.length > 0">
-        <!--<span>{{notification[0].context}}</span>-->
-        <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
-      </div>
-    </div>
-
-    <div class="category-line" fxLayout="row" fxLayoutAlign="start">
-      <div>
-        <div class="overflow-block-1" fxLayout="column" fxLayoutAlign="center center" *ngIf="commodityProductList.length > 0">
-          <div class="category-line-block-1" fxLayout="column" fxLayoutAlign="center center" routerLink="/category" >
-            <i class="iconfont-socialcommer category-line-icon-1 icon-ic-category"></i>
-          </div>
-          <div class="category-line-word">Categories</div>
+      <div class="landing__bg">
+        <div class="landing__slide">
+          <app-left-products-image [images]="banner"></app-left-products-image>
         </div>
       </div>
-      <div *ngFor="let i of commodityProductList;let n=index">
-        <div class="overflow-block" [ngStyle]="{'margin-right': n == commodityProductList.length - 1 ? '24px' : '' }"
-             fxLayout="column" fxLayoutAlign="center center" routerLink="/category/list/{{i.id}}">
-          <div class="category-line-block" fxLayout="column" fxLayoutAlign="center center" >
-            <i class="iconfont-socialcommer category-line-icon {{i.icon}}" [ngStyle]="{color:i.color}"></i>
-          </div>
-          <div class="category-line-word">{{i.name}}</div>
+      <div class="landing__notification-bg">
+        <div class="landing__notification" *ngIf="notification.length > 0">
+          <!--<span>{{notification[0].context}}</span>-->
+          <app-left-products-image [images]="notification" [direction]="true"></app-left-products-image>
         </div>
       </div>
-    </div>
 
-    <!--<div fxLayout="row" fxLayoutAlign="center" >-->
-    <!--<div class="circle"></div>-->
-    <!--</div>-->
+      <div class="category-line" fxLayout="row" fxLayoutAlign="start">
+        <div>
+          <div class="overflow-block-1" fxLayout="column" fxLayoutAlign="center center" *ngIf="commodityProductList.length > 0">
+            <div class="category-line-block-1" fxLayout="column" fxLayoutAlign="center center" routerLink="/category" >
+              <i class="iconfont-socialcommer category-line-icon-1 icon-ic-category"></i>
+            </div>
+            <div class="category-line-word">Categories</div>
+          </div>
+        </div>
+        <div *ngFor="let i of commodityProductList;let n=index">
+          <div class="overflow-block" [ngStyle]="{'margin-right': n == commodityProductList.length - 1 ? '24px' : '' }"
+               fxLayout="column" fxLayoutAlign="center center" routerLink="/category/list/{{i.id}}">
+            <div class="category-line-block" fxLayout="column" fxLayoutAlign="center center" >
+              <i class="iconfont-socialcommer category-line-icon {{i.icon}}" [ngStyle]="{color:i.color}"></i>
+            </div>
+            <div class="category-line-word">{{i.name}}</div>
+          </div>
+        </div>
+      </div>
+
+      <!--<div fxLayout="row" fxLayoutAlign="center" >-->
+      <!--<div class="circle"></div>-->
+      <!--</div>-->
 
 
-    <app-flash-sale  [flashSaleList]="flashSaleList" [flashSaleTime]="flashSaleTime"></app-flash-sale>
+      <app-flash-sale  [flashSaleList]="flashSaleList" [flashSaleTime]="flashSaleTime"></app-flash-sale>
 
-    <app-commodity [commodityProductList]="commodityProductList"></app-commodity>
+      <app-commodity [commodityProductList]="commodityProductList"></app-commodity>
 
-    <div class="featured" style="background-color: white;">
-      <div class="featured-title">Featured</div>
-      <app-featured *ngFor="let item of buffer" [item]="item" ></app-featured>
-    </div>
-    <div class="md-padding-top-2 md-padding-bottom-2" fxLayout="row" fxLayoutAlign="center center">
-      <mat-progress-spinner
-        color="accent"
-        mode="indeterminate"
-        [diameter]="value"
-        *ngIf="loading">
+      <div class="featured" style="background-color: white;">
+        <div class="featured-title">Featured</div>
+        <app-featured *ngFor="let item of buffer" [item]="item" ></app-featured>
+      </div>
+      <div class="md-padding-top-2 md-padding-bottom-2" fxLayout="row" fxLayoutAlign="center center">
+        <mat-progress-spinner
+          color="accent"
+          mode="indeterminate"
+          [diameter]="value"
+          *ngIf="loading">
 
         </mat-progress-spinner>
       </div>
