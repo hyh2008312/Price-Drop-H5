@@ -1,6 +1,7 @@
-<div class="container change-address" >
-
-  <form [formGroup]="attributeForm" novalidate>
+<div [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+  <div class="container">
+    <div class="change-address" >
+      <form [formGroup]="attributeForm" novalidate>
     <div class=" change-address-line1" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
       <div fxFlex="48" fxLayout="column" fxLayoutAlign="start start" >
         <div class="ca-title">Name</div>
@@ -75,7 +76,8 @@
     </div>
   </div>
   </form>
-
+    </div>
+  </div>
 </div>
 <div class="ca-bottom" (click)="save()">
   <button class="ca-bottom-btn">Save</button>

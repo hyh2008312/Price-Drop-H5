@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { OrderListService } from '../order-list.service';
 import { OrderService } from '../../shared/services/order/order.service';
 import { UserService } from '../../shared/services/user/user.service';
-import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component'
+import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {ToastComponent} from '../../shared/components/toast/toast.component';
 
@@ -101,6 +101,9 @@ export class OrderListComponent implements OnInit {
   payNow(i) {
     this.orderService.paymentOrder(i);
     this.router.navigate([`/order/payment`]);
+  }
+  buyProduct(i) {
+    this.router.navigate([`/goodsdetail/${i.lines[0].productId}`]);
   }
   deleteOrder(i, index) {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {

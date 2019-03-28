@@ -1,161 +1,172 @@
-<div class=" order-detail mg-rl-16 " >
 
-  <div class="co-card-top coct-content mg-t-12" fxLayout="column" fxLayoutAlign="space-between start">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Canceled'">&#xe711;</i>
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Expired'">&#xe711;</i>
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Unpaid'">&#xe702;</i>
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Paid'">&#xe746;</i>
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Packing' || order.orderStatus == 'Audit canceled'">&#xe70d;</i>
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Shipped'">&#xe712;</i>
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Completed'">&#xe6ed;</i>
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Fully Refunded'">&#xe758;</i>
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Partially Refunded'">&#xe758;</i>
-        <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Undelivered'">&#xe761;</i>
+<div [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+  <div class="container">
+    <div class=" order-detail mg-rl-16 " >
 
-        <div class="gb-text" *ngIf="order.orderStatus == 'Fully Refunded'">Fully Refunded</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Partially Refunded'">Partially Refunded</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Audit canceled'">Pending Cancel</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Paid'">Confirmed</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Unpaid'">Pending</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Canceled'">Cancelled</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Expired'">Expired</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Packing'">Preparing</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Shipped'">Shipped</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Completed'">Delivered</div>
-        <div class="gb-text" *ngIf="order.orderStatus == 'Undelivered'">Undelivered</div>
+      <div class="co-card-top coct-content mg-t-12" fxLayout="column" fxLayoutAlign="space-between start">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Canceled'">&#xe711;</i>
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Expired'">&#xe711;</i>
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Unpaid'">&#xe702;</i>
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Paid'">&#xe746;</i>
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Packing' || order.orderStatus == 'Audit canceled'">&#xe70d;</i>
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Shipped'">&#xe712;</i>
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Completed'">&#xe6ed;</i>
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Fully Refunded'">&#xe758;</i>
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Partially Refunded'">&#xe758;</i>
+            <i class="gb-icon iconfont-socialcommer" *ngIf="order.orderStatus == 'Undelivered'">&#xe761;</i>
+
+            <div class="gb-text" *ngIf="order.orderStatus == 'Fully Refunded'">Fully Refunded</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Partially Refunded'">Partially Refunded</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Audit canceled'">Pending Cancel</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Paid'">Confirmed</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Unpaid'">Pending</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Canceled'">Cancelled</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Expired'">Expired</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Packing'">Preparing</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Shipped'">Shipped</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Completed'">Delivered</div>
+            <div class="gb-text" *ngIf="order.orderStatus == 'Undelivered'">Undelivered</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <i              *ngIf="order.orderStatus == 'Unpaid'" class="gb-icon iconfont-socialcommer gd-text-color">&#xe703;</i>
+            <div            *ngIf="order.orderStatus == 'Unpaid'"   class="gd-text gd-text-color mg-r-12" >Ends in</div>
+            <app-count-down *ngIf="order.orderStatus == 'Unpaid'"  [endDate]="order.cancelTime"  class="gd-text-color" > </app-count-down>
+
+            <div            *ngIf="order.refundAmount > 0"   class="gd-text gd-text-color mg-r-12" >Refund Amount: </div>
+            <div            *ngIf="order.refundAmount > 0"   class="gd-text-color" >{{order.refundAmount}}</div>
+
+            <div            *ngIf="order.refundDate"   class="gd-text gd-text-color mg-r-12" >Refund Date: </div>
+            <app-count-down *ngIf="order.refundDate"  [endDate]="order.refundDate"  class="gd-text-color" > </app-count-down>
+
+            <div            *ngIf="order.undeliveredTime"   class="gd-text gd-text-color mg-r-12" >Undelivered Date: </div>
+            <app-count-down *ngIf="order.undeliveredTime"  [endDate]="order.undeliveredTime"  class="gd-text-color" > </app-count-down>
+
+          </div>
+
+        <div class="gb-bg-2" *ngIf="order.refundAmount > 0">
+          <div class="gb-icon iconfont-socialcommer gd-text-color"></div>
+          <div class="gd-text gd-text-color">Refund Amount: </div>
+          <div class="gd-text">₹{{order.refundAmount}}</div>
+        </div>
+        <div class="gb-bg-2" *ngIf="order.refundDate">
+          <div class="gb-icon iconfont-socialcommer gd-text-color"></div>
+          <div class="gd-text gd-text-color">Refund Date: </div>
+          <div class="gd-text">{{order.refundDate|date}}</div>
+        </div>
+
+        <div class="gb-bg-2" *ngIf="order.undeliveredTime">
+          <div class="gb-icon iconfont-socialcommer gd-text-color"></div>
+          <div class="gd-text gd-text-color">Undelivered Date: </div>
+          <div class="gd-text">{{order.undeliveredTime|date}}</div>
+        </div>
+
       </div>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <i class="gb-icon iconfont-socialcommer gd-text-color">&#xe703;</i>
-        <div class="gd-text gd-text-color mg-r-12">Ends in</div>
-        <!--<div class="gd-text gd-text-color mg-r-12">{{order.cancelTime}}</div>-->
-        <app-count-down *ngIf="order.cancelTime"  [endDate]="order.cancelTime"  class="gd-text-color" > </app-count-down>
+
+      <div class="co-card-top  mg-t-12">
+        <div fxLayout="row" fxLayoutAlign="start center" >
+          <div  *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]" fxLayout="row" fxLayoutAlign="start center">
+            <div style="background-color:#7E7DC3; transform: skewX(-45deg);height: 6px;width: 24px"></div>
+            <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
+            <div style="background-color:#E96672; transform: skewX(-45deg);height: 6px;width: 24px"></div>
+            <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
+          </div>
+        </div>
+        <div class="coct-content" fxLayout="row" fxLayoutAlign="space-between center">
+          <div>
+            <div class="coct-content-word1">Shipping To</div>
+            <div>
+              <div fxLayout="row" fxLayoutAlign="start start">
+                <i class="coct-content-icon iconfont-socialcommer">&#xe707;</i>
+                <div class="coct-content-word2">{{order.username}}</div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start start">
+                <i class="coct-content-icon iconfont-socialcommer">&#xe706;</i>
+                <div class="coct-content-word2">+91 {{order.phoneNumber}}</div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start start">
+                <i class="coct-content-icon iconfont-socialcommer">&#xe705;</i>
+                <div class="coct-content-word2">{{order.address}}</div>
+              </div>
+            </div>
+          </div>
+          <i class="iconfont-socialcommer">&nbsp;</i>
+        </div>
+
       </div>
 
-    <div class="gb-bg-2" *ngIf="order.refundAmount > 0">
-      <div class="gb-icon iconfont-socialcommer gd-text-color"></div>
-      <div class="gd-text gd-text-color">Refund Amount: </div>
-      <div class="gd-text">₹{{order.refundAmount}}</div>
-    </div>
-    <div class="gb-bg-2" *ngIf="order.refundDate">
-      <div class="gb-icon iconfont-socialcommer gd-text-color"></div>
-      <div class="gd-text gd-text-color">Refund Date: </div>
-      <div class="gd-text">{{order.refundDate|date}}</div>
-    </div>
+      <div class="co-card-mid  mg-t-12">
+        <div class="cocm-content">
+          <div class="cocm-content-block" fxLayout="row" fxLayoutAlign="start">
+            <img class="cocm-content-img" [src]="order.lines[0].mainImage"  alt="product">
+            <div fxLayout="column" fxLayoutAlign="space-between start">
+              <div class="cocm-content-title">{{order.lines[0].title}}</div>
+              <div class="cocm-content-num"  fxLayout="row" fxLayoutAlign="space-between center">
+                <div>{{order.lines[0].attributes}}</div>
+                <div>x{{order.lines[0].quantity}}</div>
+              </div>
+            </div>
+          </div>
 
-    <div class="gb-bg-2" *ngIf="order.undeliveredTime">
-      <div class="gb-icon iconfont-socialcommer gd-text-color"></div>
-      <div class="gd-text gd-text-color">Undelivered Date: </div>
-      <div class="gd-text">{{order.undeliveredTime|date}}</div>
-    </div>
+          <div>
+            <div *ngIf="order.orderType == 'Normal' || order.orderType == 'Flash' || order.orderType == 'Lottery'|| order.orderType == 'Drop'"
+                 fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="cocm-content-price1">Subtotal</div>
+              <div class="cocm-content-price1" >₹{{order.subTotalAmount}}</div>
+        </div>
 
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="cocm-content-price1">Shipping</div>
+              <div class="cocm-content-price1">₹{{order.shippingExclTax}}</div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="cocm-content-price1">Tax</div>
+              <div class="cocm-content-price1">₹{{'0'}}</div>
+            </div>
+
+            <div *ngIf="order.bonusWallet > 0" fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="cocm-content-price1">Wallet</div>
+              <div class="cocm-content-price1">- ₹{{order.paymentDiscount}}</div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="cocm-content-price2">Total</div>
+              <div class="cocm-content-price2">₹{{order.realAmount|number}}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="co-card-bottom mg-t-12 mg-b-0">
+        <div class="cocb-content" fxLayout="row" fxLayoutAlign="space-between start">
+          <div fxLayout="column" fxLayoutAlign="start" style="width: 100%">
+            <div class="cocb-content-word0">Delivery</div>
+            <div>
+              <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="cocb-content-word1">Order Processing</div>
+                <div class="cocb-content-word2">{{order.processingTimeMin || 0}} - {{order.processingTimeMax || 0}} days</div>
+              </div>
+              <div class="cocb-content-line mg-b-0"  fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="cocb-content-word1">Shipping Time  </div>
+                <div class="cocb-content-word2">{{order.shippingTimeMin || 0}} - {{order.shippingTimeMax || 0}} days</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="co-card-top coct-content1 mg-t-12" fxLayout="column" fxLayoutAlign="space-between start">
+        <!--<div class="od-word">Transaction Number: {{'123123123123123'}}</div>-->
+        <div class="od-word">Payment Method: {{'PayU'}}</div>
+        <div class="od-word" *ngIf="order.paymentMode == 'cod'">Payment Method: COD {{order.shippingProvider}}</div>
+        <div class="od-word" *ngIf="order.paymentMode == 'imprest'">Payment Method: {{order.paymentStatus}}</div>
+        <div class="od-word mg-b-0">Order Time: {{order.created|date}}</div>
+      </div>
+
+    </div>
   </div>
-
-  <div class="co-card-top  mg-t-12">
-    <div fxLayout="row" fxLayoutAlign="start center" >
-      <div  *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]" fxLayout="row" fxLayoutAlign="start center">
-        <div style="background-color:#7E7DC3; transform: skewX(-45deg);height: 6px;width: 24px"></div>
-        <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
-        <div style="background-color:#E96672; transform: skewX(-45deg);height: 6px;width: 24px"></div>
-        <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
-      </div>
-    </div>
-    <div class="coct-content" fxLayout="row" fxLayoutAlign="space-between center">
-      <div>
-        <div class="coct-content-word1">Shipping To</div>
-        <div>
-          <div fxLayout="row" fxLayoutAlign="start start">
-            <i class="coct-content-icon iconfont-socialcommer">&#xe707;</i>
-            <div class="coct-content-word2">{{order.username}}</div>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="start start">
-            <i class="coct-content-icon iconfont-socialcommer">&#xe706;</i>
-            <div class="coct-content-word2">+91 {{order.phoneNumber}}</div>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="start start">
-            <i class="coct-content-icon iconfont-socialcommer">&#xe705;</i>
-            <div class="coct-content-word2">{{order.address}}</div>
-          </div>
-        </div>
-      </div>
-      <i class="iconfont-socialcommer">&#xe626;</i>
-    </div>
-
-  </div>
-
-  <div class="co-card-mid  mg-t-12">
-    <div class="cocm-content">
-      <div class="cocm-content-block" fxLayout="row" fxLayoutAlign="start">
-        <img class="cocm-content-img" [src]="order.lines[0].mainImage"  alt="product">
-        <div fxLayout="column" fxLayoutAlign="space-between start">
-          <div class="cocm-content-title">{{order.lines[0].title}}</div>
-          <div class="cocm-content-num"  fxLayout="row" fxLayoutAlign="space-between center">
-            <div>{{order.lines[0].attributes}}</div>
-            <div>x{{order.lines[0].quantity}}</div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div *ngIf="order.orderType == 'Normal' || order.orderType == 'Flash' || order.orderType == 'Lottery'|| order.orderType == 'Drop'"
-             fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="cocm-content-price1">Subtotal</div>
-          <div class="cocm-content-price1" >₹{{order.subTotalAmount}}</div>
-    </div>
-
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="cocm-content-price1">Shipping</div>
-          <div class="cocm-content-price1">₹{{order.shippingExclTax}}</div>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="cocm-content-price1">Tax</div>
-          <div class="cocm-content-price1">₹{{'0'}}</div>
-        </div>
-
-        <div *ngIf="order.bonusWallet > 0" fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="cocm-content-price1">Wallet</div>
-          <div class="cocm-content-price1">- ₹{{order.paymentDiscount}}</div>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="cocm-content-price2">Total</div>
-          <div class="cocm-content-price2">₹{{order.realAmount|number}}</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="co-card-bottom mg-t-12 mg-b-0">
-    <div class="cocb-content" fxLayout="row" fxLayoutAlign="space-between start">
-      <div fxLayout="column" fxLayoutAlign="start" style="width: 100%">
-        <div class="cocb-content-word0">Delivery</div>
-        <div>
-          <div class="cocb-content-line" fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="cocb-content-word1">Order Processing</div>
-            <div class="cocb-content-word2">{{order.processingTimeMin || 0}} - {{order.processingTimeMax || 0}} days</div>
-          </div>
-          <div class="cocb-content-line mg-b-0"  fxLayout="row" fxLayoutAlign="space-between center">
-            <div class="cocb-content-word1">Shipping Time  </div>
-            <div class="cocb-content-word2">{{order.shippingTimeMin || 0}} - {{order.shippingTimeMax || 0}} days</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="co-card-top coct-content1 mg-t-12" fxLayout="column" fxLayoutAlign="space-between start">
-    <!--<div class="od-word">Transaction Number: {{'123123123123123'}}</div>-->
-    <div class="od-word">Payment Method: {{'PayU'}}</div>
-    <div class="od-word" *ngIf="order.paymentMode == 'cod'">Payment Method: COD {{order.shippingProvider}}</div>
-    <div class="od-word" *ngIf="order.paymentMode == 'imprest'">Payment Method: {{order.paymentStatus}}</div>
-    <div class="od-word mg-b-0">Order Time: {{order.created|date}}</div>
-  </div>
-
-
-
 </div>
 
 <div class="bottom-div" fxLayout="row" fxLayoutAlign="space-between center">

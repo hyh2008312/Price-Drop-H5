@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { OrderService } from '../../shared/services/order/order.service';
 import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
+import {ToastComponent} from '../../shared/components/toast/toast.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-confirm-order',
@@ -56,7 +58,8 @@ export class ConfirmOrderComponent implements OnInit {
     private router: Router,
     private orderListService: OrderListService,
     private orderService: OrderService,
-    private userService: UserService
+    public snackBar: MatSnackBar,
+  private userService: UserService
   ) {
     this.orderService.detail.subscribe((res) => {
       if (res) {
@@ -124,9 +127,20 @@ export class ConfirmOrderComponent implements OnInit {
             alert('server are too busy');
           }
         }).catch((res) => {
+          this.isFirst = false;
+          this.toast(res)
           console.log(res);
         });
       }
     }
+  }
+
+  toast(string) {
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: {
+        string: string
+      },
+      duration: 500,
+    });
   }
 }

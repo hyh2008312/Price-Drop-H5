@@ -35,6 +35,7 @@ export class OrderDetailComponent implements OnInit {
     ]
   };
   orderId: any = '';
+  addHeight: any = true;
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
@@ -44,7 +45,11 @@ export class OrderDetailComponent implements OnInit {
     private orderListService: OrderListService,
     private activatedRoute: ActivatedRoute,
     private userService: UserService
-  ) {}
+  ) {
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
+  }
 
   ngOnInit(): void {
     this.userService.addNavigation('Order Detail');

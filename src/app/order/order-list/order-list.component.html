@@ -8,7 +8,9 @@
     </div>
   </div>
   <div #scroll [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
-    <div class="scroll" infinite-scroll
+    <div class="container">
+
+      <div class="scroll" infinite-scroll
          [infiniteScrollDistance]="0"
          [infiniteScrollUpDistance]="1.5"
          [infiniteScrollContainer]="scroll"
@@ -72,25 +74,25 @@
 
                   <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Packing'">
                     <div class="olb-card-btn" *ngIf="order.sourcingStatus == 'Not Started'" (click)="cancel()">Cancel Order</div>
-                    <div class="olb-card-btn1" (click)="tracking()">Track Package</div>
+                    <!--<div class="olb-card-btn1" (click)="tracking()">Track Package</div>-->
                   </div>
                   <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Paid'">
                     <div class="olb-card-btn" (click)="cancel()">Cancel Order</div>
-                    <div class="olb-card-btn1" (click)="editAddress()" *ngIf="order.paymentMode!='cod'">Change Address</div>
+                    <!--<div class="olb-card-btn1" (click)="editAddress()" *ngIf="order.paymentMode!='cod'">Change Address</div>-->
                   </div>
                   <div  fxLayout="row" fxLayoutAlign="start center" *ngIf="order.orderStatus == 'Audit canceled'">
                     <div class="olb-card-btn1">Order cancellation pending</div>
                   </div>
                   <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() != 'GATICN'">
-                    <div class="olb-card-btn" (click)="tracking()">Track Package</div>
-                    <div class="olb-card-btn1" (click)="receipt()">Package Arrival Confirm</div>
+                    <!--<div class="olb-card-btn" (click)="tracking()">Track Package</div>-->
+                    <!--<div class="olb-card-btn1" (click)="receipt()">Package Arrival Confirm</div>-->
                   </div>
                   <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Shipped' && order.carrierCode.toUpperCase() == 'GATICN'">
-                    <div class="olb-card-btn1" (click)="tracking()">Track Package</div>
+                    <!--<div class="olb-card-btn1" (click)="tracking()">Track Package</div>-->
                   </div>
                   <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Expired'">
                     <div class="olb-card-btn" (click)="deleteOrder(order,index)">Delete</div>
-                    <div class="olb-card-btn1" (click)="buyProduct()">Buy Again</div>
+                    <div class="olb-card-btn1" (click)="buyProduct(order)">Buy Again</div>
                   </div>
                   <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Canceled'">
                     <div class="olb-card-btn" (click)="deleteOrder(order,index)">Delete</div>
@@ -106,11 +108,11 @@
                   </div>
                   <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Completed'">
                     <div class="olb-card-btn" (click)="deleteOrder(order,index)">Delete</div>
-                    <div class="olb-card-btn1" (click)="tracking()">Track Package</div>
+                    <!--<div class="olb-card-btn1" (click)="tracking()">Track Package</div>-->
                   </div>
                   <div   *ngIf="order.orderStatus == 'Undelivered'">
                     <div class="olb-card-btn" (click)="deleteOrder(order,index)">Delete</div>
-                    <div class="olb-card-btn1" (click)="tracking()">Track Package</div>
+                    <!--<div class="olb-card-btn1" (click)="tracking()">Track Package</div>-->
                   </div>
                 </div>
 
@@ -133,6 +135,8 @@
         </mat-progress-spinner>
       </div>
     </div>
+    </div>
+
   </div>
 
 </div>

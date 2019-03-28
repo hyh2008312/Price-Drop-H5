@@ -6,6 +6,7 @@ import { OrderService } from '../../shared/services/order/order.service';
 import { GoodsVariantDialogComponent } from '../variant-dialog/goods-variant-dialog.component';
 import { GuardLinkService} from '../../shared/services/guard-link/guard-link.service';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
+import { UserService } from '../../shared/services/user/user.service';
 import {RewardPointsDialogComponent} from '../reward-points-dialog/reward-points-dialog.component';
 import {ShipCostDialogComponent} from '../ship-cost-dialog/ship-cost-dialog.component';
 
@@ -42,7 +43,7 @@ export class GoodsDetailComponent implements OnInit {
     proId: '',
     flashSale: {}
   };
-
+  addHeight: any = true;
   isLogin = false;
   ahour: any = 11;
   amin: any = 12;
@@ -55,6 +56,7 @@ export class GoodsDetailComponent implements OnInit {
     private auth: AuthenticationService,
     public dialog: MatDialog,
     private guardLinkService: GuardLinkService,
+    private userService: UserService,
     private activatedRoute: ActivatedRoute
   ) {
     this.auth.isOnlyAuthorized().subscribe((res) => {
@@ -62,6 +64,10 @@ export class GoodsDetailComponent implements OnInit {
         this.isLogin = true;
       }
     });
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
+    this.userService.addNavigation('Detail');
 
     this.productId = this.activatedRoute.snapshot.params['id'];
     this.getGoodsDetail();

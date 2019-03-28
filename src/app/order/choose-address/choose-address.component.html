@@ -1,7 +1,8 @@
-<div class="overflow-body-height"  >
-  <div class="choose-address">
+<div  [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
 
-  <div *ngFor="let address of addressList let index = index" class="ca-overflow">
+  <div class="container">
+    <div class="choose-address">
+      <div *ngFor="let address of addressList let index = index" class="ca-overflow">
     <div class="ca-item">
       <div>
         <div fxLayout="row" fxLayoutAlign="start start">
@@ -37,6 +38,8 @@
 
     </div>
   </div>
+    </div>
+
   </div>
 
 
