@@ -65,7 +65,7 @@
 
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <div class="cocm-content-price1">Shipping</div>
-            <div class="cocm-content-price1">₹{{(order.shippingPrice|number)||'0'}}</div>
+            <div class="cocm-content-price1">₹{{'0'}}</div> <!--运费价格-->
           </div>
 
           <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -75,7 +75,7 @@
 
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <div class="cocm-content-price2">Total</div>
-            <div class="cocm-content-price2">₹{{getTotalPrice(order.currentPrice , order.shippingPrice)}}</div>
+            <div class="cocm-content-price2">₹{{getTotalPrice(order.currentPrice , '0')}}</div> <!--计算总价 运费价格-->
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@
   <div fxLayout="row" fxLayoutAlign="start">
     <div fxLayout="row" fxLayoutAlign="start center">
       <div class="bd-total">Total: &nbsp;</div>
-      <div class="bd-price">₹{{getTotalPrice(order.currentPrice , order.shippingPrice)}}</div>
+      <div class="bd-price">₹{{getTotalPrice(order.currentPrice , '0')}}</div> <!--计算总价 运费价格-->
     </div>
     <button class="bd-btn" (click)="placeOrder()">Place Order</button>
   </div>

@@ -73,7 +73,7 @@ export class ConfirmOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.addNavigation('Confirm Order');
-
+    console.log(this.order)
     this.getNotification();
     this.getDefaultAddress();
 
@@ -113,17 +113,35 @@ export class ConfirmOrderComponent implements OnInit {
       this.toast('Please add address first!');
       return;
     }
-    console.log(this.isFirst)
     if (!this.isFirst) {
       this.isFirst = true;
       const voucherId = this.card ? this.card.id : null;
-      let params = {
-        vid: this.order.id,
-        quantity: this.order.quantity,
-        voucherId: voucherId
-      };
       if (this.order.proId === 'direct') {
+        let params = {
+          vid: this.order.id,
+          quantity: this.order.quantity,
+          voucherId: voucherId
+        };
         this.orderListService.postDirectOrder(params).then((res) => {
+          if (res) {
+            this.orderService.paymentOrder(res)
+            this.router.navigate([`/order/payment`]);
+          } else {
+            this.toast('server are too busy');
+          }
+        }).catch((res) => {
+          this.isFirst = false;
+          this.toast(res)
+          console.log(res);
+        });
+      } else if (this.order.proId === 'flash') {
+        let params = {
+          vid: this.order.id,
+          quantity: this.order.quantity,
+          voucherId: voucherId,
+          flashPromotionId: this.order.flashSale.promotionId
+        };
+        this.orderListService.postFlashOrder(params).then((res) => {
           if (res) {
             this.orderService.paymentOrder(res)
             this.router.navigate([`/order/payment`]);
@@ -144,7 +162,7 @@ export class ConfirmOrderComponent implements OnInit {
       data: {
         string: string
       },
-      duration: 500,
+      duration: 1000,
     });
   }
 }

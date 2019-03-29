@@ -46,6 +46,8 @@
 
 
   <div fxLayout="row" fxLayoutAlign="center center ">
-    <button class="bottom-btn" (click)="confirm()">Confirm</button>
+    <button class="bottom-btn" *ngIf="canBuy" (click)="confirm()">Confirm</button>
+
+    <button class="bottom-btn-gray" *ngIf="!canBuy">Out of Stock</button>
   </div>
 </div>
