@@ -117,7 +117,7 @@
 <div class="bottom-div" fxLayout="row" fxLayoutAlign="start center">
   <div fxFlex>&nbsp;</div>
   <div fxLayout="row" fxLayoutAlign="start center">
-    <div class="bd-total">Total: </div>
+    <div class="bd-total">Total:&nbsp;</div>
     <div class="bd-price" *ngIf="method=='cod'">₹{{checkBalance ? (order.paymentAmount|number:'0.0-0') - balance : (order.paymentAmount|number:'0.0-0')}}</div>
     <div class="bd-price" *ngIf="method!=='cod'">₹{{checkBalance ? ((order.paymentAmount*0.95 )|number:'0.0-0')  - balance:  ((order.paymentAmount*0.95 )|number:'0.0-0')}}</div>
     <div class="bd-price-line md-margin-left-1">₹{{(order.paymentAmount|number:'0.0-0')}}</div>
