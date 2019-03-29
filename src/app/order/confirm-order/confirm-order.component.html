@@ -17,7 +17,7 @@
           <div style="background-color:white; transform: skewX(-45deg);height: 6px;width: 4px"></div>
         </div>
       </div>
-      <div routerLink="/order/chooseAddress" class="coct-content" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="coct-content" fxLayout="row" fxLayoutAlign="space-between center" (click)="openChoose()">
         <div>
           <div class="coct-content-word1">Shipping To</div>
           <div  *ngIf="address.id">
@@ -34,10 +34,11 @@
               <div class="coct-content-word2">{{address.line1}}, {{address.line2}}, {{address.line3}}, {{address.city}}, {{address.postcode}}, {{address.stateName}}</div>
             </div>
           </div>
+          <div *ngIf="!address.id">
+            <div>Add New Address</div>
+          </div>
         </div>
-        <div *ngIf="!address.id">
-          <div>Add New Address</div>
-        </div>
+
         <i class="iconfont-socialcommer">&#xe626;</i>
       </div>
 

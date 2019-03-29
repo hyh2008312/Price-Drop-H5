@@ -1,0 +1,109 @@
+.flash-item{}
+.overflow-left{
+  background-color: #EF8A31;
+}
+.overflow-right{
+  background-color: #FFEACF;
+}
+.flash-left{
+  background-color: #EF8A31;
+  height: 40px;
+  transform: skewX(-35deg);
+}
+.flash-right{
+  background-color: #FFEACF;
+  height: 40px;
+  transform: skewX(-35deg);
+}
+.flash-icon{
+  margin-left: 16px;
+  font-size: 14px;
+  color: white;
+  transform: skewX(35deg);
+}
+.flash-sales-word{
+  margin-right: 8px;
+  font-size: 16px;
+  color: #FFFFFF;
+  font-weight: 500;
+  transform: skewX(35deg);
+}
+.flash-sales-word1{
+  font-size: 12px;
+  color: #FFFFFF;
+  text-decoration: line-through;
+  transform: skewX(35deg);
+}
+.flash-sales-tword{
+  color:#EF8A31;
+  font-style: italic;
+  font-size: 16px;
+  transform: skewX(30deg);
+  margin-right: 4px;
+}
+.flash-sales-time{
+  font-size: 14px;
+  color: #FFFFFF;
+  flex-direction: row;
+  justify-content: start;
+  margin-right: 16px;
+  transform: skewX(35deg);
+}
+.flash-sales-hh{
+  background-color: #EF8A31;
+  color: white;
+  border-radius: 6px;
+  padding: 1px 3px;
+  margin: 3px;
+  font-size: 14px;
+  transform: skewX(35deg);
+}
+.flash-sales-hh-icon{
+  color: #EF8A31;
+  font-size: 14px;
+  transform: skewX(35deg);
+}
+
+
+
+// start in
+.flash-saless{
+  background-color: #00CFE3;
+}
+.flash-icons{
+  margin-left: 16px;
+  font-size: 14px;
+  color: white;
+}
+.flash-sales-lefts{
+  height: 40px;
+}
+.flash-sales-rights{
+  color: white;
+  height: 40px;
+}
+.flash-icon{
+  margin-left: 16px;
+  font-size: 14px;
+  color: white;
+}
+.flash-sales-words{
+  background-color: #00CFE3;
+  color: white;
+}
+.flash-sales-twords{
+  color:white;
+  font-style: italic;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.flash-sales-times{
+  margin-right: 16px;
+}
+.flash-sales-hhs{
+  color: white;
+  margin: 5px;
+  font-size: 14px;
+}
+

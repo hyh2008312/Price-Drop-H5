@@ -27,6 +27,7 @@ export class ChangeAddressComponent implements OnInit {
     stateId: '',
     phoneNumberConfirm: ''
   };
+  addressId: any = '';
   name: any = '';
   addHeight: any = true;
   stateName: any = 'Choose';
@@ -52,6 +53,9 @@ export class ChangeAddressComponent implements OnInit {
       stateId: ['', Validators.required]
     });
     this.userService.addNavigation('Edit Address');
+    if (this.activatedRoute.snapshot.queryParams['addressId']) {
+      this.addressId = this.activatedRoute.snapshot.queryParams['addressId'];
+    }
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
@@ -84,10 +88,18 @@ export class ChangeAddressComponent implements OnInit {
     this.router.navigate([`/order/cityList`]);
   }
   save () {
-    this.orderListService.postAddress(this.attributeForm.value).then((res) => {
-      this.router.navigate([`/order/chooseAddress`]);
-    }).catch((res) => {
-      console.log(res);
-    });
+    if (this.addressId) {
+      this.orderListService.editAddress(this.addressId, this.attributeForm.value).then((res) => {
+        this.router.navigate([`/order/chooseAddress`]);
+      }).catch((res) => {
+        console.log(res);
+      });
+    } else {
+      this.orderListService.postAddress(this.attributeForm.value).then((res) => {
+        this.router.navigate([`/order/chooseAddress`], {queryParams: {type: 1 }});
+      }).catch((res) => {
+        console.log(res);
+      });
+    }
   }
 }

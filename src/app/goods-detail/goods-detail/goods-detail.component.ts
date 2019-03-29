@@ -43,6 +43,7 @@ export class GoodsDetailComponent implements OnInit {
     proId: '',
     flashSale: {}
   };
+  flashSale: any = {};
   addHeight: any = true;
   isLogin = false;
   ahour: any = 11;
@@ -84,11 +85,14 @@ export class GoodsDetailComponent implements OnInit {
       this.nextPage.title = res.title;
       this.nextPage.productId = this.productId;
       this.nextPage.proId = res.purchaseMethod;
+      if (this.nextPage.proId === 'flash') {
+        this.flashSale = res.flashSale;
+      }
       if (res.images != null) {
         this.selimgsrc = res.images[0];
-        this.nextPage.mainImage = this.selimgsrc
+        this.nextPage.mainImage = this.selimgsrc;
       } else {
-        this.selimgsrc = ''
+        this.selimgsrc = '';
       }
 
       this.nextPage.shippingPrice = res.shipping.priceItem;

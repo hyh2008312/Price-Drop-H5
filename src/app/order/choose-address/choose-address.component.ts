@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
@@ -19,6 +19,7 @@ export class ChooseAddressComponent implements OnInit {
   addressList: any = [];
   defaultAddress: any = {};
   stu: any = true;
+  type: any = '';
   addHeight: any = true;
   asecond: any = 13;
 
@@ -27,9 +28,13 @@ export class ChooseAddressComponent implements OnInit {
     private orderListService: OrderListService,
     public dialog: MatDialog,
     private userService: UserService,
+    private activatedRoute: ActivatedRoute,
     public snackBar: MatSnackBar
   ) {
     this.userService.addNavigation('Choose Address');
+    if (this.activatedRoute.snapshot.queryParams['type']) {
+      this.type = this.activatedRoute.snapshot.queryParams['type'];
+    }
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
@@ -56,6 +61,9 @@ export class ChooseAddressComponent implements OnInit {
       this.stu = false;
       this.orderListService.editDefaultAddress(item.id).then((res) => {
         this.stu = true;
+        if (this.type == 1) {  //  代表从确认订单页面跳转到本页面的
+          this.router.navigate([`/order/confirmOrder`]);
+        }
       }).catch((res) => {
         // alert('error')
         this.openSnackBar(res);
@@ -68,6 +76,9 @@ export class ChooseAddressComponent implements OnInit {
   }
   edit(i) {
     this.orderListService.addState(i);
+    this.router.navigate([`/order/changeAddress`], {queryParams: { addressId: i.id} });
+  }
+  addNew() {
     this.router.navigate([`/order/changeAddress`]);
   }
   del(i, index) {
@@ -117,7 +128,7 @@ export class ChooseAddressComponent implements OnInit {
       data: {
         string: res
       },
-      duration: 500,
+      duration: 1000,
     });
   }
   countOff (s, o) {

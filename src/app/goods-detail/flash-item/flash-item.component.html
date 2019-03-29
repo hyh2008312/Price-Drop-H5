@@ -1,0 +1,39 @@
+<div class="flash-item" *ngIf="flashSale.flashStatus== 'Ongoing'" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="overflow-left" fxFlex>
+
+    <div class="flash-left" fxFlex fxLayout="row" fxLayoutAlign="start center">
+      <div class="flash-icon iconfont-socialcommer" >&#xe745;</div>
+      <div class="flash-sales-word">₹{{calc(unitPrice,flashSale.discount) |number}}</div>
+      <div class="flash-sales-word1">₹{{saleUnitPrice|number}}</div>
+    </div>
+  </div>
+  <div class="overflow-right"  fxFlex>
+    <div class="flash-right" fxFlex fxLayout="row" fxLayoutAlign="end center">
+      <div class="flash-sales-tword">Ends In</div>
+      <div class="flash-sales-hh">{{ahour}}</div>
+      <div class="flash-sales-hh-icon">:</div>
+      <div class="flash-sales-hh">{{amin}}</div>
+      <div  class="flash-sales-hh-icon">:</div>
+      <div class="flash-sales-hh"  style="margin-right: 16px">{{asecond}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="flash-saless" *ngIf="flashSale.flashStatus== 'Scheduled'"  fxLayout="row"  fxLayoutAlign="space-between center"> <!-- 还未开始的-->
+  <div class="flash-sales-lefts" fxFlex fxLayout="row" fxLayoutAlign="start center">
+    <div class="flash-icons iconfont-socialcommer" >&#xe745;</div>
+    <!--<text class="flash-sales-words">₹{{calc(unitPrice,discount)}}</text>-->
+    <div class="flash-sales-words">₹{{calc(unitPrice,flashSale.discount) |number}}</div>
+  </div>
+
+  <div class="flash-sales-rights" fxFlex fxLayout="row" fxLayoutAlign="end center">
+    <div class="flash-sales-twords">Start In</div>
+    <div class="flash-sales-times" fxLayout="row" fxLayoutAlign="end center">
+      <div class="flash-sales-hhs">{{ahour}}</div>
+      <div style="color: white;font-size: 12px;">:</div>
+      <div class="flash-sales-hhs">{{amin}}</div>
+      <div style="color: white;font-size: 12px; ">:</div>
+      <div class="flash-sales-hhs" >{{asecond}}</div>
+    </div>
+  </div>
+</div>

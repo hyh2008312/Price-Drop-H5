@@ -6,6 +6,7 @@
       </div>
     </div>
 
+    <app-flash-item *ngIf="nextPage.proId=='flash'"  [flashSale]="flashSale" [saleUnitPrice]="goods.saleUnitPrice" [unitPrice]="goods.unitPrice"> </app-flash-item>
     <div class="goods-title-price" >
       <div class="goods-title-price-1" >
         <div class="goods-title">{{goods.title}}</div>

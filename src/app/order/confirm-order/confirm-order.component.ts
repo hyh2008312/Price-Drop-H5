@@ -59,7 +59,7 @@ export class ConfirmOrderComponent implements OnInit {
     private orderListService: OrderListService,
     private orderService: OrderService,
     public snackBar: MatSnackBar,
-  private userService: UserService
+    private userService: UserService
   ) {
     this.orderService.detail.subscribe((res) => {
       if (res) {
@@ -73,7 +73,8 @@ export class ConfirmOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.addNavigation('Confirm Order');
-    this.getNotification()
+
+    this.getNotification();
     this.getDefaultAddress();
 
   }
@@ -104,9 +105,12 @@ export class ConfirmOrderComponent implements OnInit {
       return '';
     }
   }
+  openChoose() {
+    this.router.navigate([`/order/chooseAddress/`], { queryParams: { type: 1 } });
+  }
   placeOrder () {
     if (!this.address.id) {
-      alert('Please add address first!');
+      this.toast('Please add address first!');
       return;
     }
     console.log(this.isFirst)
@@ -124,7 +128,7 @@ export class ConfirmOrderComponent implements OnInit {
             this.orderService.paymentOrder(res)
             this.router.navigate([`/order/payment`]);
           } else {
-            alert('server are too busy');
+            this.toast('server are too busy');
           }
         }).catch((res) => {
           this.isFirst = false;
