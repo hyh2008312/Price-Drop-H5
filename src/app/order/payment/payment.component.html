@@ -8,13 +8,13 @@
   </div>
 
   <div class="payment-box mg-t-12" fxLayout="row" fxLayoutAlign="space-between center"  >
-    <div fxLayout="column" fxLayoutAlign="start start">
+    <div>
       <div class="payment-box-title">Cash/Card on Delivery</div>
-      <div class="overflow-cod" fxFlex fxLayout="row" fxLayoutAlign="start start" >
+      <div class="overflow-cod" fxLayout="row" fxLayoutAlign="start start" >
         <img class="payment-box-image1"  src="https://image.getpricedrop.com/priceDrop/h5/COD-01.png">
         <div class="payment-box-text" fxFlex>Cash / Debit Card / Credit Card at your doorstep</div>
       </div>
-      <div class="payment-box-text-err" fxFlex *ngIf="!order.cod.exist">{{order.cod.notes}}</div>
+      <div class="payment-box-text-err" *ngIf="!order.cod.exist">{{order.cod.notes}}</div>
       <!--<div class="payment-box-text-err" >&nbsp;</div>-->
     </div>
     <div  class="pd-tbl-10" (click)="chooseMethod('cod')" *ngIf="order.cod.exist">
