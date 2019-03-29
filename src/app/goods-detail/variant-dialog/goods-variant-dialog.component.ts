@@ -20,7 +20,7 @@ export class GoodsVariantDialogComponent implements OnInit {
   goods: any;
   goodsVariants: any;
   goodsType: any;
-  canBuy: any;
+  canBuy: any =true;
   variantsId: any;
   selimgsrc: any = '';
   selsize: any = '';
@@ -30,7 +30,11 @@ export class GoodsVariantDialogComponent implements OnInit {
   tmpArray: any;
   hasVariants: any = true;
   flashSale: any = {
-    flashStatus: ''
+    flashStatus: '',
+    discount: '',
+    endTime: '',
+    promotionId: '',
+    startTime: '',
   };
   purchaseMethod: any;
   productId: any;
@@ -63,7 +67,7 @@ export class GoodsVariantDialogComponent implements OnInit {
   ) {
     this.auth.isOnlyAuthorized().subscribe((res) => {
       if (res) {
-        this.isLogin = true
+        this.isLogin = true;
       }
     });
   }
@@ -79,11 +83,6 @@ export class GoodsVariantDialogComponent implements OnInit {
     if (this.purchaseMethod === 'flash') {
       this.flashSale = this.goods.flashSale;
       this.nextPage.flashSale = this.goods.flashSale;
-      if (this.flashSale.flashStatus == 'Ongoing') {
-        // this.countDate(this.flashSale.endTime)
-      } else {
-        // this.countDate(this.flashSale.startTime)
-      }
     }
   }
   getGoods(res) {
@@ -97,9 +96,9 @@ export class GoodsVariantDialogComponent implements OnInit {
 
     if (res.images != null) {
       this.selimgsrc = res.images[0]
-      this.nextPage.mainImage = this.selimgsrc
+      this.nextPage.mainImage = this.selimgsrc;
     } else {
-      this.selimgsrc = ''
+      this.selimgsrc = '';
     }
 
     this.nextPage.shippingPrice = res.shipping.priceItem;
@@ -286,7 +285,10 @@ export class GoodsVariantDialogComponent implements OnInit {
       return;
     } else {
       // this.orderService.addOrder(false);
-
+      if (this.nextPage.proId =='flash' && this.flashSale.flashStatus =='Ongoing') {
+        this.nextPage.id = this.variantsId;
+        this.nextPage.currentPrice = this.calc(this.nextPage.currentPrice , this.flashSale.discount);
+      }
       this.nextPage.id = this.variantsId;
       this.orderService.addOrder(this.nextPage);
       this.close()
@@ -299,6 +301,9 @@ export class GoodsVariantDialogComponent implements OnInit {
       // console.log(this.isLogin)
       // console.log(this.nextPage)
     }
+  }
+  calc (a, b) {
+    return parseInt(((a * b) / 100).toString());
   }
   close(): void {
 

@@ -11,8 +11,8 @@
       <div class="goods-title-price-1" >
         <div class="goods-title">{{goods.title}}</div>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <span class="goods-price1">₹{{goods.unitPrice|number}}</span>
-          <span class="goods-price2">₹{{goods.saleUnitPrice|number}}</span>
+          <span class="goods-price1" *ngIf="nextPage.proId=='direct'||(nextPage.proId=='flash'&&flashSale.flashStatus=='Scheduled')">₹{{goods.unitPrice|number}}</span>
+          <span class="goods-price2" *ngIf="nextPage.proId=='direct'||(nextPage.proId=='flash'&&flashSale.flashStatus=='Scheduled')">₹{{goods.saleUnitPrice|number}}</span>
           <div class="goods-tag1">15%OFF</div>
           <div class="goods-tag2">Tax included</div>
         </div>
