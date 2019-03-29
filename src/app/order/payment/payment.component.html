@@ -10,15 +10,21 @@
   <div class="payment-box mg-t-12" fxLayout="row" fxLayoutAlign="space-between center"  >
     <div fxLayout="column" fxLayoutAlign="start start">
       <div class="payment-box-title">Cash/Card on Delivery</div>
-      <div class="overflow-cod" fxLayout="row" fxLayoutAlign="start start" >
+      <div class="overflow-cod" fxFlex fxLayout="row" fxLayoutAlign="start start" >
         <img class="payment-box-image1"  src="https://image.getpricedrop.com/priceDrop/h5/COD-01.png">
-        <div class="payment-box-text" >Cash / Debit Card / Credit Card at your doorstep</div>
+        <div class="payment-box-text" fxFlex>Cash / Debit Card / Credit Card at your doorstep</div>
       </div>
-      <div class="payment-box-text-err" *ngIf="false">Your last COD order is not completed yet</div>
+      <div class="payment-box-text-err" fxFlex *ngIf="!order.cod.exist">{{order.cod.notes}}</div>
       <!--<div class="payment-box-text-err" >&nbsp;</div>-->
     </div>
-    <i class="iconfont-socialcommer" *ngIf="false">&#xe6fb;</i>
-    <i class="iconfont-socialcommer" *ngIf="true">&#xe73f;</i>
+    <div  class="pd-tbl-10" (click)="chooseMethod('cod')" *ngIf="order.cod.exist">
+      <i class="iconfont-socialcommer payment-icon-check" *ngIf="method!=='cod'">&#xe73f;</i>
+      <i class="iconfont-socialcommer payment-icon-checked" *ngIf="method=='cod'">&#xe6fb;</i>
+    </div>
+    <div  class="pd-tbl-10" (click)="chooseMethod('cod')" *ngIf="!order.cod.exist">
+      <i class="iconfont-socialcommer payment-icon-discheck" *ngIf="method!=='cod'">&#xe73f;</i>
+    </div>
+
   </div>
 
   <div>
@@ -33,9 +39,12 @@
           </div>
           <img class="payment-box-img1" src="http://image.getpricedrop.com/priceDrop/h5/credit-card-2.jpg" alt="">
         </div>
+        <div  class="pd-tbl-10" (click)="chooseMethod('razorpay1')">
 
-        <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
-        <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+          <i class="iconfont-socialcommer payment-icon-check" *ngIf="method!=='razorpay1'">&#xe73f;</i>
+          <i class="iconfont-socialcommer payment-icon-checked" *ngIf="method=='razorpay1'">&#xe6fb;</i>
+        </div>
+
       </div>
 
 
@@ -47,8 +56,11 @@
             </div>
             <img class="payment-box-img2" src="http://image.getpricedrop.com/priceDrop/h5/net-bank-2.jpg" alt="">
           </div>
-        <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
-        <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+        <div  class="pd-tbl-10" (click)="chooseMethod('razorpay2')">
+          <i class="iconfont-socialcommer payment-icon-check" *ngIf="method!=='razorpay2'">&#xe73f;</i>
+          <i class="iconfont-socialcommer payment-icon-checked" *ngIf="method=='razorpay2'">&#xe6fb;</i>
+        </div>
+
       </div>
 
 
@@ -61,26 +73,32 @@
           </div>
           <img class="payment-box-img3" src="http://image.getpricedrop.com/priceDrop/h5/upi.jpg" alt="">
         </div>
-
-        <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
-        <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+        <div  class="pd-tbl-10" (click)="chooseMethod('razorpay3')">
+          <i class="iconfont-socialcommer payment-icon-check" *ngIf="method!=='razorpay3'">&#xe73f;</i>
+          <i class="iconfont-socialcommer payment-icon-checked" *ngIf="method=='razorpay3'">&#xe6fb;</i>
+        </div>
       </div>
 
 
-      <div class="mg-t-12">
+      <div class="mg-t-12" *ngIf="false">
          <div fxLayout="row" fxLayoutAlign="start center" >
            <div>Wallet</div>
            <div class="payment-box-tag-5">Extra 5% Off</div>
          </div>
          <div fxLayout="row" fxLayoutAlign="space-between center">
            <img class="payment-box-img4" src="http://image.getpricedrop.com/priceDrop/h5/paytm.jpg" alt="">
-           <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
-           <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+           <div  class="pd-tbl-10" (click)="chooseMethod('paytm')">
+             <i class="iconfont-socialcommer payment-icon-check" *ngIf="true">&#xe73f;</i>
+             <i class="iconfont-socialcommer payment-icon-checked" *ngIf="false">&#xe6fb;</i>
+           </div>
+
          </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-           <img class="payment-box-img5" src="http://image.getpricedrop.com/priceDrop/h5/payu.png" alt="">
-           <i class="iconfont-socialcommer" *ngIf="true">&#xe6fb;</i>
-           <i class="iconfont-socialcommer" *ngIf="false">&#xe73f;</i>
+          <img class="payment-box-img5" src="http://image.getpricedrop.com/priceDrop/h5/payu.png" alt="">
+          <div  class="pd-tbl-10" (click)="chooseMethod('payu')">
+            <i class="iconfont-socialcommer payment-icon-check" *ngIf="true">&#xe73f;</i>
+            <i class="iconfont-socialcommer payment-icon-checked" *ngIf="false">&#xe6fb;</i>
+          </div>
          </div>
       </div>
 
@@ -89,7 +107,7 @@
 
     <div class="mg-t-12 payment-box" fxLayout="row" fxLayoutAlign="space-between center"  *ngIf="isShowBalance">
       <div class="payment-box-wallet">Wallet Balance <span class="payment-box-wallet1">₹{{balance}}</span></div>
-      <mat-slide-toggle [checked]="checkBalance"></mat-slide-toggle>
+      <mat-slide-toggle [checked]="checkBalance" (change)="changeBalance($event)"></mat-slide-toggle>
     </div>
 
   </div>
@@ -100,9 +118,10 @@
   <div fxFlex>&nbsp;</div>
   <div fxLayout="row" fxLayoutAlign="start center">
     <div class="bd-total">Total: </div>
-    <div class="bd-price">₹{{'8000'}}</div>
-    <div class="bd-price-line md-margin-left-1">₹{{'10000'}}</div>
-    <div class="bd-price-off">₹ 5%OFF</div>
+    <div class="bd-price" *ngIf="method=='cod'">₹{{checkBalance ? (order.paymentAmount|number:'0.0-0') - balance : (order.paymentAmount|number:'0.0-0')}}</div>
+    <div class="bd-price" *ngIf="method!=='cod'">₹{{checkBalance ? ((order.paymentAmount*0.95 )|number:'0.0-0')  - balance:  ((order.paymentAmount*0.95 )|number:'0.0-0')}}</div>
+    <div class="bd-price-line md-margin-left-1">₹{{(order.paymentAmount|number:'0.0-0')}}</div>
+    <div class="bd-price-off" *ngIf="method!=='cod'">₹ 5%OFF</div>
   </div>
   <button class="bd-btn" (click)="payNow()">Pay Now</button>
 

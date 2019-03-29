@@ -199,6 +199,18 @@ export class OrderListService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
+  paymentCOD(params: any){
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+    let url = `${this.baseUrl.h5Url}order/cod/create/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
 
   // method: 'POST', // 大写
   // name: 'order.flash.pure',

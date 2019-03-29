@@ -87,6 +87,7 @@ export class GoodsDetailComponent implements OnInit {
       this.nextPage.proId = res.purchaseMethod;
       if (this.nextPage.proId === 'flash') {
         this.flashSale = res.flashSale;
+        this.nextPage.flashSale = res.flashSale;
       }
       if (res.images != null) {
         this.selimgsrc = res.images[0];
@@ -146,6 +147,10 @@ export class GoodsDetailComponent implements OnInit {
         this.openVariant(Event);
       } else {
         console.log(this.nextPage);
+        if (this.nextPage.proId =='flash' && this.flashSale.flashStatus =='Ongoing') {
+          this.nextPage.id = this.variantsId;
+          this.nextPage.currentPrice = this.calc(this.nextPage.currentPrice , this.flashSale.discount);
+        }
         this.orderService.addOrder(this.nextPage);
         this.router.navigate([`/order/confirmOrder`]);
       }

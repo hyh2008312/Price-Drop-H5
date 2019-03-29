@@ -7,6 +7,8 @@ import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { CityListComponent } from './city-list/city-list.component';
 import {PaymentComponent} from './payment/payment.component';
+import {PaymentFailComponent} from './payment-fail/payment-fail.component';
+import {PaymentSuccessComponent} from './payment-sucess/payment-success.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,10 @@ const routes: Routes = [
     path: 'orderList', component: OrderListComponent,
   }, {
     path: 'payment', component: PaymentComponent,
+  }, {
+    path: 'paymentFail', component: PaymentFailComponent,
+  }, {
+    path: 'paymentSuccess', component: PaymentSuccessComponent,
   }
 ];
 

@@ -11,6 +11,8 @@ import { CityListComponent } from './city-list/city-list.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import {PaymentFailComponent} from './payment-fail/payment-fail.component';
+import {PaymentSuccessComponent} from './payment-sucess/payment-success.component';
 
 @NgModule({
   imports: [
@@ -26,11 +28,14 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
     CityListComponent,
     OrderDetailComponent,
     PaymentComponent,
-    DeleteDialogComponent
-
+    DeleteDialogComponent,
+    PaymentFailComponent,
+    PaymentSuccessComponent
   ],
   entryComponents: [
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    PaymentFailComponent,
+    PaymentSuccessComponent
   ],
   providers: [OrderListService]
 })

@@ -124,8 +124,9 @@ export class ConfirmOrderComponent implements OnInit {
         };
         this.orderListService.postDirectOrder(params).then((res) => {
           if (res) {
-            this.orderService.paymentOrder(res)
-            this.router.navigate([`/order/payment`]);
+            this.orderService.paymentOrder(res);
+            this.orderService.addOrder(false);
+            this.router.navigate([`/order/payment`], { replaceUrl: true });
           } else {
             this.toast('server are too busy');
           }
@@ -143,8 +144,9 @@ export class ConfirmOrderComponent implements OnInit {
         };
         this.orderListService.postFlashOrder(params).then((res) => {
           if (res) {
-            this.orderService.paymentOrder(res)
-            this.router.navigate([`/order/payment`]);
+            this.orderService.paymentOrder(res);
+            this.orderService.addOrder(false);
+            this.router.navigate([`/order/payment`], { replaceUrl: true });
           } else {
             this.toast('server are too busy');
           }
