@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OrderListService } from '../order-list.service';
 import { OrderService } from '../../shared/services/order/order.service';
 import { UserService } from '../../shared/services/user/user.service';
@@ -25,6 +25,7 @@ export class PaymentComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private orderListService: OrderListService,
     private userService: UserService,
     private orderService: OrderService
@@ -101,18 +102,19 @@ export class PaymentComponent implements OnInit {
         "description": 'Order#: ' + res.orderNumber,
         "image": res.order.lines[0].mainImage,
         "handler": (response) => {
-          alert(response);
-          // let params = {
-          //   orderId: res.order.id,
-          //   razorpayPaymentId: response.razorpay_payment_id,
-          //   razorpayOrderId: res.razorpayOrderId,
-          //   razorpaySignature: response.razorSignature,
-          //   bonus: this.checkBalance ? this.checkBalance : null
-          // };
-          //
-          // this.orderListService.checkRazorpay(params).then((res) => {
-          //   console.log(res);
-          // });
+          let params = {
+            orderId: res.order.id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpaySignature: response.razorpay_signature,
+            bonus: this.checkBalance ? this.checkBalance : null
+          };
+
+          this.orderListService.checkRazorpay(params).then((res) => {
+            this.router.navigate(['/order/success']);
+          }).catch(() => {
+
+          });
         },
         "prefill": {
           "contact": this.user.defaultAddress.phoneNumber,
