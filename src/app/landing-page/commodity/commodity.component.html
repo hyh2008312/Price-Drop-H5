@@ -8,8 +8,8 @@
         </div>
         <div class="commodity-view">VIEW MORE</div>
     </div>
-
-    <div *ngFor="let j of tranArr(item.product)" class="commodity-goods-row" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="space-between center">
+    <div class="commodity-goods-row"></div>
+    <div *ngFor="let j of tranArr(item.product)" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="space-between center">
         <div  *ngFor="let n of  j "
               class="commodity-goods"
               routerLink="/goodsdetail/{{n.productId}}"

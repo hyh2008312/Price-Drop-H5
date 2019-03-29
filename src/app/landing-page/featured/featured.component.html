@@ -1,11 +1,12 @@
 <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign=" center center"  >
-  <div *ngFor="let i of item" fxLayout="column"  fxLayoutAlign="center center" fxFlex>
+  <div *ngFor="let i of item" fxLayout="column"  fxLayoutAlign="center center" fxFlex
+       routerLink="/goodsdetail/{{i.id}}">
     <div class="featured-img">
       <img [src]="i.mainImage" alt="">
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" >
-      <span class="featured-price1">₹{{i.unitPrice |number}}</span>
-      <span class="featured-off">{{i.unitPrice | saleDiscount: i.saleUnitPrice}}off</span>
+    <div class="featured-bg" fxLayout="row" fxLayoutAlign="center center" >
+      <div class="featured-price1">₹{{i.unitPrice |number}}</div>
+      <div class="featured-off">{{i.unitPrice | saleDiscount: i.saleUnitPrice}}off</div>
     </div>
     <div class="featured-price2">₹{{i.saleUnitPrice |number}}</div>
   </div>

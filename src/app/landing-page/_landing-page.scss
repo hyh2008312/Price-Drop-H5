@@ -149,16 +149,16 @@
 .fs-price1{
   margin-top: 4px;
   font-size: 14px;
-  //line-height: 17px;
+  line-height: 17px;
   color: #EF8A31;
   font-weight: 500;
 }
 .fs-price2{
   font-size:12px;
-  transform:scale(0.7);
+  transform:scale(0.8);
+  line-height: 14px;
   text-decoration: line-through;
   color: #000000;
-  //line-height: 10px;
 }
 
 .commodity{
@@ -273,25 +273,28 @@
       width: 100%;
     }
   }
+  &-bg{
+    margin-top: 3px;
+  }
   &-price1{
     font-size: 14px;
     color: rgba(0,0,0,0.87);
-    //line-height: 17px;
+    line-height: 17px;
     font-weight: 500;
   }
   &-off{
-    font-size:14px;
-    transform:scale(0.7);
+    font-size:12px;
+    transform:scale(0.8);
     color: #EF8A31;
-    //line-height: 12px;
+    line-height: 14px;
+    margin-left: 2px;
   }
   &-price2{
-    font-size:14px;
-    transform:scale(0.7);
+    font-size:12px;
+    transform:scale(0.8);
     color: #000000;
-    //line-height: 12px;
-    margin-top: -6px;
-    margin-bottom: 10px;
+    line-height: 14px;
+    margin-bottom: 8px;
     text-align: center;
     text-decoration: line-through;
   }
