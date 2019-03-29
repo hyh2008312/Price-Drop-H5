@@ -13,8 +13,12 @@
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="goods-price1" *ngIf="nextPage.proId=='direct'||(nextPage.proId=='flash'&&flashSale.flashStatus=='Scheduled')">₹{{goods.unitPrice|number}}</span>
           <span class="goods-price2" *ngIf="nextPage.proId=='direct'||(nextPage.proId=='flash'&&flashSale.flashStatus=='Scheduled')">₹{{goods.saleUnitPrice|number}}</span>
-          <div class="goods-tag1">15%OFF</div>
-          <div class="goods-tag2">Tax included</div>
+          <div class="goods-tag1-bg" fxLayout="row" fxLayoutAlign="center center">
+            <div class="goods-tag1">15%OFF</div>
+          </div>
+          <div class="goods-tag2-bg" fxLayout="row" fxLayoutAlign="center center">
+            <div class="goods-tag2">Tax included</div>
+          </div>
         </div>
       </div>
     </div>
@@ -29,8 +33,12 @@
         <div class="s-i-t1" >Details</div>
       </div>
       <div class="ship-label" fxLayout="row" fxLayoutAlign="start">
-        <div class="s-i-icon">Free Shipping</div>
-        <div class="s-i-icon-imp">Imported</div>
+        <div class="s-i-icon-bg" fxLayout="row" fxLayoutAlign="center center">
+          <div class="s-i-icon">Free Shipping</div>
+        </div>
+        <div class="s-i-icon-imp-bg" fxLayout="row" fxLayoutAlign="center center">
+          <div class="s-i-icon-imp">Imported</div>
+        </div>
       </div>
     </div>
 

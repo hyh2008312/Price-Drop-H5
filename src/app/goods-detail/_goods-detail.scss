@@ -46,19 +46,27 @@
     line-height: 12px;
     font-size: 12px;
     transform: scale(.8);
-    border: 1px solid #EF8A31;
-    border-radius: 4px;
-    margin-left: 9px;
+
+    &-bg{
+      margin-left: 8px;
+      border-radius: 4px;
+      border: 1px solid #EF8A31;
+      height: 18px;
+    }
   }
   &-tag2{
-    padding: 3px 7px;
+    padding: 3px 4px;
     color: #EF8A31;
     line-height: 12px;
     font-size: 12px;
     transform: scale(.8);
-    border: 1px solid #EF8A31;
     border-radius: 4px;
-    margin-left: -10px;
+    &-bg{
+      margin-left: 4px;
+      border-radius: 4px;
+      border: 1px solid #EF8A31;
+      height: 18px;
+    }
   }
 }
 .ship-item{
@@ -95,9 +103,12 @@
   line-height: 12px;
   font-size: 12px;
   transform: scale(.8);
-  border: 1px solid #00CFE3;
-  border-radius: 4px;
-  margin-left: 22px;
+  &-bg{
+    margin-left: 32px;
+    border: 1px solid #00CFE3;
+    border-radius: 4px;
+    height: 18px;
+  }
 }
 .s-i-icon-imp{
   padding: 3px 7px;
@@ -105,9 +116,13 @@
   line-height: 12px;
   font-size: 12px;
   transform: scale(.8);
-  border: 1px solid #00CFE3;
-  border-radius: 4px;
-  margin-left: -10px;
+
+  &-bg{
+    border: 1px solid #00CFE3;
+    border-radius: 4px;
+    margin-left: 4px;
+    height: 18px;
+  }
 }
 .reward-points{
   margin: 8px 0 ;
