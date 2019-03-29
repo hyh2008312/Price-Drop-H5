@@ -33,11 +33,11 @@ export class DeleteDialogComponent implements OnInit {
     } else if (this.type === 'order') {
       this.delOrder();
     }
-    this.close();
   }
   delAddress() {
       this.orderListService.delAddress(this.id).then((res) => {
         this.toast('Delete address success!');
+        this.close();
       }).catch((res) => {
         console.log(res);
       });
@@ -45,6 +45,7 @@ export class DeleteDialogComponent implements OnInit {
   delOrder() {
     this.orderListService.delOrder(this.id).then((res) => {
       this.toast('Deleted successfully!');
+      this.close();
     }).catch((res) => {
       console.log(res);
     });

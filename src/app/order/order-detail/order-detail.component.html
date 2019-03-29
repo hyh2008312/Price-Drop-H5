@@ -117,7 +117,8 @@
 
             <div fxLayout="row" fxLayoutAlign="space-between center">
               <div class="cocm-content-price1">Shipping</div>
-              <div class="cocm-content-price1">₹{{order.shippingExclTax}}</div>
+              <div class="cocm-content-price1">₹{{'0'}}</div>
+              <!--<div class="cocm-content-price1">₹{{order.shippingExclTax}}</div>-->
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -127,7 +128,7 @@
 
             <div *ngIf="order.bonusWallet > 0" fxLayout="row" fxLayoutAlign="space-between center">
               <div class="cocm-content-price1">Wallet</div>
-              <div class="cocm-content-price1">- ₹{{order.paymentDiscount}}</div>
+              <div class="cocm-content-price3">- ₹{{order.bonusWallet|number:'0.0-0'}}</div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -159,7 +160,7 @@
 
       <div class="co-card-top coct-content1 mg-t-12" fxLayout="column" fxLayoutAlign="space-between start">
         <!--<div class="od-word">Transaction Number: {{'123123123123123'}}</div>-->
-        <div class="od-word">Payment Method: {{'PayU'}}</div>
+        <div class="od-word">Payment Method: {{order.paymentMode}}</div>
         <div class="od-word" *ngIf="order.paymentMode == 'cod'">Payment Method: COD {{order.shippingProvider}}</div>
         <div class="od-word" *ngIf="order.paymentMode == 'imprest'">Payment Method: {{order.paymentStatus}}</div>
         <div class="od-word mg-b-0">Order Time: {{order.created|date}}</div>
@@ -172,11 +173,12 @@
 <div class="bottom-div" fxLayout="row" fxLayoutAlign="space-between center">
   <div>&nbsp;</div>
   <div fxLayout="row" fxLayoutAlign="start">
-    <!--<div fxLayout="row" fxLayoutAlign="start center">-->
-      <!--<div class="bd-total">Total: &nbsp;</div>-->
-      <!--<div class="bd-price">₹{{'8000'}}</div>-->
-    <!--</div>-->
-    <button class="bd-btn">Cancel Order</button>
+    <button *ngIf="!showDetailBtn" class="bd-btn" (click)="openCancelOrder()">Cancel Order</button>
+    <div *ngIf="showDetailBtn">
+      <button class="bd-btn1" (click)="deleteOrder()">Delete</button>
+      <button class="bd-btn" (click)="openGoodsDetail()">Buy Again</button>
+    </div>
+    <div *ngIf="bottomReason">{{bottomReason}}</div>
   </div>
 
 </div>

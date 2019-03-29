@@ -1,0 +1,29 @@
+<div class="xb-guide-dialog">
+  <!--<div class="xb-guide-dialog__close">-->
+    <!--<i class="icon-ic-close iconfont-socialcommer " (click)="close()" ></i>-->
+  <!--</div>-->
+
+  <div class="popup-top" fxLayout="row" fxLayoutAlign="start ">
+    <div class="popup-title">Select a Cancelled Reason</div>
+  </div>
+
+  <div class="popup-bottom">
+    <div *ngFor="let i of reason; let index = index ">
+
+      <div class="item-row" fxLayout="row" fxLayoutAlign="start center" (click)="selItem(index)">
+        <div>
+          <i class="iconfont-socialcommer item-check"   *ngIf="selReason !== index">&#xe73f;</i>
+          <i class="iconfont-socialcommer item-checked" *ngIf="selReason == index">&#xe6fb;</i>
+        </div>
+        <div>{{i}}</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="popup-bottom-btn" fxLayout="row" fxLayoutAlign="space-between center ">
+    <div fxFlex class="bottom-btn1" (click)="cancel()">Cancel</div>
+    <div fxFlex class="bottom-btn" (click)="confirm()">OK</div>
+  </div>
+</div>

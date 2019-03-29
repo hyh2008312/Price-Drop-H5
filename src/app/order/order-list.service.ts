@@ -175,6 +175,18 @@ export class OrderListService {
       .then(response => response.json())
       .catch((res)=>this.handleError(res, this));
   }
+  cancelOrder(id, params) {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+    let url = `${this.baseUrl.h5Url}order/customer/cancel/${id}/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.put(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
   postDirectOrder(params: any){
     let headers = new Headers({
       'Content-Type': 'application/json'

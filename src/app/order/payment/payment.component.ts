@@ -43,8 +43,10 @@ export class PaymentComponent implements OnInit {
 
   ) {
     this.orderService.paymentDetail.subscribe((res) => {
+      console.log(res);
       if (res) {
         this.order = res;
+        console.log(res);
       } else {
         // this.router.navigate([`/`]);
       }
@@ -94,9 +96,9 @@ export class PaymentComponent implements OnInit {
       };
       this.orderListService.paymentCOD(params).then((res) => {
 
-        this.router.navigate([`/paymentSuccess`]);
+        this.router.navigate([`/order/paymentSuccess`]);
       }).catch((res) => {
-        this.router.navigate([`/paymentFail`]);
+        this.router.navigate([`/order/paymentFail`]);
         this.toast(res)
         console.log(res);
       });

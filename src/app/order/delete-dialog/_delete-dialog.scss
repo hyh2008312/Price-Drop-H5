@@ -15,8 +15,10 @@
 .xb-guide-dialog{
   background-color: white;
   padding: 12px 16px 16px 16px;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-radius: 4px;
+  margin: auto;
+  width: 80%;
+
 }
 .bottom{
   margin-top: 8px;
@@ -24,8 +26,10 @@
 .bottom-btn{
   padding: 8px;
   margin-right: 8px;
+  color: #EF8A31;
 }
 .bottom-btn1{
   padding: 8px;
   margin-right: 8px;
 }
+

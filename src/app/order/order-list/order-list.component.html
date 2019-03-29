@@ -69,15 +69,15 @@
 
                   <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Unpaid' && order">
                     <div class="olb-card-btn"  (click)="deleteOrder(order,index)" *ngIf="order.orderType != 'Drop'">Delete</div>
-                    <div class="olb-card-btn1" (click)="payNow()">Pay Now</div>
+                    <div class="olb-card-btn1" (click)="payNow(order)">Pay Now</div>
                   </div>
 
                   <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Packing'">
-                    <div class="olb-card-btn" *ngIf="order.sourcingStatus == 'Not Started'" (click)="cancel()">Cancel Order</div>
+                    <div class="olb-card-btn" *ngIf="order.sourcingStatus == 'Not Started'" (click)="cancel(order,index)">Cancel Order</div>
                     <!--<div class="olb-card-btn1" (click)="tracking()">Track Package</div>-->
                   </div>
                   <div  fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Paid'">
-                    <div class="olb-card-btn" (click)="cancel()">Cancel Order</div>
+                    <div class="olb-card-btn" (click)="cancel(order,index)">Cancel Order</div>
                     <!--<div class="olb-card-btn1" (click)="editAddress()" *ngIf="order.paymentMode!='cod'">Change Address</div>-->
                   </div>
                   <div  fxLayout="row" fxLayoutAlign="start center" *ngIf="order.orderStatus == 'Audit canceled'">
@@ -96,15 +96,15 @@
                   </div>
                   <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Canceled'">
                     <div class="olb-card-btn" (click)="deleteOrder(order,index)">Delete</div>
-                    <div class="olb-card-btn1" (click)="buyProduct">Buy Again</div>
+                    <div class="olb-card-btn1" (click)="buyProduct(order,index)">Buy Again</div>
                   </div>
                   <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Partially Refunded'">
                     <div class="olb-card-btn" (click)="deleteOrder(order,index)">Delete</div>
-                    <div class="olb-card-btn1" (click)="buyProduct()">Buy Again</div>
+                    <div class="olb-card-btn1" (click)="buyProduct(order,index)">Buy Again</div>
                   </div>
                   <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Fully Refunded'">
                     <div class="olb-card-btn" (click)="deleteOrder(order,index)">Delete</div>
-                    <div class="olb-card-btn1" (click)="buyProduct()">Buy Again</div>
+                    <div class="olb-card-btn1" (click)="buyProduct(order,index)">Buy Again</div>
                   </div>
                   <div fxLayout="row" fxLayoutAlign="start center"  *ngIf="order.orderStatus == 'Completed'">
                     <div class="olb-card-btn" (click)="deleteOrder(order,index)">Delete</div>

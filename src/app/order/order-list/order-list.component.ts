@@ -6,6 +6,8 @@ import { UserService } from '../../shared/services/user/user.service';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {ToastComponent} from '../../shared/components/toast/toast.component';
+import {CancelOrderDialogComponent} from '../cancel-order-dialog/cancel-order-dialog.component';
+
 
 @Component({
   selector: 'app-order-list',
@@ -103,7 +105,36 @@ export class OrderListComponent implements OnInit {
     this.router.navigate([`/order/payment`]);
   }
   buyProduct(i) {
+    console.log(i)
     this.router.navigate([`/goodsdetail/${i.lines[0].productId}`]);
+  }
+  cancel(i,index) {
+    let dialogRef = this.dialog.open(CancelOrderDialogComponent, {
+      data: {
+        order: i,
+        topType: this.activeTop
+      },
+      position: {
+        bottom: '0',
+        left: '0'
+      }
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log();
+      if (dialogRef.componentInstance.data.params == 'Audit canceled') {
+        this.orderList[index].orderStatus = 'Audit canceled';
+        this.toast('Your order cancellation request has been submitted for review.');
+      } else {
+        if (this.activeTop == null) {
+          this.orderList[index].orderStatus = 'Canceled';
+          this.toast('Cancelled successfully.');
+        } else {
+          this.orderList.splice(index, 1);
+          this.toast('Cancelled successfully.');
+        }
+      }
+      this.orderList[index].orderStatus = 'Canceled';
+    });
   }
   deleteOrder(i, index) {
     let dialogRef = this.dialog.open(DeleteDialogComponent, {
@@ -119,10 +150,10 @@ export class OrderListComponent implements OnInit {
       }
     });
   }
-  toast() {
+  toast(string) {
     this.snackBar.openFromComponent(ToastComponent, {
       data: {
-        string: 'Deleted successfully!'
+        string: string
       },
       duration: 500,
     });
