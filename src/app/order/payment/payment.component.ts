@@ -68,7 +68,6 @@ export class PaymentComponent implements OnInit {
     });
   }
   changeBalance(e) {
-    console.log(e)
     this.checkBalance = e.checked;
   }
   getBalance () {
