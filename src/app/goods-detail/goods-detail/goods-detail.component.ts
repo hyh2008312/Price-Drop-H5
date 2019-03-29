@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { GoodsDetailService } from '../goods-detail.service';
@@ -49,6 +49,7 @@ export class GoodsDetailComponent implements OnInit {
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
+  @ViewChild('scroll') scroll;
 
   constructor(
     private router: Router,
@@ -58,7 +59,8 @@ export class GoodsDetailComponent implements OnInit {
     public dialog: MatDialog,
     private guardLinkService: GuardLinkService,
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private ngZone: NgZone
   ) {
     this.auth.isOnlyAuthorized().subscribe((res) => {
       if (res) {
@@ -82,8 +84,10 @@ export class GoodsDetailComponent implements OnInit {
   ngOnInit():void {}
 
   getGoodsDetail() {
+    this.banner = [];
     this.goodsDetailService.getGoodsDetail(this.productId).then((res) => {
-      this.banner = res.images;
+      this.scroll.nativeElement.scrollTop = 0;
+      this.banner = [...res.images];
       this.goods = res;
 
       this.nextPage.title = res.title;
@@ -128,7 +132,6 @@ export class GoodsDetailComponent implements OnInit {
         this.nextPage.salePrice = res.variants[0].saleUnitPrice;
         this.nextPage.currentPrice = res.variants[0].unitPrice;
       }
-      console.log(res);
     });
   }
   getRecommendGoods() {
