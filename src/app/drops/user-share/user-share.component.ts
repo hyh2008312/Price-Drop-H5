@@ -6,9 +6,6 @@ import { DropsService } from '../drops.service';
 import { UserService } from '../../shared/services/user/user.service';
 import { GuardLinkService } from '../../shared/services/guard-link/guard-link.service';
 
-import { isPlatformBrowser } from '@angular/common';
-
-import { PLATFORM_ID } from '@angular/core';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
 import {CutPriceDialogComponent} from '../cut-price-dialog/cut-price-dialog.component';
 
@@ -26,18 +23,15 @@ export class UserShareComponent implements OnInit, OnDestroy {
   loadingValue: any = 0;
   color = 'Accent';
 
-  sub: any;
   cutid: any;
   imgsrc: any;
   someGoodsList: any;
-  lowestPrice: any;
   percentage: any;
   ahour: any;
   amin: any;
   asecond: any;
   title: any;
   currentPrice: any;
-  salePrice: any;
   priceOff: any;
   user: any= {
     id: ''
@@ -45,10 +39,8 @@ export class UserShareComponent implements OnInit, OnDestroy {
   isMe: any;
   errMsg: any = '';
   cutAmount: any;
-  sUserAgent: any;
   isLogin = false;
   cutPriceStauts : any = false;
-  userId: any;
   dropObj: any = {
     friendsDrop: [],
     dropStatus: '',
@@ -56,6 +48,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
     canDrop: '',
   };
   timer: any;
+  addHeight: any = true;
 
   constructor(
     private router: Router,
@@ -67,30 +60,36 @@ export class UserShareComponent implements OnInit, OnDestroy {
     private guardLinkService: GuardLinkService,
     private userService: UserService,
     private ngZone: NgZone,
-    @Inject(PLATFORM_ID) private platformId: Object
   ) {
-      this.auth.isOnlyAuthorized().subscribe((data) => {
-        if (data) {
-          this.isLogin = true
-          this.userService.currentUser.subscribe((data) => {
-            if(data){
-              this.user = data
-              this.getADropDetail()
-            }
-          })
-        } else {
-          this.getDropDetail()
 
-        }
-      });
-      this.getSomeGoods();
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
+    });
+
+    this.userService.addNavigation(false);
+
+    this.auth.isOnlyAuthorized().subscribe((data) => {
+      if (data) {
+        this.isLogin = true;
+        this.userService.currentUser.subscribe((data) => {
+          if(data){
+            this.user = data;
+            this.getADropDetail();
+          }
+        })
+      } else {
+        this.getDropDetail();
+
+      }
+    });
+    this.getSomeGoods();
   }
   ngOnInit(): void {
 
   }
   openFaq(event) {}
   getDropDetail() {
-    const self = this
+    const self = this;
     self.cutid = self.activatedRoute.snapshot.params['cutId'];
     // self.cutid = 86;
     self.dropsService.getDropDetail(self.cutid, this.isLogin).then((res) => {
@@ -102,7 +101,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
           title: 'Help me drop the price & Earn up to Rs.50!',
           shareImage: res.mainImage,
         };
-        this.dropsService.addTitleDescription(data)
+        this.dropsService.addTitleDescription(data);
         this.dropObj = res;
         this.imgsrc = res.avatar;
         this.priceOff =  Math.ceil((parseInt(res.saleUnitPrice) - parseInt(res.currentPrice)) / parseInt(res.saleUnitPrice) * 100) + '% OFF'
@@ -117,7 +116,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
       })
   }
   getADropDetail() {
-    const self = this
+    const self = this;
     self.cutid = self.activatedRoute.snapshot.params['cutId'];
     // self.cutid = 86;
       self.dropsService.getADropDetail(self.cutid, this.isLogin, this.user.id).then((res) => {
@@ -129,7 +128,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
           title: 'Help me drop the price & Earn up to Rs.50!',
           shareImage: res.mainImage,
         };
-        this.dropsService.addTitleDescription(data)
+        this.dropsService.addTitleDescription(data);
         this.dropObj = res;
         this.imgsrc = res.avatar;
         this.priceOff =  Math.ceil((parseInt(res.saleUnitPrice) - parseInt(res.currentPrice)) / parseInt(res.saleUnitPrice) * 100) + '% OFF'
@@ -148,28 +147,24 @@ export class UserShareComponent implements OnInit, OnDestroy {
     this.cutid = this.activatedRoute.snapshot.params['cutId'];
     if (this.isLogin) {
       if (this.dropObj.user === 'friend') {
-        this.isMe = false
+        this.isMe = false;
         if(this.dropObj.dropStatus ==='progressing'&& this.dropObj.canDrop){
           this.dropsService.friendCutPrice(this.cutid).then((res) => {
-            console.log(res)
             if (res) {
               this.dropObj = res;
-              this.priceOff =  Math.ceil((parseInt(res.saleUnitPrice) - parseInt(res.currentPrice)) / parseInt(res.saleUnitPrice) * 100) + '% OFF'
+              this.priceOff = Math.ceil((parseInt(res.saleUnitPrice) - parseInt(res.currentPrice)) / parseInt(res.saleUnitPrice) * 100) + '% OFF';
               this.percentage = Math.ceil(((5 - res.friendsDrop.length) / 5 ) * 100 ) + '%';
-              this.cutAmount =  res.rewardBonus
-              this.openCutPrice(Event, true)
+              this.cutAmount =  res.rewardBonus;
+              this.openCutPrice(Event, true);
             } else {
-              this.openCutPrice(Event, true)
-              // this.errNum = 409
+              this.openCutPrice(Event, true);
             }
           }).catch((res) => {
-            console.log('cutPrice--------catch:' + res)
-            this.openCutPrice(Event, true)
-            this.errMsg = res
-            // console.log('cutPrice--------catch:' + res)
+            this.openCutPrice(Event, true);
+            this.errMsg = res;
           })
         } else {
-          this.openCutPrice(Event, true)
+          this.openCutPrice(Event, true);
         }
       } else {
         this.isMe = true
@@ -200,7 +195,7 @@ export class UserShareComponent implements OnInit, OnDestroy {
   }
   editTime(time) {
     // const tmp = 1527753479
-    const self = this
+    const self = this;
     self.ngZone.runOutsideAngular(() => {
       self.timer = setInterval(() => {
         const nowtime = new Date().getTime();
@@ -222,11 +217,11 @@ export class UserShareComponent implements OnInit, OnDestroy {
 
         self.asecond = Math.floor(afterMin);//秒
         if ( self.asecond < 10) {
-          self.asecond = '0' + self.asecond
+          self.asecond = '0' + self.asecond;
         }
 
         // 加上减掉的天数
-        self.ahour += (day * 24)
+        self.ahour += (day * 24);
         if (self.ahour < 10) {
           self.ahour = '0' + self.ahour
         }
@@ -247,22 +242,6 @@ export class UserShareComponent implements OnInit, OnDestroy {
   }
   downApp(i) {
     window.open(i.shareUrl);
-
-    // const  sUserAgent: any = navigator.userAgent.toLowerCase();
-    // this.sUserAgent = sUserAgent;
-    // const  bIsIpad = sUserAgent.match(/ipad/i) === 'ipad';
-    // const  bIsIphoneOs = sUserAgent.match(/iphone os/i) === 'iphone os';
-    // const  bIsMidp = sUserAgent.match(/midp/i) === 'midp';
-    // const  bIsQQ= sUserAgent.indexOf('mqqbrowser') > -1;
-    // const  bIsUc =  sUserAgent.indexOf('ucbrowser') > -1;
-    // const  bIsAndroid = sUserAgent.match(/android/i) === 'android';
-    // if (bIsAndroid || bIsUc ||bIsQQ ) {
-    //   window.open('market://details?id=com.socialcommer.wx');
-    //   // window.open('https://www.getpricedrop.com/')
-    // } else {
-    //   window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx&referrer=utm_source%3Dh5page%26utm_medium%3Dpage');
-    //
-    // }
   }
   jumpApp(){
     // window.open('http://price_drop://price_drop_app/OpenPriceDropApp')

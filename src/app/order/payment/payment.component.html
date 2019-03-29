@@ -96,16 +96,14 @@
 </div>
 
 
-<div class="bottom-div" fxLayout="row" fxLayoutAlign="space-between center">
-  <div>&nbsp;</div>
-  <div fxLayout="row" fxLayoutAlign="start">
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="bd-total">Total: &nbsp;</div>
-      <div class="bd-price">₹{{'8000'}}</div>
-      <div class="bd-price-line" style="margin: 0 8px">₹{{'10000'}}</div>
-      <div class="bd-price-off">₹ 5%OFF</div>
-    </div>
-    <button class="bd-btn" (click)="payNow()">Pay Now</button>
+<div class="bottom-div" fxLayout="row" fxLayoutAlign="start center">
+  <div fxFlex>&nbsp;</div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="bd-total">Total: </div>
+    <div class="bd-price">₹{{'8000'}}</div>
+    <div class="bd-price-line md-margin-left-1">₹{{'10000'}}</div>
+    <div class="bd-price-off">₹ 5%OFF</div>
   </div>
+  <button class="bd-btn" (click)="payNow()">Pay Now</button>
 
 </div>

@@ -233,28 +233,32 @@
   background-color: white;
 }
 .bd-total{
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 14px;
   color: #000000;
 }
 .bd-price{
   font-size: 14px;
+  line-height: 20px;
   font-weight: 500;
   color: #000000;
 }
 .bd-price-line{
   font-size: 12px;
+  line-height: 17px;
   color: #000000;
   text-decoration: line-through;
 }
 .bd-price-off{
   font-size: 12px;
+  line-height: 14px;
   transform: scale(.8);
   color: #EF8A31;
 }
 .bd-btn{
   padding: 12px 17px;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 16px;
   color: #FFFFFF;
   margin-left: 24px;
   margin-right: 16px;

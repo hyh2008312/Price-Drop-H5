@@ -472,3 +472,13 @@
   margin-left: 16px;
   border-radius: 20px;
 }
+.overflow-body{
+  height: calc(100vh - 112px);
+  overflow-y: scroll;
+  background-color: #D1C8E8;
+}
+.overflow-body-height{
+  height: calc(100vh - 56px);
+  overflow-y: scroll;
+  background-color: #D1C8E8;
+}
