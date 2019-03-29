@@ -43,7 +43,7 @@ export class FlashItemComponent implements OnInit {
   }
   editTime(time) {
     // const tmp = 1527753479
-    const self = this
+    const self = this;
     self.ngZone.runOutsideAngular(() => {
       self.timer = setInterval(() => {
         const nowtime = new Date().getTime();

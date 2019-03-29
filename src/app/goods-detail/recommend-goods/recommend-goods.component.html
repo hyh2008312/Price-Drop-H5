@@ -4,7 +4,8 @@
     <div class="s-c-s">&nbsp;</div>
   </div>
   <div *ngFor="let item of tranArr(goodsList)" class="recommend-row" fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="space-between center">
-    <div class="i-good" *ngFor="let i of item" fxLayout="column" fxLayoutAlign="start center" fxFlex>
+    <div class="i-good" *ngFor="let i of item" fxLayout="column" fxLayoutAlign="start center"
+         fxFlex routerLink="/goodsdetail/{{i.id}}">
       <div class="gd-img-image">
         <img [src]="i.mainImage" >
       </div>

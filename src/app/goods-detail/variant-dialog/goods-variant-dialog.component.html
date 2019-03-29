@@ -11,8 +11,10 @@
         <div class="popup-price" >₹{{selsaleUnitPrice|number}}</div>
         <div class="popup-lowprice-word" >Exclusive Price: </div>
 
-        <div class="popup-lowprice"      *ngIf="flashSale.flashStatus=='Ongoing'">₹{{(selunitPrice*(flashSale.discount/100) || goods.unitPrice*(flashSale.discount/100))|number}}</div>
-        <div class="popup-lowprice"      *ngIf="flashSale.flashStatus=='Scheduled'||purchaseMethod==='direct'">₹{{(selunitPrice||goods.unitPrice)|number}}</div>
+        <div class="popup-lowprice" *ngIf="flashSale.flashStatus=='Ongoing'">
+          ₹{{(selunitPrice*(flashSale.discount/100) || goods.unitPrice*(flashSale.discount/100))|number}}</div>
+        <div class="popup-lowprice" *ngIf="flashSale.flashStatus=='Scheduled'||purchaseMethod==='direct'">
+          ₹{{(selunitPrice||goods.unitPrice)|number}}</div>
 
         <div class="popup-yet-bg" *ngIf="hasVariants" fxLayout="row" fxLayoutAlign="start center">
           <div class="popup-yet">Chose:</div>
@@ -46,6 +48,6 @@
 
 
   <div fxLayout="row" fxLayoutAlign="center center ">
-    <button class="bottom-btn" (click)="confirm()">Confirm</button>
+    <div class="bottom-btn" (click)="confirm()">Confirm</div>
   </div>
 </div>

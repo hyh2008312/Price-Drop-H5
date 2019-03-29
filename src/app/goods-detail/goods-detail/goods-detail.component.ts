@@ -70,9 +70,13 @@ export class GoodsDetailComponent implements OnInit {
     });
     this.userService.addNavigation('Product Detail');
 
-    this.productId = this.activatedRoute.snapshot.params['id'];
-    this.getGoodsDetail();
-    this.getRecommendGoods();
+    this.activatedRoute.params.subscribe((data) => {
+      if(data) {
+        this.productId = data.id;
+        this.getGoodsDetail();
+        this.getRecommendGoods();
+      }
+    });
   }
 
   ngOnInit():void {}
@@ -166,9 +170,6 @@ export class GoodsDetailComponent implements OnInit {
         }
       });
 
-      // dialogRef.afterClosed().subscribe(result => {
-      //   console.log(dialogRef.componentInstance.data.aa);
-      // });
     } else {
       this.guardLinkService.addRouterLink(window.location.pathname);
       this.router.navigate([`/account/login`]);

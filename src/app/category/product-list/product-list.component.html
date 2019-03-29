@@ -32,7 +32,7 @@
     <div style="margin: 28px 16px 0 16px">
 
       <div *ngFor="let item of ProductList" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign=" center center" >
-        <div *ngFor="let i of item" fxLayout="column"  fxLayoutAlign="center center" fxFlex>
+        <div *ngFor="let i of item" fxLayout="column"  fxLayoutAlign="center center" fxFlex routerLink="/goodsdetail/{{i.id}}">
           <div class="featured-img">
             <img [src]="i.mainImage" alt="">
           </div>

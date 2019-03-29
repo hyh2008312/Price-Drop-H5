@@ -1,8 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
-
-
-
 @Component({
   selector: 'cut-price-dialog',
   templateUrl: './cut-price-dialog.component.html',
@@ -25,10 +22,6 @@ export class CutPriceDialogComponent implements OnInit {
     this.isM = this.isMe
   }
   openLink() {
-
-    // https://play.google.com/store/apps/details?id=com.socialcommer.wx
-    // window.navigator
-
     const  sUserAgent: any = navigator.userAgent.toLowerCase();
     const  bIsIpad = sUserAgent.match(/ipad/i) === 'ipad';
     const  bIsIphoneOs = sUserAgent.match(/iphone os/i) === 'iphone os';
@@ -37,10 +30,9 @@ export class CutPriceDialogComponent implements OnInit {
     const  bIsUc = sUserAgent.match(/ucweb/i) === 'ucweb';
     const  bIsAndroid = sUserAgent.match(/android/i) === 'android';
     if (bIsAndroid) {
-      window.open('https://pricedrop.page.link/drops');
+      window.open('https://pricedrop.page.link/vzuh');
     } else {
       window.open('https://play.google.com/store/apps/details?id=com.socialcommer.wx&referrer=utm_source%3Dh5page%26utm_medium%3Dpage')
-
     }
   }
   close(): void {

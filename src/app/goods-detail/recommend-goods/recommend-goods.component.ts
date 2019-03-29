@@ -1,7 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { GoodsDetailService } from '../goods-detail.service';
-import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-recommend-goods',
@@ -13,7 +12,6 @@ export class RecommendGoodsComponent implements OnInit {
 
   banner: any = [];
   @Input() goodsList: any = [];
-  returnStu = true
   constructor(
     private router: Router,
     private goodsDetailService: GoodsDetailService
