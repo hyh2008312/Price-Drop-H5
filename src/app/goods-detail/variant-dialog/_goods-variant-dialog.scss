@@ -17,15 +17,28 @@
 }
 .popup-top{
   padding: 16px 16px 0 16px;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 }
 .popup-bottom{
   padding: 0 16px;
+  margin-bottom: 8px;
 }
 .popup-image{
   width: 100px;
   height: 100px;
   margin-right: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+
+  >img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
 .popup-price {
   font-size: 14px;
@@ -37,22 +50,48 @@
   margin-top: 8px;
 }
 .popup-lowprice{
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 14px;
   color: #EF8A31;
+}
+.popup-py{
+  overflow: hidden;
 }
 .popup-yet{
   font-size: 12px;
+  line-height: 14px;
   opacity: 0.54;
   margin-top: 8px;
   margin-right: 6px;
 }
+.popup-yet-1{
+  font-size: 12px;
+  line-height: 14px;
+  color: rgba(0,0,0,0.87);
+  margin-top: 8px;
+  margin-right: 6px;
+}
+.popup-color{
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 14px;
+  color: rgba(0,0,0,0.87);
+}
+.popup-color-bg{
+  margin-bottom: 24px;
+}
 .popup-color-chd{
   font-size: 12px;
-  margin: 8px 8px  0  ;
-  padding: 2px 10px;
+  margin: 8px 8px 0 0;
+  padding: 0 4px;
+  line-height: 22px;
   border: 1px solid rgba(0,0,0,0.12);
   border-radius: 4px;
+}
+.popup-color-bg{
+  max-height: 200px;
+  overflow-y: scroll;
 }
 .popup-color-chdname{
   font-size: 12px;
@@ -61,39 +100,46 @@
 
 .popup-color-chd-active{
   font-size: 12px;
-  margin: 8px 8px  0 ;
-  padding: 2px 10px;
+  margin: 8px 8px 0 0;
+  padding: 0 4px;
+  line-height: 22px;
   background-color: #EF8A31;
+  border: 1px solid #EF8A31;
   color: white;
   border-radius: 4px;
 }
 .popup-color-chd-disable{
   font-size: 12px;
-  margin: 8px 8px  0  ;
-  padding: 2px 10px;
+  margin: 8px 8px 0 0;
+  padding: 0 4px;
+  line-height: 22px;
   background-color: #dcdcdc;
+  border: 1px solid #dcdcdc;
   color: white;
   border-radius: 4px;
 }
 .bottom-btn{
   margin: 8px 16px;
-  padding: 12px 0;
+  line-height: 40px;
   text-align: center;
   background-color: #EF8A31;
   color: white;
   width: 100%;
   font-weight: 500;
   font-size: 14px;
-  border-radius: 30px;
+  border-radius: 20px;
 }
 .bottom-btn-gray{
   margin: 8px 16px;
-  padding: 12px 0;
+  line-height: 40px;
   text-align: center;
   background-color: rgba(0,0,0,0.48);
   color: white;
   font-weight: 500;
   width: 100%;
   font-size: 14px;
-  border-radius: 30px;
+  border-radius: 20px;
+}
+.btn-bg{
+  box-shadow: 0 -1px 3px 0 rgba(0,0,0,0.24);
 }
