@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { OrderListService } from '../order-list.service';
 import { OrderService } from '../../shared/services/order/order.service';
 import { UserService } from '../../shared/services/user/user.service';
+import {ToastComponent} from '../../shared/components/toast/toast.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-payment',
@@ -16,9 +18,17 @@ export class PaymentComponent implements OnInit {
   @Input() flashSaleTime: any;
   notification: any = [];
   balance: any ;
+  method: any = 'cod'
   isShowBalance: any ;
   checkBalance: any = false ;
-  order: any = {};
+  order: any = {
+    cod: {
+      exist: true,
+      notes: '',
+      type: '',
+    },
+
+  };
   asecond: any = 13;
   user: any;
   codSrc: any;
@@ -28,13 +38,15 @@ export class PaymentComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private orderListService: OrderListService,
     private userService: UserService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public snackBar: MatSnackBar
+
   ) {
     this.orderService.paymentDetail.subscribe((res) => {
       if (res) {
         this.order = res;
       } else {
-        this.router.navigate([`/`]);
+        // this.router.navigate([`/`]);
       }
     });
 
@@ -47,7 +59,6 @@ export class PaymentComponent implements OnInit {
     this.userService.addNavigation('Payment');
     this.getNotification();
     this.getBalance();
-
   }
   getNotification () {
     this.orderListService.getNotification().then((res) => {
@@ -55,6 +66,10 @@ export class PaymentComponent implements OnInit {
     }).catch((res) => {
       console.log(res);
     });
+  }
+  changeBalance(e) {
+    console.log(e)
+    this.checkBalance = e.checked;
   }
   getBalance () {
     this.orderListService.getBalance().then((res) => {
@@ -66,16 +81,35 @@ export class PaymentComponent implements OnInit {
       console.log(res);
     });
   }
-  payNow () {
-    console.log(this.checkBalance);
-    this.startRazorypay();
+  chooseMethod(method) {
+    this.method = method;
   }
-  countOff (s, o) {
-    if (o > 0) {
-      return Math.ceil((o - s) / o * 100) + '%';
-    } else {
-      return '';
+  payNow () {
+    if (this.method=='razorpay1' || this.method=='razorpay2' || this.method=='razorpay3') {
+      this.startRazorypay();
+    } else if (this.method=='cod') {
+      let params = {
+        orderId: this.order.id,
+        type: 'normal',
+        bonus: this.checkBalance ? this.checkBalance : null
+      };
+      this.orderListService.paymentCOD(params).then((res) => {
+
+        this.router.navigate([`/paymentSuccess`]);
+      }).catch((res) => {
+        this.router.navigate([`/paymentFail`]);
+        this.toast(res)
+        console.log(res);
+      });
     }
+  }
+  toast(res) {
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: {
+        string: res
+      },
+      duration: 1000,
+    });
   }
 
   startRazorypay() {
@@ -111,7 +145,8 @@ export class PaymentComponent implements OnInit {
           };
 
           this.orderListService.checkRazorpay(params).then((res) => {
-            this.router.navigate(['/order/success']);
+            // this.router.navigate(['/order/success']);
+            this.router.navigate([`/paymentSuccess`]);
           }).catch(() => {
 
           });
