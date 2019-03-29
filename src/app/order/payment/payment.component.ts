@@ -101,17 +101,18 @@ export class PaymentComponent implements OnInit {
         "description": 'Order#: ' + res.orderNumber,
         "image": res.order.lines[0].mainImage,
         "handler": (response) => {
-          let params = {
-            orderId: res.order.id,
-            razorpayPaymentId: response.razorpay_payment_id,
-            razorpayOrderId: res.razorpayOrderId,
-            razorpaySignature: response.razorSignature,
-            bonus: this.checkBalance ? this.checkBalance : null
-          };
-
-          this.orderListService.checkRazorpay(params).then((res) => {
-            console.log(res);
-          });
+          alert(response);
+          // let params = {
+          //   orderId: res.order.id,
+          //   razorpayPaymentId: response.razorpay_payment_id,
+          //   razorpayOrderId: res.razorpayOrderId,
+          //   razorpaySignature: response.razorSignature,
+          //   bonus: this.checkBalance ? this.checkBalance : null
+          // };
+          //
+          // this.orderListService.checkRazorpay(params).then((res) => {
+          //   console.log(res);
+          // });
         },
         "prefill": {
           "contact": this.user.defaultAddress.phoneNumber,

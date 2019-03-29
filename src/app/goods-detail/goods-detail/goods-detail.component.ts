@@ -67,7 +67,7 @@ export class GoodsDetailComponent implements OnInit {
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
-    this.userService.addNavigation('Detail');
+    this.userService.addNavigation('Product Detail');
 
     this.productId = this.activatedRoute.snapshot.params['id'];
     this.getGoodsDetail();

@@ -120,8 +120,10 @@
             </div>
           </div>
         </ng-container>
-        <div *ngIf="orderList && orderList.length==0" fxLayout="row" fxLayoutAlign="center center">
-          There is no order to show
+        <div *ngIf="orderList && orderList.length==0" fxLayout="column" fxLayoutAlign="center center">
+
+          <img src="https://image.getpricedrop.com/priceDrop/h5/empty.png" alt="">
+          <div>There is no order to show</div>
         </div>
       </div>
 
