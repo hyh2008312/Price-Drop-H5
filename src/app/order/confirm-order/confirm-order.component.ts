@@ -16,7 +16,7 @@ export class ConfirmOrderComponent implements OnInit {
 
   @Input() flashSaleList: any = [];
   @Input() flashSaleTime: any;
-  notification: any = []
+  notification: any = [];
   card: any = {};
   order: any = {
     title: '',
@@ -49,7 +49,7 @@ export class ConfirmOrderComponent implements OnInit {
     'isDefault': false,
     'phoneNumber': '',
     'stateId': 5
-  }
+  };
   isFirst: any = false; // 防止重复下单
   amin: any = 12;
   asecond: any = 13;
