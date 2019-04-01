@@ -1,0 +1,25 @@
+//.overflow-popup{
+//  background-color: rgba(0,0,0,.288);
+//  overflow: hidden;
+//  height: 100%;
+//  width: 100%;
+//  position: fixed;
+//  bottom: 0;
+//  left: 0;
+//}
+.mg-b-72{
+  margin-bottom: 68px;
+}
+.overflow-body{
+  height: calc(100vh - 112px);
+  overflow-y: scroll;
+}
+.overflow-body-height{
+  height: calc(100vh - 56px);
+  overflow-y: scroll;
+}
+
+
+.bg-f4{
+  background-color: #f4f4f4;
+}

@@ -63,9 +63,9 @@ export class CancelOrderDialogComponent implements OnInit {
     };
     this.orderListService.cancelOrder(this.orderId, params).then((res) => {
       if (res.orderStatus === 'Audit canceled') {
-        this.data.parmas = 'Audit canceled';
+        this.data.parmas = 'Audit canceled'; //  这两个状态在list不同的tab 的取消后表现状态不一样；这个状态需要后台客服确认
       } else {
-        this.data.parmas = 'showDetailBtn';
+        this.data.parmas = 'showDetailBtn';  // 在订单详情里面 不是上面那个状态的时候 需要显示另外两个按钮
         this.toast('Cancelled successfully.');
       }
       this.data.isEdit = true;

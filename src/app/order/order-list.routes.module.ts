@@ -9,6 +9,7 @@ import { CityListComponent } from './city-list/city-list.component';
 import {PaymentComponent} from './payment/payment.component';
 import {PaymentFailComponent} from './payment-fail/payment-fail.component';
 import {PaymentSuccessComponent} from './payment-sucess/payment-success.component';
+import {TrackPackageComponent} from './track-package/track-package.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,8 @@ const routes: Routes = [
     path: 'paymentFail', component: PaymentFailComponent,
   }, {
     path: 'paymentSuccess', component: PaymentSuccessComponent,
+  }, {
+    path: 'trackPackage/:id', component: TrackPackageComponent,
   }
 ];
 

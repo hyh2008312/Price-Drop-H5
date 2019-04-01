@@ -153,6 +153,9 @@ export class OrderListComponent implements OnInit {
       }
     });
   }
+  tracking(i, index) {
+    this.router.navigate([`/order/trackPackage/${i.id}`]);
+  }
   toast(string) {
     this.snackBar.openFromComponent(ToastComponent, {
       data: {
