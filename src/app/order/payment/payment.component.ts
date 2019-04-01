@@ -18,14 +18,14 @@ export class PaymentComponent implements OnInit {
   @Input() flashSaleTime: any;
   notification: any = [];
   balance: any ;
-  method: any = 'cod'
+  method: any = 'cod';
   isShowBalance: any ;
-  checkBalance: any = false ;
+  checkBalance: any = false;
   order: any = {
     cod: {
       exist: true,
       notes: '',
-      type: '',
+      type: ''
     },
 
   };
