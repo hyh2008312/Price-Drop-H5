@@ -1,0 +1,45 @@
+<div  [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+
+  <div class="container mg-rl-16" >
+
+    <div class="tp-top" fxLayout="row" fxLayoutAlign="start">
+      <i  class="iconfont-socialcommer tp-top-icon">&#xe77c;</i>
+      <div fxLayout="column" fxLayoutAlign="start">
+        <div class="tp-top-txt1">Carrier: <span class="tp-top-txt2">{{order.orderData.carrierCode}}</span></div>
+        <div class="tp-top-txt1">Tracking Number: {{order.orderData.trackingNumber}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
+        <div class="tp-top-txt1" *ngIf="order.orderData.carrierCode=='GATI'">Carrier’s Contact Number: {{'18601234248'}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
+        <div class="tp-top-txt1" *ngIf="order.orderData.carrierCode=='GATI'">Carrier’s Support Email: {{'abcd@getpricedrop.com'}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
+      </div>
+    </div>
+
+
+    <div class="tp-bottom">
+      <div  *ngFor="let i of order.trackingData let index = index" fxLayout="row" fxLayoutAlign="start">
+        <div class="tp-bottom-time" fxFlex="15">
+          {{i.actiondate.substring(0,4)}}<br/>{{i.actiondate.substring(5,10)}}
+          <br/><span style="color: rgba(0,0,0,.38)">{{i.actiondate.substr(-5)}}</span>
+        </div>
+
+        <div class="tp-bottom-dot-line" [ngStyle]="{width: index!==0? '16px':''}" fxLayout="column" fxLayoutAlign="start center">
+          <i *ngIf="index==0" class="iconfont-socialcommer  tp-bottom-dot" >&#xe6fb;</i>
+          <i *ngIf="index!==0" class="tp-bottom-dot-1" ></i>
+
+
+          <div [ngClass]="index==order.trackingData.length-1?'':'tp-bottom-line'"></div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start">
+          <div class="tp-bottom-txt1">{{i.exception}}</div>
+          <div class="tp-bottom-txt2">{{i.location}}</div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+

@@ -14,6 +14,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import {PaymentFailComponent} from './payment-fail/payment-fail.component';
 import {PaymentSuccessComponent} from './payment-sucess/payment-success.component';
 import {CancelOrderDialogComponent} from './cancel-order-dialog/cancel-order-dialog.component';
+import {TrackPackageComponent} from './track-package/track-package.component';
 
 @NgModule({
   imports: [
@@ -32,13 +33,15 @@ import {CancelOrderDialogComponent} from './cancel-order-dialog/cancel-order-dia
     DeleteDialogComponent,
     PaymentFailComponent,
     PaymentSuccessComponent,
-    CancelOrderDialogComponent
+    CancelOrderDialogComponent,
+    TrackPackageComponent
   ],
   entryComponents: [
     DeleteDialogComponent,
     PaymentFailComponent,
     PaymentSuccessComponent,
-    CancelOrderDialogComponent
+    CancelOrderDialogComponent,
+    TrackPackageComponent
   ],
   providers: [OrderListService]
 })

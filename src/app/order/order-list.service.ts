@@ -223,18 +223,6 @@ export class OrderListService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
-
-  // method: 'POST', // 大写
-  // name: 'order.flash.pure',
-  // data: {
-  //   flashPromotionId: that.order.flashSale.promotionId,
-  //   vid: that.order.id,
-  //   quantity: that.order.quantity,
-  //   voucherId
-  // },
-  // header: {
-  //   needAuth: true
-  // }
   postAddress(params: any){
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -283,23 +271,37 @@ export class OrderListService {
       .then(response => response.json())
       .catch(this.handleError1);
   }
-  // this.$fetch({
-  //               method: 'PUT', // 大写
-  //               url: `${baseUrl}/address/shipping/detail/${this.id}/`,
-  // data: this.address,
-  // header: {
-  // needAuth: true
-  // }
-  // }).then(resData => {
-  // // 成功回调
-  // this.$event.emit('editAddress');
-  // this.$router.finish();
-  // }, error => {
-  // // 错误回调
-  // this.$notice.toast({
-  // message: error.errorMsg
-  // })
-  // })
+  getGATIOrderTracking(id): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let url = `${this.baseUrl.h5Url}/order/gati/shipping/${id}/`;
+
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((res)=>this.handleError(res, this));
+  }
+  getOrderTracking(id): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    // this.createAuthorizationHeader(headers);
+
+    // let url = `${this.baseUrl.h5Url}order/tracking/shipping/${id}/`;
+    let url = `http://149.129.135.114/order/tracking/shipping/12115/`;
+
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((res)=>this.handleError(res, this));
+  }
 
   getRazorpay(params): Promise<any> {
 

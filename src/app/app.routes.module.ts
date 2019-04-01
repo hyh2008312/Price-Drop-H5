@@ -18,10 +18,13 @@ const routes: Routes = [
         loadChildren: './category/category.module#CategoryModule'
       }, {
         path: 'goodsdetail',
-        loadChildren: './goods-detail/goods-detail.module#GoodsDetailModule'
+        loadChildren: './goods-detail/goods-detail.module#FAQModule'
       }, {
         path: 'order',
         loadChildren: './order/order-list.module#OrderListModule'
+      }, {
+        path: 'FAQ',
+        loadChildren: './FAQ/FAQ.module#FAQModule'
       }
     ]
   }

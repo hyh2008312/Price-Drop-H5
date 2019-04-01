@@ -1,0 +1,163 @@
+.landing{
+  &__slide{
+    width: 100%;
+    padding-bottom: 45%;
+    height: 0;
+    position: relative;
+  }
+  &__bg{
+    margin: 12px 16px 8px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  &__notification{
+    width: 100%;
+    height: 32px;
+    overflow: hidden;
+    background: #FCEACF;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.12);
+
+    &-bg{
+      position: relative;
+    }
+  }
+}
+.mg-rl-16{
+  margin: 0 16px 24px 16px;
+}
+.tp-top{
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.12);
+  border-radius: 8px;
+  margin-top: 12px;
+  padding: 20px 12px ;
+  &-icon{
+    font-size: 40px;
+    margin-right: 8px;
+    color: #EF8A31;
+  }
+  &-txt1{
+    font-size: 12px;
+    color: rgba(0,0,0,.54);
+  }
+  &-txt2{
+    font-size: 12px;
+    font-weight: 500;
+    color: #EF8A31;
+  }
+  &-icon1{
+    font-size: 12px;
+    margin-left: 8px;
+    color: rgba(0,0,0,.38);
+  }
+}
+.tp-bottom{
+  padding: 25px 16px 0 16px;
+  margin-top: 12px;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.12);
+  border-radius: 8px;
+  &-time{
+    text-align: left;
+  }
+  &-dot-line{
+    margin-right: 14px;
+  }
+  &-dot{
+    color: #EF8A31;
+  }
+  &-dot-1-o{
+    width: 16px;
+    height: 22px;
+  }
+  &-dot-1{
+    background-color: #D8D8D8;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+  }
+  &-line{
+    height: 80px;
+    width: 1px;
+    margin-top: -2px;
+    background-color: rgba(0,0,0,.09);
+  }
+  &-txt1{
+    font-size: 14px;
+    line-height: 17px;
+  }
+  &-txt2{
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+
+  .gb-icon{
+    font-size: 14px;
+    margin-right: 12px;
+    color: rgba(0,0,0,0.54);
+  }
+
+  .gb-text{
+    font-size: 14px;
+    color: rgba(0,0,0, 0.87);
+  }
+  .gd-text-color{
+    color: #EF8A31;
+  }
+  .overflow-body{
+    height: calc(100vh - 160px);
+    overflow-y: scroll;
+    z-index: 0;
+  }
+  .overflow-body-height{
+    height: calc(100vh - 102px);
+    overflow-y: scroll;
+    z-index: 0;
+  }
+
+
+
+
+
+  .pd-rl-16{
+    padding: 0 16px 68px 16px;
+  }
+  .mg-rl-16{
+    margin: 0 16px 24px 16px;
+  }
+  .mg-r-12{
+    margin-right: 12px;
+  }
+  .mg-t-16{
+    margin-top: 16px;
+  }
+  .mg-t-12{
+    margin-top: 12px;
+  }
+  .mg-b-0{
+    margin-bottom: 0;
+  }
+  .bg-f4{
+    background-color: #f4f4f4;
+  }
+  .gd-img-image{
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    //border-top-right-radius: 4px;
+    //border-top-left-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    >img{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+    }
+  }
+
+
