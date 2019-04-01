@@ -60,7 +60,7 @@ export class CancelOrderDialogComponent implements OnInit {
   confirm (res) {
     let params = {
       reason: this.reason[this.selReason]
-    }
+    };
     this.orderListService.cancelOrder(this.orderId, params).then((res) => {
       if (res.orderStatus === 'Audit canceled') {
         this.data.parmas = 'Audit canceled';
@@ -68,37 +68,11 @@ export class CancelOrderDialogComponent implements OnInit {
         this.data.parmas = 'showDetailBtn';
         this.toast('Cancelled successfully.');
       }
+      this.data.isEdit = true;
       this.close();
     }).catch((res) => {
-      console.log(res);
+      this.toast(res);
     });
-    // this.$fetch({
-    //   method: 'PUT', // 大写
-    //   url: `${baseUrl}/order/customer/cancel/${this.cancelId}/`,
-    //   data: {
-    //     reason: this.reason[this.reasonActive]
-    //   },
-    //   header: {
-    //     needAuth: true
-    //   }
-    // }).then(resData => {
-    //   if (resData.orderStatus == 'Audit canceled') {
-    //     this.order[this.cancelIndex].orderStatus = 'Audit canceled';
-    //     this.$notice.toast('Your order cancellation request has been submitted for review.');
-    //   } else {
-    //     if (this.index == '0') {
-    //       this.order[this.cancelIndex].orderStatus = 'Canceled';
-    //       this.$notice.toast('Cancelled successfully.');
-    //     } else {
-    //       this.order.splice(this.cancelIndex, 1);
-    //       this.$notice.toast('Cancelled successfully.');
-    //     }
-    //   }
-    // }, error => {
-    //   this.$notice.toast({
-    //     message: error.errorMsg
-    //   });
-    // })
   }
   cancel() {
     this.close();

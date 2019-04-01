@@ -61,6 +61,7 @@ export class ConfirmOrderComponent implements OnInit {
     public snackBar: MatSnackBar,
     private userService: UserService
   ) {
+    this.userService.addNavigation('Confirm Order');
     this.orderService.detail.subscribe((res) => {
       if (res) {
         this.order = res;
@@ -72,8 +73,6 @@ export class ConfirmOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.addNavigation('Confirm Order');
-    console.log(this.order)
     this.getNotification();
     this.getDefaultAddress();
 
@@ -96,7 +95,7 @@ export class ConfirmOrderComponent implements OnInit {
     return parseInt(a) + parseInt(b);
   }
   formatDate(p) {
-    return (new Date().getTime() + (p + 7) * 24 * 60 * 60 * 1000);
+    return new Date(new Date().getTime() + (p + 7) * 24 * 60 * 60 * 1000);
   }
   countOff (s, o) {
     if (o > 0) {

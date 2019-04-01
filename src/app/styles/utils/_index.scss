@@ -155,6 +155,7 @@ textarea.mat-input-element{
   max-width: 100vw !important;
   padding: 0 !important;
   overflow: hidden !important;
+  box-shadow: none !important;;
   @include xb-xs-screen{
     background-color: transparent;
   }

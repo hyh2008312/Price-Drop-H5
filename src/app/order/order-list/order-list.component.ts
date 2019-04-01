@@ -112,7 +112,8 @@ export class OrderListComponent implements OnInit {
     let dialogRef = this.dialog.open(CancelOrderDialogComponent, {
       data: {
         order: i,
-        topType: this.activeTop
+        topType: this.activeTop,
+        isEdit: false
       },
       position: {
         bottom: '0',
@@ -120,20 +121,22 @@ export class OrderListComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log();
-      if (dialogRef.componentInstance.data.params == 'Audit canceled') {
-        this.orderList[index].orderStatus = 'Audit canceled';
-        this.toast('Your order cancellation request has been submitted for review.');
-      } else {
-        if (this.activeTop == null) {
-          this.orderList[index].orderStatus = 'Canceled';
-          this.toast('Cancelled successfully.');
+      if(dialogRef.componentInstance.data.isEdit) {
+        if (dialogRef.componentInstance.data.params == 'Audit canceled') {
+          this.orderList[index].orderStatus = 'Audit canceled';
+          this.toast('Your order cancellation request has been submitted for review.');
         } else {
-          this.orderList.splice(index, 1);
-          this.toast('Cancelled successfully.');
+          if (this.activeTop == null) {
+            this.orderList[index].orderStatus = 'Canceled';
+            this.toast('Cancelled successfully.');
+          } else {
+            this.orderList.splice(index, 1);
+            this.toast('Cancelled successfully.');
+          }
         }
+        this.orderList[index].orderStatus = 'Canceled';
       }
-      this.orderList[index].orderStatus = 'Canceled';
+
     });
   }
   deleteOrder(i, index) {

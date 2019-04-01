@@ -104,12 +104,12 @@ export class GoodsDetailComponent implements OnInit {
         this.selimgsrc = '';
       }
 
-      this.nextPage.shippingPrice = res.shipping.priceItem;
-      this.nextPage.shippingTimeMin = res.shipping.shippingTimeMin;
-      this.nextPage.shippingTimeMax = res.shipping.shippingTimeMax;
+      this.nextPage.shippingPrice = res.shipping?res.shipping.priceItem:0;
+      this.nextPage.shippingTimeMin = res.shipping?res.shipping.shippingTimeMin:0;
+      this.nextPage.shippingTimeMax = res.shipping?res.shipping.shippingTimeMax:0;
 
-      this.nextPage.processingTimeMin = res.shipping.processingTimeMin;
-      this.nextPage.processingTimeMax = res.shipping.processingTimeMax;
+      this.nextPage.processingTimeMin = res.shipping?res.shipping.processingTimeMin:0;
+      this.nextPage.processingTimeMax = res.shipping?res.shipping.processingTimeMax:0;
       if (res.attributes != null && res.attributes.length > 0) {
         if (res.variants.length == 1) {
           this.hasVariants = false;

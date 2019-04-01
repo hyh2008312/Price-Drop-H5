@@ -53,17 +53,14 @@ export class OrderDetailComponent implements OnInit {
     public dialog: MatDialog,
 
   ) {
+    this.userService.addNavigation('Order Detail');
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
   }
 
   ngOnInit(): void {
-    this.userService.addNavigation('Order Detail');
     this.getOrder();
-
-    // this.orderId = this.activatedRoute.snapshot.params['id'];
-
   }
   getOrder () {
     this.orderId = this.activatedRoute.snapshot.params['id'];
@@ -80,7 +77,8 @@ export class OrderDetailComponent implements OnInit {
     // if () {
       let dialogRef = this.dialog.open(CancelOrderDialogComponent, {
         data: {
-          id: this.activatedRoute.snapshot.params['id']
+          id: this.activatedRoute.snapshot.params['id'],
+          isEdit: false
         },
         position: {
           bottom: '0',
@@ -88,10 +86,12 @@ export class OrderDetailComponent implements OnInit {
         }
       });
       dialogRef.afterClosed().subscribe(result => {
-        if (dialogRef.componentInstance.data.parmas=='Audit canceled') {
-          this.bottomReason = dialogRef.componentInstance.data.parmas;
-        } else if (dialogRef.componentInstance.data.parmas=='showDetailBtn') {
-          this.showDetailBtn = true;
+        if(dialogRef.componentInstance.data.isEdit) {
+          if (dialogRef.componentInstance.data.parmas=='Audit canceled') {
+            this.bottomReason = dialogRef.componentInstance.data.parmas;
+          } else if (dialogRef.componentInstance.data.parmas=='showDetailBtn') {
+            this.showDetailBtn = true;
+          }
         }
       });
   }
@@ -104,17 +104,12 @@ export class OrderDetailComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.router.navigate([`/order/orderList`], { replaceUrl: true });
+      if(dialogRef.componentInstance.data.stu == 'ok') {
+        this.router.navigate([`/order/orderList`], { replaceUrl: true });
+      }
     });
   }
   openGoodsDetail() {
     this.router.navigate([`/goodsdetail/${this.order.lines[0].productId}`]);
-  }
-  countOff (s, o) {
-    if (o > 0) {
-      return Math.ceil((o - s) / o * 100) + '%'
-    } else {
-      return '';
-    }
   }
 }

@@ -42,6 +42,8 @@ export class PaymentComponent implements OnInit {
     public snackBar: MatSnackBar
 
   ) {
+    this.userService.addNavigation('Payment');
+
     this.orderService.paymentDetail.subscribe((res) => {
       console.log(res);
       if (res) {
@@ -58,16 +60,13 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.addNavigation('Payment');
     this.getNotification();
     this.getBalance();
   }
   getNotification () {
     this.orderListService.getNotification().then((res) => {
       this.notification = res;
-    }).catch((res) => {
-      console.log(res);
-    });
+    }).catch((res) => {});
   }
   changeBalance(e) {
     this.checkBalance = e.checked;
@@ -78,9 +77,7 @@ export class PaymentComponent implements OnInit {
       if (res.amount > 0 && this.order.paymentAmount > 0) {
         this.isShowBalance = true;
       }
-    }).catch((res) => {
-      console.log(res);
-    });
+    }).catch((res) => {});
   }
   chooseMethod(method) {
     this.method = method;
@@ -99,8 +96,7 @@ export class PaymentComponent implements OnInit {
         this.router.navigate([`/order/paymentSuccess`]);
       }).catch((res) => {
         this.router.navigate([`/order/paymentFail`]);
-        this.toast(res)
-        console.log(res);
+        this.toast(res);
       });
     }
   }
@@ -121,15 +117,15 @@ export class PaymentComponent implements OnInit {
     };
 
     this.orderListService.getRazorpay(params).then((res) => {
-      console.log(res);
       const price = res.amount.split('.');
       const payAmount = price[0] + price[1];
       if (res.amount <= 0) {
+        this.router.navigate([`/order/paymentSuccess`]);
         return;
       }
 
       let options = {
-        "key": 'rzp_live_S1L7BaoXwjfcux',
+        "key": 'rzp_live_dHSGsC4x92fxAQ',
         "amount": payAmount, /// The amount is shown in currency subunits. Actual amount is ₹599.
         "name": res.order.lines[0].title,
         "order_id": res.razorpayOrderId, // Pass the order ID if you are using Razorpay Orders.
@@ -147,9 +143,10 @@ export class PaymentComponent implements OnInit {
 
           this.orderListService.checkRazorpay(params).then((res) => {
             // this.router.navigate(['/order/success']);
-            this.router.navigate([`/paymentSuccess`]);
-          }).catch(() => {
-
+            this.router.navigate([`/order/paymentSuccess`]);
+          }).catch((res) => {
+            this.router.navigate([`/order/paymentFail`]);
+            this.toast(res);
           });
         },
         "prefill": {

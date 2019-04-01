@@ -14,21 +14,22 @@ export class GoodsDescriptionComponent implements OnInit {
   banner: any = [];
   productId: any= '';
   goods: any = {};
-  addHeight = true
-  returnStu = true
+  addHeight = true;
+  returnStu = true;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private goodsDetailService: GoodsDetailService
   ) {
+    this.userService.addNavigation('Description');
+
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
   }
 
   ngOnInit():void {
-    this.userService.addNavigation('Description');
 
     this.productId = this.activatedRoute.snapshot.params['id'];
     if(this.productId){
@@ -43,6 +44,7 @@ export class GoodsDescriptionComponent implements OnInit {
       console.log(res);
     });
   }
+
   trimNullObj (arr: any = []) {
     const tmpArr = [];
     for (let i = 0; i < arr.length; i++) {
