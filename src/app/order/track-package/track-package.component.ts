@@ -50,20 +50,18 @@ export class TrackPackageComponent implements OnInit {
 
     this.orderListService.getOrderTracking(this.id).then((resData) => {
       this.order = resData;
-      console.log(resData);
-        // if (resData.data && resData.data.TrackData.length > 0) {
-        //   this.gatiTrackingInfo = [...resData.data.TrackData];
-        // }
-    }).catch((res) => {
-        console.log(res);
-    });
+    }).catch((res) => {});
   }
   toast(res) {
     this.snackBar.openFromComponent(ToastComponent, {
       data: {
         string: res
       },
-      duration: 1000,
+      duration: 2500,
     });
+  }
+
+  copy($event) {
+    this.toast('Successfully Copied!');
   }
 }

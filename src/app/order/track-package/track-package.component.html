@@ -1,40 +1,105 @@
-<div  [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+<div  [ngClass]="!addHeight? 'overflow-body-normal-height': 'overflow-body-normal'">
 
   <div class="container mg-rl-16" >
 
-    <div class="tp-top" fxLayout="row" fxLayoutAlign="start">
-      <i  class="iconfont-socialcommer tp-top-icon">&#xe77c;</i>
+    <div class="tp-top" fxLayout="row" fxLayoutAlign="start center">
+      <i  class="iconfont-socialcommer tp-top-icon icon-pic-carrier"></i>
       <div fxLayout="column" fxLayoutAlign="start">
         <div class="tp-top-txt1">Carrier: <span class="tp-top-txt2">{{order.orderData.carrierCode}}</span></div>
-        <div class="tp-top-txt1">Tracking Number: {{order.orderData.trackingNumber}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
-        <div class="tp-top-txt1" *ngIf="order.orderData.carrierCode=='GATI'">Carrier’s Contact Number: {{'18601234248'}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
-        <div class="tp-top-txt1" *ngIf="order.orderData.carrierCode=='GATI'">Carrier’s Support Email: {{'abcd@getpricedrop.com'}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
+        <div class="tp-top-txt1" ngxClipboard [cbContent]="order.orderData.trackingNumber" (cbOnSuccess)="copy($event)">
+          Tracking Number: {{order.orderData.trackingNumber}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
+        <div class="tp-top-txt1" *ngIf="order.orderData.carrierCode=='GATI'"
+             ngxClipboard [cbContent]="'18601234248'" (cbOnSuccess)="copy($event)">
+          Carrier’s Contact Number: {{'18601234248'}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
+        <div class="tp-top-txt1" *ngIf="order.orderData.carrierCode=='Delhivery'"
+             ngxClipboard [cbContent]="'1246719500'" (cbOnSuccess)="copy($event)">
+          Carrier’s Contact Number: {{'1246719500'}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
+        <div class="tp-top-txt3" *ngIf="order.orderData.carrierCode=='GATI'"
+             ngxClipboard [cbContent]="'ccc_gae@gati.com'" (cbOnSuccess)="copy($event)">
+          Carrier’s Support Email: {{'ccc_gae@gati.com'}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
+        <div class="tp-top-txt3" *ngIf="order.orderData.carrierCode=='Delhivery'"
+             ngxClipboard [cbContent]="'customer.support@delhivery.com'" (cbOnSuccess)="copy($event)">
+          Carrier’s Support Email: {{'customer.support@delhivery.com'}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
       </div>
     </div>
 
-
     <div class="tp-bottom">
-      <div  *ngFor="let i of order.trackingData let index = index" fxLayout="row" fxLayoutAlign="start">
-        <div class="tp-bottom-time" fxFlex="15">
-          {{i.actiondate.substring(0,4)}}<br/>{{i.actiondate.substring(5,10)}}
-          <br/><span style="color: rgba(0,0,0,.38)">{{i.actiondate.substr(-5)}}</span>
+      <div  *ngFor="let i of order.trackingData;let index = index;" fxLayout="row" fxLayoutAlign="start">
+        <div class="tp-bottom-time" fxFlex="none">
+          <div class="tp-bottom-time-text">{{i.actiondate | amDateFormat:'YYYY'}}</div>
+          <div class="tp-bottom-time-text">{{i.actiondate | amDateFormat:'MM-DD'}}</div>
+          <div class="tp-bottom-time-1">{{i.actiondate | amDateFormat:'HH:mm'}}</div>
         </div>
 
         <div class="tp-bottom-dot-line" [ngStyle]="{width: index!==0? '16px':''}" fxLayout="column" fxLayoutAlign="start center">
-          <i *ngIf="index==0" class="iconfont-socialcommer  tp-bottom-dot" >&#xe6fb;</i>
-          <i *ngIf="index!==0" class="tp-bottom-dot-1" ></i>
+          <i *ngIf="index==0 && order.orderData.orderStatus == 'Completed'" class="iconfont-socialcommer  tp-bottom-dot" >&#xe6fb;</i>
+          <i *ngIf="index!==0 || (index==0 && order.orderData.orderStatus != 'Completed')" class="tp-bottom-dot-1" ></i>
 
-
-          <div [ngClass]="index==order.trackingData.length-1?'':'tp-bottom-line'"></div>
+          <div class="tp-bottom-line"></div>
         </div>
 
-        <div fxLayout="column" fxLayoutAlign="start">
+        <div class="md-padding-bottom-4" fxLayout="column" fxLayoutAlign="start" *ngIf="index==0 && order.orderData.orderStatus == 'Completed'">
           <div class="tp-bottom-txt1">{{i.exception}}</div>
           <div class="tp-bottom-txt2">{{i.location}}</div>
         </div>
+        <div class="md-padding-bottom-4" fxLayout="column" fxLayoutAlign="start" *ngIf="index!==0 || (index==0 && order.orderData.orderStatus != 'Completed')" >
+          <div class="tp-bottom-txt3">{{i.exception}}</div>
+          <div class="tp-bottom-txt4">{{i.location}}</div>
+        </div>
 
       </div>
+      <div fxLayout="row" fxLayoutAlign="start" *ngIf="order.orderData.shippedTime">
+        <div class="tp-bottom-time" fxFlex="none">
+          <div class="tp-bottom-time-text">{{order.orderData.shippedTime| amDateFormat:'YYYY'}}</div>
+          <div class="tp-bottom-time-text">{{order.orderData.shippedTime | amDateFormat:'MM-DD'}}</div>
+          <div class="tp-bottom-time-1">{{order.orderData.shippedTime | amDateFormat:'HH:mm'}}</div>
+        </div>
 
+        <div class="tp-bottom-dot-line" fxLayout="column" fxLayoutAlign="start center">
+          <i  class="iconfont-socialcommer  tp-bottom-dot-2" >&#xe6fb;</i>
+
+          <div class="tp-bottom-line"></div>
+        </div>
+
+        <div class="md-padding-bottom-4" fxLayout="column" fxLayoutAlign="start">
+          <div class="tp-bottom-txt1">Your order has been shipped out from our warehouse. Your tracking details will be updated by courier later.</div>
+        </div>
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start" *ngIf="order.orderData.paidTime">
+        <div class="tp-bottom-time" fxFlex="none">
+          <div class="tp-bottom-time-text">{{order.orderData.paidTime | amDateFormat:'YYYY'}}</div>
+          <div class="tp-bottom-time-text">{{order.orderData.paidTime | amDateFormat:'MM-DD'}}</div>
+          <div class="tp-bottom-time-1">{{order.orderData.paidTime | amDateFormat:'HH:mm'}}</div>
+        </div>
+
+        <div class="tp-bottom-dot-line" fxLayout="column" fxLayoutAlign="start center">
+          <i  class="iconfont-socialcommer  tp-bottom-dot-2" >&#xe6fb;</i>
+
+          <div class="tp-bottom-line"></div>
+        </div>
+
+        <div class="md-padding-bottom-4" fxLayout="column" fxLayoutAlign="start">
+          <div class="tp-bottom-txt1">The manufacturer is preparing for your order now. Your products will be shipped to our warehouse in 2-3 days.</div>
+        </div>
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start" *ngIf="order.orderData.paidTime">
+        <div class="tp-bottom-time" fxFlex="none">
+          <div class="tp-bottom-time-text">{{order.orderData.paidTime | amDateFormat:'YYYY'}}</div>
+          <div class="tp-bottom-time-text">{{order.orderData.paidTime | amDateFormat:'MM-DD'}}</div>
+          <div class="tp-bottom-time-1">{{order.orderData.paidTime | amDateFormat:'HH:mm'}}</div>
+        </div>
+
+        <div class="tp-bottom-dot-line" fxLayout="column" fxLayoutAlign="start center">
+          <i  class="iconfont-socialcommer  tp-bottom-dot-2" >&#xe6fb;</i>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start">
+          <div class="tp-bottom-txt1">Your order has been confirmed by manufacturer.</div>
+        </div>
+
+      </div>
     </div>
 
 

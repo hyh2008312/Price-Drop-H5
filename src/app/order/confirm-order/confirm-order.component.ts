@@ -54,6 +54,8 @@ export class ConfirmOrderComponent implements OnInit {
   amin: any = 12;
   asecond: any = 13;
 
+  addHeight: any = true;
+
   constructor(
     private router: Router,
     private orderListService: OrderListService,
@@ -68,6 +70,10 @@ export class ConfirmOrderComponent implements OnInit {
       } else {
         this.router.navigate([`/`]);
       }
+    });
+
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
     });
 
   }

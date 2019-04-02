@@ -1,5 +1,4 @@
-
-<div [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+<div [ngClass]="!addHeight? 'overflow-body-normal-height': 'overflow-body-normal'">
   <div class="container">
     <div class=" order-detail mg-rl-16 " >
 
@@ -173,10 +172,10 @@
 <div class="bottom-div" fxLayout="row" fxLayoutAlign="space-between center">
   <div>&nbsp;</div>
   <div fxLayout="row" fxLayoutAlign="start">
-    <button *ngIf="!showDetailBtn" class="bd-btn1" (click)="openCancelOrder()">Cancel Order</button>
+    <div *ngIf="!showDetailBtn" class="bd-btn1 md-margin-right-2" (click)="openCancelOrder()">Cancel Order</div>
     <div *ngIf="showDetailBtn">
-      <button class="bd-btn1" (click)="deleteOrder()">Delete</button>
-      <button class="bd-btn" (click)="openGoodsDetail()">Buy Again</button>
+      <div class="bd-btn1" (click)="deleteOrder()">Delete</div>
+      <div class="bd-btn" (click)="openGoodsDetail()">Buy Again</div>
     </div>
     <div *ngIf="bottomReason">{{bottomReason}}</div>
   </div>

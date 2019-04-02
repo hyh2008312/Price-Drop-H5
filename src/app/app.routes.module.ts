@@ -1,4 +1,5 @@
 import { RouterModule, Routes} from '@angular/router';
+import {GoodsDetailModule} from './goods-detail/goods-detail.module';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
         loadChildren: './category/category.module#CategoryModule'
       }, {
         path: 'goodsdetail',
-        loadChildren: './goods-detail/goods-detail.module#FAQModule'
+        loadChildren: './goods-detail/goods-detail.module#GoodsDetailModule'
       }, {
         path: 'order',
         loadChildren: './order/order-list.module#OrderListModule'

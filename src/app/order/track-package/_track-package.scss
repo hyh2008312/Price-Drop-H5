@@ -33,18 +33,30 @@
   margin-top: 12px;
   padding: 20px 12px ;
   &-icon{
-    font-size: 40px;
+    font-size: 24px;
     margin-right: 8px;
-    color: #EF8A31;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #EF8A31;
+    color: #fff;
   }
   &-txt1{
     font-size: 12px;
+    line-height: 14px;
     color: rgba(0,0,0,.54);
+    margin-bottom: 12px;
   }
   &-txt2{
     font-size: 12px;
-    font-weight: 500;
+    line-height: 14px;
+    font-weight: bold;
     color: #EF8A31;
+  }
+  &-txt3{
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(0,0,0,.54);
   }
   &-icon1{
     font-size: 12px;
@@ -53,19 +65,39 @@
   }
 }
 .tp-bottom{
-  padding: 25px 16px 0 16px;
+  padding: 24px 16px;
   margin-top: 12px;
   background-color: #FFFFFF;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.12);
   border-radius: 8px;
   &-time{
-    text-align: left;
+    text-align: right;
+    padding-right: 10px;
+    width: 50px;
+
+    &-text{
+      margin-bottom: 2px;
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    &-1{
+      transform: scale(0.8);
+      font-size: 12px;
+      line-height: 14px;
+      opacity: 0.38;
+      margin-right: -4px;
+    }
   }
   &-dot-line{
     margin-right: 14px;
   }
   &-dot{
     color: #EF8A31;
+    margin-top: -2px;
+    &-2{
+      color: #EF8A31;
+    }
   }
   &-dot-1-o{
     width: 16px;
@@ -76,9 +108,10 @@
     border-radius: 50%;
     width: 8px;
     height: 8px;
+    margin-top: 4px;
   }
   &-line{
-    height: 80px;
+    height: 100%;
     width: 1px;
     margin-top: -2px;
     background-color: rgba(0,0,0,.09);
@@ -88,9 +121,20 @@
     line-height: 17px;
   }
   &-txt2{
-    margin-top: 4px;
+    margin-top: 3px;
     font-size: 12px;
     line-height: 20px;
+  }
+  &-txt3{
+    font-size: 14px;
+    line-height: 17px;
+    opacity: 0.38;
+  }
+  &-txt4{
+    margin-top: 3px;
+    font-size: 12px;
+    line-height: 20px;
+    opacity: 0.38;
   }
 }
 
@@ -107,20 +151,6 @@
   .gd-text-color{
     color: #EF8A31;
   }
-  .overflow-body{
-    height: calc(100vh - 160px);
-    overflow-y: scroll;
-    z-index: 0;
-  }
-  .overflow-body-height{
-    height: calc(100vh - 102px);
-    overflow-y: scroll;
-    z-index: 0;
-  }
-
-
-
-
 
   .pd-rl-16{
     padding: 0 16px 68px 16px;
@@ -161,3 +191,13 @@
   }
 
 
+.overflow-body-normal{
+  height: calc(100vh - 112px);
+  overflow-y: scroll;
+  z-index: 0;
+}
+.overflow-body-normal-height{
+  height: calc(100vh - 56px);
+  overflow-y: scroll;
+  z-index: 0;
+}

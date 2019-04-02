@@ -38,7 +38,7 @@ export class OrderDetailComponent implements OnInit {
     ]
   };
   orderId: any = '';
-  bottomReason: any = ''
+  bottomReason: any = '';
   addHeight: any = true;
   showDetailBtn: any = false;
   ahour: any = 11;

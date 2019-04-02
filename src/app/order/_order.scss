@@ -262,7 +262,7 @@
 .bd-btn{
   padding: 12px 17px;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 14px;
   color: #FFFFFF;
   margin-right: 16px;
   background: #EF8A31;
@@ -271,7 +271,7 @@
 .bd-btn1{
   padding: 12px 17px;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 14px;
   color: #EF8A31;
   background: white;
   border-radius: 20px;
@@ -699,7 +699,16 @@
   }
 
 
-
+.overflow-body-normal{
+  height: calc(100vh - 112px);
+  overflow-y: scroll;
+  z-index: 0;
+}
+.overflow-body-normal-height{
+  height: calc(100vh - 56px);
+  overflow-y: scroll;
+  z-index: 0;
+}
 
 
   .pd-rl-16{

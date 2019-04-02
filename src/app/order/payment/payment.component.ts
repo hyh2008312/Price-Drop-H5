@@ -32,6 +32,7 @@ export class PaymentComponent implements OnInit {
   asecond: any = 13;
   user: any;
   codSrc: any;
+  addHeight: any = true;
 
   constructor(
     private router: Router,
@@ -40,22 +41,21 @@ export class PaymentComponent implements OnInit {
     private userService: UserService,
     private orderService: OrderService,
     public snackBar: MatSnackBar
-
   ) {
     this.userService.addNavigation('Payment');
 
     this.orderService.paymentDetail.subscribe((res) => {
-      console.log(res);
       if (res) {
         this.order = res;
-        console.log(res);
-      } else {
-        // this.router.navigate([`/`]);
-      }
+      } else {}
     });
 
     this.userService.currentUser.subscribe((res) => {
       this.user = res;
+    });
+
+    this.userService.closeDownload.subscribe((data) => {
+      this.addHeight = data;
     });
   }
 
