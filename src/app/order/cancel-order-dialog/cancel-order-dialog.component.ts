@@ -57,7 +57,7 @@ export class CancelOrderDialogComponent implements OnInit {
   selItem(i) {
     this.selReason = i;
   }
-  confirm (res) {
+  confirm () {
     let params = {
       reason: this.reason[this.selReason]
     };
