@@ -6,10 +6,11 @@ import { ChooseAddressComponent } from './choose-address/choose-address.componen
 import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { CityListComponent } from './city-list/city-list.component';
-import {PaymentComponent} from './payment/payment.component';
-import {PaymentFailComponent} from './payment-fail/payment-fail.component';
-import {PaymentSuccessComponent} from './payment-sucess/payment-success.component';
-import {TrackPackageComponent} from './track-package/track-package.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentFailComponent } from './payment-fail/payment-fail.component';
+import { PaymentSuccessComponent } from './payment-sucess/payment-success.component';
+import { TrackPackageComponent } from './track-package/track-package.component';
+import { EditAddressComponent } from './edit-address/edit-address.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,8 @@ const routes: Routes = [
     path: 'paymentSuccess', component: PaymentSuccessComponent,
   }, {
     path: 'trackPackage/:id', component: TrackPackageComponent,
+  }, {
+    path: 'editAddress/:id', component:  EditAddressComponent,
   }
 ];
 

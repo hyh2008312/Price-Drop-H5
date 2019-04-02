@@ -5,6 +5,7 @@ import { UserService } from '../../shared/services/user/user.service';
 import {MatDialog} from '@angular/material';
 import {CancelOrderDialogComponent} from '../cancel-order-dialog/cancel-order-dialog.component';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
+import {OrderService} from '../../shared/services/order/order.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -51,6 +52,7 @@ export class OrderDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     public dialog: MatDialog,
+    private orderService: OrderService
 
   ) {
     this.userService.addNavigation('Order Detail');
@@ -109,7 +111,28 @@ export class OrderDetailComponent implements OnInit {
       }
     });
   }
-  openGoodsDetail() {
+  formatMinDate (order) {
+    return new Date(new Date().getTime() + (order.shippingTimeMin + order.processingTimeMax) * 24 * 60 * 60 * 1000);
+  }
+
+  formatMaxDate (order) {
+    return new Date(new Date().getTime() + (order.shippingTimeMax + order.processingTimeMax) * 24 * 60 * 60 * 1000);
+  }
+
+  buyProduct() {
     this.router.navigate([`/goodsdetail/${this.order.lines[0].productId}`]);
+  }
+
+  tracking() {
+    this.router.navigate([`/order/trackPackage/${this.order.id}`]);
+  }
+
+  payNow() {
+    this.orderService.paymentOrder(this.order);
+    this.router.navigate([`/order/payment`]);
+  }
+
+  editAddress() {
+    this.router.navigate([`/order/editAddress/${this.order.id}`]);
   }
 }

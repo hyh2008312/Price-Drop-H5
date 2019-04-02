@@ -105,7 +105,6 @@ export class OrderListComponent implements OnInit {
     this.router.navigate([`/order/payment`]);
   }
   buyProduct(i) {
-    console.log(i)
     this.router.navigate([`/goodsdetail/${i.lines[0].productId}`]);
   }
   cancel(i,index) {
@@ -167,13 +166,14 @@ export class OrderListComponent implements OnInit {
   formatDate(p) {
     return new Date(p).getTime();
   }
-  onUp(ev) {
-    console.log('scrolled up!', ev);
-  }
+  onUp(ev) {}
 
   onScrollDown (ev) {
     this.loading = true;
     this.getOrder();
   }
 
+  editAddress(i) {
+    this.router.navigate([`/order/editAddress/${i.id}`]);
+  }
 }

@@ -24,8 +24,6 @@ export class TrackPackageComponent implements OnInit {
     orderData: {},
     trackingData: [],
   };
-  trackingInfo: any = [];
-  gatiTrackingInfo: any = [];
 
   constructor(
     private router: Router,

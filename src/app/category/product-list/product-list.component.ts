@@ -1,7 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../category.service';
-import {UserService} from '../../shared/services/user/user.service';
+import { UserService } from '../../shared/services/user/user.service';
+import {ToastComponent } from '../../shared/components/toast/toast.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-category-product-list',
@@ -29,9 +31,9 @@ export class ProductListComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
     private userService: UserService,
-    private changeDetectorRef: ChangeDetectorRef
+    public snackBar: MatSnackBar
 
-) {
+  ) {
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
@@ -48,15 +50,15 @@ export class ProductListComponent implements OnInit {
   getCategoryTitle () {
     let id = this.activatedRoute.snapshot.params['id'];
     this.categoryService.getTitle(id).then((res) => {
-      this.titleName = res.name
+      this.titleName = res.name;
       this.userService.addNavigation(this.titleName);
     }).catch((res) => {
-        console.log(res)
+      this.toast(res);
     })
   }
   getProduct (isFirst?: any) {
     let id = this.activatedRoute.snapshot.params['id'];
-    let cId  = id
+    let cId  = id;
     if (this.selId) {
       cId = this.selId
     }
@@ -65,66 +67,69 @@ export class ProductListComponent implements OnInit {
       'page' : this.page,
       'page_size' : this.pageSize,
       'sort' : this.sort,
-    }
+    };
     this.categoryService.getProduct(params).then((res) => {
-       if (isFirst) {
-         this.ProductList = []
-       }
-        let arr = [];
-        for (let i = 0; i < res.results.length; i++) {
-          const item = res.results[i];
-          arr.push(item);
-          if ((i > 0 && i % 2 == 1) || i == res.results.length - 1) {
-            this.ProductList.push(arr);
-            arr = [];
-          }
+      if (isFirst) {
+        this.ProductList = []
+      }
+      let arr = [];
+      for (let i = 0; i < res.results.length; i++) {
+        const item = res.results[i];
+        arr.push(item);
+        if ((i > 0 && i % 2 == 1) || i == res.results.length - 1) {
+          this.ProductList.push(arr);
+          arr = [];
         }
+      }
       this.page++;
       this.loading = false;
       // this.changeDetectorRef.markForCheck();
       // this.changeDetectorRef.detectChanges();
     }).catch((res) => {
-        console.log(res)
+      this.toast(res);
     })
   }
-  onUp(ev) {
-    console.log('scrolled up!', ev);
-  }
+  onUp(ev) {}
 
   onScrollDown (ev) {
     this.loading = true;
-    console.log('scrolled down!', ev);
     this.getProduct();
   }
   getSubCategory () {
     let id = this.activatedRoute.snapshot.params['id'];
     this.categoryService.getSubCategory(id).then((res) => {
-      console.log(res)
-     this.categoryList = res
+      this.categoryList = res
       this.categoryList.unshift({
         id: false,
         name: 'All'
       });
     }).catch((res) => {
-        console.log(res)
-    })
+      this.toast(res);
+    });
   }
   getNotification () {
     this.categoryService.getNotification().then((res) => {
       this.notification = res
     }).catch((res) => {
-        console.log(res)
-    })
+      this.toast(res);
+    });
   }
+
   selHtag(id) {
-    console.log(id)
     if (this.selId != id) {
       this.selId = id;
     } else {
       this.selId = false;
     }
-    // this.changeDetectorRef.markForCheck();
-    // this.changeDetectorRef.detectChanges();
     this.getProduct(true);
+  }
+
+  toast(res) {
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: {
+        string: res
+      },
+      duration: 2500,
+    });
   }
 }

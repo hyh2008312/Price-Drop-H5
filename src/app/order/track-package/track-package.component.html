@@ -6,7 +6,8 @@
       <i  class="iconfont-socialcommer tp-top-icon icon-pic-carrier"></i>
       <div fxLayout="column" fxLayoutAlign="start">
         <div class="tp-top-txt1">Carrier: <span class="tp-top-txt2">{{order.orderData.carrierCode}}</span></div>
-        <div class="tp-top-txt1" ngxClipboard [cbContent]="order.orderData.trackingNumber" (cbOnSuccess)="copy($event)">
+        <div class="tp-top-txt1" *ngIf="order.orderData.trackingNumber && order.orderData.shippedTime"
+             ngxClipboard [cbContent]="order.orderData.trackingNumber" (cbOnSuccess)="copy($event)">
           Tracking Number: {{order.orderData.trackingNumber}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
         <div class="tp-top-txt1" *ngIf="order.orderData.carrierCode=='GATI'"
              ngxClipboard [cbContent]="'18601234248'" (cbOnSuccess)="copy($event)">
@@ -20,6 +21,10 @@
         <div class="tp-top-txt3" *ngIf="order.orderData.carrierCode=='Delhivery'"
              ngxClipboard [cbContent]="'customer.support@delhivery.com'" (cbOnSuccess)="copy($event)">
           Carrier’s Support Email: {{'customer.support@delhivery.com'}} <i class="iconfont-socialcommer tp-top-icon1">&#xe708;</i></div>
+        <div class="tp-top-txt3" *ngIf="!order.orderData.trackingNumber || !order.orderData.shippedTime">
+          Tracking Number:
+          <span class="tp-top-txt2">Waiting for update</span>
+        </div>
       </div>
     </div>
 

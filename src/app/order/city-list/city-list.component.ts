@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
 
@@ -20,10 +20,11 @@ export class CityListComponent implements OnInit {
   ahour: any = 11;
   amin: any = 12;
   asecond: any = 13;
-
+  source: any;
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private orderListService: OrderListService,
     private userService: UserService
   ) {
@@ -35,6 +36,9 @@ export class CityListComponent implements OnInit {
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
+    if (this.activatedRoute.snapshot.queryParams['source']) {
+      this.source = this.activatedRoute.snapshot.queryParams['source'];
+    }
   }
 
   ngOnInit(): void {
@@ -55,7 +59,13 @@ export class CityListComponent implements OnInit {
   }
   saveCity() {
     // this.orderListService.addState(this.activeState);
-    this.router.navigate(['/order/changeAddress'], {queryParams: {id: this.activeState.id, name: this.activeState.name}});
+    if(this.source > 0) {
+      this.router.navigate([`/order/editAddress/${this.source}`],
+        {queryParams: {id: this.activeState.id, name: this.activeState.name}, replaceUrl: true});
+    } else {
+      this.router.navigate(['/order/changeAddress'],
+        {queryParams: {id: this.activeState.id, name: this.activeState.name}, replaceUrl: true});
+    }
   }
   citySort (arr) {
     const tmp = [];

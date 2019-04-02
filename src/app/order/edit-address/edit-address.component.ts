@@ -6,12 +6,12 @@ import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
-  selector: 'app-order-change-address',
-  templateUrl: './change-address.component.html',
+  selector: 'app-order-edit-address',
+  templateUrl: './edit-address.component.html',
   styleUrls: ['../_order.scss']
 })
 
-export class ChangeAddressComponent implements OnInit {
+export class EditAddressComponent implements OnInit {
 
   attributeForm: FormGroup;
   address: {
@@ -25,7 +25,7 @@ export class ChangeAddressComponent implements OnInit {
     stateId: '',
     phoneNumberConfirm: ''
   };
-  addressId: any = '';
+  id: any = '';
   name: any = '';
   addHeight: any = true;
   stateName: any = 'Choose';
@@ -40,6 +40,7 @@ export class ChangeAddressComponent implements OnInit {
     private userService: UserService
   ) {
     this.attributeForm = this.fb.group({
+      id: [''],
       firstName: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
       phoneNumberConfirm: ['', [Validators.required, Validators.minLength(10)]],
@@ -51,52 +52,62 @@ export class ChangeAddressComponent implements OnInit {
       stateId: ['', Validators.required]
     });
     this.userService.addNavigation('Edit Address');
-    if (this.activatedRoute.snapshot.queryParams['addressId']) {
-      this.addressId = this.activatedRoute.snapshot.queryParams['addressId'];
-    }
+
     this.userService.closeDownload.subscribe((data) => {
       this.addHeight = data;
     });
   }
 
   ngOnInit(): void {
-    this.orderListService.state.subscribe((res) => {
+    this.id = this.activatedRoute.snapshot.params['id'];
+    this.orderListService.getOrderAddress({
+      id: this.id
+    }).then((res) => {
       if (res) {
-        if (this.activatedRoute.snapshot.queryParams['name'] || res.stateName) {
-          this.stateName = this.activatedRoute.snapshot.queryParams['name'] || res.stateName;
-          this.stateId = this.activatedRoute.snapshot.queryParams['id'] || res.stateId;
-        }
+        this.stateName = res.state;
         this.attributeForm.patchValue({
-          firstName : res.firstName,
+          id: this.id,
+          firstName : res.username,
           phoneNumber : res.phoneNumber,
           phoneNumberConfirm : res.phoneNumber,
           postcode : res.postcode,
           line1 : res.line1,
           line2 : res.line2,
           line3 : res.line3,
-          city : res.city,
-          stateId : this.stateId,
+          city : res.city
+        });
+
+        this.orderListService.getCityList().then((res) => {
+          for(let item of res) {
+            if(item.name == this.stateName) {
+              this.stateId = item.id;
+            }
+          }
+          if (this.activatedRoute.snapshot.queryParams['name']) {
+            this.stateName = this.activatedRoute.snapshot.queryParams['name'];
+            this.stateId = this.activatedRoute.snapshot.queryParams['id'];
+          }
+          this.attributeForm.patchValue({
+            stateId: this.stateId
+          });
         });
       }
     });
+
   }
   chooseState () {
     this.orderListService.addState(this.attributeForm.value);
-    this.router.navigate([`/order/cityList`], {queryParams: {source: 0 }});
+    this.router.navigate([`/order/cityList`], {queryParams: {source: this.id }, replaceUrl: true});
   }
   save () {
-    if (this.addressId) {
-      this.orderListService.editAddress(this.addressId, this.attributeForm.value).then((res) => {
-        this.router.navigate([`/order/chooseAddress`]);
-      }).catch((res) => {
-        console.log(res);
-      });
-    } else {
-      this.orderListService.postAddress(this.attributeForm.value).then((res) => {
-        this.router.navigate([`/order/chooseAddress`], {queryParams: {type: 1 }});
-      }).catch((res) => {
-        console.log(res);
-      });
+    if(this.attributeForm.invalid) {
+      console.log(this.attributeForm.value)
+      return;
     }
+    this.orderListService.editOrderAddress(this.attributeForm.value).then((res) => {
+      this.router.navigate([`/order/orderDetail/${this.id}`], {replaceUrl: true});
+    }).catch((res) => {
+      console.log(res);
+    });
   }
 }

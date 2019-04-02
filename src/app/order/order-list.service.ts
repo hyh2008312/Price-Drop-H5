@@ -136,6 +136,18 @@ export class OrderListService {
       .then(response => response.json())
       .catch((res)=>this.handleError(res, this));
   }
+  getOrderAddress(params): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+    let url = `${this.baseUrl.h5Url}/order/customer/detail/${params.id}/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((res)=>this.handleError(res, this));
+  }
   getBalance(): Promise<any> {
 
     let headers = new Headers({
@@ -243,6 +255,18 @@ export class OrderListService {
     let url = `${this.baseUrl.h5Url}address/shipping/detail/${id}/`;
     let options = new RequestOptions({headers: headers});
     return this.http.put(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError1);
+  }
+  editOrderAddress(params) {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+    let url = `${this.baseUrl.h5Url}order/customer/update/address/${params.id}/`;
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError1);
