@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
-
+import { FaqComponent } from './faq/faq.component';
 import { FAQService } from './FAQ.service';
 
 @NgModule({
@@ -10,6 +10,7 @@ import { FAQService } from './FAQ.service';
   ],
   exports: [],
   declarations: [
+    FaqComponent
   ],
   entryComponents: [
 
