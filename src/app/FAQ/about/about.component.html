@@ -1,7 +1,7 @@
 <div #scroll [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
 
   <div class="container background-bg-white faq">
-    <div *ngFor="let i of faqArr let index = index"
+    <div *ngFor="let i of aboutArr let index = index"
          (click)="openTmp(index)"
          class="faq-item"
          fxLayout="row" fxLayoutAlign="space-between center">

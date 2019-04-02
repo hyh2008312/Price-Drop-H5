@@ -1,0 +1,18 @@
+<div #scroll [ngClass]="!addHeight? 'overflow-body-height': 'overflow-body'">
+
+  <div class="container background-bg-white faq-qa">
+    <!--<div *ngFor="let i of faqArr let index = index" class="faq-item" fxLayout="row" fxLayoutAlign="space-between center">-->
+      <!--<div>{{i}}</div>-->
+      <!--<i class="iconfont-socialcommer">&#xe626;</i>-->
+    <!--</div>-->
+    <div *ngFor="let i of arr let index = index" class="qa-item">
+      <div class="question">
+        {{index+1}}. {{i.question}}
+      </div>
+      <div class="answer">
+        {{i.answer}}
+      </div>
+    </div>
+
+  </div>
+</div>

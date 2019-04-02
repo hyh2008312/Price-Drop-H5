@@ -19,7 +19,29 @@
   overflow-y: scroll;
 }
 
+.faq{
+  //padding: 0 16px;
+}
+.faq-item{
+  padding: 12px  16px;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+}
 
+.qa-item{
+  margin-bottom: 30px;
+}
+.question{
+  font-weight: 500;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+.faq-qa{
+  padding:24px 30px;
+}
+
+.about{
+  background-color: black;
+}
 .bg-f4{
   background-color: #f4f4f4;
 }
