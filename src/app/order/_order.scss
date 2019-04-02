@@ -647,6 +647,7 @@
     color: #000000;
     margin-left: 12px;
     line-height: 24px;
+    text-align: center;
   }
   &-word1{
     font-size: 14px;
@@ -654,13 +655,43 @@
     margin-top: 8px;
     margin-bottom: 85px;
     line-height: 17px;
+    text-align: center;
+  }
+  &-word2{
+    font-size: 14px;
+    color: #000000;
+    margin-top: 8px;
+    line-height: 17px;
+    text-align: center;
+  }
+  &-word3{
+    font-size: 14px;
+    color: #000000;
+    margin-top: 4px;
+    margin-bottom: 80px;
+    line-height: 17px;
+    text-align: center;
   }
   &-btn{
     background: #EF8A31;
     border-radius: 20px;
     color: white;
     font-size: 14px;
-    padding: 10px 115px;
+    line-height: 40px;
+    width: 262px;
+    text-align: center;
+    font-weight: bold;
+  }
+  &-btn-1{
+    margin-top: 12px;
+    border: 1px solid #EF8A31;
+    border-radius: 20px;
+    color: #EF8A31;
+    font-size: 14px;
+    line-height: 38px;
+    width: 260px;
+    text-align: center;
+    font-weight: bold;
   }
 }
 

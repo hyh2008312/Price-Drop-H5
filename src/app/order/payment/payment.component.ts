@@ -92,10 +92,9 @@ export class PaymentComponent implements OnInit {
         bonus: this.checkBalance ? this.checkBalance : null
       };
       this.orderListService.paymentCOD(params).then((res) => {
-
-        this.router.navigate([`/order/paymentSuccess`]);
+        this.router.navigate([`/order/paymentSuccess`], {replaceUrl: true});
       }).catch((res) => {
-        this.router.navigate([`/order/paymentFail`]);
+        this.router.navigate([`/order/paymentFail`], {replaceUrl: true});
         this.toast(res);
       });
     }

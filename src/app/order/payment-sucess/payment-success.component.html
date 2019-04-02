@@ -5,10 +5,12 @@
     <div fxLayout="row" fxLayoutAlign="start center">
       <i class="iconfont-socialcommer payment-result-success">&#xe6e7;</i>
       <div class="payment-result-word">Transaction Successful</div>
+
     </div>
-    <!--<div class="payment-result-word1">You have Paid Rs.1000</div>-->
-    <div class="payment-result-word1">Order Placed Successfully!</div>
-    <div class="payment-result-btn" routerLink="/order/orderList">View Order</div>
+    <div class="payment-result-word2">Thank you for your order.</div>
+    <div class="payment-result-word3">Your package will be dispatched in 5-7 days!</div>
+    <div class="payment-result-btn" (click)="jumpOrder()">View Order</div>
+    <div class="payment-result-btn-1" (click)="jumpHome()">Back to Home Page</div>
   </div>
 
 

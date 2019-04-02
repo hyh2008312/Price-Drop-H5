@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router} from '@angular/router';
 import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
@@ -13,9 +13,6 @@ import {ToastComponent} from '../../shared/components/toast/toast.component';
 
 export class PaymentSuccessComponent implements OnInit {
 
-  @Input() flashSaleList: any = [];
-  @Input() flashSaleTime: any;
-  addressList: any = [];
   defaultAddress: any = {};
   stu: any = true;
   type: any = '';
@@ -43,7 +40,15 @@ export class PaymentSuccessComponent implements OnInit {
       data: {
         string: res
       },
-      duration: 1000,
+      duration: 2500,
     });
+  }
+
+  jumpOrder() {
+    this.router.navigate(['/order/orderList'], {replaceUrl: true});
+  }
+
+  jumpHome() {
+    this.router.navigate(['/'], {replaceUrl: true});
   }
 }
