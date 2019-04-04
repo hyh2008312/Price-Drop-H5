@@ -3,8 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { OrderListService } from '../order-list.service';
 import { OrderService } from '../../shared/services/order/order.service';
 import { UserService } from '../../shared/services/user/user.service';
-import {ToastComponent} from '../../shared/components/toast/toast.component';
-import {MatSnackBar} from '@angular/material';
+import { ToastComponent } from '../../shared/components/toast/toast.component';
+import { MatSnackBar } from '@angular/material';
+import { RazorpayId } from '../../config/app.api';
 
 @Component({
   selector: 'app-payment',
@@ -124,7 +125,7 @@ export class PaymentComponent implements OnInit {
       }
 
       let options = {
-        "key": 'rzp_live_dHSGsC4x92fxAQ',
+        "key": RazorpayId,
         "amount": payAmount, /// The amount is shown in currency subunits. Actual amount is ₹599.
         "name": res.order.lines[0].title,
         "order_id": res.razorpayOrderId, // Pass the order ID if you are using Razorpay Orders.

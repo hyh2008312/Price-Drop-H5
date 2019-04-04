@@ -1,5 +1,5 @@
 import { RouterModule, Routes} from '@angular/router';
-import {GoodsDetailModule} from './goods-detail/goods-detail.module';
+import { ProtectedGuard } from 'ngx-auth';
 
 const routes: Routes = [
   {
@@ -22,6 +22,7 @@ const routes: Routes = [
         loadChildren: './goods-detail/goods-detail.module#GoodsDetailModule'
       }, {
         path: 'order',
+        canActivate: [ ProtectedGuard ],
         loadChildren: './order/order-list.module#OrderListModule'
       }, {
         path: 'FAQ',

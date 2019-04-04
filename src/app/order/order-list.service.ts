@@ -317,8 +317,7 @@ export class OrderListService {
     });
     // this.createAuthorizationHeader(headers);
 
-    // let url = `${this.baseUrl.h5Url}order/tracking/shipping/${id}/`;
-    let url = `http://149.129.135.114/order/tracking/shipping/12115/`;
+    let url = `${this.baseUrl.h5Url}order/tracking/shipping/${id}/`;
 
     let options = new RequestOptions({headers: headers});
     return this.http.get(url, options)

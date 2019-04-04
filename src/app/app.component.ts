@@ -66,11 +66,9 @@ export class AppComponent {
     });
   }
 
-  jumpNewPage(link?: any) {
-    if (this.isLogin) {
-      this.router.navigate([link]);
-    } else {
-      this.router.navigate(['/account/login']);
-    }
+  logout(drawer) {
+    drawer.close();
+    this.authenticationService.logout();
+    this.router.navigate(['/'], {replaceUrl: true});
   }
 }
