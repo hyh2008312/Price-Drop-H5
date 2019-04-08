@@ -8,6 +8,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 
 import { BaseApi,SystemConstant } from '../../../config/app.api';
 import { User } from './user';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Injectable()
 export class UserService {
@@ -33,7 +34,9 @@ export class UserService {
     private http: Http,
     private baseUrl: BaseApi,
     private systemConstant: SystemConstant,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    public titleService: Title,
+    public metaService: Meta,
   ) {
 
   }
@@ -62,6 +65,18 @@ export class UserService {
       .toPromise()
       .then(response => response.json() as User)
       .catch(this.handleError);
+  }
+
+  addTitleDescription(data:any) {
+    this.titleService.setTitle(data.title);
+
+    this.metaService.updateTag({name: 'description', content: data.description});
+    this.metaService.updateTag({property: "og:title", content: data.title});
+    this.metaService.updateTag({property: "og:description", content: data.description});
+    this.metaService.updateTag({property: "og:image", content: data.shareImage});
+    this.metaService.updateTag({property: "og:image:width", content: '600'});
+    this.metaService.updateTag({property: "og:image:height", content: '600'});
+    this.metaService.updateTag({property: "og:url", content: window.location.href});
   }
 
   private handleError (error: Response | any) {

@@ -133,6 +133,12 @@ export class GoodsDetailComponent implements OnInit {
         this.nextPage.salePrice = res.variants[0].saleUnitPrice;
         this.nextPage.currentPrice = res.variants[0].unitPrice;
       }
+
+      this.userService.addTitleDescription({
+        title: this.goods.title,
+        description: this.goods.title,
+        shareImage: this.goods.image[0]
+      });
     });
   }
   getRecommendGoods() {
