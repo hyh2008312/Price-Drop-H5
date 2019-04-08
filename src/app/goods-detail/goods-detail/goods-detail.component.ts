@@ -137,7 +137,7 @@ export class GoodsDetailComponent implements OnInit {
       this.userService.addTitleDescription({
         title: this.goods.title,
         description: this.goods.title,
-        shareImage: this.goods.image[0]
+        shareImage: this.goods.images[0]
       });
     });
   }
