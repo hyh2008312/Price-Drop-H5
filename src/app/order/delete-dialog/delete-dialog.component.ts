@@ -3,7 +3,6 @@ import {MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import {OrderListService} from '../order-list.service';
 import {ToastComponent} from '../../shared/components/toast/toast.component';
 
-
 @Component({
   selector: 'app-delete-dialog',
   templateUrl: './delete-dialog.component.html',
@@ -58,11 +57,10 @@ export class DeleteDialogComponent implements OnInit {
       data: {
         string: string
       },
-      duration: 500,
+      duration: 2500,
     });
   }
   close(): void {
     this.dialogRef.close();
-    // this.statusChange.emit(true)
   }
 }

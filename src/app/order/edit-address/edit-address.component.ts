@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { OrderListService } from '../order-list.service';
 import { UserService } from '../../shared/services/user/user.service';
+import { ToastComponent } from '../../shared/components/toast/toast.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-order-edit-address',
@@ -37,7 +39,8 @@ export class EditAddressComponent implements OnInit {
     private orderListService: OrderListService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    public snackBar: MatSnackBar
   ) {
     this.attributeForm = this.fb.group({
       id: [''],
@@ -101,13 +104,20 @@ export class EditAddressComponent implements OnInit {
   }
   save () {
     if(this.attributeForm.invalid) {
-      console.log(this.attributeForm.value)
       return;
     }
     this.orderListService.editOrderAddress(this.attributeForm.value).then((res) => {
       this.router.navigate([`/order/orderDetail/${this.id}`], {replaceUrl: true});
     }).catch((res) => {
-      console.log(res);
+      this.toast(res);
+    });
+  }
+  toast(string) {
+    this.snackBar.openFromComponent(ToastComponent, {
+      data: {
+        string: string
+      },
+      duration: 2500,
     });
   }
 }

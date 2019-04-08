@@ -157,7 +157,7 @@ export class ConfirmOrderComponent implements OnInit {
           }
         }).catch((res) => {
           this.isFirst = false;
-          this.toast(res)
+          this.toast(res);
           console.log(res);
         });
       }
@@ -169,7 +169,7 @@ export class ConfirmOrderComponent implements OnInit {
       data: {
         string: string
       },
-      duration: 1000,
+      duration: 2500,
     });
   }
 }

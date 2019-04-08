@@ -6,8 +6,6 @@ import {AuthenticationService} from '../../shared/services/authentication/authen
 import {GuardLinkService} from '../../shared/services/guard-link/guard-link.service';
 import {ToastComponent} from '../../shared/components/toast/toast.component';
 
-
-
 @Component({
   selector: 'app-cancel-order-dialog',
   templateUrl: './cancel-order-dialog.component.html',
@@ -82,7 +80,7 @@ export class CancelOrderDialogComponent implements OnInit {
       data: {
         string: string
       },
-      duration: 1000,
+      duration: 2500
     });
   }
   close(): void {

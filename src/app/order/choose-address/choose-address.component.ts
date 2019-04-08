@@ -65,13 +65,10 @@ export class ChooseAddressComponent implements OnInit {
           this.router.navigate([`/order/confirmOrder`]);
         }
       }).catch((res) => {
-        // alert('error')
         this.openSnackBar(res);
-        // console.log(res)
       });
     } else if (!this.stu) {
       this.openSnackBar('wait for minute');
-      // alert('wait for minute')
     }
   }
   edit(i) {
@@ -128,14 +125,7 @@ export class ChooseAddressComponent implements OnInit {
       data: {
         string: res
       },
-      duration: 1000,
+      duration: 2500,
     });
-  }
-  countOff (s, o) {
-    if (o > 0) {
-      return Math.ceil((o - s) / o * 100) + '%';
-    } else {
-      return '';
-    }
   }
 }

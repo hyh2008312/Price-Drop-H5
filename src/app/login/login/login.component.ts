@@ -185,7 +185,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     let first = false;
     this.loadingValue = 0;
     this.showLoading = true;
-    this.load()
+    this.load();
     this.googleLoginSub = this._auth.login(provider).subscribe(
       (data) => {
         if (data) {

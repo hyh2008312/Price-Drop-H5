@@ -82,7 +82,7 @@
 
     </div>
 
-    <div class="co-card-bottom mg-t-12">
+  <div class="co-card-bottom mg-t-12">
       <div class="cocb-content" fxLayout="row" fxLayoutAlign="space-between start">
         <div fxLayout="column" fxLayoutAlign="start">
           <div class="cocb-content-word0">Delivery</div>
@@ -105,17 +105,13 @@
       </div>
     </div>
 
-
 </div>
 
 <div class="bottom-div" fxLayout="row" fxLayoutAlign="space-between center">
-  <div>&nbsp;</div>
-  <div fxLayout="row" fxLayoutAlign="start">
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="bd-total">Total: &nbsp;</div>
-      <div class="bd-price">₹{{getTotalPrice(order.currentPrice , '0')}}</div> <!--计算总价 运费价格-->
-    </div>
-    <button class="bd-btn" (click)="placeOrder()">Place Order</button>
+  <div fxFlex>&nbsp;</div>
+  <div class="md-margin-right-1" fxLayout="row" fxLayoutAlign="start center">
+    <div class="bd-total">Total: &nbsp;</div>
+    <div class="bd-price">₹{{getTotalPrice(order.currentPrice , '0')}}</div> <!--计算总价 运费价格-->
   </div>
-
+  <button class="bd-btn" (click)="placeOrder()">Place Order</button>
 </div>
