@@ -125,7 +125,8 @@ export class ConfirmOrderComponent implements OnInit {
         let params = {
           vid: this.order.id,
           quantity: this.order.quantity,
-          voucherId: voucherId
+          voucherId: voucherId,
+          orderFrom: 'h5'
         };
         this.orderListService.postDirectOrder(params).then((res) => {
           if (res) {
@@ -137,15 +138,15 @@ export class ConfirmOrderComponent implements OnInit {
           }
         }).catch((res) => {
           this.isFirst = false;
-          this.toast(res)
-          console.log(res);
+          this.toast(res);
         });
       } else if (this.order.proId === 'flash') {
         let params = {
           vid: this.order.id,
           quantity: this.order.quantity,
           voucherId: voucherId,
-          flashPromotionId: this.order.flashSale.promotionId
+          flashPromotionId: this.order.flashSale.promotionId,
+          orderFrom: 'h5'
         };
         this.orderListService.postFlashOrder(params).then((res) => {
           if (res) {

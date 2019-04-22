@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   errMsg: any = '';
   errTwo: any = false;
   second: any;
-  disabled: any ;
-  isF: any = true ;
-  bindNum: any ;
+  disabled: any;
+  isF: any = true;
+  bindNum: any;
 
   sub: any;
 
@@ -92,13 +92,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginLink = data;
       }
     });
+
     this.activatedRoute.queryParams.subscribe((data1) => {
       if (data1) {
         this.userService.currentUser.subscribe((data) => {
           if ( data! = null) {
-
             if (data.bindMobile!="") {
-
               if ( data1.verifyShow == "true" ) {
                 this.verifyShow = false
               } else {
@@ -108,7 +107,6 @@ export class LoginComponent implements OnInit, OnDestroy {
               this.verifyShow = false
             }
           }
-
         });
       }
     });
@@ -121,7 +119,6 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @param data
    */
   onValueChanged(data) {
-
     for (const field in this.formErrors) {
       this.formErrors[field] = '';
       //取到表单字段
@@ -136,9 +133,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           break;
         }
       }
-
     }
-
   }
 
   ngOnInit(): void {
@@ -151,7 +146,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     const self = this;
-    const _setLogin = false;
     this.loadingValue = 0;
     this.showLoading = true;
     this.load();
@@ -161,7 +155,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       self.userService.getUser().then((data) => {
         self.userService.addUser(data);
         self.auth.inviteToken(data.isInvite);
-        console.log(self.loginLink)
         if (self.loginLink) {
           self.router.navigate([self.loginLink]).then((data) => {
             self.showLoading = false;
@@ -273,36 +266,18 @@ export class LoginComponent implements OnInit, OnDestroy {
       )
   }
 
-  scoller() {
-    //
-    // document.body.addEventListener('click',  (event)=> {
-    // //   alert(event)
-    // // }
-    //   let element = event.target;
-    //   let tags = {
-    //     'INPUT': 1,
-    //     'TEXTAREA': 1,
-    //   }
-    //   console.log( element.scrollIntoViewIfNeeded())
-    //   if ((element.tagName in tags) ) {
-    //     setTimeout(()=>{
-    //       element.scrollIntoViewIfNeeded();
-    //       console.log('scrollIntoViewIfNeeded');
-    //     }, 400);
-    //   }
-    //
-    // }, false);
-  }
+  scoller() {}
+
   getCodeF() {
     if (this.phoneNum == '') {
-      this.errMsg = 'Please enter your mobile number.'
-      this.isF = false
+      this.errMsg = 'Please enter your mobile number.';
+      this.isF = false;
     } else {
-      this.isF = true
+      this.isF = true;
     }
     if (this.isF) {
-      this.getCode()
-      this.isF = false
+      this.getCode();
+      this.isF = false;
     }
     this.changeDetectorRef.detectChanges();
   }
@@ -310,8 +285,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     // let self = this;
     const data = {
       'mobile' : this.phoneNum
-    }
-    this.time()
+    };
+    this.time();
     this.service.getCode(data, this.loginStatus).then((res) => {
       if (res.result === 'success') {
         this.errMsg = '';
@@ -322,19 +297,19 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
       } else {
         if (res.code == 30004) {
-          this.errTwo = true
+          this.errTwo = true;
         } else {
-          this.errMsg = res.message
+          this.errMsg = res.message;
         }
       }
       this.changeDetectorRef.detectChanges();
     }).catch(res => {
-      console.log(res)
-    })
+      console.log(res);
+    });
 
   }
   time () {
-    let timer = null
+    let timer = null;
     clearInterval(timer);
     let time = 60;
     timer = setInterval(() => {
@@ -357,9 +332,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }, 1000);
 
   }
-  // enterCodeF(){
-  //
-  // }
 
   enterCode() {
     if(this.Vcode == '') {
@@ -370,7 +342,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const data = {
       'mobile' : this.phoneNum,
       'code' : this.Vcode
-    }
+    };
 
     this.service.verifyCode(data, this.loginStatus).then((res) => {
       if(res.result =='success'){
@@ -391,8 +363,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
       this.changeDetectorRef.detectChanges();
     }).catch(res => {
-      console.log(res)
-    })
+
+    });
   }
 
   ngOnDestroy() {

@@ -347,7 +347,7 @@ export class OrderListService {
       'Content-Type': 'application/json'
     });
     this.createAuthorizationHeader(headers);
-    let url = `${this.baseUrl.h5Url}order/create/pure/`;
+    let url = `${this.baseUrl.h5Url}payment/razorpay/create/`;
     let options = new RequestOptions({headers: headers});
     return this.http.post(url, params, options)
       .toPromise()
