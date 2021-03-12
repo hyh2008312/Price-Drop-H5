@@ -75,7 +75,7 @@
     "file-saver": "^2.0.1",
     "html2canvas": "^1.0.0-alpha.12",
     "intl": "^1.2.5",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "mongodb": "^2.2.35",
     "morgan": "^1.9.0",
     "ngx-auth": "^3.1.0",
