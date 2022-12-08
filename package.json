@@ -71,7 +71,7 @@
     "core-js": "^2.5.5",
     "echarts": "^4.1.0",
     "enhanced-resolve": "^3.4.1",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "file-saver": "^2.0.1",
     "html2canvas": "^1.0.0-alpha.12",
     "intl": "^1.2.5",
